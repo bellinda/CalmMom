@@ -12,16 +12,25 @@ import android.widget.Toast;
 
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.melnykov.fab.FloatingActionButton;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseFirestore mDb;
 
     private FloatingActionButton mFloatingBtn;
 
@@ -47,9 +56,10 @@ public class LoginActivity extends AppCompatActivity {
                     // User is signed out
                     System.out.println("onAuthStateChanged:signed_out");
                 }
-                // ...
             }
         };
+
+        mDb = FirebaseFirestore.getInstance();
 
         mFloatingBtn = (FloatingActionButton) findViewById(R.id.add_new_user_btn);
 
@@ -82,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void loginUser(String email, String password) {
+    private void loginUser(final String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -96,11 +106,39 @@ public class LoginActivity extends AppCompatActivity {
                             System.out.println("signInWithEmail:failed" + task.getException());
                             Toast.makeText(LoginActivity.this, "Failed",
                                     Toast.LENGTH_SHORT).show();
+                        } else {
+                            getUserData(email);
                         }
-
-                        // ...
                     }
                 });
+    }
+
+    private void getUserData(final String email) {
+        final DocumentReference userRef = mDb.collection("users").document(email);
+        userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+
+                    Toast.makeText(LoginActivity.this, task.getResult().toString(),
+                            Toast.LENGTH_SHORT).show();
+
+                    if (document != null) {
+                        //The user exists...
+                        if (document.contains("name")) {
+                            //open main menu
+                        } else {
+                            //open screen for getting user information
+                        }
+                    } else {
+                        //The user doesn't exist...
+                        //createUser(email);
+                    }
+
+                }
+            }
+        });
     }
 
     private void showAlertDialogNow(String message, String title) {

@@ -17,13 +17,20 @@ import android.widget.Toast;
 
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private FirebaseFirestore mDb;
 
     private EditText mEmail;
     private EditText mPassword;
@@ -43,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         mAuth = FirebaseAuth.getInstance();
+        mDb = FirebaseFirestore.getInstance();
 
         mEmail = (EditText) findViewById(R.id.input_username);
         mPassword = (EditText) findViewById(R.id.input_password);
@@ -77,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void registerUser(String email, String password) {
+    private void registerUser(final String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -85,18 +93,43 @@ public class RegisterActivity extends AppCompatActivity {
                         System.out.println("createUserWithEmail:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
                             showAlertDialogNow(task.getException().getMessage(), "User registration");
+                            mLoader.setVisibility(View.GONE);
+                            mRegisterBtn.setVisibility(View.VISIBLE);
                         } else {
-                            showAlertDialogNow("You are registered successfully", "User registration", new WarnDialog.DialogClickListener() {
-                                @Override
-                                public void onClick() {
-                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            });
+                            createUser(email);
                         }
+                    }
+                });
+    }
+
+    private void createUser(String email) {
+        Map<String, Object> user = new HashMap<>();
+        mDb.collection("users").document(email).set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("DocumentSnapshot successfully written!");
                         mLoader.setVisibility(View.GONE);
                         mRegisterBtn.setVisibility(View.VISIBLE);
+
+                        showAlertDialogNow("You are registered successfully", "User registration", new WarnDialog.DialogClickListener() {
+                            @Override
+                            public void onClick() {
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("Error writing document " + e.getMessage());
+                        mLoader.setVisibility(View.GONE);
+                        mRegisterBtn.setVisibility(View.VISIBLE);
+
+                        showAlertDialogNow(e.getMessage(), "User registration");
                     }
                 });
     }
