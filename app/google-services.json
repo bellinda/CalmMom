@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "274753181383",
+    "firebase_url": "https://calmmom-35c98.firebaseio.com",
+    "project_id": "calmmom-35c98",
+    "storage_bucket": "calmmom-35c98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274753181383:android:b50b160df1f1f607",
+        "android_client_info": {
+          "package_name": "com.angelova.w510.calmmom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274753181383-9b54amcehb3l4pa8e3ctbo2mnf3tpjon.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.angelova.w510.calmmom",
+            "certificate_hash": "88eb91d357969e4c890b7b6ebbae2113b3a5c170"
+          }
+        },
+        {
+          "client_id": "274753181383-dm4d00t16uto49uadssptgudar3n2uco.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALu6mV5cVoLYgocZ2o_fKsycSQNgoPgT8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274753181383-dm4d00t16uto49uadssptgudar3n2uco.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

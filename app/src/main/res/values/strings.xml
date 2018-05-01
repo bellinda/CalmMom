@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Calm Mom</string>
+
+    <string name="username_label">Email</string>
+    <string name="password_label">Password</string>
+    <string name="password_repeat_label">Repeat Password</string>
+    <string name="login_btn">Login</string>
+    <string name="forgotten_pass">Forgotten Password?</string>
+    <string name="register_btn">Register</string>
+</resources>

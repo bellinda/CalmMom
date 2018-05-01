@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.angelova.w510.calmmom.RegisterActivity"
+    android:background="@color/colorContrast">
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08"
+        android:id="@+id/top_logo_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25"
+        android:id="@+id/bottom_logo_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05"
+        android:id="@+id/left_logo_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35"
+        android:id="@+id/right_logo_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"
+        android:id="@+id/right_title_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15"
+        android:id="@+id/top_title_guideline" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_logo_guideline"
+        android:background="@drawable/ic_logo"
+        app:layout_constraintRight_toLeftOf="@+id/right_logo_guideline"
+        app:layout_constraintLeft_toLeftOf="@+id/left_logo_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_logo_guideline" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/title"
+        app:layout_constraintRight_toLeftOf="@+id/right_title_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_logo_guideline"
+        app:layout_constraintLeft_toLeftOf="@+id/right_logo_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_title_guideline" />
+
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35"
+        android:id="@+id/top_username_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"
+        android:id="@+id/left_username_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"
+        android:id="@+id/right_username_guideline" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/top_username_guideline"
+        app:layout_constraintLeft_toRightOf="@id/left_username_guideline"
+        app:layout_constraintRight_toLeftOf="@id/right_username_guideline"
+        android:textColorHint="@color/colorAccent"
+        android:focusable="false"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/input_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username_label"
+            android:textColor="@color/colorAccent"
+            android:theme="@style/MyEditTextTheme"
+            android:focusableInTouchMode="true"
+            android:inputType="textEmailAddress"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/input_layout_username"
+        app:layout_constraintLeft_toRightOf="@id/left_username_guideline"
+        app:layout_constraintRight_toLeftOf="@id/right_username_guideline"
+        android:layout_marginTop="15dp"
+        app:passwordToggleEnabled="true"
+        android:textColorHint="@color/colorAccent"
+        app:passwordToggleTint="@color/colorAccent">
+
+        <EditText
+            android:id="@+id/input_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/password_label"
+            android:textColor="@color/colorAccent"
+            android:theme="@style/MyEditTextTheme"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_password_repeat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/input_layout_password"
+        app:layout_constraintLeft_toRightOf="@id/left_username_guideline"
+        app:layout_constraintRight_toLeftOf="@id/right_username_guideline"
+        android:layout_marginTop="15dp"
+        app:passwordToggleEnabled="true"
+        android:textColorHint="@color/colorAccent"
+        app:passwordToggleTint="@color/colorAccent">
+
+        <EditText
+            android:id="@+id/input_password_repeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/password_repeat_label"
+            android:textColor="@color/colorAccent"
+            android:theme="@style/MyEditTextTheme"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3"
+        android:id="@+id/left_btn_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7"
+        android:id="@+id/right_btn_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8"
+        android:id="@+id/top_btn_guideline" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="@+id/left_btn_guideline"
+        app:layout_constraintRight_toRightOf="@+id/right_btn_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_btn_guideline"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/border_only_button"
+            android:text="@string/register_btn"
+            android:textAllCaps="true"
+            android:textColor="@drawable/button_text_color_dark"
+            android:textSize="@dimen/button_title_text_size"
+            android:id="@+id/register_btn"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_loader"
+            android:visibility="gone"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
