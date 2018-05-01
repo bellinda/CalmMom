@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEmail;
     private EditText mPassword;
     private Button mLoginBtn;
+    private ProgressBar mLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         mDb = FirebaseFirestore.getInstance();
 
         mFloatingBtn = (FloatingActionButton) findViewById(R.id.add_new_user_btn);
+        mLoader = (ProgressBar) findViewById(R.id.login_loader);
 
         mFloatingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +82,9 @@ public class LoginActivity extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mLoginBtn.setVisibility(View.GONE);
+                mLoader.setVisibility(View.VISIBLE);
+
                 if (mEmail.getText() != null && !mEmail.getText().toString().isEmpty()) {
                     if (mPassword.getText() != null && !mPassword.getText().toString().isEmpty()) {
                         loginUser(mEmail.getText().toString(), mPassword.getText().toString());
@@ -106,6 +112,8 @@ public class LoginActivity extends AppCompatActivity {
                             System.out.println("signInWithEmail:failed" + task.getException());
                             Toast.makeText(LoginActivity.this, "Failed",
                                     Toast.LENGTH_SHORT).show();
+
+                            showAlertDialogNow(task.getException().getMessage(), "Login");
                         } else {
                             getUserData(email);
                         }
@@ -118,6 +126,10 @@ public class LoginActivity extends AppCompatActivity {
         userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                mLoader.setVisibility(View.GONE);
+                mLoginBtn.setVisibility(View.VISIBLE);
+
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
 
@@ -130,6 +142,9 @@ public class LoginActivity extends AppCompatActivity {
                             //open main menu
                         } else {
                             //open screen for getting user information
+                            Intent intent = new Intent(LoginActivity.this, InfoActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
                     } else {
                         //The user doesn't exist...
@@ -145,6 +160,8 @@ public class LoginActivity extends AppCompatActivity {
         WarnDialog warning = new WarnDialog(this, title, message, new WarnDialog.DialogClickListener() {
             @Override
             public void onClick() {
+                mLoader.setVisibility(View.GONE);
+                mLoginBtn.setVisibility(View.VISIBLE);
             }
         });
         warning.show();
