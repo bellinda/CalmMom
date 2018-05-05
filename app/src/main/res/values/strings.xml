@@ -7,4 +7,9 @@
     <string name="login_btn">Login</string>
     <string name="forgotten_pass">Forgotten Password?</string>
     <string name="register_btn">Register</string>
+
+    <string name="name_label">Name</string>
+    <string name="age_label">Age</string>
+    <string name="height_label">Current height</string>
+    <string name="weight_label">Current weight</string>
 </resources>
