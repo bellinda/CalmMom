@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.angelova.w510.calmmom.InfoActivity"
     android:focusable="false"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:layout_marginBottom="20dp">
 
     <android.support.constraint.Guideline
         android:layout_width="1dp"
@@ -74,7 +75,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/image_view"
+        app:layout_constraintBottom_toTopOf="@+id/image_view"
         android:textSize="32sp"/>
 
     <android.support.constraint.Guideline
@@ -95,106 +96,248 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.38"
+        app:layout_constraintGuide_percent="0.35"
         android:id="@+id/top_input_guideline" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_name"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/top_input_guideline"
-        app:layout_constraintLeft_toRightOf="@id/left_input_guideline"
-        app:layout_constraintRight_toLeftOf="@id/right_input_guideline"
-        android:textColorHint="@color/colorPrimary"
-        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-        android:focusable="false"
-        android:focusableInTouchMode="true">
+        android:id="@+id/nested_scroll_view"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintRight_toLeftOf="@+id/right_input_guideline"
+        app:layout_constraintLeft_toLeftOf="@+id/left_input_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_input_guideline"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <EditText
-            android:id="@+id/input_name"
+        <LinearLayout
+            android:id="@+id/linear_layout_android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/name_label"
-            android:textColor="@color/colorContrast"
-            android:focusableInTouchMode="true"
-            android:theme="@style/MyPrimaryEditTextTheme"
-            android:inputType="textPersonName"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_age"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/input_layout_name"
-        app:layout_constraintLeft_toRightOf="@id/left_input_guideline"
-        app:layout_constraintRight_toLeftOf="@id/right_input_guideline"
-        android:textColorHint="@color/colorPrimary"
-        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-        android:focusable="false"
-        android:focusableInTouchMode="true"
-        android:layout_marginTop="15dp">
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                android:focusable="false"
+                android:focusableInTouchMode="true">
 
-        <EditText
-            android:id="@+id/input_age"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/age_label"
-            android:textColor="@color/colorContrast"
-            android:focusableInTouchMode="true"
-            android:theme="@style/MyPrimaryEditTextTheme"
-            android:inputType="number"/>
+                <EditText
+                    android:id="@+id/input_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/name_label"
+                    android:textColor="@color/colorContrast"
+                    android:focusableInTouchMode="true"
+                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:inputType="textPersonName"/>
 
-    </android.support.design.widget.TextInputLayout>
+            </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_height"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/input_layout_age"
-        app:layout_constraintLeft_toRightOf="@id/left_input_guideline"
-        app:layout_constraintRight_toLeftOf="@id/right_input_guideline"
-        android:textColorHint="@color/colorPrimary"
-        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-        android:focusable="false"
-        android:focusableInTouchMode="true"
-        android:layout_marginTop="15dp">
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                android:focusable="false"
+                android:focusableInTouchMode="true"
+                android:layout_marginTop="15dp">
 
-        <EditText
-            android:id="@+id/input_height"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/height_label"
-            android:textColor="@color/colorContrast"
-            android:focusableInTouchMode="true"
-            android:theme="@style/MyPrimaryEditTextTheme"
-            android:inputType="numberDecimal"/>
+                <EditText
+                    android:id="@+id/input_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/age_label"
+                    android:textColor="@color/colorContrast"
+                    android:focusableInTouchMode="true"
+                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:inputType="number"/>
 
-    </android.support.design.widget.TextInputLayout>
+            </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_weight"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/input_layout_height"
-        app:layout_constraintLeft_toRightOf="@id/left_input_guideline"
-        app:layout_constraintRight_toLeftOf="@id/right_input_guideline"
-        android:textColorHint="@color/colorPrimary"
-        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-        android:focusable="false"
-        android:focusableInTouchMode="true"
-        android:layout_marginTop="15dp">
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                android:focusable="false"
+                android:focusableInTouchMode="true"
+                android:layout_marginTop="15dp">
 
-        <EditText
-            android:id="@+id/input_weight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/weight_label"
-            android:textColor="@color/colorContrast"
-            android:focusableInTouchMode="true"
-            android:theme="@style/MyPrimaryEditTextTheme"
-            android:inputType="numberDecimal"/>
+                <EditText
+                    android:id="@+id/input_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/height_label"
+                    android:textColor="@color/colorContrast"
+                    android:focusableInTouchMode="true"
+                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:inputType="numberDecimal"/>
 
-    </android.support.design.widget.TextInputLayout>
+            </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                android:focusable="false"
+                android:focusableInTouchMode="true"
+                android:layout_marginTop="15dp">
+
+                <EditText
+                    android:id="@+id/input_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/weight_label"
+                    android:textColor="@color/colorContrast"
+                    android:focusableInTouchMode="true"
+                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:inputType="numberDecimal"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:id="@+id/illnesses_view">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⨁"
+                    android:textColor="@color/colorPrimary"
+                    android:id="@+id/add_image_view"
+                    android:textSize="38sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/illnesses_label"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/add_item_label_text_size"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:id="@+id/surgeries_view">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⨁"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="38sp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/surgeries_label"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/add_item_label_text_size"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:id="@+id/family_history_view">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⨁"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="38sp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/family_history_label"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/add_item_label_text_size"/>
+
+            </LinearLayout>
+
+            <android.support.constraint.ConstraintLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+
+                <android.support.constraint.Guideline
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.25"
+                    android:id="@+id/left_guideline" />
+
+                <android.support.constraint.Guideline
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.75"
+                    android:id="@+id/right_guideline" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+                    app:layout_constraintRight_toRightOf="@+id/right_guideline"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/border_only_button_dark"
+                        android:text="@string/info_submit"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/labels_text_size"
+                        android:textColor="@drawable/button_text_color_dark_to_white"
+                        android:id="@+id/submit_btn"/>
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/submit_loader"
+                        android:visibility="gone"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </android.support.constraint.ConstraintLayout>

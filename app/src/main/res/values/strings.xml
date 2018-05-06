@@ -12,4 +12,8 @@
     <string name="age_label">Age</string>
     <string name="height_label">Current height</string>
     <string name="weight_label">Current weight</string>
+    <string name="illnesses_label">Illnesses</string>
+    <string name="family_history_label">Family History</string>
+    <string name="surgeries_label">Surgeries</string>
+    <string name="info_submit">Save info</string>
 </resources>
