@@ -17,7 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.dialogs.AddIllnessDialog;
+import com.angelova.w510.calmmom.dialogs.SurgeriesDialog;
 import com.angelova.w510.calmmom.models.Illness;
+import com.angelova.w510.calmmom.models.Surgery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ public class InfoActivity extends AppCompatActivity {
     private CircleImageView mProfileImage;
     private TextView mProfileText;
     private LinearLayout mIllnessesLayout;
+    private LinearLayout mSurgeriesLayout;
 
     private static final int SELECT_FILE = 1023;
 
@@ -68,6 +71,23 @@ public class InfoActivity extends AppCompatActivity {
                 AddIllnessDialog dialog = new AddIllnessDialog(InfoActivity.this, illnesses, new AddIllnessDialog.DialogClickListener() {
                     @Override
                     public void onSave(List<Illness> receivedIllnesses) {
+
+                    }
+                });
+                dialog.show();
+            }
+        });
+
+        mSurgeriesLayout = (LinearLayout) findViewById(R.id.surgeries_view);
+        mSurgeriesLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Surgery> surgeries = new ArrayList<>();
+                surgeries.add(new Surgery());
+
+                SurgeriesDialog dialog = new SurgeriesDialog(InfoActivity.this, surgeries, new SurgeriesDialog.DialogClickListener() {
+                    @Override
+                    public void onSave(List<Surgery> illnesses) {
 
                     }
                 });
