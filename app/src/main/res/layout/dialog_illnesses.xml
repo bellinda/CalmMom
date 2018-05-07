@@ -23,37 +23,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"/>
 
-    <!--<LinearLayout-->
-        <!--android:id="@+id/wrapper"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="300dp"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:layout_marginStart="10dp"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:layout_marginEnd="10dp"-->
-            <!--android:scrollbars="vertical"-->
-            <!--android:id="@+id/list"-->
-            <!--android:paddingBottom="50dp"/>-->
-
-        <!--</LinearLayout>-->
-
-    <!--<View-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:background="#10000000"-->
-        <!--android:elevation="1dp"-->
-        <!--android:id="@+id/divider"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:layout_marginStart="10dp"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:layout_marginEnd="10dp"/>-->
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,19 +53,6 @@
             android:layout_alignRight="@id/list"
             android:layout_alignBottom="@id/list"/>
     </RelativeLayout>
-
-    <!--<com.melnykov.fab.FloatingActionButton-->
-        <!--android:id="@+id/add_new_user_btn"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:src="@drawable/fab_add"-->
-        <!--app:fab_shadow="true"-->
-        <!--app:fab_shadowColor="#66000000"-->
-        <!--app:fab_shadowRadius="4dp"-->
-        <!--app:fab_shadowXOffset="1dp"-->
-        <!--app:fab_shadowYOffset="3dp"-->
-        <!--app:fab_colorNormal="@color/colorContrast"/>-->
 
     <LinearLayout
         android:layout_width="fill_parent"

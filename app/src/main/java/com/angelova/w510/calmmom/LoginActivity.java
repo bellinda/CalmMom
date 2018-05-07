@@ -133,8 +133,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
 
-                    Toast.makeText(LoginActivity.this, task.getResult().toString(),
-                            Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(LoginActivity.this, task.getResult().toString(),
+//                            Toast.LENGTH_SHORT).show();
 
                     if (document != null) {
                         //The user exists...
