@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/input_field_height"
+        android:id="@+id/title_view"
+        android:text="Recovered from Sicknesses"
+        android:textSize="@dimen/warn_dialog_title_text_size"
+        android:textColor="@color/colorAccent"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/wrapper"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="300dp"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:scrollbars="vertical"-->
+            <!--android:id="@+id/list"-->
+            <!--android:paddingBottom="50dp"/>-->
+
+        <!--</LinearLayout>-->
+
+    <!--<View-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="#10000000"-->
+        <!--android:elevation="1dp"-->
+        <!--android:id="@+id/divider"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginStart="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginEnd="10dp"/>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="50dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:scrollbars="vertical"
+            android:id="@+id/list"/>
+
+        <com.melnykov.fab.FloatingActionButton
+            android:id="@+id/add_illness_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/fab_add"
+            app:fab_shadow="true"
+            app:fab_shadowColor="#66000000"
+            app:fab_shadowRadius="4dp"
+            app:fab_shadowXOffset="1dp"
+            app:fab_shadowYOffset="3dp"
+            app:fab_colorNormal="@color/colorContrast"
+            android:layout_alignRight="@id/list"
+            android:layout_alignBottom="@id/list"/>
+    </RelativeLayout>
+
+    <!--<com.melnykov.fab.FloatingActionButton-->
+        <!--android:id="@+id/add_new_user_btn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:src="@drawable/fab_add"-->
+        <!--app:fab_shadow="true"-->
+        <!--app:fab_shadowColor="#66000000"-->
+        <!--app:fab_shadowRadius="4dp"-->
+        <!--app:fab_shadowXOffset="1dp"-->
+        <!--app:fab_shadowYOffset="3dp"-->
+        <!--app:fab_colorNormal="@color/colorContrast"/>-->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/warn_dialog_button_height"
+        android:layout_marginTop="-45dp"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/warn_dialog_button_height"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:gravity="center"
+            android:textSize="@dimen/warn_dialog_buttons_text_size"
+            android:textColor="@color/colorPrimaryDark"
+            android:id="@+id/cancel_button"
+            android:background="@color/colorAccent"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/warn_dialog_button_height"
+            android:layout_weight="1"
+            android:text="Save"
+            android:gravity="center"
+            android:textSize="@dimen/warn_dialog_buttons_text_size"
+            android:textColor="@color/colorPrimaryDark"
+            android:id="@+id/save_button"
+            android:background="@color/colorAccent"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

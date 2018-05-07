@@ -13,7 +13,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.angelova.w510.calmmom.dialogs.AddIllnessDialog;
+import com.angelova.w510.calmmom.models.Illness;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -21,6 +28,7 @@ public class InfoActivity extends AppCompatActivity {
 
     private CircleImageView mProfileImage;
     private TextView mProfileText;
+    private LinearLayout mIllnessesLayout;
 
     private static final int SELECT_FILE = 1023;
 
@@ -46,6 +54,24 @@ public class InfoActivity extends AppCompatActivity {
                 else {
                     openGallery();
                 }
+            }
+        });
+
+        mIllnessesLayout = (LinearLayout) findViewById(R.id.illnesses_view);
+        mIllnessesLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Illness> illnesses = new ArrayList<>();
+                //adding a default item
+                illnesses.add(new Illness());
+
+                AddIllnessDialog dialog = new AddIllnessDialog(InfoActivity.this, illnesses, new AddIllnessDialog.DialogClickListener() {
+                    @Override
+                    public void onSave(List<Illness> receivedIllnesses) {
+
+                    }
+                });
+                dialog.show();
             }
         });
     }

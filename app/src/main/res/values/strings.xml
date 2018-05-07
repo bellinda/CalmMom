@@ -16,4 +16,9 @@
     <string name="family_history_label">Family History</string>
     <string name="surgeries_label">Surgeries</string>
     <string name="info_submit">Save info</string>
+    <string name="illness_name_label">Title</string>
+    <string name="illness_date_label">Reference Date</string>
+    <string name="illness_medicines_label">Taken medicines</string>
+    <string name="illness_notes_label">Notes</string>
+    <string name="illness_remove_item_from_list">Remove item</string>
 </resources>
