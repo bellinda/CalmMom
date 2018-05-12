@@ -84,6 +84,7 @@ public class AddIllnessDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 listener.onSave(illnesses);
+                dismiss();
             }
         });
     }

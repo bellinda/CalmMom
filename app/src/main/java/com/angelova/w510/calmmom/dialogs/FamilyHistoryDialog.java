@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.R;
-import com.angelova.w510.calmmom.adapters.SurgeriesAdapter;
-import com.angelova.w510.calmmom.models.Surgery;
+import com.angelova.w510.calmmom.adapters.FamilyHistoryAdapter;
+import com.angelova.w510.calmmom.models.FamilyHistory;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -21,10 +21,10 @@ import java.util.List;
  * Created by W510 on 7.5.2018 г..
  */
 
-public class SurgeriesDialog extends Dialog {
+public class FamilyHistoryDialog extends Dialog {
 
     private Activity activity;
-    private List<Surgery> surgeries = new ArrayList<>();
+    private List<FamilyHistory> familyHistories = new ArrayList<>();
     private DialogClickListener listener;
 
     private FloatingActionButton mAddButton;
@@ -32,16 +32,16 @@ public class SurgeriesDialog extends Dialog {
     private TextView mSaveBtn;
 
     private RecyclerView mRecyclerView;
-    private SurgeriesAdapter mAdapter;
+    private FamilyHistoryAdapter mAdapter;
 
     public interface DialogClickListener {
-        void onSave(List<Surgery> surgeries);
+        void onSave(List<FamilyHistory> fhs);
     }
 
-    public SurgeriesDialog(Activity activity, List<Surgery> surgeries, DialogClickListener onClickListener) {
+    public FamilyHistoryDialog(Activity activity, List<FamilyHistory> surgeries, DialogClickListener onClickListener) {
         super(activity);
         this.activity = activity;
-        this.surgeries = surgeries;
+        this.familyHistories = surgeries;
         this.listener = onClickListener;
         this.setCancelable(false);
     }
@@ -49,14 +49,14 @@ public class SurgeriesDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_surgeries);
+        setContentView(R.layout.dialog_fh);
 
-        mAddButton = (FloatingActionButton) findViewById(R.id.add_surgery_btn);
+        mAddButton = (FloatingActionButton) findViewById(R.id.add_fh_btn);
         mCancelBtn = (TextView) findViewById(R.id.cancel_button);
         mSaveBtn = (TextView) findViewById(R.id.save_button);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
-        mAdapter = new SurgeriesAdapter(surgeries);
+        mAdapter = new FamilyHistoryAdapter(familyHistories);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -66,9 +66,9 @@ public class SurgeriesDialog extends Dialog {
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                surgeries.add(new Surgery());
-                mAdapter.notifyItemInserted(surgeries.size() - 1);
-                mRecyclerView.scrollToPosition(surgeries.size() - 1);
+                familyHistories.add(new FamilyHistory());
+                mAdapter.notifyItemInserted(familyHistories.size() - 1);
+                mRecyclerView.scrollToPosition(familyHistories.size() - 1);
             }
         });
 
@@ -82,7 +82,7 @@ public class SurgeriesDialog extends Dialog {
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onSave(surgeries);
+                listener.onSave(familyHistories);
                 dismiss();
             }
         });

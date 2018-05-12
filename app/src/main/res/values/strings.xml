@@ -15,6 +15,10 @@
     <string name="illnesses_label">Illnesses</string>
     <string name="family_history_label">Family History</string>
     <string name="surgeries_label">Surgeries</string>
+    <string name="menstruation_label">First day of last menstruation</string>
+    <string name="regular_menstruation_label">Regular menstruation?</string>
+    <string name="menstruation_length_label">Menstruation cycle length</string>
+    <string name="menstruation_duration_label">Duration of the menstruation</string>
     <string name="info_submit">Save info</string>
 
     <string name="illness_name_label">Title</string>
@@ -27,4 +31,9 @@
     <string name="surgery_date_label">Reference Date</string>
     <string name="surgery_success_label">Successful?</string>
     <string name="surgery_notes_label">Notes</string>
+    <string name="surgery_remove_item_from_list">Remove item</string>
+
+    <string name="fh_what_label">Type</string>
+    <string name="fh_notes_label">Notes</string>
+    <string name="fh_remove_item_from_list">Remove item</string>
 </resources>

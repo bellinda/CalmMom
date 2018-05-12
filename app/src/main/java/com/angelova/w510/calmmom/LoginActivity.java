@@ -140,9 +140,14 @@ public class LoginActivity extends AppCompatActivity {
                         //The user exists...
                         if (document.contains("name")) {
                             //open main menu
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("email", mEmail.getText().toString());
+                            startActivity(intent);
+                            finish();
                         } else {
                             //open screen for getting user information
                             Intent intent = new Intent(LoginActivity.this, InfoActivity.class);
+                            intent.putExtra("email", mEmail.getText().toString());
                             startActivity(intent);
                             finish();
                         }

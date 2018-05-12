@@ -144,8 +144,6 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorPrimary"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-                android:focusable="false"
-                android:focusableInTouchMode="true"
                 android:layout_marginTop="15dp">
 
                 <EditText
@@ -154,7 +152,6 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/age_label"
                     android:textColor="@color/colorContrast"
-                    android:focusableInTouchMode="true"
                     android:theme="@style/MyPrimaryEditTextTheme"
                     android:inputType="number"/>
 
@@ -166,8 +163,6 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorPrimary"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-                android:focusable="false"
-                android:focusableInTouchMode="true"
                 android:layout_marginTop="15dp">
 
                 <EditText
@@ -176,7 +171,6 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/height_label"
                     android:textColor="@color/colorContrast"
-                    android:focusableInTouchMode="true"
                     android:theme="@style/MyPrimaryEditTextTheme"
                     android:inputType="numberDecimal"/>
 
@@ -188,8 +182,6 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorPrimary"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-                android:focusable="false"
-                android:focusableInTouchMode="true"
                 android:layout_marginTop="15dp">
 
                 <EditText
@@ -198,7 +190,6 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/weight_label"
                     android:textColor="@color/colorContrast"
-                    android:focusableInTouchMode="true"
                     android:theme="@style/MyPrimaryEditTextTheme"
                     android:inputType="numberDecimal"/>
 
@@ -287,6 +278,88 @@
 
             </LinearLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_menstruation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                android:layout_marginTop="15dp">
+
+                <EditText
+                    android:id="@+id/input_menstruation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/menstruation_label"
+                    android:textColor="@color/colorContrast"
+                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:inputType="date"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/switch_button_height"
+                android:gravity="center_vertical"
+                android:id="@+id/status_layout"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/add_item_label_text_size"
+                    android:text="@string/regular_menstruation_label"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/regular_switch"
+                    android:theme="@style/SCBSwitch"/>
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_menstruation_length"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                android:layout_marginTop="15dp">
+
+                <EditText
+                    android:id="@+id/input_menstruation_length"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/menstruation_length_label"
+                    android:textColor="@color/colorContrast"
+                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:inputType="number"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_menstruation_duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                android:layout_marginTop="15dp">
+
+                <EditText
+                    android:id="@+id/input_menstruation_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/menstruation_duration_label"
+                    android:textColor="@color/colorContrast"
+                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:inputType="number"/>
+
+            </android.support.design.widget.TextInputLayout>
+
             <android.support.constraint.ConstraintLayout
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
@@ -325,14 +398,16 @@
                         android:textAllCaps="true"
                         android:textSize="@dimen/labels_text_size"
                         android:textColor="@drawable/button_text_color_dark_to_white"
-                        android:id="@+id/submit_btn"/>
+                        android:id="@+id/submit_btn"
+                        android:visibility="visible"/>
 
                     <ProgressBar
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/submit_loader"
                         android:visibility="gone"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:indeterminateTint="@color/colorContrast"/>
                 </LinearLayout>
 
 
