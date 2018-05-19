@@ -4,6 +4,269 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.angelova.w510.calmmom.MainActivity">
+    tools:context="com.angelova.w510.calmmom.MainActivity"
+    android:background="@color/colorPrimary">
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.07"
+        android:id="@+id/left_header_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.93"
+        android:id="@+id/right_header_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.55"
+        android:id="@+id/middle_header_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05"
+        android:id="@+id/top_header_guideline"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/left_header_guideline"
+        app:layout_constraintRight_toLeftOf="@id/middle_header_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_header_guideline"
+        android:text="13 May 2018"
+        android:textColor="@color/colorAccent"
+        android:gravity="center"
+        android:textSize="@dimen/menu_date_text_size"
+        android:id="@+id/current_date_view"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/current_date_view"
+        app:layout_constraintLeft_toRightOf="@id/left_header_guideline"
+        app:layout_constraintRight_toLeftOf="@id/middle_header_guideline"
+        android:text="36 weeks"
+        android:textColor="@color/colorAccent"
+        android:gravity="center"
+        android:textSize="@dimen/menu_weeks_text_size"
+        android:layout_marginTop="5dp"
+        android:id="@+id/current_week_view"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/current_week_view"
+        app:layout_constraintLeft_toRightOf="@id/left_header_guideline"
+        app:layout_constraintRight_toLeftOf="@id/middle_header_guideline"
+        android:text="Your baby is avg. 2.5kg and 48cm"
+        android:textColor="@color/colorAccent"
+        android:gravity="center"
+        android:textSize="@dimen/menu_baby_size_text_size"
+        android:layout_marginTop="10dp"
+        android:id="@+id/baby_size_view"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@id/middle_header_guideline"
+        app:layout_constraintTop_toTopOf="@id/current_date_view"
+        app:layout_constraintBottom_toBottomOf="@id/baby_size_view"
+        android:background="@color/colorAccent"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/separator"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/separator"
+        app:layout_constraintRight_toLeftOf="@id/right_header_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_header_guideline"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_pineapple"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Size of a pineapple"
+            android:textColor="@color/colorAccent"
+            android:gravity="center"
+            android:visibility="visible"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <!--<View-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@color/colorAccent"-->
+        <!--app:layout_constraintLeft_toLeftOf="@id/left_header_guideline"-->
+        <!--app:layout_constraintRight_toRightOf="@id/right_header_guideline"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/separator"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:id="@+id/bottom_separator"/>-->
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        app:layout_constraintGuide_percent="0.33"
+        android:orientation="horizontal"
+        android:id="@+id/tip_top_guideline"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_border"
+        app:layout_constraintLeft_toLeftOf="@id/left_header_guideline"
+        app:layout_constraintRight_toRightOf="@id/right_header_guideline"
+        app:layout_constraintTop_toBottomOf="@id/tip_top_guideline"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:id="@+id/tip_layout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tip of the week:"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:textSize="@dimen/menu_tip_text_size"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Package your things for the hospital. Check more details in the tips menu."
+            android:textColor="@color/colorAccent"/>
+    </LinearLayout>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        android:id="@+id/middle_menu_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55"
+        android:id="@+id/menu_items_top_guideline"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/left_header_guideline"
+        app:layout_constraintRight_toLeftOf="@id/middle_menu_guideline"
+        app:layout_constraintTop_toBottomOf="@id/menu_items_top_guideline"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@+id/first_line_layout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_examination"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Examinations"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/middle_menu_guideline"
+        app:layout_constraintRight_toLeftOf="@id/right_header_guideline"
+        app:layout_constraintTop_toBottomOf="@id/menu_items_top_guideline"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_health_state"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Health state"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/left_header_guideline"
+        app:layout_constraintRight_toLeftOf="@id/middle_menu_guideline"
+        app:layout_constraintTop_toBottomOf="@id/first_line_layout"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_kicks"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kicks and Contractions"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/middle_menu_guideline"
+        app:layout_constraintRight_toLeftOf="@id/right_header_guideline"
+        app:layout_constraintTop_toBottomOf="@id/first_line_layout"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_tips"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tips"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
