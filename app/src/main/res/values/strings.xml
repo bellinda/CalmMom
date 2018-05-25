@@ -36,4 +36,7 @@
     <string name="fh_what_label">Type</string>
     <string name="fh_notes_label">Notes</string>
     <string name="fh_remove_item_from_list">Remove item</string>
+
+    <string name="title_examinations">Examinations</string>
+    <string name="title_questions">Questions</string>
 </resources>

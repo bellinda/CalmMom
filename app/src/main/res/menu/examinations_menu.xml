@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_examinations"
+        android:icon="@drawable/examinations_selector"
+        android:title="@string/title_examinations" />
+
+    <item
+        android:id="@+id/navigation_questions"
+        android:icon="@drawable/questions_selector"
+        android:title="@string/title_questions" />
+
+</menu>
