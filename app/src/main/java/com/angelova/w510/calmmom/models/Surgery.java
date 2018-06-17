@@ -1,10 +1,12 @@
 package com.angelova.w510.calmmom.models;
 
+import java.io.Serializable;
+
 /**
  * Created by W510 on 7.5.2018 г..
  */
 
-public class Surgery {
+public class Surgery implements Serializable {
 
     private String kind;
     private String referenceDate;

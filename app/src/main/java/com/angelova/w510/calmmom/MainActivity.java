@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ExaminationsActivity.class);
-                //intent.putExtra("email", mEmail.getText().toString());
+                intent.putExtra("email", getIntent().getStringExtra("email"));
                 startActivity(intent);
                 //finish();
             }

@@ -1,10 +1,12 @@
 package com.angelova.w510.calmmom.models;
 
+import java.io.Serializable;
+
 /**
  * Created by W510 on 7.5.2018 г..
  */
 
-public class FamilyHistory {
+public class FamilyHistory implements Serializable {
 
     private String type;
     private String notes;

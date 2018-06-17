@@ -1,12 +1,13 @@
 package com.angelova.w510.calmmom.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by W510 on 6.5.2018 г..
  */
 
-public class Illness {
+public class Illness implements Serializable {
 
     private String name;
     private String referenceDate;

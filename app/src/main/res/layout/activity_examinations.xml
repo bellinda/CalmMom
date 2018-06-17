@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.angelova.w510.calmmom.ExaminationsActivity">
+    tools:context="com.angelova.w510.calmmom.ExaminationsActivity"
+    android:background="@color/colorContrast">
 
     <FrameLayout
         android:id="@+id/content"
@@ -14,6 +15,11 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorPrimary"/>
     </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView

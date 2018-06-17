@@ -2,13 +2,14 @@ package com.angelova.w510.calmmom.models;
 
 import android.net.Uri;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by W510 on 12.5.2018 г..
  */
 
-public class User {
+public class User implements Serializable {
 
     private String name;
     private int age;
@@ -22,6 +23,7 @@ public class User {
     private boolean regularMenstruation;
     private int lengthOfMenstruation;
     private int durationOfMenstruation;
+    private List<Examination> examinations;
 
     public String getName() {
         return name;
@@ -117,5 +119,13 @@ public class User {
 
     public void setDurationOfMenstruation(int durationOfMenstruation) {
         this.durationOfMenstruation = durationOfMenstruation;
+    }
+
+    public List<Examination> getExaminations() {
+        return examinations;
+    }
+
+    public void setExaminations(List<Examination> examinations) {
+        this.examinations = examinations;
     }
 }

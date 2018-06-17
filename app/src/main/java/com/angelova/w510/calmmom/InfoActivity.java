@@ -25,6 +25,8 @@ import com.angelova.w510.calmmom.dialogs.AddIllnessDialog;
 import com.angelova.w510.calmmom.dialogs.FamilyHistoryDialog;
 import com.angelova.w510.calmmom.dialogs.SurgeriesDialog;
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
+import com.angelova.w510.calmmom.models.Examination;
+import com.angelova.w510.calmmom.models.ExaminationStatus;
 import com.angelova.w510.calmmom.models.FamilyHistory;
 import com.angelova.w510.calmmom.models.Illness;
 import com.angelova.w510.calmmom.models.Surgery;
@@ -41,6 +43,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -211,6 +214,9 @@ public class InfoActivity extends AppCompatActivity {
                     mUser.setLengthOfMenstruation(Integer.parseInt(mInputMenstruationLength.getText().toString()));
                     mUser.setDurationOfMenstruation(Integer.parseInt(mInputMenstruationDuration.getText().toString()));
 
+                    List<Examination> mainExaminations = getListWithMainExaminations();
+                    mUser.setExaminations(mainExaminations);
+
                     mSubmitBtn.setVisibility(View.GONE);
                     mSubmitLoader.setVisibility(View.VISIBLE);
                     disableAllEditableFieldsOnSubmit();
@@ -273,6 +279,7 @@ public class InfoActivity extends AppCompatActivity {
                             @Override
                             public void onClick() {
                                 Intent intent = new Intent(InfoActivity.this, MainActivity.class);
+                                intent.putExtra("email", mUserEmail);
                                 startActivity(intent);
                                 finish();
                             }
@@ -371,6 +378,56 @@ public class InfoActivity extends AppCompatActivity {
         mIllnessesLayout.setClickable(true);
         mSurgeriesLayout.setClickable(true);
         mFHLayout.setClickable(true);
+    }
+
+    private List<Examination> getListWithMainExaminations() {
+        List<Examination> examinations = new ArrayList<>();
+        List<String> tests = Arrays.asList(getString(R.string.first_examination_test1), getString(R.string.first_examination_test2),
+                getString(R.string.first_examination_test3), getString(R.string.first_examination_test4),
+                getString(R.string.first_examination_test5), getString(R.string.first_examination_test6),
+                getString(R.string.first_examination_test7));
+        List<String> activities = Arrays.asList(getString(R.string.first_examination_act1), getString(R.string.first_examination_act2),
+                getString(R.string.first_examination_act3), getString(R.string.first_examination_act4),
+                getString(R.string.first_examination_act5), getString(R.string.first_examination_act6));
+
+        Examination firstEx = new Examination("First, Second or Third Month", "", ExaminationStatus.CURRENT, tests, activities);
+        examinations.add(firstEx);
+
+        activities = Arrays.asList(getString(R.string.second_examination_act1), getString(R.string.second_examination_act2),
+                getString(R.string.second_examination_act3), getString(R.string.second_examination_act4));
+        Examination secondEx = new Examination("Fourth Month", "", ExaminationStatus.FUTURE, new ArrayList<String>(), activities);
+        examinations.add(secondEx);
+
+        tests = Arrays.asList(getString(R.string.third_examination_test1));
+        activities = Arrays.asList(getString(R.string.third_examination_act1), getString(R.string.third_examination_act2), getString(R.string.third_examination_act3));
+        Examination thirdEx = new Examination("Fifth Month", "", ExaminationStatus.FUTURE, tests, activities);
+        examinations.add(thirdEx);
+
+        activities = Arrays.asList(getString(R.string.fourth_examination_act1), getString(R.string.fourth_examination_act2), getString(R.string.fourth_examination_act3));
+        Examination fourthEx = new Examination("Sixth Month", "", ExaminationStatus.FUTURE, new ArrayList<String>(), activities);
+        examinations.add(fourthEx);
+
+        activities = Arrays.asList(getString(R.string.fifth_examination_act1), getString(R.string.fifth_examination_act2), getString(R.string.fifth_examination_act3));
+        Examination fifthEx = new Examination("Seventh Month", "", ExaminationStatus.FUTURE, new ArrayList<String>(), activities);
+        examinations.add(fifthEx);
+
+        tests = Arrays.asList(getString(R.string.sixth_examination_test1));
+        activities = Arrays.asList(getString(R.string.sixth_examination_act1), getString(R.string.sixth_examination_act2), getString(R.string.sixth_examination_act3));
+        Examination sixthEx = new Examination("Eighth Month", "", ExaminationStatus.FUTURE, tests, activities);
+        examinations.add(sixthEx);
+
+        tests = Arrays.asList(getString(R.string.seventh_examination_test1));
+        activities = Arrays.asList(getString(R.string.seventh_examination_act1), getString(R.string.seventh_examination_act2),
+                getString(R.string.seventh_examination_act3), getString(R.string.seventh_examination_act4));
+        Examination seventhEx = new Examination("Ninth Month", "", ExaminationStatus.FUTURE, tests, activities);
+        examinations.add(seventhEx);
+
+        activities = Arrays.asList(getString(R.string.eighth_examination_act1), getString(R.string.eighth_examination_act2),
+                getString(R.string.eighth_examination_act3), getString(R.string.eighth_examination_act4));
+        Examination eighthEx = new Examination("Tenth Month", "", ExaminationStatus.FUTURE, new ArrayList<String>(), activities);
+        examinations.add(eighthEx);
+
+        return examinations;
     }
 
     private void showAlertDialogNow(String message, String title) {
