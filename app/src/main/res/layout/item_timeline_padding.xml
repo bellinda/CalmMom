@@ -25,14 +25,16 @@
         android:layout_marginLeft="10dp"
         android:layout_gravity="center_vertical"
         android:padding="15dp"
-        android:background="@drawable/thin_white_border">
+        android:orientation="horizontal"
+        android:weightSum="6">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="5">
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -50,6 +52,20 @@
                 android:textColor="@color/colorAccent"
                 tools:text="Order Successfully Completed"/>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_info"
+                android:scaleType="center" />
         </LinearLayout>
 
     </LinearLayout>

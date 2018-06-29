@@ -70,11 +70,40 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
             holder.mDate.setText(DateTimeUtils.parseDateTime(timeLineModel.getDate(), "yyyy-MM-dd HH:mm", "hh:mm a, dd-MMM-yyyy"));
         }
         else
-            holder.mDate.setVisibility(View.GONE);
+            holder.mDate.setText(mContext.getString(R.string.time_line_adapter_no_date));
 
         holder.mMessage.setText(timeLineModel.getTitle());
 
         holder.mMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar currentDate = Calendar.getInstance();
+                final Calendar date = Calendar.getInstance();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, R.style.AppTheme_DialogTheme, new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+
+                        date.set(year, monthOfYear, dayOfMonth);
+                        new TimePickerDialog(mContext, R.style.AppTheme_DialogTheme, new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                date.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                date.set(Calendar.MINUTE, minute);
+                                timeLineModel.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date.getTime()));
+                                notifyItemChanged(position);
+                                ((ExaminationsActivity) mContext).updateExaminationsInDb(mFeedList);
+                            }
+                        },currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE), false).show();
+
+                    }
+                }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE));
+                datePickerDialog.getDatePicker().setMinDate(currentDate.getTimeInMillis());
+                datePickerDialog.show();
+            }
+        });
+
+        holder.mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar currentDate = Calendar.getInstance();
