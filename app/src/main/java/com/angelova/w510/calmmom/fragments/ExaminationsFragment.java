@@ -1,6 +1,8 @@
 package com.angelova.w510.calmmom.fragments;
 
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,11 +16,14 @@ import android.view.WindowManager;
 
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.adapters.TimeLineAdapter;
+import com.angelova.w510.calmmom.dialogs.AddExaminationDialog;
 import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationStatus;
 import com.angelova.w510.calmmom.models.User;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,6 +35,7 @@ public class ExaminationsFragment extends Fragment {
     private TimeLineAdapter mTimeLineAdapter;
     private RecyclerView mRecyclerView;
     private List<Examination> mDataList = new ArrayList<>();
+    private FloatingActionButton mAddNewExBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,11 +53,41 @@ public class ExaminationsFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
 
-        mDataList.addAll(user.getExaminations());
+        List<Examination> examinations = user.getExaminations();
+        Collections.sort(examinations);
+        mDataList.addAll(examinations);
 
         mTimeLineAdapter = new TimeLineAdapter(mDataList);
         mRecyclerView.setAdapter(mTimeLineAdapter);
 
+        mAddNewExBtn = (FloatingActionButton) rootView.findViewById(R.id.add_new_ex_btn);
+        setTheColorOfTheFLoatingButtonIcon();
+        mAddNewExBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddExaminationDialog dialog = new AddExaminationDialog(getActivity(), new AddExaminationDialog.DialogClickListener() {
+                    @Override
+                    public void onSave(Examination examination) {
+                        mDataList.add(examination);
+                        Collections.sort(mDataList);
+                        mTimeLineAdapter.notifyDataSetChanged();
+                    }
+                });
+                dialog.show();
+            }
+        });
+
         return rootView;
+    }
+
+    private void setTheColorOfTheFLoatingButtonIcon() {
+        //get the drawable
+        Drawable myFabSrc = getResources().getDrawable(R.drawable.fab_add);
+        //copy it in a new one
+        Drawable willBeWhite = myFabSrc.getConstantState().newDrawable();
+        //set the color filter, you can use also Mode.SRC_ATOP
+        willBeWhite.mutate().setColorFilter(Color.parseColor("#324A5F"), PorterDuff.Mode.MULTIPLY);
+        //set it to your fab button initialized before
+        mAddNewExBtn.setImageDrawable(willBeWhite);
     }
 }

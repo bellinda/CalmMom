@@ -91,4 +91,12 @@
     <string name="eighth_examination_act2">Антропометрия (ръст, телесна маса, външна пелвиметрика) - двукратно</string>
     <string name="eighth_examination_act3">Акушерски статус</string>
     <string name="eighth_examination_act4">Сърдечна дейност на плода - двукратно</string>
+
+    <string name="dialog_add_examination_title">Add New Examination</string>
+    
+    <string name="time_line_adapter_no_date">Click here to set date and time</string>
+    <string name="examination_date_text">Select date for the examination</string>
+    <string name="examination_time_text">Select time for the examination</string>
+    <string name="examination_title_text">Set title</string>
+    <string name="examination_no_title">No title</string>
 </resources>

@@ -1,13 +1,19 @@
 package com.angelova.w510.calmmom.models;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by W510 on 24.5.2018 г..
  */
 
-public class Examination implements Serializable {
+public class Examination implements Serializable, Comparable<Examination> {
 
     private String date;
     private ExaminationStatus status;
@@ -71,5 +77,24 @@ public class Examination implements Serializable {
 
     public void setActivities(List<String> activities) {
         this.activities = activities;
+    }
+
+    @Override
+    public int compareTo(@NonNull Examination examination) {
+        String serverDateFormat = "yyyy-MM-dd HH:mm";
+        SimpleDateFormat formatter = new SimpleDateFormat(serverDateFormat, Locale.UK);
+        if (getDate().isEmpty()) {
+            return 1;
+        } else if (examination.getDate().isEmpty()) {
+            return -1;
+        }
+        try {
+            Date date = formatter.parse(getDate());
+            Date examinationDate = formatter.parse(examination.getDate());
+            return date.compareTo(examinationDate);
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+        return 0;
     }
 }

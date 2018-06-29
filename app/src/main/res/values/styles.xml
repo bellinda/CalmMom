@@ -14,6 +14,16 @@
         <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
     </style>
 
+    <style name="MyEditTextInDialogTheme" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColorHint">@color/colorContrast</item>
+        <item name="colorAccent">@color/colorContrast </item>
+        <!-- Used for the bottom line when not selected / focused -->
+        <item name="colorControlNormal">@color/colorContrast</item>
+        <item name="colorControlActivated">@color/colorContrast</item>
+        <item name="colorControlHighlight">@color/colorContrast</item>
+        <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
+    </style>
+
     <style name="MyPrimaryEditTextTheme">
         <!-- Used for the bottom line when not selected / focused -->
         <item name="colorControlNormal">@color/colorPrimary</item>
@@ -47,5 +57,11 @@
 
         <!-- Put the two options, colorAccent and android:colorAccent. -->
         <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.DialogThemeDark" parent="Theme.AppCompat.Light.Dialog">
+
+        <!-- Put the two options, colorAccent and android:colorAccent. -->
+        <item name="colorAccent">@color/colorContrast</item>
     </style>
 </resources>
