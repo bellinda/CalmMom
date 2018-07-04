@@ -48,26 +48,79 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_date"
+            <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:id="@+id/input_layout_date"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textColorHint="@color/colorPrimary"-->
+                <!--app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@id/input_layout_kind">-->
+
+                <!--<android.support.design.widget.TextInputEditText-->
+                    <!--android:id="@+id/input_date"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="@string/surgery_date_label"-->
+                    <!--android:textColor="@color/colorContrast"-->
+                    <!--android:theme="@style/MyPrimaryEditTextTheme"-->
+                    <!--android:inputType="date"/>-->
+
+            <!--</android.support.design.widget.TextInputLayout>-->
+
+            <TextView
+                android:id="@+id/ref_date_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/colorPrimary"
-                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_layout_kind">
+                app:layout_constraintTop_toBottomOf="@id/input_layout_kind"
+                android:layout_marginTop="10dp"
+                android:text="@string/illness_date_label"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/date_title_text_size"/>
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/input_date"
-                    android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/ref_date_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ref_date_description"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="8">
+
+                <TextView
+                    android:id="@+id/ref_date_text"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="5"
+                    android:background="@drawable/pickers_bgr_light"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="31/01/2018"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/date_text_size" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/surgery_date_label"
-                    android:textColor="@color/colorContrast"
-                    android:theme="@style/MyPrimaryEditTextTheme"
-                    android:inputType="date"/>
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:gravity="center">
 
-            </android.support.design.widget.TextInputLayout>
+                    <ImageView
+                        android:id="@+id/select_date_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/ic_date_light" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -75,7 +128,7 @@
                 android:gravity="center_vertical"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_layout_date"
+                app:layout_constraintTop_toBottomOf="@+id/ref_date_layout"
                 android:id="@+id/status_layout"
                 android:orientation="horizontal"
                 android:weightSum="5">

@@ -7,7 +7,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.R;
@@ -57,7 +56,7 @@ public class AddIllnessDialog extends Dialog {
         mSaveBtn = (TextView) findViewById(R.id.save_button);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
-        mAdapter = new IllnessesAdapter(illnesses);
+        mAdapter = new IllnessesAdapter(illnesses, activity);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -76,6 +75,8 @@ public class AddIllnessDialog extends Dialog {
         mCancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                eliminateEmptyItems();
+                listener.onSave(illnesses);
                 dismiss();
             }
         });
@@ -83,9 +84,20 @@ public class AddIllnessDialog extends Dialog {
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                eliminateEmptyItems();
                 listener.onSave(illnesses);
                 dismiss();
             }
         });
+    }
+
+    private void eliminateEmptyItems() {
+        List<Illness> notEmptyIllnesses = new ArrayList<>();
+        for (Illness illness : illnesses) {
+            if (illness.getName() != null && !illness.getName().isEmpty()) {
+                notEmptyIllnesses.add(illness);
+            }
+        }
+        illnesses = notEmptyIllnesses;
     }
 }

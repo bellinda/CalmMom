@@ -20,6 +20,13 @@
         android:layout_width="1dp"
         android:layout_height="1dp"
         android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.27"
+        android:id="@+id/curve_bottom_guideline_2"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.15"
         android:id="@+id/top_image_guideline"/>
 
@@ -30,6 +37,57 @@
         app:layout_constraintGuide_percent="0.03"
         android:id="@+id/top_text_guideline"/>
 
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"
+        android:id="@+id/left_feet_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25"
+        android:id="@+id/right_feet_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.03"
+        android:id="@+id/top_feet_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.13"
+        android:id="@+id/bottom_feet_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3"
+        android:id="@+id/left_title_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85"
+        android:id="@+id/right_title_guideline"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/curve_bottom_guideline_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/curved_drawable_dark"/>
+
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -38,6 +96,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/curved_drawable"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/top_feet_guideline"
+        app:layout_constraintLeft_toRightOf="@+id/left_feet_guideline"
+        app:layout_constraintRight_toLeftOf="@+id/right_feet_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_feet_guideline"
+        android:gravity="center"
+        android:id="@+id/feet_layout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/feet"
+            android:scaleType="fitXY"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@+id/left_title_guideline"
+        app:layout_constraintRight_toLeftOf="@+id/right_title_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_feet_guideline"
+        app:layout_constraintTop_toTopOf="@+id/feet_layout"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/your_data"/>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -76,7 +166,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/image_view"
-        android:textSize="32sp"/>
+        android:textSize="32sp"
+        android:visibility="gone"/>
 
     <android.support.constraint.Guideline
         android:layout_width="0dp"

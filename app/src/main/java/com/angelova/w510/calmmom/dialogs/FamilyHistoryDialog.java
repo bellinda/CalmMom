@@ -38,10 +38,10 @@ public class FamilyHistoryDialog extends Dialog {
         void onSave(List<FamilyHistory> fhs);
     }
 
-    public FamilyHistoryDialog(Activity activity, List<FamilyHistory> surgeries, DialogClickListener onClickListener) {
+    public FamilyHistoryDialog(Activity activity, List<FamilyHistory> fhs, DialogClickListener onClickListener) {
         super(activity);
         this.activity = activity;
-        this.familyHistories = surgeries;
+        this.familyHistories = fhs;
         this.listener = onClickListener;
         this.setCancelable(false);
     }
@@ -75,6 +75,7 @@ public class FamilyHistoryDialog extends Dialog {
         mCancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                eliminateEmptyItems();
                 dismiss();
             }
         });
@@ -82,9 +83,20 @@ public class FamilyHistoryDialog extends Dialog {
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                eliminateEmptyItems();
                 listener.onSave(familyHistories);
                 dismiss();
             }
         });
+    }
+
+    private void eliminateEmptyItems() {
+        List<FamilyHistory> notEmptyFHs = new ArrayList<>();
+        for (FamilyHistory fh : familyHistories) {
+            if (fh.getType() != null && !fh.getType().isEmpty()) {
+                notEmptyFHs.add(fh);
+            }
+        }
+        familyHistories = notEmptyFHs;
     }
 }

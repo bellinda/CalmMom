@@ -56,7 +56,7 @@ public class SurgeriesDialog extends Dialog {
         mSaveBtn = (TextView) findViewById(R.id.save_button);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
-        mAdapter = new SurgeriesAdapter(surgeries);
+        mAdapter = new SurgeriesAdapter(surgeries, activity);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -75,6 +75,8 @@ public class SurgeriesDialog extends Dialog {
         mCancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                eliminateEmptyItems();
+                listener.onSave(surgeries);
                 dismiss();
             }
         });
@@ -82,9 +84,20 @@ public class SurgeriesDialog extends Dialog {
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                eliminateEmptyItems();
                 listener.onSave(surgeries);
                 dismiss();
             }
         });
+    }
+
+    private void eliminateEmptyItems() {
+        List<Surgery> notEMptySurgeries = new ArrayList<>();
+        for (Surgery surgery : surgeries) {
+            if (surgery.getKind() != null && !surgery.getKind().isEmpty()) {
+                notEMptySurgeries.add(surgery);
+            }
+        }
+        surgeries = notEMptySurgeries;
     }
 }
