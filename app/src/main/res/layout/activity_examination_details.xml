@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context="com.angelova.w510.calmmom.ExaminationDetailsActivity">
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15"
+        android:id="@+id/curve_bottom_guideline"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/curve_bottom_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/curved_drawable_dark_deeper"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.09"
+        android:id="@+id/date_bottom_guideline"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/date_bottom_guideline"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/new_examination_date_text_size"
+        android:text="26th June 2018"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.27"
+        android:id="@+id/switch_bottom_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2"
+        android:id="@+id/switch_top_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2"
+        android:id="@+id/switch_left_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8"
+        android:id="@+id/switch_right_guideline"/>
+
+    <info.hoang8f.android.segmented.SegmentedGroup
+        xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/segm_gr_test_mes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/switch_bottom_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/switch_top_guideline"
+        app:layout_constraintStart_toStartOf="@+id/switch_left_guideline"
+        app:layout_constraintEnd_toEndOf="@+id/switch_right_guideline"
+        android:layout_weight="5"
+        android:orientation="horizontal"
+        segmentedgroup:sc_border_width="1dp"
+        segmentedgroup:sc_corner_radius="0dp"
+        segmentedgroup:sc_tint_color="@color/colorContrast"
+        segmentedgroup:sc_checked_text_color="#ffffff"
+        android:weightSum="2">
+
+        <RadioButton
+            android:id="@+id/tests"
+            style="@style/RadioButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Tests"
+            android:checked="true"
+            />
+
+        <RadioButton
+            android:id="@+id/measurements"
+            style="@style/RadioButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Measurements"/>
+    </info.hoang8f.android.segmented.SegmentedGroup>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.92"
+        android:id="@+id/list_right_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.08"
+        android:id="@+id/list_left_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6"
+        android:id="@+id/list_bottom_guideline"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@+id/list_left_guideline"
+        app:layout_constraintRight_toLeftOf="@+id/list_right_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/switch_bottom_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/list_bottom_guideline"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:background="@drawable/dark_border"
+        android:orientation="vertical"
+        android:weightSum="6">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tests_list"
+            android:layout_weight="5">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mes_list"
+            android:layout_weight="5"
+            android:visibility="gone">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:id="@+id/new_item_input_layout">
+
+            <android.support.constraint.Guideline
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0"
+                android:id="@+id/left_parent"/>
+
+            <android.support.constraint.Guideline
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.88"
+                android:id="@+id/right_parent"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="9"
+                app:layout_constraintLeft_toRightOf="@id/left_parent"
+                app:layout_constraintRight_toLeftOf="@id/right_parent">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="\u25ba"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/new_examination_test_mes_text_size"
+                        android:textColor="@color/colorContrast"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/new_examination_input_height"
+                        android:id="@+id/new_item_input"
+                        android:textColor="@color/colorContrast"
+                        android:theme="@style/MyEditTextInDialogTheme"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="\u2713"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:textSize="@dimen/new_examination_chars_btns_text_size"
+                    android:textColor="@color/colorContrast"
+                    android:layout_weight="1"
+                    android:id="@+id/okay_btn"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="\u2717"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:textSize="@dimen/new_examination_chars_btns_text_size"
+                    android:textColor="@color/colorContrast"
+                    android:layout_weight="1"
+                    android:id="@+id/cancel_btn"/>
+            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+
+
+
+    </LinearLayout>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95"
+        android:id="@+id/add_right_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.63"
+        android:id="@+id/add_bottom_guideline" />
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/add_new_item_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:layout_constraintRight_toLeftOf="@id/add_right_guideline"
+        app:layout_constraintBottom_toTopOf="@id/add_bottom_guideline"
+        android:src="@drawable/fab_add"
+        app:fab_shadow="true"
+        app:fab_shadowColor="#66000000"
+        app:fab_shadowRadius="4dp"
+        app:fab_shadowXOffset="1dp"
+        app:fab_shadowYOffset="3dp"
+        app:fab_colorNormal="@color/colorContrast"/>
+</android.support.constraint.ConstraintLayout>

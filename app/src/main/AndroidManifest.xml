@@ -22,7 +22,9 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".InfoActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ExaminationsActivity"></activity>
+        <activity android:name=".ExaminationsActivity" />
+        <activity android:name=".ExaminationDetailsActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

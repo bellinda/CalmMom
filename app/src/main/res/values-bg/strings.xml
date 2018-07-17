@@ -99,4 +99,5 @@
     <string name="examination_time_text">Изберете час за прегледа</string>
     <string name="examination_title_text">Въведи заглавие</string>
     <string name="examination_no_title">Няма зададено заглавие</string>
+    <string name="examination_no_tests">Няма насрочени изследвания</string>
 </resources>

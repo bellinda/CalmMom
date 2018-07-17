@@ -1,5 +1,6 @@
 package com.angelova.w510.calmmom;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -146,5 +147,14 @@ public class ExaminationsActivity extends AppCompatActivity {
                         System.out.println("Error updating document " + e);
                     }
                 });
+    }
+
+    public void openExaminationDetailsActivity(Examination examination) {
+        Intent intent = new Intent(ExaminationsActivity.this, ExaminationDetailsActivity.class);
+        intent.putExtra("examination", examination);
+        intent.putExtra("user", mUser);
+        intent.putExtra("email", mUserEmail);
+        startActivity(intent);
+        //finish();
     }
 }
