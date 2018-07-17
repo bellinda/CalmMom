@@ -131,6 +131,13 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
                 datePickerDialog.show();
             }
         });
+
+        holder.mInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((ExaminationsActivity)mContext).openExaminationDetailsActivity(timeLineModel);
+            }
+        });
     }
 
     @Override
