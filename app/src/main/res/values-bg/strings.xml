@@ -100,4 +100,6 @@
     <string name="examination_title_text">Въведи заглавие</string>
     <string name="examination_no_title">Няма зададено заглавие</string>
     <string name="examination_no_tests">Няма насрочени изследвания</string>
+    <string name="examination_documents_title">Резултати и документи</string>
+    <string name="examination_images_title">Снимки</string>
 </resources>

@@ -20,6 +20,8 @@ public class Examination implements Serializable, Comparable<Examination> {
     private String title;
     private List<String> tests;
     private List<String> activities;
+    private List<ExaminationDocument> documents;
+    private List<ExaminationDocument> images;
 
     public Examination() {
 
@@ -77,6 +79,22 @@ public class Examination implements Serializable, Comparable<Examination> {
 
     public void setActivities(List<String> activities) {
         this.activities = activities;
+    }
+
+    public List<ExaminationDocument> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<ExaminationDocument> documents) {
+        this.documents = documents;
+    }
+
+    public List<ExaminationDocument> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ExaminationDocument> images) {
+        this.images = images;
     }
 
     @Override

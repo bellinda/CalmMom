@@ -100,4 +100,6 @@
     <string name="examination_title_text">Set title</string>
     <string name="examination_no_title">No title</string>
     <string name="examination_no_tests">No tests were planned</string>
+    <string name="examination_documents_title">Results and Documents</string>
+    <string name="examination_images_title">Images</string>
 </resources>

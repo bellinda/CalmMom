@@ -164,7 +164,7 @@ public class InfoActivity extends AppCompatActivity {
                 if (mUser.getFamilyHistories() == null || mUser.getFamilyHistories().size() == 0) {
                     fHistories.add(new FamilyHistory());
                 } else {
-                    fHistories = mUser.getFamilyHistories();
+                    fHistories = eliminateEmptyFHItems(mUser.getFamilyHistories());
                 }
 
                 FamilyHistoryDialog dialog = new FamilyHistoryDialog(InfoActivity.this, fHistories, new FamilyHistoryDialog.DialogClickListener() {
@@ -451,5 +451,15 @@ public class InfoActivity extends AppCompatActivity {
         if (!isLoading) {
             super.onBackPressed();
         }
+    }
+
+    private List<FamilyHistory> eliminateEmptyFHItems(List<FamilyHistory> fHistories) {
+        List<FamilyHistory> notEmptyFHs = new ArrayList<>();
+        for (FamilyHistory fh : fHistories) {
+            if (fh.getType() != null && !fh.getType().isEmpty()) {
+                notEmptyFHs.add(fh);
+            }
+        }
+        return notEmptyFHs;
     }
 }

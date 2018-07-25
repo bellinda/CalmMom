@@ -264,4 +264,158 @@
         app:fab_shadowXOffset="1dp"
         app:fab_shadowYOffset="3dp"
         app:fab_colorNormal="@color/colorContrast"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.08"
+        android:id="@+id/add_l_left_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.63"
+        android:id="@+id/add_l_top_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.79"
+        android:id="@+id/add_l_bottom_guideline"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/add_l_top_guideline"
+        app:layout_constraintLeft_toRightOf="@id/add_l_left_guideline"
+        android:id="@+id/documents_title"
+        android:text="@string/examination_documents_title"
+        android:textColor="@color/colorContrast"
+        android:textSize="16sp"/>
+    
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@id/add_l_left_guideline"
+        app:layout_constraintTop_toBottomOf="@id/documents_title"
+        app:layout_constraintBottom_toTopOf="@id/add_l_bottom_guideline"
+        app:layout_constraintDimensionRatio="H,1:1"
+        android:background="@drawable/dark_border_dashed"
+        android:text="+"
+        android:gravity="center"
+        android:textSize="32sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorContrast"
+        android:id="@+id/documents_selector"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@+id/documents_selector"
+        app:layout_constraintTop_toTopOf="@+id/documents_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/documents_selector"
+        android:layout_marginLeft="20dp"
+        android:text="2 files selected"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/colorContrast"
+        android:id="@+id/documents_count"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_info_dark"
+        android:scaleType="center"
+        app:layout_constraintLeft_toRightOf="@+id/documents_count"
+        app:layout_constraintTop_toTopOf="@+id/documents_count"
+        app:layout_constraintBottom_toBottomOf="@id/documents_count"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/view_documents_btn"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.97"
+        android:id="@+id/add_l_2_bottom_guideline"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/add_l_bottom_guideline"
+        app:layout_constraintLeft_toRightOf="@id/add_l_left_guideline"
+        android:id="@+id/images_title"
+        android:text="@string/examination_images_title"
+        android:textColor="@color/colorContrast"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@id/add_l_left_guideline"
+        app:layout_constraintTop_toBottomOf="@id/images_title"
+        app:layout_constraintBottom_toTopOf="@id/add_l_2_bottom_guideline"
+        app:layout_constraintDimensionRatio="H,1:1"
+        android:background="@drawable/dark_border_dashed"
+        android:text="+"
+        android:gravity="center"
+        android:textSize="32sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorContrast"
+        android:id="@+id/images_selector"/>
+
+    <HorizontalScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@+id/images_selector"
+        app:layout_constraintTop_toTopOf="@+id/images_selector"
+        app:layout_constraintBottom_toTopOf="@id/add_l_2_bottom_guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="20dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:id="@+id/img_layout"/>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/colorContrast"
+                android:id="@+id/images_loader"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="0dp"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/images_selector"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/images_selector"-->
+        <!--app:layout_constraintBottom_toTopOf="@id/add_l_2_bottom_guideline"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:id="@+id/img_layout"-->
+        <!--android:orientation="horizontal"/>-->
+
+    <!--<ProgressBar-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/images_selector"-->
+        <!--app:layout_constraintBottom_toTopOf="@id/add_l_2_bottom_guideline"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/img_layout"-->
+        <!--android:indeterminateTint="@color/colorContrast"-->
+        <!--android:id="@+id/images_loader"-->
+        <!--android:visibility="gone"/>-->
 </android.support.constraint.ConstraintLayout>
