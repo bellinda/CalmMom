@@ -1,6 +1,8 @@
 package com.angelova.w510.calmmom;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -17,6 +19,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
@@ -35,6 +38,10 @@ import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationDocument;
 import com.angelova.w510.calmmom.models.User;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.bumptech.glide.request.target.Target;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,6 +53,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.jsibbold.zoomage.ZoomageView;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -69,6 +77,7 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
     private TextView mCancelBtn;
     private TextView mDocumentsSelector;
     private TextView mImagesSelector;
+    private TextView mDocumentsCounter;
 
     private LinearLayout mImagesView;
     private ProgressBar mImagesLoader;
@@ -114,6 +123,7 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
         mOkayBtn = (TextView) findViewById(R.id.okay_btn);
         mCancelBtn = (TextView) findViewById(R.id.cancel_btn);
         mDocumentsSelector = (TextView) findViewById(R.id.documents_selector);
+        mDocumentsCounter = (TextView) findViewById(R.id.documents_count);
         mImagesSelector = (TextView) findViewById(R.id.images_selector);
         mImagesView = (LinearLayout) findViewById(R.id.img_layout);
         mImagesLoader = (ProgressBar) findViewById(R.id.images_loader);
@@ -207,6 +217,14 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                 mNewItemInputLayout.setVisibility(View.GONE);
             }
         });
+
+        if (mExamination.getDocuments() == null) {
+            mDocumentsCounter.setText(getString(R.string.examination_no_documents));
+        } else if (mExamination.getDocuments().size() == 1) {
+            mDocumentsCounter.setText(getString(R.string.examination_one_document));
+        } else {
+            mDocumentsCounter.setText(String.format(getString(R.string.examination_documents), mExamination.getDocuments().size()));
+        }
 
         mDocumentsSelector.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -321,6 +339,11 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                     selectedFilesNames.add(displayName);
                     //update user documents for current examination
 
+                    if (mExamination.getDocuments() != null) {
+                        mDocumentsCounter.setText(String.format(getString(R.string.examination_documents), mExamination.getDocuments().size() + 1));
+                    } else {
+                        mDocumentsCounter.setText(getString(R.string.examination_one_document));
+                    }
                     uploadDocument(uri, displayName);
 //                    if (mSelectedFilesLabel.getVisibility() == View.GONE) {
 //                        mSelectedFilesLabel.setVisibility(View.VISIBLE);
@@ -422,6 +445,41 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
             imageView.setLayoutParams(params);
             imageView.setId(i);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            final String imageUrl = images.get(i).getDownloadUri();
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LayoutInflater factory = LayoutInflater.from(ExaminationDetailsActivity.this);
+                    final View view = factory.inflate(R.layout.dialog_image, null);
+                    final ZoomageView image = (ZoomageView) view.findViewById(R.id.image_view);
+                    final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.image_progress);
+                    TextView okBtn = (TextView) view.findViewById(R.id.ok_button);
+                    GlideDrawableImageViewTarget imageViewMainTarget = new GlideDrawableImageViewTarget(image);
+                    Glide.with(ExaminationDetailsActivity.this).load(imageUrl)
+                            .listener(new RequestListener<String, GlideDrawable>() {
+                                @Override
+                                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                    progressBar.setVisibility(View.GONE);
+                                    image.setVisibility(View.VISIBLE);
+                                    return false;
+                                }
+                            }).into(imageViewMainTarget);
+                    final AlertDialog.Builder share_dialog = new AlertDialog.Builder(ExaminationDetailsActivity.this);
+                    share_dialog.setView(view);
+                    final Dialog dialog = share_dialog.show();
+                    okBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                }
+            });
             mImagesView.addView(imageView);
             Glide.with(this).load(images.get(i).getDownloadUri()).into(imageView);
         }
