@@ -24,6 +24,8 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,6 +36,7 @@ import android.widget.TextView;
 
 import com.angelova.w510.calmmom.adapters.MeasurementsAdapter;
 import com.angelova.w510.calmmom.adapters.TestsAdapter;
+import com.angelova.w510.calmmom.dialogs.ListDialog;
 import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationDocument;
 import com.angelova.w510.calmmom.models.User;
@@ -56,6 +59,8 @@ import com.google.firebase.storage.UploadTask;
 import com.jsibbold.zoomage.ZoomageView;
 import com.melnykov.fab.FloatingActionButton;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -78,6 +83,7 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
     private TextView mDocumentsSelector;
     private TextView mImagesSelector;
     private TextView mDocumentsCounter;
+    private ImageView mDocumentsViewBtn;
 
     private LinearLayout mImagesView;
     private ProgressBar mImagesLoader;
@@ -124,6 +130,7 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
         mCancelBtn = (TextView) findViewById(R.id.cancel_btn);
         mDocumentsSelector = (TextView) findViewById(R.id.documents_selector);
         mDocumentsCounter = (TextView) findViewById(R.id.documents_count);
+        mDocumentsViewBtn = (ImageView) findViewById(R.id.view_documents_btn);
         mImagesSelector = (TextView) findViewById(R.id.images_selector);
         mImagesView = (LinearLayout) findViewById(R.id.img_layout);
         mImagesLoader = (ProgressBar) findViewById(R.id.images_loader);
@@ -269,7 +276,20 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
             }
         });
 
-        //Glide.with(this).load(mExamination.getImages().get(0).getDownloadUri()).into(mImageView);
+        if (mExamination.getDocuments() != null && mExamination.getDocuments().size() > 0) {
+            mDocumentsViewBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ListDialog dialog = new ListDialog(ExaminationDetailsActivity.this, mExamination.getDocuments(), new ListDialog.DialogClickListener() {
+                        @Override
+                        public void onItemClicked(ExaminationDocument document) {
+                            openWebPage(document, document.getDownloadUri());
+                        }
+                    });
+                    dialog.show();
+                }
+            });
+        }
     }
 
     private void getFilesFromStorage() {
@@ -342,7 +362,7 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                     if (mExamination.getDocuments() != null) {
                         mDocumentsCounter.setText(String.format(getString(R.string.examination_documents), mExamination.getDocuments().size() + 1));
                     } else {
-                        mDocumentsCounter.setText(getString(R.string.examination_one_document));
+                        mDocumentsCounter.setText(getString(R.string.examination_no_documents));
                     }
                     uploadDocument(uri, displayName);
 //                    if (mSelectedFilesLabel.getVisibility() == View.GONE) {
@@ -484,5 +504,46 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
             Glide.with(this).load(images.get(i).getDownloadUri()).into(imageView);
         }
         mImagesLoader.setVisibility(View.GONE);
+    }
+
+    public void openWebPage(ExaminationDocument document, String url) {
+
+        LayoutInflater factory = LayoutInflater.from(ExaminationDetailsActivity.this);
+        final View view = factory.inflate(R.layout.dialog_document_view, null);
+        final WebView doc = (WebView) view.findViewById(R.id.web_view);
+        final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.image_progress);
+        TextView okBtn = (TextView) view.findViewById(R.id.ok_button);
+        doc.getSettings().setJavaScriptEnabled(true);
+        if (document.getName().endsWith("pdf")) {
+            try {
+                url = URLEncoder.encode(url, "UTF-8");
+                doc.loadUrl("https://docs.google.com/gview?embedded=true&url=" + url);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        } else {
+            doc.getSettings().setBuiltInZoomControls(true);
+            doc.getSettings().setUseWideViewPort(true);
+            doc.getSettings().setJavaScriptEnabled(true);
+            doc.getSettings().setLoadWithOverviewMode(true);
+            doc.loadUrl(url);
+        }
+        doc.setWebViewClient(new WebViewClient() {
+
+            public void onPageFinished(WebView view, String url) {
+                progressBar.setVisibility(View.GONE);
+                doc.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final AlertDialog.Builder share_dialog = new AlertDialog.Builder(ExaminationDetailsActivity.this);
+        share_dialog.setView(view);
+        final Dialog dialog = share_dialog.show();
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 }
