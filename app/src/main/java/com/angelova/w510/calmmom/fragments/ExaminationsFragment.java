@@ -61,7 +61,7 @@ public class ExaminationsFragment extends Fragment {
         mRecyclerView.setAdapter(mTimeLineAdapter);
 
         mAddNewExBtn = (FloatingActionButton) rootView.findViewById(R.id.add_new_ex_btn);
-        setTheColorOfTheFLoatingButtonIcon();
+        //setTheColorOfTheFLoatingButtonIcon();
         mAddNewExBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

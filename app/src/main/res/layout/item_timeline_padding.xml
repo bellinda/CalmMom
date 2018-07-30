@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         app:markerSize="20dp"
         app:lineSize="3dp"
-        app:line="@color/colorAccent"
+        app:line="@color/colorContrast"
         app:linePadding="5dp"/>
 
     <LinearLayout
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/text_timeline_date"
                 android:textSize="12sp"
-                android:textColor="@color/colorAccentTransparent"
+                android:textColor="@color/colorContrastTransparent"
                 tools:text="24 JAN"/>
 
             <android.support.v7.widget.AppCompatTextView
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:id="@+id/text_timeline_title"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorContrast"
                 tools:text="Order Successfully Completed"/>
 
         </LinearLayout>
@@ -65,7 +65,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@drawable/ic_info"
+                android:background="@drawable/ic_info_dark"
                 android:scaleType="center" />
         </LinearLayout>
 
