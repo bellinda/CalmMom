@@ -2,7 +2,9 @@ package com.angelova.w510.calmmom;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -19,6 +21,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -27,12 +30,14 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.angelova.w510.calmmom.adapters.MeasurementsAdapter;
 import com.angelova.w510.calmmom.adapters.TestsAdapter;
@@ -40,6 +45,7 @@ import com.angelova.w510.calmmom.dialogs.ListDialog;
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationDocument;
+import com.angelova.w510.calmmom.models.ExaminationStatus;
 import com.angelova.w510.calmmom.models.User;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -62,9 +68,14 @@ import com.melnykov.fab.FloatingActionButton;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class ExaminationDetailsActivity extends AppCompatActivity {
@@ -85,6 +96,7 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
     private TextView mImagesSelector;
     private TextView mDocumentsCounter;
     private ImageView mDocumentsViewBtn;
+    private TextView mDateView;
 
     private LinearLayout mImagesView;
     private ProgressBar mImagesLoader;
@@ -135,6 +147,7 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
         mImagesSelector = (TextView) findViewById(R.id.images_selector);
         mImagesView = (LinearLayout) findViewById(R.id.img_layout);
         mImagesLoader = (ProgressBar) findViewById(R.id.images_loader);
+        mDateView = (TextView) findViewById(R.id.date_text_view);
 
         mExamination = (Examination) getIntent().getSerializableExtra("examination");
         if (mExamination.getTests().size() > 0) {
@@ -305,6 +318,86 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                 }
             });
         }
+
+        if (mExamination.getDate() != null && !TextUtils.isEmpty(mExamination.getDate())) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            try {
+                Date date = sdf.parse(mExamination.getDate());
+                mDateView.setText(dateFormat.format(date));
+            } catch (ParseException pe) {
+                pe.printStackTrace();
+            }
+        } else {
+            mDateView.setText(getString(R.string.time_line_adapter_no_date));
+        }
+
+        if (mExamination.getStatus() != ExaminationStatus.COMPLETED) {
+            mDateView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Calendar currentDate = Calendar.getInstance();
+                    final Calendar date = Calendar.getInstance();
+                    int year = 0;
+                    int month = 0;
+                    int day = 0;
+                    if (mExamination.getDate() != null && !TextUtils.isEmpty(mExamination.getDate())) {
+                        try {
+                            Date selectedDate = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(mExamination.getDate());
+                            Calendar selected = Calendar.getInstance();
+                            selected.setTime(selectedDate);
+                            year = selected.get(Calendar.YEAR);
+                            month = selected.get(Calendar.MONTH);
+                            day = selected.get(Calendar.DATE);
+                        } catch (ParseException pe) {
+                            pe.printStackTrace();
+                        }
+                    } else {
+                        year = currentDate.get(Calendar.YEAR);
+                        month = currentDate.get(Calendar.MONTH);
+                        day = currentDate.get(Calendar.DATE);
+                    }
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(ExaminationDetailsActivity.this, R.style.AppTheme_DialogTheme, new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+
+                            date.set(year, monthOfYear, dayOfMonth);
+
+                            try {
+                                int hour = 0;
+                                int minute = 0;
+                                if (mExamination.getDate() != null && !TextUtils.isEmpty(mExamination.getDate())) {
+                                    Date selectedDate = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(mExamination.getDate());
+                                    Calendar selected = Calendar.getInstance();
+                                    selected.setTime(selectedDate);
+                                    hour = selected.get(Calendar.HOUR_OF_DAY);
+                                    minute = selected.get(Calendar.MINUTE);
+                                } else {
+                                    hour = currentDate.get(Calendar.HOUR_OF_DAY);
+                                    minute = currentDate.get(Calendar.MINUTE);
+                                }
+
+                                new TimePickerDialog(ExaminationDetailsActivity.this, R.style.AppTheme_DialogTheme, new TimePickerDialog.OnTimeSetListener() {
+                                    @Override
+                                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                        date.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                        date.set(Calendar.MINUTE, minute);
+                                        mDateView.setText(new SimpleDateFormat("dd MMM yyyy").format(date.getTime()));
+                                        mExamination.setDate(new SimpleDateFormat("yyyy-MM-dd hh:mm").format(date.getTime()));
+                                        updateExaminationInDb();
+                                    }
+                                }, hour, minute, false).show();
+                            } catch (ParseException pe) {
+                                pe.printStackTrace();
+                            }
+                        }
+                    }, year, month, day);
+                    //datePickerDialog.getDatePicker().setMinDate(currentDate.getTimeInMillis());
+                    datePickerDialog.show();
+                }
+            });
+        }
     }
 
     private void getFilesFromStorage() {
@@ -396,7 +489,7 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
         ObjectMapper m = new ObjectMapper();
         List<Examination> examinations = new ArrayList<>();
         for (Examination ex : mUser.getExaminations()) {
-            if (ex.getTitle().equals(mExamination.getTitle()) && ex.getDate().equals(mExamination.getDate())) {
+            if (ex.getTitle().equals(mExamination.getTitle())) {
                 examinations.add(mExamination);
             } else {
                 examinations.add(ex);
