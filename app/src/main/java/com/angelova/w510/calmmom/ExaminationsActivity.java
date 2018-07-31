@@ -72,6 +72,7 @@ public class ExaminationsActivity extends AppCompatActivity {
                         FragmentTransaction transaction = fragmentManager.beginTransaction();
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("user", mUser);
+                        bundle.putString("email", mUserEmail);
                         // set Fragmentclass Arguments
                         ExaminationsFragment examinationsFragment = new ExaminationsFragment();
                         examinationsFragment.setArguments(bundle);
@@ -100,6 +101,7 @@ public class ExaminationsActivity extends AppCompatActivity {
                 case R.id.navigation_examinations:
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("user", mUser);
+                    bundle.putString("email", mUserEmail);
                     // set Fragmentclass Arguments
                     ExaminationsFragment examinationsFragment = new ExaminationsFragment();
                     examinationsFragment.setArguments(bundle);
@@ -155,6 +157,6 @@ public class ExaminationsActivity extends AppCompatActivity {
         intent.putExtra("user", mUser);
         intent.putExtra("email", mUserEmail);
         startActivity(intent);
-        //finish();
+        finish();
     }
 }

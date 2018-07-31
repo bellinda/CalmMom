@@ -663,4 +663,13 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
         });
         warning.show();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(ExaminationDetailsActivity.this, ExaminationsActivity.class);
+        intent.putExtra("email", mUserEmail);
+        startActivity(intent);
+    }
 }

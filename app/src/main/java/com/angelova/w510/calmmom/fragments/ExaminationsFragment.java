@@ -5,7 +5,9 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +22,13 @@ import com.angelova.w510.calmmom.dialogs.AddExaminationDialog;
 import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationStatus;
 import com.angelova.w510.calmmom.models.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -37,10 +46,14 @@ public class ExaminationsFragment extends Fragment {
     private List<Examination> mDataList = new ArrayList<>();
     private FloatingActionButton mAddNewExBtn;
 
+    private User mUser;
+    private String mUserEmail;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        User user = (User) getArguments().getSerializable("user");
+        mUser = (User) getArguments().getSerializable("user");
+        mUserEmail = getArguments().getString("email");
         View rootView = inflater.inflate(R.layout.fragment_examinations, container, false);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -53,7 +66,7 @@ public class ExaminationsFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
 
-        List<Examination> examinations = user.getExaminations();
+        List<Examination> examinations = mUser.getExaminations();
         Collections.sort(examinations);
         mDataList.addAll(examinations);
 
