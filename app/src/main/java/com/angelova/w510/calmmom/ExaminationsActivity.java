@@ -113,7 +113,11 @@ public class ExaminationsActivity extends AppCompatActivity {
                     }
                     return true;
                 case R.id.navigation_questions:
-                    transaction.replace(R.id.content, new QuestionsFragment()).commit();
+                    Bundle bundleQ = new Bundle();
+                    bundleQ.putSerializable("user", mUser);
+                    QuestionsFragment questionsFragment = new QuestionsFragment();
+                    questionsFragment.setArguments(bundleQ);
+                    transaction.replace(R.id.content, questionsFragment).commit();
                     if(getSupportActionBar() != null) {
                         //getSupportActionBar().setTitle(R.string.title_documents);
 //                        toolbar.setVisibility(View.VISIBLE);
