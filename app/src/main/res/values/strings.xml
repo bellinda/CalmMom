@@ -105,4 +105,7 @@
     <string name="examination_no_documents">0 documents added</string>
     <string name="examination_one_document">1 document added</string>
     <string name="examination_documents">%1$d documents added</string>
+    <string name="examination_no_text_adding_test">Please enter a test before saving</string>
+    <string name="examination_no_text_adding_mes">Please enter a measurement before saving</string>
+    <string name="examination_no_text_title">Warning</string>
 </resources>

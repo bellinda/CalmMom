@@ -14,6 +14,23 @@
         app:layout_constraintGuide_percent="0.15"
         android:id="@+id/curve_bottom_guideline"/>
 
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.16"
+        android:id="@+id/curve_light_bottom_guideline"/>
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/curve_light_bottom_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/curved_drawable_light_deeper"/>
+
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -37,6 +37,7 @@ import android.widget.TextView;
 import com.angelova.w510.calmmom.adapters.MeasurementsAdapter;
 import com.angelova.w510.calmmom.adapters.TestsAdapter;
 import com.angelova.w510.calmmom.dialogs.ListDialog;
+import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationDocument;
 import com.angelova.w510.calmmom.models.User;
@@ -202,18 +203,32 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
         mOkayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mListTests.getVisibility() == View.VISIBLE) {
-                    mTests.add(mNewItemInput.getText().toString());
-                    mExamination.setTests(mTests);
-                    mTestsAdapter.notifyDataSetChanged();
+                if (!mNewItemInput.getText().toString().isEmpty()) {
+                    if (mListTests.getVisibility() == View.VISIBLE) {
+                        if (mTests == null) {
+                            mTests = new ArrayList<>();
+                        }
+                        mTests.add(mNewItemInput.getText().toString());
+                        mExamination.setTests(mTests);
+                        mTestsAdapter.notifyDataSetChanged();
+                    } else {
+                        if (mMeasurements == null) {
+                            mMeasurements = new ArrayList<String>();
+                        }
+                        mMeasurements.add(mNewItemInput.getText().toString());
+                        mExamination.setActivities(mMeasurements);
+                        mMeasurementsAdapter.notifyDataSetChanged();
+                    }
+                    mNewItemInput.setText("");
+                    mNewItemInputLayout.setVisibility(View.GONE);
+                    updateExaminationInDb();
                 } else {
-                    mMeasurements.add(mNewItemInput.getText().toString());
-                    mExamination.setActivities(mMeasurements);
-                    mMeasurementsAdapter.notifyDataSetChanged();
+                    if (mListTests.getVisibility() == View.VISIBLE) {
+                        showAlertDialogNow(getString(R.string.examination_no_text_adding_test), getString(R.string.examination_no_text_title));
+                    } else {
+                        showAlertDialogNow(getString(R.string.examination_no_text_adding_mes), getString(R.string.examination_no_text_title));
+                    }
                 }
-                mNewItemInput.setText("");
-                mNewItemInputLayout.setVisibility(View.GONE);
-                updateExaminationInDb();
             }
         });
 
@@ -545,5 +560,14 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+    }
+
+    private void showAlertDialogNow(String message, String title) {
+        WarnDialog warning = new WarnDialog(this, title, message, new WarnDialog.DialogClickListener() {
+            @Override
+            public void onClick() {
+            }
+        });
+        warning.show();
     }
 }
