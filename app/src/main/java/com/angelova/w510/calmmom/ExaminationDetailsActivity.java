@@ -467,10 +467,12 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                     selectedFilesNames.add(displayName);
                     //update user documents for current examination
 
-                    if (mExamination.getDocuments() != null) {
-                        mDocumentsCounter.setText(String.format(getString(R.string.examination_documents), mExamination.getDocuments().size() + 1));
-                    } else {
-                        mDocumentsCounter.setText(getString(R.string.examination_no_documents));
+                    if (isDocumentsSelected) {
+                        if (mExamination.getDocuments() != null) {
+                            mDocumentsCounter.setText(String.format(getString(R.string.examination_documents), mExamination.getDocuments().size() + 1));
+                        } else {
+                            mDocumentsCounter.setText(getString(R.string.examination_no_documents));
+                        }
                     }
                     uploadDocument(uri, displayName);
 //                    if (mSelectedFilesLabel.getVisibility() == View.GONE) {
