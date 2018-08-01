@@ -105,4 +105,6 @@
     <string name="examination_no_text_adding_test">Моля въведете название на изследване преди да запазите</string>
     <string name="examination_no_text_adding_mes">Моля въведете название на измерване преди да запазите</string>
     <string name="examination_no_text_title">Внимание</string>
+
+    <string name="questions_add_answer">Добави отговор</string>
 </resources>

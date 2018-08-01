@@ -52,10 +52,10 @@ public class QuestionsFragment extends Fragment {
 
         List<Question> questions = mUser.getQuestions();
         questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
+        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", ""));
         questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
         questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
-        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
-        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
+        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", ""));
         questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
         questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
         questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
