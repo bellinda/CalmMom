@@ -105,7 +105,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     questionPrefix = "В: ";
                 }
                 holder.questionView.setText(questionPrefix + holder.questionEditView.getText());
-                question.setText(questionPrefix + holder.questionEditView.getText());
+                question.setText(holder.questionEditView.getText().toString());
                 holder.questionView.setVisibility(View.VISIBLE);
                 holder.questionEditLayout.setVisibility(View.GONE);
 
@@ -147,8 +147,6 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     }
                     constraintSet.applyTo(holder.cardContent);
                 } else {
-                    //TODO: remove item from list
-                    //questions.remove(question);
                     ((ExaminationsActivity) context).updateQuestionsList(question);
                 }
             }
