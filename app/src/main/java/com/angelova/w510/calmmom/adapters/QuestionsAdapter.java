@@ -13,10 +13,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.angelova.w510.calmmom.ExaminationsActivity;
 import com.angelova.w510.calmmom.R;
+import com.angelova.w510.calmmom.fragments.QuestionsFragment;
 import com.angelova.w510.calmmom.models.Question;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by W510 on 31.7.2018 г..
@@ -43,26 +46,53 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Question question = questions.get(position);
-        holder.questionView.setText(question.getText());
-        if (question.getAnswer() != null && !TextUtils.isEmpty(question.getAnswer())) {
-            holder.answerView.setText(question.getAnswer());
-            holder.answerView.setVisibility(View.VISIBLE);
-            holder.addAnswerLayout.setVisibility(View.GONE);
+        String questionPrefix = "Q: ";
+        if (Locale.getDefault().getLanguage().equalsIgnoreCase("bg")) {
+            questionPrefix = "В: ";
+        }
+        holder.questionView.setText(questionPrefix + question.getText());
+        if (!question.isNew()) {
+            if (question.getAnswer() != null && !TextUtils.isEmpty(question.getAnswer())) {
+                String answerPrefix = "A: ";
+                if (Locale.getDefault().getLanguage().equalsIgnoreCase("bg")) {
+                    answerPrefix = "О: ";
+                }
+                holder.answerView.setText(answerPrefix + question.getAnswer());
+                holder.answerView.setVisibility(View.VISIBLE);
+                holder.addAnswerLayout.setVisibility(View.GONE);
+            } else {
+                holder.answerView.setVisibility(View.GONE);
+                holder.addAnswerLayout.setVisibility(View.VISIBLE);
+            }
         } else {
             holder.answerView.setVisibility(View.GONE);
-            holder.addAnswerLayout.setVisibility(View.VISIBLE);
+            holder.addAnswerLayout.setClickable(false);
+            holder.addAnswerLayout.setEnabled(false);
+            ConstraintSet constraintSet = new ConstraintSet();
+            constraintSet.clone(holder.cardContent);
+            constraintSet.connect(holder.addAnswerLayout.getId(), ConstraintSet.TOP, holder.questionEditLayout.getId(), ConstraintSet.BOTTOM, 10);
+            constraintSet.applyTo(holder.cardContent);
+
+            holder.questionEditLayout.setVisibility(View.VISIBLE);
+            holder.questionView.setVisibility(View.GONE);
+            holder.answerEditLayout.setVisibility(View.GONE);
         }
+
         holder.questionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 holder.questionView.setVisibility(View.GONE);
                 holder.questionEditLayout.setVisibility(View.VISIBLE);
-                holder.questionEditView.setText(holder.questionView.getText());
+                holder.questionEditView.setText(holder.questionView.getText().subSequence(2, holder.questionView.getText().length()));
 
                 ConstraintSet constraintSet = new ConstraintSet();
                 constraintSet.clone(holder.cardContent);
 
-                constraintSet.connect(holder.answerView.getId(), ConstraintSet.TOP, holder.questionEditLayout.getId(), ConstraintSet.BOTTOM, 10);
+                if (question.getAnswer() != null && !TextUtils.isEmpty(question.getAnswer())) {
+                    constraintSet.connect(holder.answerView.getId(), ConstraintSet.TOP, holder.questionEditLayout.getId(), ConstraintSet.BOTTOM, 10);
+                } else {
+                    constraintSet.connect(holder.addAnswerLayout.getId(), ConstraintSet.TOP, holder.questionEditLayout.getId(), ConstraintSet.BOTTOM, 10);
+                }
                 constraintSet.applyTo(holder.cardContent);
             }
         });
@@ -70,31 +100,57 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         holder.questionSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.questionView.setText(holder.questionEditView.getText());
+                String questionPrefix = "Q: ";
+                if (Locale.getDefault().getLanguage().equalsIgnoreCase("bg")) {
+                    questionPrefix = "В: ";
+                }
+                holder.questionView.setText(questionPrefix + holder.questionEditView.getText());
+                question.setText(questionPrefix + holder.questionEditView.getText());
                 holder.questionView.setVisibility(View.VISIBLE);
                 holder.questionEditLayout.setVisibility(View.GONE);
 
                 ConstraintSet constraintSet = new ConstraintSet();
                 constraintSet.clone(holder.cardContent);
 
-                constraintSet.connect(holder.answerView.getId(), ConstraintSet.TOP, holder.questionView.getId(), ConstraintSet.BOTTOM, 10);
+                if (question.getAnswer() != null && !TextUtils.isEmpty(question.getAnswer())) {
+                    constraintSet.connect(holder.answerView.getId(), ConstraintSet.TOP, holder.questionView.getId(), ConstraintSet.BOTTOM, 10);
+                } else {
+                    constraintSet.connect(holder.addAnswerLayout.getId(), ConstraintSet.TOP, holder.questionView.getId(), ConstraintSet.BOTTOM, 10);
+                    holder.addAnswerLayout.setVisibility(View.VISIBLE);
+                    holder.addAnswerLayout.setClickable(true);
+                    holder.addAnswerLayout.setEnabled(true);
+                }
                 constraintSet.applyTo(holder.cardContent);
 
-                //TODO:update questions in DB
+                if (question.isNew()) {
+                    question.setNew(false);
+                }
+
+                ((ExaminationsActivity) context).updateQuestionsInDb(questions);
             }
         });
 
         holder.questionCancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.questionView.setVisibility(View.VISIBLE);
-                holder.questionEditLayout.setVisibility(View.GONE);
+                if (!question.isNew()) {
+                    holder.questionView.setVisibility(View.VISIBLE);
+                    holder.questionEditLayout.setVisibility(View.GONE);
 
-                ConstraintSet constraintSet = new ConstraintSet();
-                constraintSet.clone(holder.cardContent);
+                    ConstraintSet constraintSet = new ConstraintSet();
+                    constraintSet.clone(holder.cardContent);
 
-                constraintSet.connect(holder.answerView.getId(), ConstraintSet.TOP, holder.questionView.getId(), ConstraintSet.BOTTOM, 10);
-                constraintSet.applyTo(holder.cardContent);
+                    if (question.getAnswer() != null && !TextUtils.isEmpty(question.getAnswer())) {
+                        constraintSet.connect(holder.answerView.getId(), ConstraintSet.TOP, holder.questionView.getId(), ConstraintSet.BOTTOM, 10);
+                    } else {
+                        constraintSet.connect(holder.addAnswerLayout.getId(), ConstraintSet.TOP, holder.questionView.getId(), ConstraintSet.BOTTOM, 10);
+                    }
+                    constraintSet.applyTo(holder.cardContent);
+                } else {
+                    //TODO: remove item from list
+                    //questions.remove(question);
+                    ((ExaminationsActivity) context).updateQuestionsList(question);
+                }
             }
         });
 
@@ -118,11 +174,16 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         holder.answerSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.answerView.setText(holder.answerEditView.getText());
+                String answerPrefix = "A: ";
+                if (Locale.getDefault().getLanguage().equalsIgnoreCase("bg")) {
+                    answerPrefix = "О: ";
+                }
+                holder.answerView.setText(answerPrefix + holder.answerEditView.getText());
+                question.setAnswer(holder.answerEditView.getText().toString());
                 holder.answerView.setVisibility(View.VISIBLE);
                 holder.answerEditLayout.setVisibility(View.GONE);
 
-                //TODO: update questions in DB
+                ((ExaminationsActivity) context).updateQuestionsInDb(questions);
             }
         });
 

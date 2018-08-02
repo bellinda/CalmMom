@@ -16,6 +16,7 @@ import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.adapters.QuestionsAdapter;
 import com.angelova.w510.calmmom.models.Question;
 import com.angelova.w510.calmmom.models.User;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +31,7 @@ public class QuestionsFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private QuestionsAdapter mAdapter;
     private List<Question> mDataList = new ArrayList<>();
+    private FloatingActionButton mAddNewQnBtn;
 
     private User mUser;
 
@@ -50,22 +52,40 @@ public class QuestionsFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
 
+        //mDataList.clear();
+
         List<Question> questions = mUser.getQuestions();
-        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
-        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", ""));
-        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
-        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
-        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", ""));
-        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
-        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
-        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
-        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
-        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala"));
+//        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala", false));
+//        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "", false));
+//        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala", false));
+//        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala", false));
+//        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "", false));
+//        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala", false));
+//        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala", false));
+//        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala", false));
+//        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala", false));
+//        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala", false));
         mDataList.addAll(questions);
 
         mAdapter = new QuestionsAdapter(mDataList, getActivity());
         mRecyclerView.setAdapter(mAdapter);
 
+        mAddNewQnBtn = (FloatingActionButton) rootView.findViewById(R.id.add_new_qn_btn);
+        mAddNewQnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDataList.add(0, new Question("", "", true));
+                mAdapter.notifyItemInserted(0);
+                mRecyclerView.scrollToPosition(0);
+            }
+        });
+
         return rootView;
+    }
+
+    public void removeItemFromList(Question question) {
+        int itemId = mDataList.indexOf(question);
+        mDataList.remove(itemId);
+        mAdapter.notifyItemRemoved(itemId);
     }
 }

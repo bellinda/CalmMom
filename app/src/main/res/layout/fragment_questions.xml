@@ -26,6 +26,35 @@
         android:layout_width="1dp"
         android:layout_height="1dp"
         android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8"
+        android:id="@+id/add_btn_vertical_gdl"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.88"
+        android:id="@+id/top_add_guideline"/>
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/add_new_qn_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:layout_constraintLeft_toRightOf="@id/add_btn_vertical_gdl"
+        app:layout_constraintTop_toBottomOf="@id/top_add_guideline"
+        android:src="@drawable/fab_add"
+        app:fab_shadow="true"
+        app:fab_shadowColor="#66000000"
+        app:fab_shadowRadius="4dp"
+        app:fab_shadowXOffset="1dp"
+        app:fab_shadowYOffset="3dp"
+        app:fab_colorNormal="@color/colorPrimaryDark" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5"
         android:id="@+id/img_guideline"/>
 

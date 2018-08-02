@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.view.WindowManager;
 import com.angelova.w510.calmmom.fragments.ExaminationsFragment;
 import com.angelova.w510.calmmom.fragments.QuestionsFragment;
 import com.angelova.w510.calmmom.models.Examination;
+import com.angelova.w510.calmmom.models.Question;
 import com.angelova.w510.calmmom.models.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -162,5 +164,33 @@ public class ExaminationsActivity extends AppCompatActivity {
         intent.putExtra("email", mUserEmail);
         startActivity(intent);
         finish();
+    }
+
+    public void updateQuestionsInDb(List<Question> questions) {
+        ObjectMapper m = new ObjectMapper();
+        mUser.setQuestions(questions);
+        Map<String, Object> user = m.convertValue(mUser, Map.class);
+
+        final DocumentReference userRef = mDb.collection("users").document(mUserEmail);
+        userRef.update(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("Error updating document " + e);
+                    }
+                });
+    }
+
+    public void updateQuestionsList(Question question) {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.content);
+        if (f instanceof QuestionsFragment) {
+            ((QuestionsFragment) f).removeItemFromList(question);
+        }
     }
 }

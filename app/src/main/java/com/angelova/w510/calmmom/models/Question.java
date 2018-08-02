@@ -10,14 +10,16 @@ public class Question implements Serializable {
 
     private String text;
     private String answer;
+    private boolean isNew;
 
     public Question() {
 
     }
 
-    public Question(String text, String answer) {
+    public Question(String text, String answer, boolean isNew) {
         this.text = text;
         this.answer = answer;
+        this.isNew = isNew;
     }
 
     public String getText() {
@@ -34,5 +36,13 @@ public class Question implements Serializable {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean isNew) {
+        this.isNew = isNew;
     }
 }
