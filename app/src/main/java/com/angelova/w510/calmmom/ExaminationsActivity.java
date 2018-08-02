@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.angelova.w510.calmmom.dialogs.YesNoDialog;
 import com.angelova.w510.calmmom.fragments.ExaminationsFragment;
 import com.angelova.w510.calmmom.fragments.QuestionsFragment;
 import com.angelova.w510.calmmom.models.Examination;
@@ -187,10 +188,21 @@ public class ExaminationsActivity extends AppCompatActivity {
                 });
     }
 
-    public void updateQuestionsList(Question question) {
-        Fragment f = getSupportFragmentManager().findFragmentById(R.id.content);
-        if (f instanceof QuestionsFragment) {
-            ((QuestionsFragment) f).removeItemFromList(question);
-        }
+    public void updateQuestionsList(final Question question) {
+        YesNoDialog dialog = new YesNoDialog(ExaminationsActivity.this, getString(R.string.delete_question_text), getString(R.string.dialog_yes_no_positive), getString(R.string.dialog_yes_no_negative), new YesNoDialog.ButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick() {
+                Fragment f = getSupportFragmentManager().findFragmentById(R.id.content);
+                if (f instanceof QuestionsFragment) {
+                    ((QuestionsFragment) f).removeItemFromListAndUpdateDb(question);
+                }
+            }
+
+            @Override
+            public void onNegativeButtonClick() {
+
+            }
+        });
+        dialog.show();
     }
 }

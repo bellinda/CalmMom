@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.angelova.w510.calmmom.ExaminationsActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.adapters.QuestionsAdapter;
 import com.angelova.w510.calmmom.models.Question;
@@ -87,5 +88,12 @@ public class QuestionsFragment extends Fragment {
         int itemId = mDataList.indexOf(question);
         mDataList.remove(itemId);
         mAdapter.notifyItemRemoved(itemId);
+    }
+
+    public void removeItemFromListAndUpdateDb(Question question) {
+        int itemId = mDataList.indexOf(question);
+        mDataList.remove(itemId);
+        mAdapter.notifyItemRemoved(itemId);
+        ((ExaminationsActivity)getActivity()).updateQuestionsInDb(mDataList);
     }
 }

@@ -76,6 +76,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
             holder.questionEditLayout.setVisibility(View.VISIBLE);
             holder.questionView.setVisibility(View.GONE);
             holder.answerEditLayout.setVisibility(View.GONE);
+
+            holder.deleteBtn.setVisibility(View.GONE);
         }
 
         holder.questionView.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +126,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
                 if (question.isNew()) {
                     question.setNew(false);
+                    holder.deleteBtn.setVisibility(View.VISIBLE);
                 }
 
                 ((ExaminationsActivity) context).updateQuestionsInDb(questions);
@@ -196,6 +199,13 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                 holder.answerEditLayout.setVisibility(View.GONE);
             }
         });
+
+        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((ExaminationsActivity) context).updateQuestionsList(question);
+            }
+        });
     }
 
     @Override
@@ -216,6 +226,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         private EditText answerEditView;
         private TextView answerSaveBtn;
         private TextView answerCancelBtn;
+        private TextView deleteBtn;
 
         public ViewHolder(View view) {
             super(view);
@@ -231,6 +242,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
             answerEditView = (EditText) view.findViewById(R.id.answer_edit_view);
             answerSaveBtn = (TextView) view.findViewById(R.id.save_ans_btn);
             answerCancelBtn = (TextView) view.findViewById(R.id.cancel_ans_btn);
+            deleteBtn = (TextView) view.findViewById(R.id.delete_btn);
         }
     }
 }
