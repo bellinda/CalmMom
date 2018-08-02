@@ -28,4 +28,7 @@
     <dimen name="question_edit_view_height">70dp</dimen>
     <dimen name="question_edit_view_text_size">14sp</dimen>
     <dimen name="question_edit_view_btns_text_size">26sp</dimen>
+
+    <dimen name="dialog_yes_no_title_text_size">18sp</dimen>
+    <dimen name="dialog_yes_no_button_height">45dp</dimen>
 </resources>
