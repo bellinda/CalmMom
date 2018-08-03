@@ -134,7 +134,6 @@
                     android:gravity="top|start"
                     android:inputType="textMultiLine"
                     android:scrollbars="vertical"
-                    android:maxLines="20"
                     android:theme="@style/MyEditTextInDialogTheme"
                     android:textSize="@dimen/question_edit_view_text_size"
                     android:layout_weight="8"/>

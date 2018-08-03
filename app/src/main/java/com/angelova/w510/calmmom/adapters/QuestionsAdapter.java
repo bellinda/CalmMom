@@ -83,19 +83,22 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         holder.questionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.questionView.setVisibility(View.GONE);
-                holder.questionEditLayout.setVisibility(View.VISIBLE);
-                holder.questionEditView.setText(holder.questionView.getText().subSequence(2, holder.questionView.getText().length()));
+                if (!question.isEditingAnswer()) {
+                    holder.questionView.setVisibility(View.GONE);
+                    holder.questionEditLayout.setVisibility(View.VISIBLE);
+                    holder.questionEditView.setText(holder.questionView.getText().subSequence(2, holder.questionView.getText().length()));
+                    question.setEditingQuestion(true);
 
-                ConstraintSet constraintSet = new ConstraintSet();
-                constraintSet.clone(holder.cardContent);
+                    ConstraintSet constraintSet = new ConstraintSet();
+                    constraintSet.clone(holder.cardContent);
 
-                if (question.getAnswer() != null && !TextUtils.isEmpty(question.getAnswer())) {
-                    constraintSet.connect(holder.answerView.getId(), ConstraintSet.TOP, holder.questionEditLayout.getId(), ConstraintSet.BOTTOM, 10);
-                } else {
-                    constraintSet.connect(holder.addAnswerLayout.getId(), ConstraintSet.TOP, holder.questionEditLayout.getId(), ConstraintSet.BOTTOM, 10);
+                    if (question.getAnswer() != null && !TextUtils.isEmpty(question.getAnswer())) {
+                        constraintSet.connect(holder.answerView.getId(), ConstraintSet.TOP, holder.questionEditLayout.getId(), ConstraintSet.BOTTOM, 10);
+                    } else {
+                        constraintSet.connect(holder.addAnswerLayout.getId(), ConstraintSet.TOP, holder.questionEditLayout.getId(), ConstraintSet.BOTTOM, 10);
+                    }
+                    constraintSet.applyTo(holder.cardContent);
                 }
-                constraintSet.applyTo(holder.cardContent);
             }
         });
 
@@ -128,6 +131,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     question.setNew(false);
                     holder.deleteBtn.setVisibility(View.VISIBLE);
                 }
+                question.setEditingQuestion(false);
 
                 ((ExaminationsActivity) context).updateQuestionsInDb(questions);
             }
@@ -152,6 +156,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                 } else {
                     ((ExaminationsActivity) context).updateQuestionsList(question);
                 }
+                question.setEditingQuestion(false);
             }
         });
 
@@ -166,9 +171,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         holder.answerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.answerView.setVisibility(View.GONE);
-                holder.answerEditLayout.setVisibility(View.VISIBLE);
-                holder.answerEditView.setText(holder.answerView.getText());
+                if (!question.isEditingQuestion()) {
+                    holder.answerView.setVisibility(View.GONE);
+                    holder.answerEditLayout.setVisibility(View.VISIBLE);
+                    holder.answerEditView.setText(holder.answerView.getText());
+                    question.setEditingAnswer(true);
+                }
             }
         });
 
@@ -184,6 +192,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                 holder.answerView.setVisibility(View.VISIBLE);
                 holder.answerEditLayout.setVisibility(View.GONE);
 
+                question.setEditingAnswer(false);
+
                 ((ExaminationsActivity) context).updateQuestionsInDb(questions);
             }
         });
@@ -197,6 +207,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     holder.addAnswerLayout.setVisibility(View.VISIBLE);
                 }
                 holder.answerEditLayout.setVisibility(View.GONE);
+                question.setEditingAnswer(false);
             }
         });
 

@@ -11,6 +11,8 @@ public class Question implements Serializable {
     private String text;
     private String answer;
     private boolean isNew;
+    private boolean isEditingQuestion;
+    private boolean isEditingAnswer;
 
     public Question() {
 
@@ -44,5 +46,21 @@ public class Question implements Serializable {
 
     public void setNew(boolean isNew) {
         this.isNew = isNew;
+    }
+
+    public boolean isEditingQuestion() {
+        return isEditingQuestion;
+    }
+
+    public void setEditingQuestion(boolean isEditingQuestion) {
+        this.isEditingQuestion = isEditingQuestion;
+    }
+
+    public boolean isEditingAnswer() {
+        return isEditingAnswer;
+    }
+
+    public void setEditingAnswer(boolean isEditingAnswer) {
+        this.isEditingAnswer = isEditingAnswer;
     }
 }
