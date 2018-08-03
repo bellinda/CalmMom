@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_weight"
+        android:icon="@drawable/weight_selector"
+        android:title="@string/title_weight" />
+
+    <item
+        android:id="@+id/navigation_activity"
+        android:icon="@drawable/activity_selector"
+        android:title="@string/title_activity" />
+
+    <item
+        android:id="@+id/navigation_belly_img"
+        android:icon="@drawable/belly_img_selector"
+        android:title="@string/title_belly_img" />
+</menu>

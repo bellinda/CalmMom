@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 public class MainActivity extends AppCompatActivity {
 
     private LinearLayout mExaminationsItem;
+    private LinearLayout mHealthStateItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,17 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("email", getIntent().getStringExtra("email"));
                 startActivity(intent);
                 //finish();
+            }
+        });
+
+        mHealthStateItem = (LinearLayout) findViewById(R.id.health_state_layout);
+
+        mHealthStateItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HealthStateActivity.class);
+                intent.putExtra("email", getIntent().getStringExtra("email"));
+                startActivity(intent);
             }
         });
     }

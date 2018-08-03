@@ -39,6 +39,9 @@
 
     <string name="title_examinations">Examinations</string>
     <string name="title_questions">Questions</string>
+    <string name="title_weight">Weight</string>
+    <string name="title_activity">Activities</string>
+    <string name="title_belly_img">Belly images</string>
 
     <string name="first_examination_test1">Хемоглобин, еритроцити, хематокрит, левкоцити, MCV, MCH, СУЕ, кръвна захар, урина-седимент, уробилиноген, кетони</string>
     <string name="first_examination_test2">Определяне на кръвна група и Rh-фактор</string>

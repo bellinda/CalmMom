@@ -206,7 +206,8 @@
         app:layout_constraintRight_toLeftOf="@id/right_header_guideline"
         app:layout_constraintTop_toBottomOf="@id/menu_items_top_guideline"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/health_state_layout">
 
         <ImageView
             android:layout_width="wrap_content"
