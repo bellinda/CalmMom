@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.ExaminationsActivity;
@@ -174,7 +175,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                 if (!question.isEditingQuestion()) {
                     holder.answerView.setVisibility(View.GONE);
                     holder.answerEditLayout.setVisibility(View.VISIBLE);
-                    holder.answerEditView.setText(holder.answerView.getText());
+                    holder.answerEditView.setText(holder.answerView.getText().subSequence(2, holder.answerView.getText().length()));
                     question.setEditingAnswer(true);
                 }
             }

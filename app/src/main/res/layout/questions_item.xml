@@ -133,7 +133,9 @@
                     android:padding="5dp"
                     android:gravity="top|start"
                     android:inputType="textMultiLine"
+                    android:scrollbarStyle="insideInset"
                     android:scrollbars="vertical"
+                    android:overScrollMode="always"
                     android:theme="@style/MyEditTextInDialogTheme"
                     android:textSize="@dimen/question_edit_view_text_size"
                     android:layout_weight="8"/>
