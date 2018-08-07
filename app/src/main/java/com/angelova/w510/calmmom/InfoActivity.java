@@ -31,6 +31,7 @@ import com.angelova.w510.calmmom.models.FamilyHistory;
 import com.angelova.w510.calmmom.models.Illness;
 import com.angelova.w510.calmmom.models.Surgery;
 import com.angelova.w510.calmmom.models.User;
+import com.angelova.w510.calmmom.models.Weight;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -216,6 +217,10 @@ public class InfoActivity extends AppCompatActivity {
 
                     List<Examination> mainExaminations = getListWithMainExaminations();
                     mUser.setExaminations(mainExaminations);
+
+                    List<Weight> weights = new ArrayList<>();
+                    weights.add(new Weight(Double.parseDouble(mInputCurrWeight.getText().toString()), 0));
+                    mUser.setWeights(weights);
 
                     mSubmitBtn.setVisibility(View.GONE);
                     mSubmitLoader.setVisibility(View.VISIBLE);

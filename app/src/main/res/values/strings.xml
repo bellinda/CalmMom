@@ -118,4 +118,9 @@
 
     <string name="dialog_yes_no_positive">Yes</string>
     <string name="dialog_yes_no_negative">No</string>
+
+    <string name="fragment_weight_kilos">kg</string>
+    <string name="fragment_weight_weeks">Weeks</string>
+    <string name="fragment_weight_chart_description">Current vs. expected weight/week</string>
+    <string name="fragment_weight_title">Current vs Expected Weight Gain</string>
 </resources>

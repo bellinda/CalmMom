@@ -25,6 +25,7 @@ public class User implements Serializable {
     private int durationOfMenstruation;
     private List<Examination> examinations;
     private List<Question> questions;
+    private List<Weight> weights;
 
     public String getName() {
         return name;
@@ -136,5 +137,13 @@ public class User implements Serializable {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public List<Weight> getWeights() {
+        return weights;
+    }
+
+    public void setWeights(List<Weight> weights) {
+        this.weights = weights;
     }
 }
