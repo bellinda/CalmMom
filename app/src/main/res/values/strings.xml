@@ -123,4 +123,9 @@
     <string name="fragment_weight_weeks">Weeks</string>
     <string name="fragment_weight_chart_description">Current vs. expected weight/week</string>
     <string name="fragment_weight_title">Current vs Expected Weight Gain</string>
+
+    <string name="dialog_add_weight_title">Add weight for week</string>
+    <string name="dialog_add_weight_weight_label">Weight</string>
+    <string name="dialog_add_weight_kilos">kg</string>
+    <string name="dialog_add_weight_week_label">Week</string>
 </resources>

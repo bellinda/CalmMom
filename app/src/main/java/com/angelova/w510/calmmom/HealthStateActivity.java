@@ -16,13 +16,21 @@ import com.angelova.w510.calmmom.fragments.ActivitiesFragment;
 import com.angelova.w510.calmmom.fragments.BellyImagesFragment;
 import com.angelova.w510.calmmom.fragments.WeightFragment;
 import com.angelova.w510.calmmom.models.User;
+import com.angelova.w510.calmmom.models.Weight;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class HealthStateActivity extends AppCompatActivity {
 
@@ -128,4 +136,33 @@ public class HealthStateActivity extends AppCompatActivity {
         }
 
     };
+
+    public void updateUserWeightsInDb(Weight weight) {
+        ObjectMapper m = new ObjectMapper();
+        List<Weight> updatedWeights = new ArrayList<>();
+        for (Weight w : mUser.getWeights()) {
+            if (w.getWeek() == weight.getWeek()) {
+                updatedWeights.add(weight);
+            } else {
+                updatedWeights.add(w);
+            }
+        }
+        mUser.setWeights(updatedWeights);
+        Map<String, Object> user = m.convertValue(mUser, Map.class);
+
+        final DocumentReference userRef = mDb.collection("users").document(mUserEmail);
+        userRef.update(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("Error updating document " + e);
+                    }
+                });
+    }
 }

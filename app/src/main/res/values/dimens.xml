@@ -31,4 +31,6 @@
 
     <dimen name="dialog_yes_no_title_text_size">18sp</dimen>
     <dimen name="dialog_yes_no_button_height">45dp</dimen>
+
+    <dimen name="dialog_add_weight_spinner_height">40dp</dimen>
 </resources>

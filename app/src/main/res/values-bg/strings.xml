@@ -120,4 +120,9 @@
     <string name="fragment_weight_weeks">Седмици</string>
     <string name="fragment_weight_chart_description">Текущо vs. очаквано тегло/седмица</string>
     <string name="fragment_weight_title">Текущо vs очаквано увеличаване на теглото</string>
+
+    <string name="dialog_add_weight_title">Добавяне на тегло за седмица</string>
+    <string name="dialog_add_weight_weight_label">Тегло</string>
+    <string name="dialog_add_weight_kilos">кг</string>
+    <string name="dialog_add_weight_week_label">Седмица</string>
 </resources>

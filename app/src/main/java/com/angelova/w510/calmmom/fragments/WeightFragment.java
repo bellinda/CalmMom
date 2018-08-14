@@ -12,10 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
+import com.angelova.w510.calmmom.HealthStateActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.chart_customizations.CustomFillFormatter;
 import com.angelova.w510.calmmom.chart_customizations.CustomLineChartRenderer;
+import com.angelova.w510.calmmom.dialogs.AddWeightDialog;
 import com.angelova.w510.calmmom.models.User;
 import com.angelova.w510.calmmom.models.Weight;
 import com.github.mikephil.charting.charts.LineChart;
@@ -44,11 +47,16 @@ import java.util.List;
 public class WeightFragment extends Fragment implements OnChartGestureListener, OnChartValueSelectedListener {
 
     private LineChart mChart;
+    private LinearLayout mAddDataBtn;
 
     private User mUser;
 
     private List<Entry> mMinimumValues;
     private List<Entry> mMaximumValues;
+
+    private LineDataSet userDataSet;
+    private LineDataSet minDataSet;
+    private LineDataSet maxDataSet;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,35 +79,6 @@ public class WeightFragment extends Fragment implements OnChartGestureListener, 
 
         calculateAverageWeightGain();
 
-        ArrayList<Entry> yValues = new ArrayList<>();
-
-        yValues.add(new Entry(0, 65f));
-        yValues.add(new Entry(1, 67f));
-        yValues.add(new Entry(2, 69f));
-        yValues.add(new Entry(5, 72f));
-//        yValues.add(new Entry(4, 50f));
-//        yValues.add(new Entry(5, 60f));
-//        yValues.add(new Entry(6, 65f));
-
-        ArrayList<Entry> yValues2 = new ArrayList<>();
-
-        yValues2.add(new Entry(0, 30f));
-        yValues2.add(new Entry(1, 40f));
-        yValues2.add(new Entry(2, 45f));
-        yValues2.add(new Entry(3, 50f));
-        yValues2.add(new Entry(4, 55f));
-        yValues2.add(new Entry(6, 65f));
-
-        ArrayList<Entry> yValues3 = new ArrayList<>();
-
-        yValues3.add(new Entry(0, 35f));
-        yValues3.add(new Entry(1, 50f));
-        yValues3.add(new Entry(2, 55f));
-        yValues3.add(new Entry(3, 65f));
-        yValues3.add(new Entry(4, 70f));
-        yValues3.add(new Entry(5, 80f));
-        yValues3.add(new Entry(6, 95f));
-
         final ArrayList<String> xValues = new ArrayList<>();
         xValues.add("0");
         xValues.add("5");
@@ -112,57 +91,52 @@ public class WeightFragment extends Fragment implements OnChartGestureListener, 
         xValues.add("40");
 
         List<Entry> userValues = getWeightValuesFromUser();
-        LineDataSet set1 = new LineDataSet(userValues, "Data Set 1");
-        LineDataSet set2 = new LineDataSet(mMinimumValues, "Minimum values for the current BMI");
-        LineDataSet set3 = new LineDataSet(mMaximumValues, "Maximum values for the current BMI");
+        userDataSet = new LineDataSet(userValues, "Data Set 1");
+        minDataSet = new LineDataSet(mMinimumValues, "Minimum values for the current BMI");
+        maxDataSet = new LineDataSet(mMaximumValues, "Maximum values for the current BMI");
 
-        set1.setFillAlpha(110);
+        userDataSet.setFillAlpha(110);
 
         //to make the smooth line as the graph is adrapt change so smooth curve
-        set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        set2.setMode(LineDataSet.Mode.LINEAR);
-        set3.setMode(LineDataSet.Mode.LINEAR);
+        userDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        minDataSet.setMode(LineDataSet.Mode.LINEAR);
+        maxDataSet.setMode(LineDataSet.Mode.LINEAR);
         //to enable the cubic density : if 1 then it will be sharp curve
-        set1.setCubicIntensity(0.2f);
-        //set2.setCubicIntensity(0.2f);
+        userDataSet.setCubicIntensity(0.2f);
+        //minDataSet.setCubicIntensity(0.2f);
 
         //to fill the below of smooth line in graph
-        set1.setDrawFilled(true);
-        set2.setDrawFilled(true);
-        set3.setDrawFilled(true);
-        set1.setFillColor(Color.parseColor("#324A5F"));
-        set2.setFillColor(Color.parseColor("#fa7665"));
-        set3.setFillColor(Color.parseColor("#fa7665"));
+        userDataSet.setDrawFilled(true);
+        minDataSet.setDrawFilled(true);
+        maxDataSet.setDrawFilled(true);
+        userDataSet.setFillColor(Color.parseColor("#324A5F"));
+        minDataSet.setFillColor(Color.parseColor("#fa7665"));
+        maxDataSet.setFillColor(Color.parseColor("#fa7665"));
         //set the transparency
-        set1.setFillAlpha(80);
-        set2.setFillAlpha(0);
-        set3.setFillAlpha(50);
+        userDataSet.setFillAlpha(80);
+        minDataSet.setFillAlpha(0);
+        maxDataSet.setFillAlpha(50);
 
-        set1.setColor(Color.parseColor("#324A5F"));
-        set2.setColor(Color.parseColor("#fa7665"));
-        set3.setColor(Color.parseColor("#fa7665"));
-
-        //set the gradiant then the above draw fill color will be replace
-        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.chart_gradient);
-        //set1.setFillDrawable(drawable);
-        //set2.setFillDrawable(drawable);
+        userDataSet.setColor(Color.parseColor("#324A5F"));
+        minDataSet.setColor(Color.parseColor("#fa7665"));
+        maxDataSet.setColor(Color.parseColor("#fa7665"));
 
         //set legend disable or enable to hide {the left down corner name of graph}
         Legend legend = mChart.getLegend();
         legend.setEnabled(false);
 
         //to remove the cricle from the graph
-        set1.setDrawCircles(false);
-        set2.setDrawCircles(false);
-        set3.setDrawCircles(false);
+        userDataSet.setDrawCircles(false);
+        minDataSet.setDrawCircles(false);
+        maxDataSet.setDrawCircles(false);
 
-        set2.setDrawValues(false);
-        set3.setDrawValues(false);
+        minDataSet.setDrawValues(false);
+        maxDataSet.setDrawValues(false);
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
-        dataSets.add(set2);
-        dataSets.add(set3);
+        dataSets.add(userDataSet);
+        dataSets.add(minDataSet);
+        dataSets.add(maxDataSet);
 
         LineData data = new LineData(dataSets);
 
@@ -183,7 +157,7 @@ public class WeightFragment extends Fragment implements OnChartGestureListener, 
             }
         });
 
-        set3.setFillFormatter(new CustomFillFormatter(set2));
+        maxDataSet.setFillFormatter(new CustomFillFormatter(minDataSet));
 
         mChart.setRenderer(new CustomLineChartRenderer(mChart, mChart.getAnimator(), mChart.getViewPortHandler()));
 
@@ -192,6 +166,21 @@ public class WeightFragment extends Fragment implements OnChartGestureListener, 
         Description description = new Description();
         description.setText(getString(R.string.fragment_weight_chart_description));
         mChart.setDescription(description);
+
+        mAddDataBtn = (LinearLayout) rootView.findViewById(R.id.add_data_btn);
+        mAddDataBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddWeightDialog dialog = new AddWeightDialog(getActivity(), new AddWeightDialog.DialogClickListener() {
+                    @Override
+                    public void onSave(Weight weight) {
+                        ((HealthStateActivity) getActivity()).updateUserWeightsInDb(weight);
+                        updateChart(weight);
+                    }
+                });
+                dialog.show();
+            }
+        });
 
         return rootView;
     }
@@ -370,6 +359,50 @@ public class WeightFragment extends Fragment implements OnChartGestureListener, 
             default:
                 return 0;
         }
+    }
+
+    private void updateChart(Weight weight) {
+        List<Entry> userValues = getWeightValuesFromUser();
+        List<Entry> updatedUserValues = new ArrayList<Entry>();
+
+        boolean isTheWeekPresent = false;
+        for (Entry entry : userValues) {
+            if (entry.getX() == weight.getWeek()) {
+                updatedUserValues.add(new Entry(weight.getWeek(), (float) weight.getValue()));
+                isTheWeekPresent = true;
+            } else {
+                updatedUserValues.add(entry);
+            }
+        }
+
+        if (!isTheWeekPresent) {
+            mUser.getWeights().add(weight);
+            userValues = getWeightValuesFromUser();
+            userDataSet = new LineDataSet(userValues, "Data Set 1");
+        } else {
+            userDataSet = new LineDataSet(updatedUserValues, "Data Set 1");
+        }
+
+        updateStyleOfUserDataSet();
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(userDataSet);
+        dataSets.add(minDataSet);
+        dataSets.add(maxDataSet);
+
+        LineData data = new LineData(dataSets);
+        mChart.setData(data);
+        mChart.invalidate();
+    }
+
+    private void updateStyleOfUserDataSet() {
+        userDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        userDataSet.setCubicIntensity(0.2f);
+        userDataSet.setDrawFilled(true);
+        userDataSet.setFillColor(Color.parseColor("#324A5F"));
+        userDataSet.setFillAlpha(80);
+        userDataSet.setColor(Color.parseColor("#324A5F"));
+        userDataSet.setDrawCircles(false);
     }
 
     @Override
