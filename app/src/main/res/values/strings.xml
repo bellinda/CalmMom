@@ -128,4 +128,8 @@
     <string name="dialog_add_weight_weight_label">Weight</string>
     <string name="dialog_add_weight_kilos">kg</string>
     <string name="dialog_add_weight_week_label">Week</string>
+
+    <string name="fragment_activities_marker_hour">1 hour</string>
+    <string name="fragment_activities_marker_minutes">Minutes</string>
+    <string name="fragment_activities_marker_longer_than_hour">hours</string>
 </resources>

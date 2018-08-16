@@ -125,4 +125,8 @@
     <string name="dialog_add_weight_weight_label">Тегло</string>
     <string name="dialog_add_weight_kilos">кг</string>
     <string name="dialog_add_weight_week_label">Седмица</string>
+
+    <string name="fragment_activities_marker_hour">1 час</string>
+    <string name="fragment_activities_marker_minutes">Минути</string>
+    <string name="fragment_activities_marker_longer_than_hour">часа</string>
 </resources>

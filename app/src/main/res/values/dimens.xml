@@ -33,4 +33,7 @@
     <dimen name="dialog_yes_no_button_height">45dp</dimen>
 
     <dimen name="dialog_add_weight_spinner_height">40dp</dimen>
+
+    <dimen name="bar_chart_marker_height">40dp</dimen>
+    <dimen name="bar_chart_marker_width">100dp</dimen>
 </resources>

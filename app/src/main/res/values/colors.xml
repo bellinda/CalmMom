@@ -6,4 +6,5 @@
     <color name="colorContrast">#324A5F</color>
     <color name="colorAccentTransparent">#c3fdfcfa</color>
     <color name="colorContrastTransparent">#c3324a5f</color>
+    <color name="colorPrimaryTransparent">#c3fa7b6a</color>
 </resources>
