@@ -54,7 +54,8 @@
         app:layout_constraintBottom_toTopOf="@+id/details_chart_bottom_guideline"
         android:id="@+id/activities_scroll"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,21 +83,21 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:gravity="center_vertical">
+                    android:layout_weight="9"
+                    android:gravity="center_vertical"
+                    android:id="@+id/walking_bar_layout">
 
                     <View
-                        android:layout_width="200dp"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/details_color_bar_height"
                         android:background="@color/colorContrastLiteTransparent"
                         android:id="@+id/walking_bar"/>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
                         android:text="20:15 h"
-                        android:layout_marginLeft="10dp"
                         android:id="@+id/walking_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -123,21 +124,21 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:gravity="center_vertical">
+                    android:layout_weight="9"
+                    android:gravity="center_vertical"
+                    android:id="@+id/aerobics_bar_layout">
 
                     <View
-                        android:layout_width="50dp"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/details_color_bar_height"
                         android:background="@color/colorContrastLiteTransparent"
                         android:id="@+id/aerobics_bar"/>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="3:00 h"
-                        android:layout_marginLeft="10dp"
+                        android:text="03:00 h"
                         android:id="@+id/aerobics_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -164,21 +165,21 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:gravity="center_vertical">
+                    android:layout_weight="9"
+                    android:gravity="center_vertical"
+                    android:id="@+id/yoga_bar_layout">
 
                     <View
-                        android:layout_width="60dp"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/details_color_bar_height"
                         android:background="@color/colorContrastLiteTransparent"
                         android:id="@+id/yoga_bar"/>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="5:00 h"
-                        android:layout_marginLeft="10dp"
+                        android:text="05:00 h"
                         android:id="@+id/yoga_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -205,21 +206,21 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:gravity="center_vertical">
+                    android:layout_weight="9"
+                    android:gravity="center_vertical"
+                    android:id="@+id/pilates_bar_layout">
 
                     <View
-                        android:layout_width="20dp"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/details_color_bar_height"
                         android:background="@color/colorContrastLiteTransparent"
                         android:id="@+id/pilates_bar"/>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="1:00 h"
-                        android:layout_marginLeft="10dp"
+                        android:text="01:00 h"
                         android:id="@+id/pilates_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -246,21 +247,21 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:gravity="center_vertical">
+                    android:layout_weight="9"
+                    android:gravity="center_vertical"
+                    android:id="@+id/swimming_bar_layout">
 
                     <View
-                        android:layout_width="100dp"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/details_color_bar_height"
                         android:background="@color/colorContrastLiteTransparent"
                         android:id="@+id/swimming_bar"/>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
                         android:text="10:00 h"
-                        android:layout_marginLeft="10dp"
                         android:id="@+id/swimming_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -287,21 +288,21 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:gravity="center_vertical">
+                    android:layout_weight="9"
+                    android:gravity="center_vertical"
+                    android:id="@+id/dancing_bar_layout">
 
                     <View
-                        android:layout_width="55dp"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/details_color_bar_height"
                         android:background="@color/colorContrastLiteTransparent"
                         android:id="@+id/dancing_bar"/>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="4:00 h"
-                        android:layout_marginLeft="10dp"
+                        android:text="04:00 h"
                         android:id="@+id/dancing_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -328,21 +329,22 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:gravity="center_vertical">
+                    android:layout_weight="9"
+                    android:gravity="center_vertical"
+                    android:id="@+id/sc_bar_layout">
 
                     <View
-                        android:layout_width="20dp"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/details_color_bar_height"
                         android:background="@color/colorContrastLiteTransparent"
-                        android:id="@+id/sc_bar"/>
+                        android:id="@+id/sc_bar"
+                        android:layout_marginRight="5dp"/>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="2:00 h"
-                        android:layout_marginLeft="10dp"
+                        android:text="02:00 h"
                         android:id="@+id/sc_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -369,8 +371,9 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:gravity="center_vertical">
+                    android:layout_weight="9"
+                    android:gravity="center_vertical"
+                    android:id="@+id/jogging_bar_layout">
 
                     <View
                         android:layout_width="0dp"
@@ -379,11 +382,10 @@
                         android:id="@+id/jogging_bar"/>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="0:00 h"
-                        android:layout_marginLeft="10dp"
+                        android:text="00:00 h"
                         android:id="@+id/jogging_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -410,21 +412,21 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:gravity="center_vertical">
+                    android:layout_weight="9"
+                    android:gravity="center_vertical"
+                    android:id="@+id/other_bar_layout">
 
                     <View
-                        android:layout_width="10dp"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/details_color_bar_height"
                         android:background="@color/colorContrastLiteTransparent"
                         android:id="@+id/other_bar"/>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="0:30 h"
-                        android:layout_marginLeft="10dp"
+                        android:text="00:30 h"
                         android:id="@+id/other_duration"/>
                 </LinearLayout>
             </LinearLayout>

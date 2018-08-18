@@ -129,6 +129,7 @@
     <string name="fragment_activities_marker_hour">1 час</string>
     <string name="fragment_activities_marker_minutes">Минути</string>
     <string name="fragment_activities_marker_longer_than_hour">часа</string>
+    <string name="fragment_activities_hours">ч.</string>
 
     <string name="dialog_add_activity">Добавяне на активност</string>
     <string name="dialog_add_activity_hours">ч</string>
