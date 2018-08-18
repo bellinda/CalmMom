@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -29,6 +30,418 @@
         android:id="@+id/bar_chart_activities">
 
     </com.github.mikephil.charting.charts.BarChart>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6"
+        android:id="@+id/details_chart_top_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.97"
+        android:id="@+id/details_chart_bottom_guideline"/>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/details_chart_top_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/details_chart_bottom_guideline"
+        android:id="@+id/activities_scroll"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_walking"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="200dp"
+                        android:layout_height="@dimen/details_color_bar_height"
+                        android:background="@color/colorContrastLiteTransparent"
+                        android:id="@+id/walking_bar"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center_vertical"
+                        android:text="20:15 h"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/walking_duration"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_aerobics"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="@dimen/details_color_bar_height"
+                        android:background="@color/colorContrastLiteTransparent"
+                        android:id="@+id/aerobics_bar"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center_vertical"
+                        android:text="3:00 h"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/aerobics_duration"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_yoga"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="60dp"
+                        android:layout_height="@dimen/details_color_bar_height"
+                        android:background="@color/colorContrastLiteTransparent"
+                        android:id="@+id/yoga_bar"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center_vertical"
+                        android:text="5:00 h"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/yoga_duration"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_pilates"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="20dp"
+                        android:layout_height="@dimen/details_color_bar_height"
+                        android:background="@color/colorContrastLiteTransparent"
+                        android:id="@+id/pilates_bar"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center_vertical"
+                        android:text="1:00 h"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/pilates_duration"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_swimming"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="@dimen/details_color_bar_height"
+                        android:background="@color/colorContrastLiteTransparent"
+                        android:id="@+id/swimming_bar"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center_vertical"
+                        android:text="10:00 h"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/swimming_duration"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_dancing"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="55dp"
+                        android:layout_height="@dimen/details_color_bar_height"
+                        android:background="@color/colorContrastLiteTransparent"
+                        android:id="@+id/dancing_bar"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center_vertical"
+                        android:text="4:00 h"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/dancing_duration"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_stationary_cycling"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="20dp"
+                        android:layout_height="@dimen/details_color_bar_height"
+                        android:background="@color/colorContrastLiteTransparent"
+                        android:id="@+id/sc_bar"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center_vertical"
+                        android:text="2:00 h"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/sc_duration"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_jogging"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/details_color_bar_height"
+                        android:background="@color/colorContrastLiteTransparent"
+                        android:id="@+id/jogging_bar"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center_vertical"
+                        android:text="0:00 h"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/jogging_duration"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_other"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="@dimen/details_color_bar_height"
+                        android:background="@color/colorContrastLiteTransparent"
+                        android:id="@+id/other_bar"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center_vertical"
+                        android:text="0:30 h"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/other_duration"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <com.github.mikephil.charting.charts.HorizontalBarChart
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/details_chart_top_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/details_chart_bottom_guideline"
+        android:id="@+id/bar_chart_activities_details"
+        android:visibility="gone">
+
+    </com.github.mikephil.charting.charts.HorizontalBarChart>
 
     <android.support.constraint.Guideline
         android:layout_width="1dp"
@@ -67,4 +480,34 @@
         app:layout_constraintTop_toBottomOf="@+id/img_top_guideline"
         app:layout_constraintBottom_toTopOf="@+id/img_bottom_guideline"
         android:visibility="visible"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8"
+        android:id="@+id/add_btn_vertical_gdl"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.88"
+        android:id="@+id/top_add_guideline"/>
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/add_activity_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:layout_constraintLeft_toRightOf="@id/add_btn_vertical_gdl"
+        app:layout_constraintTop_toBottomOf="@id/top_add_guideline"
+        android:src="@drawable/fab_add"
+        app:fab_shadow="true"
+        app:fab_shadowColor="#66000000"
+        app:fab_shadowRadius="4dp"
+        app:fab_shadowXOffset="1dp"
+        app:fab_shadowYOffset="3dp"
+        app:fab_colorNormal="@color/colorPrimaryDark" />
+
 </android.support.constraint.ConstraintLayout>

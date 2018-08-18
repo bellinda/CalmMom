@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
+    android:paddingTop="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingBottom="10dp"
+    android:focusable="false"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/input_field_height"
+        android:id="@+id/title_view"
+        android:text="@string/dialog_add_activity"
+        android:textSize="@dimen/warn_dialog_title_text_size"
+        android:textColor="@color/colorContrast"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:weightSum="11">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/dialog_add_weight_week_label"
+            android:layout_weight="7"
+            android:gravity="center_vertical"
+            android:textSize="18sp"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dialog_add_weight_spinner_height"
+            android:layout_weight="4"
+            android:background="@drawable/dark_border_thin"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                android:spinnerMode="dropdown" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/spinner_arrow" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:id="@+id/activities_scroll"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="14">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_walking"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/current_rate_label"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_add_activity_walking"
+                    android:layout_weight="6"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/walking_hours_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_hours"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/walking_mins_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_mins"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="14">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_aerobics"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_add_activity_aerobics"
+                    android:layout_weight="6"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/aerobics_hours_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_hours"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/aerobics_mins_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_mins"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="14">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_yoga"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_add_activity_yoga"
+                    android:layout_weight="6"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/yoga_hours_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_hours"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/yoga_mins_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_mins"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="14">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_pilates"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_add_activity_pilates"
+                    android:layout_weight="6"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/pilates_hours_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_hours"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/pilates_mins_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_mins"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="14">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_swimming"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_add_activity_swimming"
+                    android:layout_weight="6"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/swimming_hours_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_hours"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/swimming_mins_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_mins"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="14">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_dancing"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_add_activity_dancing"
+                    android:layout_weight="6"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/dancing_hours_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_hours"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/dancing_mins_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_mins"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="14">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_stationary_cycling"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_add_activity_sc"
+                    android:layout_weight="6"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/sc_hours_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_hours"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/sc_mins_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_mins"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="14">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_jogging"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_add_activity_jogging"
+                    android:layout_weight="6"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/jogging_hours_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_hours"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/jogging_mins_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_mins"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="14">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/details_image_size"
+                        android:layout_height="@dimen/details_image_size"
+                        android:background="@drawable/ic_other"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_add_activity_other"
+                    android:layout_weight="6"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/other_hours_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_hours"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:id="@+id/other_mins_value"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_add_activity_mins"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/warn_dialog_button_height"
+        android:weightSum="2"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/warn_dialog_button_height"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:gravity="center"
+            android:textSize="@dimen/warn_dialog_buttons_text_size"
+            android:textColor="@color/colorContrast"
+            android:id="@+id/cancel_button"
+            android:background="@color/colorAccent"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorContrast"/>
+
+        <TextView
+            android:id="@+id/save_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/warn_dialog_button_height"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="Save"
+            android:textColor="@color/colorContrast"
+            android:textSize="@dimen/warn_dialog_buttons_text_size" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

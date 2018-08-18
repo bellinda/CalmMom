@@ -1,8 +1,7 @@
 package com.angelova.w510.calmmom.models;
 
-import android.net.Uri;
-
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -26,6 +25,7 @@ public class User implements Serializable {
     private List<Examination> examinations;
     private List<Question> questions;
     private List<Weight> weights;
+    private HashMap<String, List<UserActivity>> activities;
 
     public String getName() {
         return name;
@@ -145,5 +145,13 @@ public class User implements Serializable {
 
     public void setWeights(List<Weight> weights) {
         this.weights = weights;
+    }
+
+    public HashMap<String, List<UserActivity>> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(HashMap<String, List<UserActivity>> activities) {
+        this.activities = activities;
     }
 }

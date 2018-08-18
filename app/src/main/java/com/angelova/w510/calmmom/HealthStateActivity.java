@@ -16,6 +16,7 @@ import com.angelova.w510.calmmom.fragments.ActivitiesFragment;
 import com.angelova.w510.calmmom.fragments.BellyImagesFragment;
 import com.angelova.w510.calmmom.fragments.WeightFragment;
 import com.angelova.w510.calmmom.models.User;
+import com.angelova.w510.calmmom.models.UserActivity;
 import com.angelova.w510.calmmom.models.Weight;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +30,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -149,6 +151,27 @@ public class HealthStateActivity extends AppCompatActivity {
         }
         mUser.setWeights(updatedWeights);
         Map<String, Object> user = m.convertValue(mUser, Map.class);
+
+        final DocumentReference userRef = mDb.collection("users").document(mUserEmail);
+        userRef.update(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("Error updating document " + e);
+                    }
+                });
+    }
+
+    public void updateUserInDb(User userToUpdate) {
+        ObjectMapper m = new ObjectMapper();
+
+        Map<String, Object> user = m.convertValue(userToUpdate, Map.class);
 
         final DocumentReference userRef = mDb.collection("users").document(mUserEmail);
         userRef.update(user)

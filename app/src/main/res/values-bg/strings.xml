@@ -129,4 +129,17 @@
     <string name="fragment_activities_marker_hour">1 час</string>
     <string name="fragment_activities_marker_minutes">Минути</string>
     <string name="fragment_activities_marker_longer_than_hour">часа</string>
+
+    <string name="dialog_add_activity">Добавяне на активност</string>
+    <string name="dialog_add_activity_hours">ч</string>
+    <string name="dialog_add_activity_mins">мин</string>
+    <string name="dialog_add_activity_walking">Вървене</string>
+    <string name="dialog_add_activity_aerobics">Аеробика</string>
+    <string name="dialog_add_activity_yoga">Йога</string>
+    <string name="dialog_add_activity_pilates">Пилатес</string>
+    <string name="dialog_add_activity_swimming">Плуване</string>
+    <string name="dialog_add_activity_dancing">Танци</string>
+    <string name="dialog_add_activity_sc">Велоаргометър</string>
+    <string name="dialog_add_activity_jogging">Тичане</string>
+    <string name="dialog_add_activity_other">Друго</string>
 </resources>

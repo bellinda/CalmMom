@@ -1,6 +1,5 @@
 package com.angelova.w510.calmmom;
 
-import android.*;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,6 +30,7 @@ import com.angelova.w510.calmmom.models.FamilyHistory;
 import com.angelova.w510.calmmom.models.Illness;
 import com.angelova.w510.calmmom.models.Surgery;
 import com.angelova.w510.calmmom.models.User;
+import com.angelova.w510.calmmom.models.UserActivity;
 import com.angelova.w510.calmmom.models.Weight;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.Continuation;
@@ -221,6 +221,9 @@ public class InfoActivity extends AppCompatActivity {
                     List<Weight> weights = new ArrayList<>();
                     weights.add(new Weight(Double.parseDouble(mInputCurrWeight.getText().toString()), 0));
                     mUser.setWeights(weights);
+
+                    HashMap<String, List<UserActivity>> activities = getInitialUserActivities();
+                    mUser.setActivities(activities);
 
                     mSubmitBtn.setVisibility(View.GONE);
                     mSubmitLoader.setVisibility(View.VISIBLE);
@@ -433,6 +436,14 @@ public class InfoActivity extends AppCompatActivity {
         examinations.add(eighthEx);
 
         return examinations;
+    }
+
+    private HashMap<String, List<UserActivity>> getInitialUserActivities() {
+        HashMap<String, List<UserActivity>> activities = new HashMap<>();
+        for (int i = 1; i <= 40; i++) {
+            activities.put(Integer.toString(i), new ArrayList<UserActivity>());
+        }
+        return activities;
     }
 
     private void showAlertDialogNow(String message, String title) {

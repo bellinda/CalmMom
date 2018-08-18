@@ -36,4 +36,7 @@
 
     <dimen name="bar_chart_marker_height">40dp</dimen>
     <dimen name="bar_chart_marker_width">100dp</dimen>
+
+    <dimen name="details_image_size">30dp</dimen>
+    <dimen name="details_color_bar_height">20dp</dimen>
 </resources>

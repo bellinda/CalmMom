@@ -132,4 +132,17 @@
     <string name="fragment_activities_marker_hour">1 hour</string>
     <string name="fragment_activities_marker_minutes">Minutes</string>
     <string name="fragment_activities_marker_longer_than_hour">hours</string>
+
+    <string name="dialog_add_activity">Add activities data</string>
+    <string name="dialog_add_activity_hours">h</string>
+    <string name="dialog_add_activity_mins">m</string>
+    <string name="dialog_add_activity_walking">Walking</string>
+    <string name="dialog_add_activity_aerobics">Aerobics</string>
+    <string name="dialog_add_activity_yoga">Yoga</string>
+    <string name="dialog_add_activity_pilates">Pilates</string>
+    <string name="dialog_add_activity_swimming">Swimming</string>
+    <string name="dialog_add_activity_dancing">Dancing</string>
+    <string name="dialog_add_activity_sc">Stationary Cycling</string>
+    <string name="dialog_add_activity_jogging">Jogging</string>
+    <string name="dialog_add_activity_other">Other</string>
 </resources>

@@ -5,29 +5,30 @@ package com.angelova.w510.calmmom.models;
  */
 
 public enum ActivityType {
-    Yoga(0),
-    Jogging(1),
-    Pilates(2),
-    Swimming(2),
-    StationaryB(2),
-    Walking(2),
-    Dancing(2),
-    Other(2);
+    Yoga("Yoga"),
+    Jogging("Jogging"),
+    Pilates("Pilates"),
+    Swimming("Swimming"),
+    StationaryB("Stationary Cycling"),
+    Aerobics("Aerobics"),
+    Walking("Walking"),
+    Dancing("Dancing"),
+    Other("Other");
 
-    private final int type;
+    private final String type;
 
-    ActivityType(int type)
+    ActivityType(String type)
     {
         this.type = type;
     }
 
-    private int getType() {
+    private String getType() {
         return type;
     }
 
-    public static ActivityType fromValue(int value) {
+    public static ActivityType fromValue(String value) {
         for (ActivityType activityType : ActivityType.values()) {
-            if (activityType.getType() == value) {
+            if (activityType.getType().equals(value)) {
                 return activityType;
             }
         }
