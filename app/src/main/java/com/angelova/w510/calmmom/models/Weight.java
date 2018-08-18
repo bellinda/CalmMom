@@ -2,11 +2,13 @@ package com.angelova.w510.calmmom.models;
 
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
+
 /**
  * Created by W510 on 7.8.2018 г..
  */
 
-public class Weight implements Comparable<Weight> {
+public class Weight implements Comparable<Weight>, Serializable {
     private double value;
     private int week;
 
