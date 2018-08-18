@@ -113,32 +113,32 @@ public class AddActivityDialog extends Dialog {
                         int hours = act.getDuration() / 60;
                         int minutes = act.getDuration() % 60;
                         if (act.getType() == ActivityType.Walking) {
-                            mWalkingHours.setText(hours);
-                            mWalkingMinutes.setText(minutes);
+                            mWalkingHours.setText(String.format("%s", hours));
+                            mWalkingMinutes.setText(String.format("%s", minutes));
                         } else if (act.getType() == ActivityType.Aerobics) {
-                            mAerobicsHours.setText(hours);
-                            mAerobicsHours.setText(minutes);
+                            mAerobicsHours.setText(String.format("%s", hours));
+                            mAerobicsHours.setText(String.format("%s", minutes));
                         } else if (act.getType() == ActivityType.Yoga) {
-                            mYogaHours.setText(hours);
-                            mYogaMinutes.setText(minutes);
+                            mYogaHours.setText(String.format("%s", hours));
+                            mYogaMinutes.setText(String.format("%s", minutes));
                         } else if (act.getType() == ActivityType.Pilates) {
-                            mPilatesHours.setText(hours);
-                            mPilatesMinutes.setText(minutes);
+                            mPilatesHours.setText(String.format("%s", hours));
+                            mPilatesMinutes.setText(String.format("%s", minutes));
                         } else if (act.getType() == ActivityType.Swimming) {
-                            mSwimmingHours.setText(hours);
-                            mSwimmingMinutes.setText(minutes);
+                            mSwimmingHours.setText(String.format("%s", hours));
+                            mSwimmingMinutes.setText(String.format("%s", minutes));
                         } else if (act.getType() == ActivityType.Dancing) {
-                            mDancingHours.setText(hours);
-                            mDancingMinutes.setText(minutes);
+                            mDancingHours.setText(String.format("%s", hours));
+                            mDancingMinutes.setText(String.format("%s", minutes));
                         } else if (act.getType() == ActivityType.Jogging) {
-                            mJoggingHours.setText(hours);
-                            mJoggingMinutes.setText(minutes);
+                            mJoggingHours.setText(String.format("%s", hours));
+                            mJoggingMinutes.setText(String.format("%s", minutes));
                         } else if (act.getType() == ActivityType.StationaryB) {
-                            mSCHours.setText(hours);
-                            mSCMinutes.setText(minutes);
+                            mSCHours.setText(String.format("%s", hours));
+                            mSCMinutes.setText(String.format("%s", minutes));
                         } else if (act.getType() == ActivityType.Other) {
-                            mOtherHours.setText(hours);
-                            mOtherMinutes.setText(minutes);
+                            mOtherHours.setText(String.format("%s", hours));
+                            mOtherMinutes.setText(String.format("%s", minutes));
                         }
                     }
                 } else {
