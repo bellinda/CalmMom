@@ -141,7 +141,7 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
             }
         });
 
-        BarDataSet dataSet = new BarDataSet(entries, "Activity Duration");
+        BarDataSet dataSet = new BarDataSet(entries, getString(R.string.fragment_activities_duration));
         dataSet.setColor(ContextCompat.getColor(getActivity(), R.color.colorPrimaryTransparent));
         dataSet.setDrawValues(false);
 
@@ -344,7 +344,7 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
             }
         });
 
-        BarDataSet dataSet = new BarDataSet(entries, "Activity Duration");
+        BarDataSet dataSet = new BarDataSet(entries, getString(R.string.fragment_activities_duration));
         dataSet.setColor(ContextCompat.getColor(getActivity(), R.color.colorPrimaryTransparent));
         dataSet.setDrawValues(false);
 
