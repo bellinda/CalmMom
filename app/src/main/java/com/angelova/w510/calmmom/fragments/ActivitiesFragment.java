@@ -220,7 +220,8 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
                     public void onSave(String week, List<UserActivity> activities) {
                         mUser.getActivities().put(week, activities);
                         ((HealthStateActivity) getActivity()).updateUserInDb(mUser);
-                        //TODO: update UI
+                        updateChart();
+                        mActivitiesScroll.setVisibility(View.INVISIBLE);
                     }
                 });
                 dialog.show();
@@ -369,6 +370,32 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
         mSCDuration.setText(zeroDurationAsText);
         mJoggingDuration.setText(zeroDurationAsText);
         mOtherDuration.setText(zeroDurationAsText);
+    }
+
+    private void updateChart() {
+        ArrayList<BarEntry> entries = getBarEntriesFromUserActivities();
+        Collections.sort(entries, new Comparator<BarEntry>() {
+            @Override
+            public int compare(BarEntry o1, BarEntry o2) {
+                if (o1.getX() > o2.getX()) {
+                    return 1;
+                } else if (o1.getX() < o2.getX()) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+
+        BarDataSet dataSet = new BarDataSet(entries, "Activity Duration");
+        dataSet.setColor(ContextCompat.getColor(getActivity(), R.color.colorPrimaryTransparent));
+        dataSet.setDrawValues(false);
+
+        BarData data = new BarData(dataSet);
+
+        mChart.setData(data);
+        mChart.highlightValues(null);
+        mChart.invalidate();
     }
 
     @Override
