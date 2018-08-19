@@ -117,7 +117,7 @@ public class AddActivityDialog extends Dialog {
                             mWalkingMinutes.setText(String.format("%s", minutes));
                         } else if (act.getType() == ActivityType.Aerobics) {
                             mAerobicsHours.setText(String.format("%s", hours));
-                            mAerobicsHours.setText(String.format("%s", minutes));
+                            mAerobicsMinutes.setText(String.format("%s", minutes));
                         } else if (act.getType() == ActivityType.Yoga) {
                             mYogaHours.setText(String.format("%s", hours));
                             mYogaMinutes.setText(String.format("%s", minutes));
