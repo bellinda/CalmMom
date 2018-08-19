@@ -127,48 +127,6 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
             labels.add(String.format("%s", i));
         }
 
-//        ArrayList<BarEntry> entries = new ArrayList<>();
-//        entries.add(new BarEntry(1f, 80));
-//        entries.add(new BarEntry(2f, 20));
-//        entries.add(new BarEntry(3f, 15));
-//        entries.add(new BarEntry(4f, 40));
-//        entries.add(new BarEntry(5f, 60));
-//        entries.add(new BarEntry(6f, 10));
-//        entries.add(new BarEntry(7f, 0));
-//        entries.add(new BarEntry(8f, 0));
-//        entries.add(new BarEntry(9f, 0));
-//        entries.add(new BarEntry(10f, 0));
-//        entries.add(new BarEntry(11f, 0));
-//        entries.add(new BarEntry(12f, 0));
-//        entries.add(new BarEntry(13f, 0));
-//        entries.add(new BarEntry(14f, 80));
-//        entries.add(new BarEntry(15f, 0));
-//        entries.add(new BarEntry(16f, 0));
-//        entries.add(new BarEntry(17f, 0));
-//        entries.add(new BarEntry(18f, 0));
-//        entries.add(new BarEntry(19f, 0));
-//        entries.add(new BarEntry(20f, 0));
-//        entries.add(new BarEntry(21f, 0));
-//        entries.add(new BarEntry(22f, 0));
-//        entries.add(new BarEntry(23f, 0));
-//        entries.add(new BarEntry(24f, 0));
-//        entries.add(new BarEntry(25f, 0));
-//        entries.add(new BarEntry(26f, 0));
-//        entries.add(new BarEntry(27f, 0));
-//        entries.add(new BarEntry(28f, 0));
-//        entries.add(new BarEntry(29f, 0));
-//        entries.add(new BarEntry(30f, 0));
-//        entries.add(new BarEntry(31f, 0));
-//        entries.add(new BarEntry(32f, 0));
-//        entries.add(new BarEntry(33f, 0));
-//        entries.add(new BarEntry(34f, 0));
-//        entries.add(new BarEntry(35f, 0));
-//        entries.add(new BarEntry(36f, 0));
-//        entries.add(new BarEntry(37f, 0));
-//        entries.add(new BarEntry(38f, 0));
-//        entries.add(new BarEntry(39f, 0));
-//        entries.add(new BarEntry(40f, 0));
-
         ArrayList<BarEntry> entries = getBarEntriesFromUserActivities();
         Collections.sort(entries, new Comparator<BarEntry>() {
             @Override
@@ -198,10 +156,9 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
 
         BarData data = new BarData(dataSet);
 
-        mChart.setData(data); // set the data and list of labels into chart
+        mChart.setData(data);
 
         CustomMarkerView mv = new CustomMarkerView(getActivity(), R.layout.marker_content);
-        // set the marker to the chart
         mChart.setMarker(mv);
         mChart.setDrawMarkers(true);
         mChart.getAxisRight().setEnabled(false);
