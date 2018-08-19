@@ -38,7 +38,7 @@ public class CustomMarkerView extends MarkerView {
             int wholeTime = Math.round(e.getY());
             int hours = wholeTime / 60;
             int minutes = wholeTime % 60;
-            markerContent = String.format("%s:%s %s", hours, minutes, context.getString(R.string.fragment_activities_marker_longer_than_hour));
+            markerContent = String.format("%02d:%02d %s", hours, minutes, context.getString(R.string.fragment_activities_marker_longer_than_hour));
         }
         tvContent.setText(markerContent);
 
