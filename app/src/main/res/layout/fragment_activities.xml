@@ -112,7 +112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="20:15 h"
+                        tools:text="20:15 h"
                         android:id="@+id/walking_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -153,7 +153,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="03:00 h"
+                        tools:text="03:00 h"
                         android:id="@+id/aerobics_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -194,7 +194,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="05:00 h"
+                        tools:text="05:00 h"
                         android:id="@+id/yoga_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -235,7 +235,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="01:00 h"
+                        tools:text="01:00 h"
                         android:id="@+id/pilates_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -276,7 +276,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="10:00 h"
+                        tools:text="10:00 h"
                         android:id="@+id/swimming_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -317,7 +317,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="04:00 h"
+                        tools:text="04:00 h"
                         android:id="@+id/dancing_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -359,7 +359,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="02:00 h"
+                        tools:text="02:00 h"
                         android:id="@+id/sc_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -400,7 +400,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="00:00 h"
+                        tools:text="00:00 h"
                         android:id="@+id/jogging_duration"/>
                 </LinearLayout>
             </LinearLayout>
@@ -441,7 +441,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
-                        android:text="00:30 h"
+                        tools:text="00:30 h"
                         android:id="@+id/other_duration"/>
                 </LinearLayout>
             </LinearLayout>
