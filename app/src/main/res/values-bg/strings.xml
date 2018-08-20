@@ -145,4 +145,6 @@
     <string name="dialog_add_activity_sc">Велоаргометър</string>
     <string name="dialog_add_activity_jogging">Тичане</string>
     <string name="dialog_add_activity_other">Друго</string>
+
+    <string name="tips_week_label">Седмица</string>
 </resources>

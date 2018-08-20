@@ -86,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/curved_drawable_dark"/>
+        android:background="@drawable/curved_drawable"/>
 
     <View
         android:layout_width="0dp"
@@ -95,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/curved_drawable"/>
+        android:background="@drawable/curved_drawable_dark"/>
 
     <LinearLayout
         android:layout_width="0dp"

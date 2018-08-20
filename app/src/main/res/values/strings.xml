@@ -148,4 +148,6 @@
     <string name="dialog_add_activity_sc">Stationary Cycling</string>
     <string name="dialog_add_activity_jogging">Jogging</string>
     <string name="dialog_add_activity_other">Other</string>
+
+    <string name="tips_week_label">Week</string>
 </resources>

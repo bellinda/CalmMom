@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
+import com.angelova.w510.calmmom.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -139,9 +140,11 @@ public class LoginActivity extends AppCompatActivity {
                     if (document != null) {
                         //The user exists...
                         if (document.contains("name")) {
+                            User user = document.toObject(User.class);
                             //open main menu
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("email", mEmail.getText().toString());
+                            intent.putExtra("user", user);
                             startActivity(intent);
                             finish();
                         } else {

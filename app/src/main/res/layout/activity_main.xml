@@ -133,34 +133,6 @@
         android:orientation="horizontal"
         android:id="@+id/tip_top_guideline"/>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/white_border"
-        app:layout_constraintLeft_toLeftOf="@id/left_header_guideline"
-        app:layout_constraintRight_toRightOf="@id/right_header_guideline"
-        app:layout_constraintTop_toBottomOf="@id/tip_top_guideline"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:id="@+id/tip_layout"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tip of the week:"
-            android:textColor="@color/colorAccent"
-            android:textStyle="bold"
-            android:textSize="@dimen/menu_tip_text_size"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Package your things for the hospital. Check more details in the tips menu."
-            android:textColor="@color/colorAccent"/>
-    </LinearLayout>
-
     <android.support.constraint.Guideline
         android:layout_width="1dp"
         android:layout_height="1dp"
@@ -255,7 +227,8 @@
         app:layout_constraintTop_toBottomOf="@id/examinations_layout"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/tip_layout">
 
         <ImageView
             android:layout_width="wrap_content"
