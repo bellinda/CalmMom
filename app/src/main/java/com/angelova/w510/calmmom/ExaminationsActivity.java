@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.dialogs.YesNoDialog;
 import com.angelova.w510.calmmom.fragments.ExaminationsFragment;
 import com.angelova.w510.calmmom.fragments.QuestionsFragment;
@@ -205,4 +206,20 @@ public class ExaminationsActivity extends AppCompatActivity {
         });
         dialog.show();
     }
+
+    public void showYesNoDialogNow(String title, String positiveBtnTitle, String negativeBtnTitle, YesNoDialog.ButtonClickListener listener) {
+        YesNoDialog dialog = new YesNoDialog(this, title, positiveBtnTitle, negativeBtnTitle, listener);
+        dialog.show();
+    }
+
+    public void showWarnDialogNow(String title, String message) {
+        WarnDialog dialog = new WarnDialog(this, title, message, new WarnDialog.DialogClickListener() {
+            @Override
+            public void onClick() {
+
+            }
+        });
+        dialog.show();
+    }
+
 }

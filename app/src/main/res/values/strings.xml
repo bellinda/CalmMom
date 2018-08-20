@@ -111,6 +111,11 @@
     <string name="examination_no_text_adding_test">Please enter a test before saving</string>
     <string name="examination_no_text_adding_mes">Please enter a measurement before saving</string>
     <string name="examination_no_text_title">Warning</string>
+    <string name="examination_set_to_current_question">Are you sure that you want this examination to get your current one?</string>
+    <string name="examination_set_to_current_positive_btn">Yes</string>
+    <string name="examination_set_to_current_negative_btn">No</string>
+    <string name="examination_set_to_current_no_date">Please select a date for this examination before setting it to current</string>
+    <string name="examination_set_to_current_no_date_title">Warning</string>
 
     <string name="questions_add_answer">Add answer</string>
     <string name="delete_question_title">Warning</string>

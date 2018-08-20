@@ -108,6 +108,11 @@
     <string name="examination_no_text_adding_test">Моля въведете название на изследване преди да запазите</string>
     <string name="examination_no_text_adding_mes">Моля въведете название на измерване преди да запазите</string>
     <string name="examination_no_text_title">Внимание</string>
+    <string name="examination_set_to_current_question">Сигурна ли сте, че искате да направите този преглед текущ?</string>
+    <string name="examination_set_to_current_positive_btn">Да</string>
+    <string name="examination_set_to_current_negative_btn">Не</string>
+    <string name="examination_set_to_current_no_date">Моля изберете дата за този преглед, преди да го направите текущ</string>
+    <string name="examination_set_to_current_no_date_title">Внимание</string>
 
     <string name="questions_add_answer">Добави отговор</string>
     <string name="delete_question_title">Внимание</string>

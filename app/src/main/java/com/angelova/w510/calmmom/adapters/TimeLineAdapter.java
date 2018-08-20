@@ -1,10 +1,12 @@
 package com.angelova.w510.calmmom.adapters;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,8 @@ import android.widget.TimePicker;
 import com.angelova.w510.calmmom.ExaminationsActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.TimeLineViewHolder;
+import com.angelova.w510.calmmom.dialogs.WarnDialog;
+import com.angelova.w510.calmmom.dialogs.YesNoDialog;
 import com.angelova.w510.calmmom.fragments.ExaminationsFragment;
 import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationStatus;
@@ -21,8 +25,10 @@ import com.angelova.w510.calmmom.utils.DateTimeUtils;
 import com.angelova.w510.calmmom.utils.VectorDrawableUtils;
 import com.github.vipulasri.timelineview.TimelineView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,6 +70,32 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
         } else {
             holder.mTimelineView.setMarker(ContextCompat.getDrawable(mContext, R.drawable.ic_marker), ContextCompat.getColor(mContext, R.color.colorContrast));
         }
+
+        holder.mTimelineView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (timeLineModel.getStatus() != ExaminationStatus.CURRENT && timeLineModel.getDate() != null && !timeLineModel.getDate().isEmpty()) {
+                    ((ExaminationsActivity) mContext).showYesNoDialogNow(mContext.getString(R.string.examination_set_to_current_question),
+                            mContext.getString(R.string.examination_set_to_current_positive_btn),
+                            mContext.getString(R.string.examination_set_to_current_negative_btn), new YesNoDialog.ButtonClickListener() {
+                        @Override
+                        public void onPositiveButtonClick() {
+                            timeLineModel.setStatus(ExaminationStatus.CURRENT);
+                            updateAllOlderExaminationsToBePast(timeLineModel);
+                            notifyDataSetChanged();
+                            ((ExaminationsActivity) mContext).updateExaminationsInDb(mFeedList);
+                        }
+
+                        @Override
+                        public void onNegativeButtonClick() {
+
+                        }
+                    });
+                } else if (timeLineModel.getDate() == null || timeLineModel.getDate().isEmpty()) {
+                    ((ExaminationsActivity) mContext).showWarnDialogNow(mContext.getString(R.string.examination_set_to_current_no_date_title), mContext.getString(R.string.examination_set_to_current_no_date));
+                }
+            }
+        });
 
         if(!timeLineModel.getDate().isEmpty()) {
             holder.mDate.setVisibility(View.VISIBLE);
@@ -143,5 +175,24 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
     @Override
     public int getItemCount() {
         return (mFeedList != null ? mFeedList.size() : 0);
+    }
+
+    private void updateAllOlderExaminationsToBePast(Examination updatedExamination) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        try {
+            Date updatedExDate = sdf.parse(updatedExamination.getDate());
+            for (Examination ex : mFeedList) {
+                if (ex.getDate() != null && !TextUtils.isEmpty(ex.getDate())) {
+                    Date currentExDate = sdf.parse(ex.getDate());
+                    if (currentExDate.before(updatedExDate)) {
+                        ex.setStatus(ExaminationStatus.COMPLETED);
+                    } else if (currentExDate.after(updatedExDate)) {
+                        ex.setStatus(ExaminationStatus.FUTURE);
+                    }
+                }
+            }
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
     }
 }
