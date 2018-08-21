@@ -32,6 +32,18 @@
         <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
     </style>
 
+    <style name="MyContrastEditTextTheme">
+        <!-- Used for the bottom line when not selected / focused -->
+        <item name="colorControlNormal">@color/colorContrast</item>
+        <item name="colorControlActivated">@color/colorContrast</item>
+        <item name="colorControlHighlight">@color/colorContrast</item>
+        <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
+    </style>
+
+    <style name="DarkCheck">
+        <item name="colorAccent">@color/colorContrast</item>
+    </style>
+
     <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/colorPrimary</item>
     </style>

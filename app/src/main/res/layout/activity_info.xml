@@ -212,7 +212,7 @@
                 android:id="@+id/input_layout_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/colorPrimary"
+                android:textColorHint="@color/colorContrast"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 android:focusable="false"
                 android:focusableInTouchMode="true">
@@ -224,7 +224,7 @@
                     android:hint="@string/name_label"
                     android:textColor="@color/colorContrast"
                     android:focusableInTouchMode="true"
-                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:theme="@style/MyContrastEditTextTheme"
                     android:inputType="textPersonName"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -233,7 +233,7 @@
                 android:id="@+id/input_layout_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/colorPrimary"
+                android:textColorHint="@color/colorContrast"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 android:layout_marginTop="15dp">
 
@@ -243,7 +243,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/age_label"
                     android:textColor="@color/colorContrast"
-                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:theme="@style/MyContrastEditTextTheme"
                     android:inputType="number"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -252,7 +252,7 @@
                 android:id="@+id/input_layout_height"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/colorPrimary"
+                android:textColorHint="@color/colorContrast"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 android:layout_marginTop="15dp">
 
@@ -262,7 +262,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/height_label"
                     android:textColor="@color/colorContrast"
-                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:theme="@style/MyContrastEditTextTheme"
                     android:inputType="numberDecimal"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -271,7 +271,7 @@
                 android:id="@+id/input_layout_weight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/colorPrimary"
+                android:textColorHint="@color/colorContrast"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 android:layout_marginTop="15dp">
 
@@ -281,10 +281,124 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/weight_label"
                     android:textColor="@color/colorContrast"
-                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:theme="@style/MyContrastEditTextTheme"
                     android:inputType="numberDecimal"/>
 
             </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/risk_factor_title"
+                android:textColor="@color/colorContrast"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="18sp"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/checkboxes_view">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/checkbox_height_info"
+                        android:layout_marginTop="@dimen/margin_between_views"
+                        android:text="@string/risk_factor_smoke"
+                        android:textColor="@color/colorContrast"
+                        android:paddingLeft="10dp"
+                        android:id="@+id/factor_smoke"
+                        android:layout_weight="1"
+                        android:theme="@style/DarkCheck"/>
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/checkbox_height_info"
+                        android:layout_marginTop="@dimen/margin_between_views"
+                        android:text="@string/risk_factor_alcohol"
+                        android:textColor="@color/colorContrast"
+                        android:paddingLeft="10dp"
+                        android:id="@+id/factor_alcohol"
+                        android:layout_weight="1"
+                        android:theme="@style/DarkCheck"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/checkbox_height_info"
+                        android:layout_marginTop="@dimen/margin_between_views"
+                        android:text="@string/risk_factor_overweight"
+                        android:textColor="@color/colorContrast"
+                        android:paddingLeft="10dp"
+                        android:id="@+id/factor_overweight"
+                        android:layout_weight="1"
+                        android:theme="@style/DarkCheck"/>
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/checkbox_height_info"
+                        android:layout_marginTop="@dimen/margin_between_views"
+                        android:text="@string/risk_factor_age"
+                        android:textColor="@color/colorContrast"
+                        android:paddingLeft="10dp"
+                        android:id="@+id/factor_age"
+                        android:layout_weight="1"
+                        android:theme="@style/DarkCheck"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/checkbox_height_info"
+                        android:layout_marginTop="@dimen/margin_between_views"
+                        android:text="@string/risk_factor_under_feeding"
+                        android:textColor="@color/colorContrast"
+                        android:paddingLeft="10dp"
+                        android:id="@+id/factor_under_feeding"
+                        android:layout_weight="1"
+                        android:theme="@style/DarkCheck"/>
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/checkbox_height_info"
+                        android:layout_marginTop="@dimen/margin_between_views"
+                        android:text="@string/risk_factor_food_allergy"
+                        android:textColor="@color/colorContrast"
+                        android:paddingLeft="10dp"
+                        android:id="@+id/factor_food_allergy"
+                        android:layout_weight="1"
+                        android:theme="@style/DarkCheck"/>
+                </LinearLayout>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/checkbox_height_info"
+                    android:layout_marginTop="@dimen/margin_between_views"
+                    android:text="@string/risk_factor_med_allergy"
+                    android:textColor="@color/colorContrast"
+                    android:paddingLeft="10dp"
+                    android:id="@+id/factor_med_allergy"
+                    android:theme="@style/DarkCheck"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -296,7 +410,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="⨁"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorContrast"
                     android:id="@+id/add_image_view"
                     android:textSize="38sp"
                     app:layout_constraintTop_toTopOf="parent"
@@ -307,7 +421,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/illnesses_label"
                     android:layout_marginLeft="10dp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorContrast"
                     android:gravity="center_vertical"
                     android:textSize="@dimen/add_item_label_text_size"/>
 
@@ -325,7 +439,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="⨁"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorContrast"
                     android:textSize="38sp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"/>
@@ -336,7 +450,7 @@
                     android:text="@string/surgeries_label"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorContrast"
                     android:textSize="@dimen/add_item_label_text_size"/>
 
             </LinearLayout>
@@ -353,7 +467,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="⨁"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorContrast"
                     android:textSize="38sp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"/>
@@ -364,7 +478,7 @@
                     android:text="@string/family_history_label"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorContrast"
                     android:textSize="@dimen/add_item_label_text_size"/>
 
             </LinearLayout>
@@ -373,7 +487,7 @@
                 android:id="@+id/input_layout_menstruation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/colorPrimary"
+                android:textColorHint="@color/colorContrast"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 android:layout_marginTop="15dp">
 
@@ -383,7 +497,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/menstruation_label"
                     android:textColor="@color/colorContrast"
-                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:theme="@style/MyContrastEditTextTheme"
                     android:inputType="date"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -400,7 +514,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorContrast"
                     android:textSize="@dimen/add_item_label_text_size"
                     android:text="@string/regular_menstruation_label"
                     android:gravity="center_vertical"
@@ -417,7 +531,7 @@
                 android:id="@+id/input_layout_menstruation_length"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/colorPrimary"
+                android:textColorHint="@color/colorContrast"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 android:layout_marginTop="15dp">
 
@@ -427,7 +541,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/menstruation_length_label"
                     android:textColor="@color/colorContrast"
-                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:theme="@style/MyContrastEditTextTheme"
                     android:inputType="number"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -436,7 +550,7 @@
                 android:id="@+id/input_layout_menstruation_duration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/colorPrimary"
+                android:textColorHint="@color/colorContrast"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 android:layout_marginTop="15dp">
 
@@ -446,7 +560,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/menstruation_duration_label"
                     android:textColor="@color/colorContrast"
-                    android:theme="@style/MyPrimaryEditTextTheme"
+                    android:theme="@style/MyContrastEditTextTheme"
                     android:inputType="number"/>
 
             </android.support.design.widget.TextInputLayout>

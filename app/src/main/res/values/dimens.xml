@@ -11,6 +11,8 @@
     <dimen name="surgery_state_height">50dp</dimen>
     <dimen name="date_title_text_size">17sp</dimen>
     <dimen name="switch_button_height">50dp</dimen>
+    <dimen name="margin_between_views">8dp</dimen>
+    <dimen name="checkbox_height_info">50dp</dimen>
 
     <dimen name="menu_date_text_size">28sp</dimen>
     <dimen name="menu_weeks_text_size">24sp</dimen>

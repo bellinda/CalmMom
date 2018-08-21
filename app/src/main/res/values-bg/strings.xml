@@ -19,6 +19,14 @@
     <string name="regular_menstruation_label">Regular menstruation?</string>
     <string name="menstruation_length_label">Menstruation cycle length</string>
     <string name="menstruation_duration_label">Duration of the menstruation</string>
+    <string name="risk_factor_title">Рискови фактори</string>
+    <string name="risk_factor_smoke">Тютюнопушене</string>
+    <string name="risk_factor_alcohol">Злоупотреба с алкохол</string>
+    <string name="risk_factor_overweight">Наднормено тегло</string>
+    <string name="risk_factor_age">Възраст</string>
+    <string name="risk_factor_under_feeding">Недохранване</string>
+    <string name="risk_factor_food_allergy">Алергия към храни</string>
+    <string name="risk_factor_med_allergy">Алергия към лекарства</string>
     <string name="info_submit">Save info</string>
 
     <string name="illness_name_label">Title</string>

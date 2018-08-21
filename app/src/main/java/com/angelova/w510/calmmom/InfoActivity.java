@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -32,6 +33,7 @@ import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationStatus;
 import com.angelova.w510.calmmom.models.FamilyHistory;
 import com.angelova.w510.calmmom.models.Illness;
+import com.angelova.w510.calmmom.models.RiskFactor;
 import com.angelova.w510.calmmom.models.Surgery;
 import com.angelova.w510.calmmom.models.User;
 import com.angelova.w510.calmmom.models.UserActivity;
@@ -71,6 +73,14 @@ public class InfoActivity extends AppCompatActivity {
     private SwitchCompat mRegularSwitch;
     private EditText mInputMenstruationLength;
     private EditText mInputMenstruationDuration;
+
+    private CheckBox mSmokeChkBox;
+    private CheckBox mAlcoholChkBox;
+    private CheckBox mOverweightChkBox;
+    private CheckBox mAgeChkBox;
+    private CheckBox mUnderfeedingChkBox;
+    private CheckBox mFoodAllChkBox;
+    private CheckBox mMedAllChkBox;
 
     private Button mSubmitBtn;
     private ProgressBar mSubmitLoader;
@@ -196,6 +206,13 @@ public class InfoActivity extends AppCompatActivity {
         mRegularSwitch = (SwitchCompat) findViewById(R.id.regular_switch);
         mInputMenstruationLength = (EditText) findViewById(R.id.input_menstruation_length);
         mInputMenstruationDuration = (EditText) findViewById(R.id.input_menstruation_duration);
+        mSmokeChkBox = (CheckBox) findViewById(R.id.factor_smoke);
+        mAlcoholChkBox = (CheckBox) findViewById(R.id.factor_alcohol);
+        mOverweightChkBox = (CheckBox) findViewById(R.id.factor_overweight);
+        mAgeChkBox = (CheckBox) findViewById(R.id.factor_age);
+        mUnderfeedingChkBox = (CheckBox) findViewById(R.id.factor_under_feeding);
+        mFoodAllChkBox = (CheckBox) findViewById(R.id.factor_food_allergy);
+        mMedAllChkBox = (CheckBox) findViewById(R.id.factor_med_allergy);
         mSubmitBtn = (Button) findViewById(R.id.submit_btn);
         mSubmitLoader = (ProgressBar) findViewById(R.id.submit_loader);
         mSubmitBtn.setOnClickListener(new View.OnClickListener() {
@@ -234,6 +251,30 @@ public class InfoActivity extends AppCompatActivity {
 
                     HashMap<String, List<UserActivity>> activities = getInitialUserActivities();
                     mUser.setActivities(activities);
+
+                    List<RiskFactor> riskFactors = new ArrayList<RiskFactor>();
+                    if (mSmokeChkBox.isChecked()) {
+                        riskFactors.add(RiskFactor.Smoking);
+                    }
+                    if (mAlcoholChkBox.isChecked()) {
+                        riskFactors.add(RiskFactor.Alcohol);
+                    }
+                    if (mOverweightChkBox.isChecked()) {
+                        riskFactors.add(RiskFactor.Overweight);
+                    }
+                    if (mAgeChkBox.isChecked()) {
+                        riskFactors.add(RiskFactor.Age);
+                    }
+                    if (mUnderfeedingChkBox.isChecked()) {
+                        riskFactors.add(RiskFactor.UnderFeeding);
+                    }
+                    if (mFoodAllChkBox.isChecked()) {
+                        riskFactors.add(RiskFactor.FoodAllergy);
+                    }
+                    if (mMedAllChkBox.isChecked()) {
+                        riskFactors.add(RiskFactor.MedicinesAllergy);
+                    }
+                    mUser.setRiskFactors(riskFactors);
 
                     mSubmitBtn.setVisibility(View.GONE);
                     mSubmitLoader.setVisibility(View.VISIBLE);

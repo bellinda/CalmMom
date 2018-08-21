@@ -19,6 +19,14 @@
     <string name="regular_menstruation_label">Regular menstruation?</string>
     <string name="menstruation_length_label">Menstruation cycle length</string>
     <string name="menstruation_duration_label">Duration of the menstruation</string>
+    <string name="risk_factor_title">Risk factors</string>
+    <string name="risk_factor_smoke">Smoking</string>
+    <string name="risk_factor_alcohol">Drinking Alcohol</string>
+    <string name="risk_factor_overweight">Overweight</string>
+    <string name="risk_factor_age">Age</string>
+    <string name="risk_factor_under_feeding">Underfeeding</string>
+    <string name="risk_factor_food_allergy">Food Allergy</string>
+    <string name="risk_factor_med_allergy">Medicines Allergy</string>
     <string name="info_submit">Save info</string>
 
     <string name="illness_name_label">Title</string>

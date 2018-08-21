@@ -26,6 +26,7 @@ public class User implements Serializable {
     private List<Question> questions;
     private List<Weight> weights;
     private HashMap<String, List<UserActivity>> activities;
+    private List<RiskFactor> riskFactors;
 
     public String getName() {
         return name;
@@ -153,5 +154,13 @@ public class User implements Serializable {
 
     public void setActivities(HashMap<String, List<UserActivity>> activities) {
         this.activities = activities;
+    }
+
+    public List<RiskFactor> getRiskFactors() {
+        return riskFactors;
+    }
+
+    public void setRiskFactors(List<RiskFactor> riskFactors) {
+        this.riskFactors = riskFactors;
     }
 }
