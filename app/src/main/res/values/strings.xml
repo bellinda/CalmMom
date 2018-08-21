@@ -27,6 +27,10 @@
     <string name="risk_factor_under_feeding">Underfeeding</string>
     <string name="risk_factor_food_allergy">Food Allergy</string>
     <string name="risk_factor_med_allergy">Medicines Allergy</string>
+    <string name="abortions_switch_label">Abortions</string>
+    <string name="abortions_desired">As desired (count)</string>
+    <string name="abortions_miscarriage">Miscarriages (count)</string>
+    <string name="abortions_med_evidence">On medical evidence (count)</string>
     <string name="info_submit">Save info</string>
 
     <string name="illness_name_label">Title</string>

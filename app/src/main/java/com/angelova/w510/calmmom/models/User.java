@@ -27,6 +27,9 @@ public class User implements Serializable {
     private List<Weight> weights;
     private HashMap<String, List<UserActivity>> activities;
     private List<RiskFactor> riskFactors;
+    private int desiredAbortions;
+    private int miscarriages;
+    private int abortionsOnMedEvidence;
 
     public String getName() {
         return name;
@@ -162,5 +165,29 @@ public class User implements Serializable {
 
     public void setRiskFactors(List<RiskFactor> riskFactors) {
         this.riskFactors = riskFactors;
+    }
+
+    public int getDesiredAbortions() {
+        return desiredAbortions;
+    }
+
+    public void setDesiredAbortions(int desiredAbortions) {
+        this.desiredAbortions = desiredAbortions;
+    }
+
+    public int getMiscarriages() {
+        return miscarriages;
+    }
+
+    public void setMiscarriages(int miscarriages) {
+        this.miscarriages = miscarriages;
+    }
+
+    public int getAbortionsOnMedEvidence() {
+        return abortionsOnMedEvidence;
+    }
+
+    public void setAbortionsOnMedEvidence(int abortionsOnMedEvidence) {
+        this.abortionsOnMedEvidence = abortionsOnMedEvidence;
     }
 }

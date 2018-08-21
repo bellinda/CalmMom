@@ -20,6 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -81,6 +82,14 @@ public class InfoActivity extends AppCompatActivity {
     private CheckBox mUnderfeedingChkBox;
     private CheckBox mFoodAllChkBox;
     private CheckBox mMedAllChkBox;
+
+    private SwitchCompat mAbortionSwitch;
+    private LinearLayout mDesiredAbortionsLayout;
+    private LinearLayout mMiscarriagesLayout;
+    private LinearLayout mMedicalAbortionsLayout;
+    private EditText mDesiredInput;
+    private EditText mMiscarriagesInput;
+    private EditText mMedicalInput;
 
     private Button mSubmitBtn;
     private ProgressBar mSubmitLoader;
@@ -213,6 +222,28 @@ public class InfoActivity extends AppCompatActivity {
         mUnderfeedingChkBox = (CheckBox) findViewById(R.id.factor_under_feeding);
         mFoodAllChkBox = (CheckBox) findViewById(R.id.factor_food_allergy);
         mMedAllChkBox = (CheckBox) findViewById(R.id.factor_med_allergy);
+        mAbortionSwitch = (SwitchCompat) findViewById(R.id.abortion_switch);
+        mDesiredAbortionsLayout = (LinearLayout) findViewById(R.id.desired_layout);
+        mMiscarriagesLayout = (LinearLayout) findViewById(R.id.miscarriages_layout);
+        mMedicalAbortionsLayout = (LinearLayout) findViewById(R.id.medical_layout);
+        mDesiredInput = (EditText) findViewById(R.id.desired_count);
+        mMiscarriagesInput = (EditText) findViewById(R.id.miscarriages_count);
+        mMedicalInput = (EditText) findViewById(R.id.medical_count);
+        mAbortionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mDesiredAbortionsLayout.setVisibility(View.VISIBLE);
+                    mMiscarriagesLayout.setVisibility(View.VISIBLE);
+                    mMedicalAbortionsLayout.setVisibility(View.VISIBLE);
+                } else {
+                    mDesiredAbortionsLayout.setVisibility(View.GONE);
+                    mMiscarriagesLayout.setVisibility(View.GONE);
+                    mMedicalAbortionsLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
         mSubmitBtn = (Button) findViewById(R.id.submit_btn);
         mSubmitLoader = (ProgressBar) findViewById(R.id.submit_loader);
         mSubmitBtn.setOnClickListener(new View.OnClickListener() {
@@ -275,6 +306,20 @@ public class InfoActivity extends AppCompatActivity {
                         riskFactors.add(RiskFactor.MedicinesAllergy);
                     }
                     mUser.setRiskFactors(riskFactors);
+
+                    if (mAbortionSwitch.isChecked()) {
+                        if (mDesiredInput.getText() != null && !mDesiredInput.getText().toString().isEmpty()) {
+                            mUser.setDesiredAbortions(Integer.parseInt(mDesiredInput.getText().toString()));
+                        }
+
+                        if (mMiscarriagesInput.getText() != null && !mMiscarriagesInput.getText().toString().isEmpty()) {
+                            mUser.setMiscarriages(Integer.parseInt(mMiscarriagesInput.getText().toString()));
+                        }
+
+                        if (mMedicalInput.getText() != null && !mMedicalInput.getText().toString().isEmpty()) {
+                            mUser.setAbortionsOnMedEvidence(Integer.parseInt(mMedicalInput.getText().toString()));
+                        }
+                    }
 
                     mSubmitBtn.setVisibility(View.GONE);
                     mSubmitLoader.setVisibility(View.VISIBLE);

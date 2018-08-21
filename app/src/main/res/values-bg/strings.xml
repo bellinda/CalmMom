@@ -27,6 +27,10 @@
     <string name="risk_factor_under_feeding">Недохранване</string>
     <string name="risk_factor_food_allergy">Алергия към храни</string>
     <string name="risk_factor_med_allergy">Алергия към лекарства</string>
+    <string name="abortions_switch_label">Аборти</string>
+    <string name="abortions_desired">По желание (брой)</string>
+    <string name="abortions_miscarriage">Спонтанни (брой)</string>
+    <string name="abortions_med_evidence">По мед. показания (брой)</string>
     <string name="info_submit">Save info</string>
 
     <string name="illness_name_label">Title</string>

@@ -483,6 +483,116 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/switch_button_height"
+                android:gravity="center_vertical"
+                android:id="@+id/abortion_layout"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="@dimen/add_item_label_text_size"
+                    android:text="@string/abortions_switch_label"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/abortion_switch"
+                    android:theme="@style/SCBSwitch"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/switch_button_height"
+                android:gravity="center_vertical"
+                android:id="@+id/desired_layout"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="15dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="@dimen/add_item_label_text_size"
+                    android:text="@string/abortions_desired"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/desired_count"
+                    android:layout_weight="1"
+                    android:theme="@style/MyContrastEditTextTheme"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/switch_button_height"
+                android:gravity="center_vertical"
+                android:id="@+id/miscarriages_layout"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="15dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="@dimen/add_item_label_text_size"
+                    android:text="@string/abortions_miscarriage"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/miscarriages_count"
+                    android:layout_weight="1"
+                    android:theme="@style/MyContrastEditTextTheme"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/switch_button_height"
+                android:gravity="center_vertical"
+                android:id="@+id/medical_layout"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="15dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="@dimen/add_item_label_text_size"
+                    android:text="@string/abortions_med_evidence"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_count"
+                    android:layout_weight="1"
+                    android:theme="@style/MyContrastEditTextTheme"/>
+            </LinearLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_menstruation"
                 android:layout_width="match_parent"
