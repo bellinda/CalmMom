@@ -10,6 +10,7 @@ public class Tip implements Comparable<Tip> {
 
     private String week;
     private String content;
+    private String bgContent;
 
     public Tip() {}
 
@@ -27,6 +28,14 @@ public class Tip implements Comparable<Tip> {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getBgContent() {
+        return bgContent;
+    }
+
+    public void setBgContent(String bgContent) {
+        this.bgContent = bgContent;
     }
 
     @Override

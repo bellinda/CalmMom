@@ -11,6 +11,7 @@ import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.models.Tip;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -39,7 +40,11 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         Tip tip = tips.get(position);
         holder.mWeekView.setText(tip.getWeek());
-        holder.mTipView.setText(tip.getContent());
+        if (Locale.getDefault().getLanguage().equalsIgnoreCase("bg")) {
+            holder.mTipView.setText(tip.getBgContent());
+        } else {
+            holder.mTipView.setText(tip.getContent());
+        }
     }
 
     @Override
