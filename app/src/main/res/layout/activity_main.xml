@@ -41,7 +41,7 @@
         app:layout_constraintLeft_toLeftOf="@id/left_header_guideline"
         app:layout_constraintRight_toLeftOf="@id/middle_header_guideline"
         app:layout_constraintTop_toBottomOf="@id/top_header_guideline"
-        android:text="13 May 2018"
+        tools:text="13 May 2018"
         android:textColor="@color/colorAccent"
         android:gravity="center"
         android:textSize="@dimen/menu_date_text_size"

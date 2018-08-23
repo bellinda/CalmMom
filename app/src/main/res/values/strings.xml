@@ -31,6 +31,9 @@
     <string name="abortions_desired">As desired (count)</string>
     <string name="abortions_miscarriage">Miscarriages (count)</string>
     <string name="abortions_med_evidence">On medical evidence (count)</string>
+    <string name="taken_medicines">Taken medicines before, during the pregnancy</string>
+    <string name="unwanted_pregnancy_label">Unwanted Pregnancy</string>
+    <string name="blood_group_incompatibility">Blood group incompatibility between parents</string>
     <string name="info_submit">Save info</string>
 
     <string name="illness_name_label">Title</string>
@@ -106,6 +109,9 @@
     <string name="eighth_examination_act2">Антропометрия (ръст, телесна маса, външна пелвиметрика) - двукратно</string>
     <string name="eighth_examination_act3">Акушерски статус</string>
     <string name="eighth_examination_act4">Сърдечна дейност на плода - двукратно</string>
+
+    <string name="main_activity_weeks">week</string>
+    <string name="main_activity_size_text" formatted="false">Your baby is avg. %skg and %scm</string>
 
     <string name="dialog_add_examination_title">Add New Examination</string>
 
