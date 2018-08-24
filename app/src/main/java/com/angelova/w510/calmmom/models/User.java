@@ -14,9 +14,11 @@ public class User implements Serializable {
     private int age;
     private double currentHeight;
     private double currentWeight;
-    private List<Illness> illnesses;
-    private List<Surgery> surgeries;
-    private List<FamilyHistory> familyHistories;
+    private String infectiousDiseases;
+    private String otherIllnesses;
+    private String surgeries;
+    private String familyHistories;
+    private String complicationsOtherPregnancies;
     private String profileImage;
     private String firstDayOfLastMenstruation;
     private boolean regularMenstruation;
@@ -30,6 +32,9 @@ public class User implements Serializable {
     private int desiredAbortions;
     private int miscarriages;
     private int abortionsOnMedEvidence;
+    private String takenMedicines;
+    private boolean bloodGroupIncompatibility;
+    private boolean unwantedPregnancy;
 
     public String getName() {
         return name;
@@ -63,28 +68,44 @@ public class User implements Serializable {
         this.currentWeight = currentWeight;
     }
 
-    public List<Illness> getIllnesses() {
-        return illnesses;
+    public String getInfectiousDiseases() {
+        return infectiousDiseases;
     }
 
-    public void setIllnesses(List<Illness> illnesses) {
-        this.illnesses = illnesses;
+    public void setInfectiousDiseases(String infectiousDiseases) {
+        this.infectiousDiseases = infectiousDiseases;
     }
 
-    public List<Surgery> getSurgeries() {
+    public String getOtherIllnesses() {
+        return otherIllnesses;
+    }
+
+    public void setOtherIllnesses(String illnesses) {
+        this.otherIllnesses = illnesses;
+    }
+
+    public String getSurgeries() {
         return surgeries;
     }
 
-    public void setSurgeries(List<Surgery> surgeries) {
+    public void setSurgeries(String surgeries) {
         this.surgeries = surgeries;
     }
 
-    public List<FamilyHistory> getFamilyHistories() {
+    public String getFamilyHistories() {
         return familyHistories;
     }
 
-    public void setFamilyHistories(List<FamilyHistory> familyHistories) {
+    public void setFamilyHistories(String familyHistories) {
         this.familyHistories = familyHistories;
+    }
+
+    public String getComplicationsOtherPregnancies() {
+        return complicationsOtherPregnancies;
+    }
+
+    public void setComplicationsOtherPregnancies(String complicationsOtherPregnancies) {
+        this.complicationsOtherPregnancies = complicationsOtherPregnancies;
     }
 
     public String getProfileImage() {
@@ -189,5 +210,29 @@ public class User implements Serializable {
 
     public void setAbortionsOnMedEvidence(int abortionsOnMedEvidence) {
         this.abortionsOnMedEvidence = abortionsOnMedEvidence;
+    }
+
+    public String getTakenMedicines() {
+        return takenMedicines;
+    }
+
+    public void setTakenMedicines(String takenMedicines) {
+        this.takenMedicines = takenMedicines;
+    }
+
+    public boolean isBloodGroupIncompatibility() {
+        return bloodGroupIncompatibility;
+    }
+
+    public void setBloodGroupIncompatibility(boolean bloodGroupIncompatibility) {
+        this.bloodGroupIncompatibility = bloodGroupIncompatibility;
+    }
+
+    public boolean isUnwantedPregnancy() {
+        return unwantedPregnancy;
+    }
+
+    public void setUnwantedPregnancy(boolean unwantedPregnancy) {
+        this.unwantedPregnancy = unwantedPregnancy;
     }
 }

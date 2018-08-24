@@ -402,86 +402,140 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:id="@+id/illnesses_view">
+                android:layout_height="@dimen/switch_button_height"
+                android:gravity="center_vertical"
+                android:id="@+id/unwanted_pr_layout"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="15dp">
 
                 <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="@dimen/add_item_label_text_size"
+                    android:text="@string/unwanted_pregnancy_label"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"/>
+
+                <android.support.v7.widget.SwitchCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="⨁"
-                    android:textColor="@color/colorContrast"
-                    android:id="@+id/add_image_view"
-                    android:textSize="38sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/illnesses_label"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@color/colorContrast"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/add_item_label_text_size"/>
-
+                    android:id="@+id/unwanted_switch"
+                    android:theme="@style/SCBSwitch"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center_vertical"
+                android:layout_height="@dimen/switch_button_longer_label_height"
                 android:gravity="center_vertical"
-                android:id="@+id/surgeries_view">
+                android:id="@+id/blood_gr_incomp_layout"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="15dp">
 
                 <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="@dimen/add_item_label_text_size"
+                    android:text="@string/blood_group_incompatibility"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"/>
+
+                <android.support.v7.widget.SwitchCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="⨁"
-                    android:textColor="@color/colorContrast"
-                    android:textSize="38sp"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/surgeries_label"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/colorContrast"
-                    android:textSize="@dimen/add_item_label_text_size"/>
-
+                    android:id="@+id/blood_group_incomp_switch"
+                    android:theme="@style/SCBSwitch"/>
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:id="@+id/family_history_view">
+                android:text="@string/infectious_diseases"
+                android:textColor="@color/colorContrast"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="18sp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="⨁"
-                    android:textColor="@color/colorContrast"
-                    android:textSize="38sp"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical"/>
+            <EditText
+                android:id="@+id/input_infectious_diseases"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContrast"
+                android:theme="@style/MyContrastEditTextTheme"
+                android:layout_marginTop="10dp"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/family_history_label"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/colorContrast"
-                    android:textSize="@dimen/add_item_label_text_size"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/family_history_label"
+                android:textColor="@color/colorContrast"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="18sp"/>
 
-            </LinearLayout>
+            <EditText
+                android:id="@+id/input_family_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContrast"
+                android:theme="@style/MyContrastEditTextTheme"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/surgeries_label"
+                android:textColor="@color/colorContrast"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/input_surgeries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContrast"
+                android:theme="@style/MyContrastEditTextTheme"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/features_complications"
+                android:textColor="@color/colorContrast"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/input_features_complications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContrast"
+                android:theme="@style/MyContrastEditTextTheme"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/other_illnesses_label"
+                android:textColor="@color/colorContrast"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/input_other_illnesses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContrast"
+                android:theme="@style/MyContrastEditTextTheme"
+                android:layout_marginTop="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -534,7 +588,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/desired_count"
                     android:layout_weight="1"
-                    android:theme="@style/MyContrastEditTextTheme"/>
+                    android:theme="@style/MyContrastEditTextTheme"
+                    android:inputType="number"/>
             </LinearLayout>
 
             <LinearLayout
@@ -562,7 +617,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/miscarriages_count"
                     android:layout_weight="1"
-                    android:theme="@style/MyContrastEditTextTheme"/>
+                    android:theme="@style/MyContrastEditTextTheme"
+                    android:inputType="number"/>
             </LinearLayout>
 
             <LinearLayout
@@ -590,8 +646,26 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_count"
                     android:layout_weight="1"
-                    android:theme="@style/MyContrastEditTextTheme"/>
+                    android:theme="@style/MyContrastEditTextTheme"
+                    android:inputType="number"/>
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/taken_medicines"
+                android:textColor="@color/colorContrast"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/input_medicines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContrast"
+                android:theme="@style/MyContrastEditTextTheme"
+                android:layout_marginTop="10dp"/>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_menstruation"

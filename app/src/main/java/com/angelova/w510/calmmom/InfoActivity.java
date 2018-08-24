@@ -24,6 +24,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.dialogs.AddIllnessDialog;
@@ -62,9 +63,6 @@ public class InfoActivity extends AppCompatActivity {
 
     private CircleImageView mProfileImage;
     private TextView mProfileText;
-    private LinearLayout mIllnessesLayout;
-    private LinearLayout mSurgeriesLayout;
-    private LinearLayout mFHLayout;
 
     private EditText mInputName;
     private EditText mInputAge;
@@ -74,6 +72,11 @@ public class InfoActivity extends AppCompatActivity {
     private SwitchCompat mRegularSwitch;
     private EditText mInputMenstruationLength;
     private EditText mInputMenstruationDuration;
+    private EditText mInfectiousDiseases;
+    private EditText mOtherIllnesses;
+    private EditText mSurgeries;
+    private EditText mFamilyHistory;
+    private EditText mFeaturesAndComplications;
 
     private CheckBox mSmokeChkBox;
     private CheckBox mAlcoholChkBox;
@@ -90,6 +93,10 @@ public class InfoActivity extends AppCompatActivity {
     private EditText mDesiredInput;
     private EditText mMiscarriagesInput;
     private EditText mMedicalInput;
+
+    private EditText mTakenMedicinesInput;
+    private SwitchCompat mBloodGrIncompatibilitySwitch;
+    private SwitchCompat mUnwantedPregnancySwitch;
 
     private Button mSubmitBtn;
     private ProgressBar mSubmitLoader;
@@ -143,70 +150,6 @@ public class InfoActivity extends AppCompatActivity {
             }
         });
 
-        mIllnessesLayout = (LinearLayout) findViewById(R.id.illnesses_view);
-        mIllnessesLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<Illness> illnesses = new ArrayList<>();
-                if (mUser.getIllnesses() == null || mUser.getIllnesses().size() == 0) {
-                    //adding a default item
-                    illnesses.add(new Illness());
-                } else {
-                    illnesses = mUser.getIllnesses();
-                }
-
-                AddIllnessDialog dialog = new AddIllnessDialog(InfoActivity.this, illnesses, new AddIllnessDialog.DialogClickListener() {
-                    @Override
-                    public void onSave(List<Illness> receivedIllnesses) {
-                        mUser.setIllnesses(receivedIllnesses);
-                    }
-                });
-                dialog.show();
-            }
-        });
-
-        mSurgeriesLayout = (LinearLayout) findViewById(R.id.surgeries_view);
-        mSurgeriesLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<Surgery> surgeries = new ArrayList<>();
-                if (mUser.getSurgeries() == null || mUser.getSurgeries().size() == 0) {
-                    surgeries.add(new Surgery());
-                } else {
-                    surgeries = mUser.getSurgeries();
-                }
-
-                SurgeriesDialog dialog = new SurgeriesDialog(InfoActivity.this, surgeries, new SurgeriesDialog.DialogClickListener() {
-                    @Override
-                    public void onSave(List<Surgery> receivedSurgeries) {
-                        mUser.setSurgeries(receivedSurgeries);
-                    }
-                });
-                dialog.show();
-            }
-        });
-
-        mFHLayout = (LinearLayout) findViewById(R.id.family_history_view);
-        mFHLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<FamilyHistory> fHistories = new ArrayList<>();
-                if (mUser.getFamilyHistories() == null || mUser.getFamilyHistories().size() == 0) {
-                    fHistories.add(new FamilyHistory());
-                } else {
-                    fHistories = eliminateEmptyFHItems(mUser.getFamilyHistories());
-                }
-
-                FamilyHistoryDialog dialog = new FamilyHistoryDialog(InfoActivity.this, fHistories, new FamilyHistoryDialog.DialogClickListener() {
-                    @Override
-                    public void onSave(List<FamilyHistory> fhs) {
-                        mUser.setFamilyHistories(fhs);
-                    }
-                });
-                dialog.show();
-            }
-        });
-
         mInputName = (EditText) findViewById(R.id.input_name);
         mInputAge = (EditText) findViewById(R.id.input_age);
         mInputCurrHeight = (EditText) findViewById(R.id.input_height);
@@ -243,6 +186,15 @@ public class InfoActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mInfectiousDiseases = (EditText) findViewById(R.id.input_infectious_diseases);
+        mOtherIllnesses = (EditText) findViewById(R.id.input_other_illnesses);
+        mSurgeries = (EditText) findViewById(R.id.input_surgeries);
+        mFamilyHistory = (EditText) findViewById(R.id.input_family_history);
+        mFeaturesAndComplications = (EditText) findViewById(R.id.input_features_complications);
+        mTakenMedicinesInput = (EditText) findViewById(R.id.input_medicines);
+        mBloodGrIncompatibilitySwitch = (SwitchCompat) findViewById(R.id.blood_group_incomp_switch);
+        mUnwantedPregnancySwitch = (SwitchCompat) findViewById(R.id.unwanted_switch);
 
         mSubmitBtn = (Button) findViewById(R.id.submit_btn);
         mSubmitLoader = (ProgressBar) findViewById(R.id.submit_loader);
@@ -319,6 +271,38 @@ public class InfoActivity extends AppCompatActivity {
                         if (mMedicalInput.getText() != null && !mMedicalInput.getText().toString().isEmpty()) {
                             mUser.setAbortionsOnMedEvidence(Integer.parseInt(mMedicalInput.getText().toString()));
                         }
+                    }
+
+                    if (mInfectiousDiseases.getText() != null && !mInfectiousDiseases.getText().toString().isEmpty()) {
+                        mUser.setInfectiousDiseases(mInfectiousDiseases.getText().toString());
+                    }
+
+                    if (mOtherIllnesses.getText() != null && !mOtherIllnesses.getText().toString().isEmpty()) {
+                        mUser.setOtherIllnesses(mOtherIllnesses.getText().toString());
+                    }
+
+                    if (mSurgeries.getText() != null && !mSurgeries.getText().toString().isEmpty()) {
+                        mUser.setSurgeries(mSurgeries.getText().toString());
+                    }
+
+                    if (mFamilyHistory.getText() != null && !mFamilyHistory.getText().toString().isEmpty()) {
+                        mUser.setFamilyHistories(mFamilyHistory.getText().toString());
+                    }
+
+                    if (mFeaturesAndComplications.getText() != null && !mFeaturesAndComplications.getText().toString().isEmpty()) {
+                        mUser.setComplicationsOtherPregnancies(mFeaturesAndComplications.getText().toString());
+                    }
+
+                    if (mTakenMedicinesInput.getText() != null && !mTakenMedicinesInput.getText().toString().isEmpty()) {
+                        mUser.setTakenMedicines(mTakenMedicinesInput.getText().toString());
+                    }
+
+                    if (mBloodGrIncompatibilitySwitch.isChecked()) {
+                        mUser.setBloodGroupIncompatibility(true);
+                    }
+
+                    if (mUnwantedPregnancySwitch.isChecked()) {
+                        mUser.setUnwantedPregnancy(true);
                     }
 
                     mSubmitBtn.setVisibility(View.GONE);
@@ -461,13 +445,29 @@ public class InfoActivity extends AppCompatActivity {
         mInputAge.setEnabled(false);
         mInputCurrHeight.setEnabled(false);
         mInputCurrWeight.setEnabled(false);
+        mSmokeChkBox.setEnabled(false);
+        mAlcoholChkBox.setEnabled(false);
+        mOverweightChkBox.setEnabled(false);
+        mAgeChkBox.setEnabled(false);
+        mUnderfeedingChkBox.setEnabled(false);
+        mFoodAllChkBox.setEnabled(false);
+        mMedAllChkBox.setEnabled(false);
+        mUnwantedPregnancySwitch.setClickable(false);
+        mBloodGrIncompatibilitySwitch.setClickable(false);
+        mInfectiousDiseases.setEnabled(false);
+        mFamilyHistory.setEnabled(false);
+        mSurgeries.setEnabled(false);
+        mOtherIllnesses.setEnabled(false);
+        mFeaturesAndComplications.setEnabled(false);
+        mAbortionSwitch.setClickable(false);
+        mDesiredInput.setEnabled(false);
+        mMiscarriagesInput.setEnabled(false);
+        mMedicalInput.setEnabled(false);
+        mTakenMedicinesInput.setEnabled(false);
         mInputFirstDayOfLastM.setEnabled(false);
         mRegularSwitch.setClickable(false);
         mInputMenstruationLength.setEnabled(false);
         mInputMenstruationDuration.setEnabled(false);
-        mIllnessesLayout.setClickable(false);
-        mSurgeriesLayout.setClickable(false);
-        mFHLayout.setClickable(false);
     }
 
     private void enableAllEditableFields() {
@@ -476,13 +476,29 @@ public class InfoActivity extends AppCompatActivity {
         mInputAge.setEnabled(true);
         mInputCurrHeight.setEnabled(true);
         mInputCurrWeight.setEnabled(true);
+        mSmokeChkBox.setEnabled(true);
+        mAlcoholChkBox.setEnabled(true);
+        mOverweightChkBox.setEnabled(true);
+        mAgeChkBox.setEnabled(true);
+        mUnderfeedingChkBox.setEnabled(true);
+        mFoodAllChkBox.setEnabled(true);
+        mMedAllChkBox.setEnabled(true);
+        mUnwantedPregnancySwitch.setClickable(true);
+        mBloodGrIncompatibilitySwitch.setClickable(true);
+        mInfectiousDiseases.setEnabled(true);
+        mFamilyHistory.setEnabled(true);
+        mSurgeries.setEnabled(true);
+        mOtherIllnesses.setEnabled(true);
+        mFeaturesAndComplications.setEnabled(true);
+        mAbortionSwitch.setClickable(true);
+        mDesiredInput.setEnabled(true);
+        mMiscarriagesInput.setEnabled(true);
+        mMedicalInput.setEnabled(true);
+        mTakenMedicinesInput.setEnabled(true);
         mInputFirstDayOfLastM.setEnabled(true);
         mRegularSwitch.setClickable(true);
         mInputMenstruationLength.setEnabled(true);
         mInputMenstruationDuration.setEnabled(true);
-        mIllnessesLayout.setClickable(true);
-        mSurgeriesLayout.setClickable(true);
-        mFHLayout.setClickable(true);
     }
 
     private List<Examination> getListWithMainExaminations() {

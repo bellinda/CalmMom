@@ -12,9 +12,9 @@
     <string name="age_label">Age</string>
     <string name="height_label">Current height</string>
     <string name="weight_label">Current weight</string>
-    <string name="illnesses_label">Illnesses</string>
-    <string name="family_history_label">Family History</string>
-    <string name="surgeries_label">Surgeries</string>
+    <string name="other_illnesses_label">Други заболявания</string>
+    <string name="family_history_label">Фамилна обремененост, заболявания</string>
+    <string name="surgeries_label">Прекарани операции, диагноза</string>
     <string name="menstruation_label">First day of last menstruation</string>
     <string name="regular_menstruation_label">Regular menstruation?</string>
     <string name="menstruation_length_label">Menstruation cycle length</string>
@@ -34,6 +34,8 @@
     <string name="taken_medicines">Приемани лекарства преди, по време на бременността</string>
     <string name="unwanted_pregnancy_label">Нежелана бременност</string>
     <string name="blood_group_incompatibility">Кръвногрупова несъвместимост между родителите</string>
+    <string name="infectious_diseases">Прекарани инфекциозни болести</string>
+    <string name="features_complications">Особености и усложнения при предишни бременности и раждания</string>
     <string name="info_submit">Save info</string>
 
     <string name="illness_name_label">Title</string>

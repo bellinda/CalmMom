@@ -12,9 +12,9 @@
     <string name="age_label">Age</string>
     <string name="height_label">Current height</string>
     <string name="weight_label">Current weight</string>
-    <string name="illnesses_label">Illnesses</string>
-    <string name="family_history_label">Family History</string>
-    <string name="surgeries_label">Surgeries</string>
+    <string name="other_illnesses_label">Other illnesses</string>
+    <string name="family_history_label">Family history, diseases</string>
+    <string name="surgeries_label">Spent surgeries, diagnosis</string>
     <string name="menstruation_label">First day of last menstruation</string>
     <string name="regular_menstruation_label">Regular menstruation?</string>
     <string name="menstruation_length_label">Menstruation cycle length</string>
@@ -34,6 +34,8 @@
     <string name="taken_medicines">Taken medicines before, during the pregnancy</string>
     <string name="unwanted_pregnancy_label">Unwanted Pregnancy</string>
     <string name="blood_group_incompatibility">Blood group incompatibility between parents</string>
+    <string name="infectious_diseases">Spent infectious diseases</string>
+    <string name="features_complications">Features and complications of previous pregnancies and deliveries</string>
     <string name="info_submit">Save info</string>
 
     <string name="illness_name_label">Title</string>
