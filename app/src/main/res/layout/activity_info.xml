@@ -541,6 +541,219 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/switch_button_height"
                 android:gravity="center_vertical"
+                android:id="@+id/first_pregnancy_layout"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="@dimen/add_item_label_text_size"
+                    android:text="@string/first_pregnancy_title"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/first_pregnancy_switch"
+                    android:checked="true"
+                    android:theme="@style/SCBSwitch"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/last_delivery_layout"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/last_delivery"
+                    android:textColor="@color/colorContrast"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="18sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <TextView
+                        android:id="@+id/last_delivery_text"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:background="@drawable/pickers_bgr"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="31/01/2018"
+                        android:textColor="@color/colorContrast"
+                        android:textSize="@dimen/date_text_size" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/select_date_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/ic_date" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/switch_button_height"
+                android:gravity="center_vertical"
+                android:id="@+id/live_kids_layout"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="15dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="@dimen/add_item_label_text_size"
+                    android:text="@string/kids_alive"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/live_kids_count"
+                    android:layout_weight="1"
+                    android:theme="@style/MyContrastEditTextTheme"
+                    android:inputType="number"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/switch_button_height"
+                android:gravity="center_vertical"
+                android:id="@+id/lstillborn_kids_layout"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="15dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="@dimen/add_item_label_text_size"
+                    android:text="@string/kids_dead"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/stillborn_kids_count"
+                    android:layout_weight="1"
+                    android:theme="@style/MyContrastEditTextTheme"
+                    android:inputType="number"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/switch_button_height"
+                android:gravity="center_vertical"
+                android:id="@+id/premature_layout"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="15dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="@dimen/add_item_label_text_size"
+                    android:text="@string/kids_premature"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/premature_kids_count"
+                    android:layout_weight="1"
+                    android:theme="@style/MyContrastEditTextTheme"
+                    android:inputType="number"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/switch_button_height"
+                android:gravity="center_vertical"
+                android:id="@+id/postmature_layout"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="15dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="@dimen/add_item_label_text_size"
+                    android:text="@string/kids_postterm"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/postmature_kids_count"
+                    android:layout_weight="1"
+                    android:theme="@style/MyContrastEditTextTheme"
+                    android:inputType="number"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sterility"
+                android:textColor="@color/colorContrast"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/input_sterility"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorContrast"
+                android:theme="@style/MyContrastEditTextTheme"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/switch_button_height"
+                android:gravity="center_vertical"
                 android:id="@+id/abortion_layout"
                 android:orientation="horizontal"
                 android:weightSum="5"
@@ -667,24 +880,75 @@
                 android:theme="@style/MyContrastEditTextTheme"
                 android:layout_marginTop="10dp"/>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_menstruation"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/colorContrast"
-                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-                android:layout_marginTop="15dp">
+                android:orientation="vertical"
+                android:id="@+id/menstruation_layout">
 
-                <EditText
-                    android:id="@+id/input_menstruation"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/menstruation_label"
+                    android:text="@string/menstruation_label"
                     android:textColor="@color/colorContrast"
-                    android:theme="@style/MyContrastEditTextTheme"
-                    android:inputType="date"/>
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="18sp"/>
 
-            </android.support.design.widget.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <TextView
+                        android:id="@+id/menstruation_text"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:background="@drawable/pickers_bgr"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text=""
+                        android:textColor="@color/colorContrast"
+                        android:textSize="@dimen/date_text_size" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/ic_date" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:id="@+id/input_layout_menstruation"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textColorHint="@color/colorContrast"-->
+                <!--app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"-->
+                <!--android:layout_marginTop="15dp">-->
+
+                <!--<EditText-->
+                    <!--android:id="@+id/input_menstruation"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="@string/menstruation_label"-->
+                    <!--android:textColor="@color/colorContrast"-->
+                    <!--android:theme="@style/MyContrastEditTextTheme"-->
+                    <!--android:inputType="date"/>-->
+
+            <!--</android.support.design.widget.TextInputLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"

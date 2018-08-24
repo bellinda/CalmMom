@@ -29,6 +29,13 @@ public class User implements Serializable {
     private List<Weight> weights;
     private HashMap<String, List<UserActivity>> activities;
     private List<RiskFactor> riskFactors;
+    private boolean firstPregnancy;
+    private String lastDeliveryDate;
+    private int liveBornKids;
+    private int stillbornKids;
+    private int prematureKids;
+    private int posttermKids;
+    private String sterilityDiagnosis;
     private int desiredAbortions;
     private int miscarriages;
     private int abortionsOnMedEvidence;
@@ -186,6 +193,62 @@ public class User implements Serializable {
 
     public void setRiskFactors(List<RiskFactor> riskFactors) {
         this.riskFactors = riskFactors;
+    }
+
+    public boolean isFirstPregnancy() {
+        return firstPregnancy;
+    }
+
+    public void setFirstPregnancy(boolean firstPregnancy) {
+        this.firstPregnancy = firstPregnancy;
+    }
+
+    public String getLastDeliveryDate() {
+        return lastDeliveryDate;
+    }
+
+    public void setLastDeliveryDate(String lastDeliveryDate) {
+        this.lastDeliveryDate = lastDeliveryDate;
+    }
+
+    public int getLiveBornKids() {
+        return liveBornKids;
+    }
+
+    public void setLiveBornKids(int liveBornKids) {
+        this.liveBornKids = liveBornKids;
+    }
+
+    public int getStillbornKids() {
+        return stillbornKids;
+    }
+
+    public void setStillbornKids(int stillbornKids) {
+        this.stillbornKids = stillbornKids;
+    }
+
+    public int getPrematureKids() {
+        return prematureKids;
+    }
+
+    public void setPrematureKids(int prematureKids) {
+        this.prematureKids = prematureKids;
+    }
+
+    public int getPosttermKids() {
+        return posttermKids;
+    }
+
+    public void setPosttermKids(int posttermKids) {
+        this.posttermKids = posttermKids;
+    }
+
+    public String getSterilityDiagnosis() {
+        return sterilityDiagnosis;
+    }
+
+    public void setSterilityDiagnosis(String sterilityDiagnosis) {
+        this.sterilityDiagnosis = sterilityDiagnosis;
     }
 
     public int getDesiredAbortions() {

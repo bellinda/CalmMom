@@ -27,6 +27,13 @@
     <string name="risk_factor_under_feeding">Недохранване</string>
     <string name="risk_factor_food_allergy">Алергия към храни</string>
     <string name="risk_factor_med_allergy">Алергия към лекарства</string>
+    <string name="first_pregnancy_title">Първа бременност?</string>
+    <string name="last_delivery">Последно раждане на дата</string>
+    <string name="kids_alive">Живородени деца (брой)</string>
+    <string name="kids_dead">Мъртвородени деца (брой)</string>
+    <string name="kids_premature">Недоносеи (брой)</string>
+    <string name="kids_postterm">Преносени (брой)</string>
+    <string name="sterility">Лекуван стерилитет, диагноза</string>
     <string name="abortions_switch_label">Аборти</string>
     <string name="abortions_desired">По желание (брой)</string>
     <string name="abortions_miscarriage">Спонтанни (брой)</string>

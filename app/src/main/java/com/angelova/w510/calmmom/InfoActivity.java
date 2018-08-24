@@ -1,6 +1,7 @@
 package com.angelova.w510.calmmom;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -21,22 +22,17 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Switch;
 import android.widget.TextView;
 
-import com.angelova.w510.calmmom.dialogs.AddIllnessDialog;
-import com.angelova.w510.calmmom.dialogs.FamilyHistoryDialog;
-import com.angelova.w510.calmmom.dialogs.SurgeriesDialog;
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationStatus;
 import com.angelova.w510.calmmom.models.FamilyHistory;
-import com.angelova.w510.calmmom.models.Illness;
 import com.angelova.w510.calmmom.models.RiskFactor;
-import com.angelova.w510.calmmom.models.Surgery;
 import com.angelova.w510.calmmom.models.User;
 import com.angelova.w510.calmmom.models.UserActivity;
 import com.angelova.w510.calmmom.models.Weight;
@@ -51,8 +47,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +66,9 @@ public class InfoActivity extends AppCompatActivity {
     private EditText mInputAge;
     private EditText mInputCurrHeight;
     private EditText mInputCurrWeight;
-    private EditText mInputFirstDayOfLastM;
+    //private EditText mInputFirstDayOfLastM;
+    private LinearLayout mFirstDayOfMLayout;
+    private TextView mFirstDayOfMText;
     private SwitchCompat mRegularSwitch;
     private EditText mInputMenstruationLength;
     private EditText mInputMenstruationDuration;
@@ -85,6 +85,19 @@ public class InfoActivity extends AppCompatActivity {
     private CheckBox mUnderfeedingChkBox;
     private CheckBox mFoodAllChkBox;
     private CheckBox mMedAllChkBox;
+
+    private SwitchCompat mFirstPregnancySwitch;
+    private LinearLayout mLastDeliveryLayout;
+    private LinearLayout mLiveBornKidsLayout;
+    private LinearLayout mStillbornKidsLayout;
+    private LinearLayout mPrematureLayout;
+    private LinearLayout mPosttermLayout;
+    private TextView mLastDeliveryDateInput;
+    private EditText mLiveBornKidsInput;
+    private EditText mStillbornKidsInput;
+    private EditText mPrematureInput;
+    private EditText mPosttermInput;
+    private EditText mSterilityInput;
 
     private SwitchCompat mAbortionSwitch;
     private LinearLayout mDesiredAbortionsLayout;
@@ -110,6 +123,9 @@ public class InfoActivity extends AppCompatActivity {
     private Uri mFilePath;
 
     private boolean isLoading = false;
+    final Calendar mLastDeliveryDate = Calendar.getInstance();
+    final Calendar mFirstDayOfLastMDate = Calendar.getInstance();
+    final Calendar mCurrentDate = Calendar.getInstance();
 
     private static final int SELECT_FILE = 1023;
 
@@ -154,7 +170,25 @@ public class InfoActivity extends AppCompatActivity {
         mInputAge = (EditText) findViewById(R.id.input_age);
         mInputCurrHeight = (EditText) findViewById(R.id.input_height);
         mInputCurrWeight = (EditText) findViewById(R.id.input_weight);
-        mInputFirstDayOfLastM = (EditText) findViewById(R.id.input_menstruation);
+        mFirstDayOfMLayout = (LinearLayout) findViewById(R.id.menstruation_layout);
+        mFirstDayOfMText = (TextView) findViewById(R.id.menstruation_text);
+        mFirstDayOfMLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(InfoActivity.this, R.style.AppTheme_DialogThemeDark, new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                        mFirstDayOfLastMDate.set(year, monthOfYear, dayOfMonth);
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        mFirstDayOfMText.setText(sdf.format(mFirstDayOfLastMDate.getTime()));
+                        mUser.setFirstDayOfLastMenstruation(mFirstDayOfMText.getText().toString());
+                    }
+                }, mFirstDayOfLastMDate.get(Calendar.YEAR), mFirstDayOfLastMDate.get(Calendar.MONTH), mFirstDayOfLastMDate.get(Calendar.DATE));
+                datePickerDialog.getDatePicker().setMaxDate(mCurrentDate.getTimeInMillis());
+                datePickerDialog.show();
+            }
+        });
         mRegularSwitch = (SwitchCompat) findViewById(R.id.regular_switch);
         mInputMenstruationLength = (EditText) findViewById(R.id.input_menstruation_length);
         mInputMenstruationDuration = (EditText) findViewById(R.id.input_menstruation_duration);
@@ -165,6 +199,53 @@ public class InfoActivity extends AppCompatActivity {
         mUnderfeedingChkBox = (CheckBox) findViewById(R.id.factor_under_feeding);
         mFoodAllChkBox = (CheckBox) findViewById(R.id.factor_food_allergy);
         mMedAllChkBox = (CheckBox) findViewById(R.id.factor_med_allergy);
+        mFirstPregnancySwitch = (SwitchCompat) findViewById(R.id.first_pregnancy_switch);
+        mLastDeliveryLayout = (LinearLayout) findViewById(R.id.last_delivery_layout);
+        mLiveBornKidsLayout = (LinearLayout) findViewById(R.id.live_kids_layout);
+        mStillbornKidsLayout = (LinearLayout) findViewById(R.id.lstillborn_kids_layout);
+        mPrematureLayout = (LinearLayout) findViewById(R.id.premature_layout);
+        mPosttermLayout = (LinearLayout) findViewById(R.id.postmature_layout);
+        mLastDeliveryDateInput = (TextView) findViewById(R.id.last_delivery_text);
+        mLiveBornKidsInput = (EditText) findViewById(R.id.live_kids_count);
+        mStillbornKidsInput = (EditText) findViewById(R.id.stillborn_kids_count);
+        mPrematureInput = (EditText) findViewById(R.id.premature_kids_count);
+        mPosttermInput = (EditText) findViewById(R.id.postmature_kids_count);
+        mFirstPregnancySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mLastDeliveryLayout.setVisibility(View.GONE);
+                    mLiveBornKidsLayout.setVisibility(View.GONE);
+                    mStillbornKidsLayout.setVisibility(View.GONE);
+                    mPrematureLayout.setVisibility(View.GONE);
+                    mPosttermLayout.setVisibility(View.GONE);
+                } else {
+                    mLastDeliveryLayout.setVisibility(View.VISIBLE);
+                    mLiveBornKidsLayout.setVisibility(View.VISIBLE);
+                    mStillbornKidsLayout.setVisibility(View.VISIBLE);
+                    mPrematureLayout.setVisibility(View.VISIBLE);
+                    mPosttermLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        mLastDeliveryLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(InfoActivity.this, R.style.AppTheme_DialogThemeDark, new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                        mLastDeliveryDate.set(year, monthOfYear, dayOfMonth);
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        mLastDeliveryDateInput.setText(sdf.format(mLastDeliveryDate.getTime()));
+                        mUser.setLastDeliveryDate(mLastDeliveryDateInput.getText().toString());
+                    }
+                }, mLastDeliveryDate.get(Calendar.YEAR), mLastDeliveryDate.get(Calendar.MONTH), mLastDeliveryDate.get(Calendar.DATE));
+                datePickerDialog.getDatePicker().setMaxDate(mCurrentDate.getTimeInMillis());
+                datePickerDialog.show();
+            }
+        });
+        mSterilityInput = (EditText) findViewById(R.id.input_sterility);
         mAbortionSwitch = (SwitchCompat) findViewById(R.id.abortion_switch);
         mDesiredAbortionsLayout = (LinearLayout) findViewById(R.id.desired_layout);
         mMiscarriagesLayout = (LinearLayout) findViewById(R.id.miscarriages_layout);
@@ -209,7 +290,7 @@ public class InfoActivity extends AppCompatActivity {
                     showAlertDialogNow("Please input your current height", "Warning");
                 } else if (mInputCurrWeight.getText() == null || mInputCurrWeight.getText().toString().isEmpty()) {
                     showAlertDialogNow("Please input your current weight", "Warning");
-                } else if (mInputFirstDayOfLastM.getText() == null || mInputFirstDayOfLastM.getText().toString().isEmpty()) {
+                } else if (mFirstDayOfMText.getText() == null || mFirstDayOfMText.getText().toString().isEmpty()) {
                     showAlertDialogNow("Please input the first day of your last menstruation cycle", "Warning");
                 } else if (mInputMenstruationLength.getText() == null || mInputMenstruationLength.getText().toString().isEmpty()) {
                     showAlertDialogNow("Please enter the length of your menstruation cycle", "Warning");
@@ -220,7 +301,6 @@ public class InfoActivity extends AppCompatActivity {
                     mUser.setAge(Integer.parseInt(mInputAge.getText().toString()));
                     mUser.setCurrentHeight(Double.parseDouble(mInputCurrHeight.getText().toString()));
                     mUser.setCurrentWeight(Double.parseDouble(mInputCurrWeight.getText().toString()));
-                    mUser.setFirstDayOfLastMenstruation(mInputFirstDayOfLastM.getText().toString());
                     mUser.setRegularMenstruation(mRegularSwitch.isChecked());
                     mUser.setLengthOfMenstruation(Integer.parseInt(mInputMenstruationLength.getText().toString()));
                     mUser.setDurationOfMenstruation(Integer.parseInt(mInputMenstruationDuration.getText().toString()));
@@ -258,6 +338,28 @@ public class InfoActivity extends AppCompatActivity {
                         riskFactors.add(RiskFactor.MedicinesAllergy);
                     }
                     mUser.setRiskFactors(riskFactors);
+
+                    if (!mFirstPregnancySwitch.isChecked()) {
+                        mUser.setFirstPregnancy(false);
+                        if (mLiveBornKidsInput.getText() != null && !mLiveBornKidsInput.getText().toString().isEmpty()) {
+                            mUser.setLiveBornKids(Integer.parseInt(mLiveBornKidsInput.getText().toString()));
+                        }
+                        if (mStillbornKidsInput.getText() != null && !mStillbornKidsInput.getText().toString().isEmpty()) {
+                            mUser.setStillbornKids(Integer.parseInt(mStillbornKidsInput.getText().toString()));
+                        }
+                        if (mPrematureInput.getText() != null && !mPrematureInput.getText().toString().isEmpty()) {
+                            mUser.setPrematureKids(Integer.parseInt(mPrematureInput.getText().toString()));
+                        }
+                        if (mPosttermInput.getText() != null && !mPosttermInput.getText().toString().isEmpty()) {
+                            mUser.setPosttermKids(Integer.parseInt(mPosttermInput.getText().toString()));
+                        }
+                    } else {
+                        mUser.setFirstPregnancy(true);
+                    }
+
+                    if (mSterilityInput.getText() != null && !mSterilityInput.getText().toString().isEmpty()) {
+                        mUser.setSterilityDiagnosis(mSterilityInput.getText().toString());
+                    }
 
                     if (mAbortionSwitch.isChecked()) {
                         if (mDesiredInput.getText() != null && !mDesiredInput.getText().toString().isEmpty()) {
@@ -459,12 +561,19 @@ public class InfoActivity extends AppCompatActivity {
         mSurgeries.setEnabled(false);
         mOtherIllnesses.setEnabled(false);
         mFeaturesAndComplications.setEnabled(false);
+        mFirstPregnancySwitch.setClickable(false);
+        mLastDeliveryLayout.setClickable(false);
+        mLiveBornKidsInput.setEnabled(false);
+        mStillbornKidsInput.setEnabled(false);
+        mPrematureInput.setEnabled(false);
+        mPosttermInput.setEnabled(false);
+        mSterilityInput.setEnabled(false);
         mAbortionSwitch.setClickable(false);
         mDesiredInput.setEnabled(false);
         mMiscarriagesInput.setEnabled(false);
         mMedicalInput.setEnabled(false);
         mTakenMedicinesInput.setEnabled(false);
-        mInputFirstDayOfLastM.setEnabled(false);
+        mFirstDayOfMLayout.setClickable(false);
         mRegularSwitch.setClickable(false);
         mInputMenstruationLength.setEnabled(false);
         mInputMenstruationDuration.setEnabled(false);
@@ -490,12 +599,19 @@ public class InfoActivity extends AppCompatActivity {
         mSurgeries.setEnabled(true);
         mOtherIllnesses.setEnabled(true);
         mFeaturesAndComplications.setEnabled(true);
+        mFirstPregnancySwitch.setClickable(true);
+        mLastDeliveryLayout.setClickable(true);
+        mLiveBornKidsInput.setEnabled(true);
+        mStillbornKidsInput.setEnabled(true);
+        mPrematureInput.setEnabled(true);
+        mPosttermInput.setEnabled(true);
+        mSterilityInput.setEnabled(true);
         mAbortionSwitch.setClickable(true);
         mDesiredInput.setEnabled(true);
         mMiscarriagesInput.setEnabled(true);
         mMedicalInput.setEnabled(true);
         mTakenMedicinesInput.setEnabled(true);
-        mInputFirstDayOfLastM.setEnabled(true);
+        mFirstDayOfMLayout.setClickable(true);
         mRegularSwitch.setClickable(true);
         mInputMenstruationLength.setEnabled(true);
         mInputMenstruationDuration.setEnabled(true);

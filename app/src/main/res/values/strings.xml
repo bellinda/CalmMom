@@ -27,6 +27,13 @@
     <string name="risk_factor_under_feeding">Underfeeding</string>
     <string name="risk_factor_food_allergy">Food Allergy</string>
     <string name="risk_factor_med_allergy">Medicines Allergy</string>
+    <string name="first_pregnancy_title">First pregnancy?</string>
+    <string name="last_delivery">Date of last delivery</string>
+    <string name="kids_alive">Live births (count)</string>
+    <string name="kids_dead">Stillborn children (count)</string>
+    <string name="kids_premature">Premature babies (count)</string>
+    <string name="kids_postterm">Postterm babies (count)</string>
+    <string name="sterility">Treated sterility, diagnosis</string>
     <string name="abortions_switch_label">Abortions</string>
     <string name="abortions_desired">As desired (count)</string>
     <string name="abortions_miscarriage">Miscarriages (count)</string>
