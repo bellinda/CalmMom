@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView mCurrentDateView;
     private TextView mCurrentWeekView;
     private TextView mBabySizeView;
+
+    private FloatingActionButton mProfileBtn;
 
     private User mUser;
     private BabySize mCurrentBabySize;
@@ -100,6 +103,14 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("user", getIntent().getSerializableExtra("user"));
                 //intent.putExtra("email", getIntent().getStringExtra("email"));
                 startActivity(intent);
+            }
+        });
+
+        mProfileBtn = (FloatingActionButton) findViewById(R.id.profile_btn);
+        mProfileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

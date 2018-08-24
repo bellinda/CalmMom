@@ -32,7 +32,7 @@
         android:layout_width="1dp"
         android:layout_height="1dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.12"
+        app:layout_constraintGuide_percent="0.08"
         android:id="@+id/top_header_guideline"/>
 
     <TextView
@@ -243,5 +243,34 @@
             android:textColor="@color/colorContrast"
             android:layout_marginTop="10dp"/>
     </LinearLayout>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.78"
+        android:id="@+id/profile_btn_vertical_gdl"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35"
+        android:id="@+id/top_profile_guideline"/>
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/profile_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:layout_constraintLeft_toRightOf="@id/profile_btn_vertical_gdl"
+        app:layout_constraintTop_toBottomOf="@id/top_profile_guideline"
+        android:src="@mipmap/ic_profile"
+        app:fab_shadow="true"
+        app:fab_shadowColor="#66000000"
+        app:fab_shadowRadius="4dp"
+        app:fab_shadowXOffset="1dp"
+        app:fab_shadowYOffset="3dp"
+        app:fab_colorNormal="@color/colorPrimaryDark" />
 
 </android.support.constraint.ConstraintLayout>
