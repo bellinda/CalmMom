@@ -203,7 +203,8 @@
         app:layout_constraintTop_toBottomOf="@id/examinations_layout"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/kicks_contractions_layout">
 
         <ImageView
             android:layout_width="wrap_content"

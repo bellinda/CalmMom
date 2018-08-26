@@ -28,6 +28,7 @@ public class User implements Serializable {
     private List<Question> questions;
     private List<Weight> weights;
     private HashMap<String, List<UserActivity>> activities;
+    private List<Kick> kicks;
     private List<RiskFactor> riskFactors;
     private boolean firstPregnancy;
     private String lastDeliveryDate;
@@ -185,6 +186,14 @@ public class User implements Serializable {
 
     public void setActivities(HashMap<String, List<UserActivity>> activities) {
         this.activities = activities;
+    }
+
+    public List<Kick> getKicks() {
+        return kicks;
+    }
+
+    public void setKicks(List<Kick> kicks) {
+        this.kicks = kicks;
     }
 
     public List<RiskFactor> getRiskFactors() {

@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mExaminationsItem;
     private LinearLayout mHealthStateItem;
     private LinearLayout mTipsItem;
+    private LinearLayout mKicksAndContractionsItem;
 
     private TextView mCurrentDateView;
     private TextView mCurrentWeekView;
@@ -102,6 +103,18 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, TipsActivity.class);
                 intent.putExtra("user", getIntent().getSerializableExtra("user"));
                 //intent.putExtra("email", getIntent().getStringExtra("email"));
+                startActivity(intent);
+            }
+        });
+
+        mKicksAndContractionsItem = (LinearLayout) findViewById(R.id.kicks_contractions_layout);
+
+        mKicksAndContractionsItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, KicksAndContractionsActivity.class);
+                intent.putExtra("user", getIntent().getSerializableExtra("user"));
+                intent.putExtra("email", getIntent().getStringExtra("email"));
                 startActivity(intent);
             }
         });

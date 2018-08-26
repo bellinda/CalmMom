@@ -29,7 +29,8 @@
             android:name=".ExaminationDetailsActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".HealthStateActivity" />
-        <activity android:name=".TipsActivity"></activity>
+        <activity android:name=".TipsActivity" />
+        <activity android:name=".KicksAndContractionsActivity"></activity>
     </application>
 
 </manifest>
