@@ -97,7 +97,7 @@ public class KicksFragment extends Fragment {
                     mPulsator.setVisibility(View.GONE);
                     mKickBtn.setVisibility(View.GONE);
                     mCountText.setVisibility(View.GONE);
-                    mCountBtn.setText("Start counting");
+                    mCountBtn.setText(getString(R.string.fragment_kicks_start));
                     isCounting = false;
                     counter = 0;
                     mCountText.setText("0/10");
@@ -123,7 +123,7 @@ public class KicksFragment extends Fragment {
                     mPulsator.setVisibility(View.VISIBLE);
                     mKickBtn.setVisibility(View.VISIBLE);
                     mCountText.setVisibility(View.VISIBLE);
-                    mCountBtn.setText("Stop counting");
+                    mCountBtn.setText(getString(R.string.fragment_kicks_stop));
                     startTimeMilliseconds = Calendar.getInstance().getTimeInMillis();
                     isCounting = true;
 

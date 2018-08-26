@@ -184,4 +184,11 @@
     <string name="dialog_add_activity_other">Other</string>
 
     <string name="tips_week_label">Week</string>
+
+    <string name="fragment_kicks_start">Start counting</string>
+    <string name="fragment_kicks_stop">Stop counting</string>
+    <string name="fragment_kicks_kick">Kick</string>
+    <string name="fragment_kicks_date">Date</string>
+    <string name="fragment_kicks_duration">Duration</string>
+    <string name="fragment_kicks_count">Kicks count</string>
 </resources>

@@ -181,4 +181,11 @@
     <string name="dialog_add_activity_other">Друго</string>
 
     <string name="tips_week_label">Седмица</string>
+
+    <string name="fragment_kicks_start">Започни броенето</string>
+    <string name="fragment_kicks_stop">Спри броенето</string>
+    <string name="fragment_kicks_kick">Ритане</string>
+    <string name="fragment_kicks_date">Дата</string>
+    <string name="fragment_kicks_duration">Продължителност</string>
+    <string name="fragment_kicks_count">Брой ритания</string>
 </resources>
