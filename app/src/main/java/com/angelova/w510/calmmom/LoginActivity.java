@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.angelova.w510.calmmom.dialogs.DialogResetPassword;
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPassword;
     private Button mLoginBtn;
     private ProgressBar mLoader;
+    private TextView mForgotPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +98,20 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     showAlertDialogNow("Please input your email", "Login");
                 }
+            }
+        });
+
+        mForgotPass = (TextView) findViewById(R.id.forgotten_pass_label);
+        mForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogResetPassword dialog = new DialogResetPassword(LoginActivity.this, new DialogResetPassword.DialogClickListener() {
+                    @Override
+                    public void onSend(String email) {
+                        sendResetPasswordEmail(email);
+                    }
+                });
+                dialog.show();
             }
         });
     }
@@ -162,6 +179,18 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void sendResetPasswordEmail(String email) {
+        FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            showAlertDialogNow("An email was sent", "Password reset");
+                        }
+                    }
+                });
     }
 
     private void showAlertDialogNow(String message, String title) {

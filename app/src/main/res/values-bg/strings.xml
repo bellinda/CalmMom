@@ -188,4 +188,10 @@
     <string name="fragment_kicks_date">Дата</string>
     <string name="fragment_kicks_duration">Продължителност</string>
     <string name="fragment_kicks_count">Брой ритания</string>
+
+    <string name="dialog_reset_pass_title">Подновяване на парола</string>
+    <string name="dialog_reset_pass_msg">Моля въведете имейл адреса си, където ще получите писмо за подновяване на паролата Ви</string>
+    <string name="dialog_reset_pass_email_label">Имейл</string>
+    <string name="dialog_reset_pass_cancel">Отказа</string>
+    <string name="dialog_reset_pass_send">Изпращане</string>
 </resources>

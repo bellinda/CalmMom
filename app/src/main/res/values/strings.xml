@@ -191,4 +191,10 @@
     <string name="fragment_kicks_date">Date</string>
     <string name="fragment_kicks_duration">Duration</string>
     <string name="fragment_kicks_count">Kicks count</string>
+
+    <string name="dialog_reset_pass_title">Reset password</string>
+    <string name="dialog_reset_pass_msg">Please enter your email address in order to receive an email for resetting your password</string>
+    <string name="dialog_reset_pass_email_label">Email</string>
+    <string name="dialog_reset_pass_cancel">Cancel</string>
+    <string name="dialog_reset_pass_send">Send</string>
 </resources>
