@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.angelova.w510.calmmom.dialogs.DialogResetPassword;
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.models.User;
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.melnykov.fab.FloatingActionButton;
 
+import io.fabric.sdk.android.Fabric;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();

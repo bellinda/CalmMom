@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -31,6 +32,8 @@
         <activity android:name=".HealthStateActivity" />
         <activity android:name=".TipsActivity" />
         <activity android:name=".KicksAndContractionsActivity"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="627b66396e9d89fdbcaa048c8384959371ca7f85" />
     </application>
-
 </manifest>
