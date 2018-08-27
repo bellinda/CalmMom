@@ -43,7 +43,7 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.ViewHolder> {
         if (Locale.getDefault().getLanguage().equalsIgnoreCase("bg")) {
             holder.mTipView.setText(tip.getBgContent());
         } else {
-            holder.mTipView.setText(tip.getContent());
+            holder.mTipView.setText(tip.getContent().replaceAll(" ►", "\n►"));
         }
     }
 
