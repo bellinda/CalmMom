@@ -18,8 +18,8 @@ public class Examination implements Serializable, Comparable<Examination> {
     private String date;
     private ExaminationStatus status;
     private String title;
-    private List<String> tests;
-    private List<String> activities;
+    private List<Test> tests;
+    private List<Measurement> activities;
     private List<ExaminationDocument> documents;
     private List<ExaminationDocument> images;
 
@@ -33,7 +33,7 @@ public class Examination implements Serializable, Comparable<Examination> {
         this.status = status;
     }
 
-    public Examination(String title, String date, ExaminationStatus status, List<String> tests, List<String> activities) {
+    public Examination(String title, String date, ExaminationStatus status, List<Test> tests, List<Measurement> activities) {
         this.title = title;
         this.date = date;
         this.status = status;
@@ -65,19 +65,19 @@ public class Examination implements Serializable, Comparable<Examination> {
         this.status = status;
     }
 
-    public List<String> getTests() {
+    public List<Test> getTests() {
         return tests;
     }
 
-    public void setTests(List<String> tests) {
+    public void setTests(List<Test> tests) {
         this.tests = tests;
     }
 
-    public List<String> getActivities() {
+    public List<Measurement> getActivities() {
         return activities;
     }
 
-    public void setActivities(List<String> activities) {
+    public void setActivities(List<Measurement> activities) {
         this.activities = activities;
     }
 

@@ -46,6 +46,8 @@ import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationDocument;
 import com.angelova.w510.calmmom.models.ExaminationStatus;
+import com.angelova.w510.calmmom.models.Measurement;
+import com.angelova.w510.calmmom.models.Test;
 import com.angelova.w510.calmmom.models.User;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -108,8 +110,8 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
     private User mUser;
     private String mUserEmail;
 
-    private List<String> mTests;
-    private List<String> mMeasurements;
+    private List<Test> mTests;
+    private List<Measurement> mMeasurements;
 
     private FirebaseFirestore mDb;
     FirebaseStorage mStorage;
@@ -152,9 +154,9 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
         mExamination = (Examination) getIntent().getSerializableExtra("examination");
         if (mExamination.getTests().size() > 0) {
             mTests = mExamination.getTests();
-            mTestsAdapter = new TestsAdapter(mTests);
+            mTestsAdapter = new TestsAdapter(this, mTests, mExamination.getStatus() == ExaminationStatus.COMPLETED);
         } else {
-            mTestsAdapter = new TestsAdapter(Arrays.asList(getString(R.string.examination_no_tests)));
+            mTestsAdapter = new TestsAdapter(this, Arrays.asList(new Test(getString(R.string.examination_no_tests))), mExamination.getStatus() == ExaminationStatus.COMPLETED);
         }
         mUser = (User) getIntent().getSerializableExtra("user");
         mUserEmail = getIntent().getStringExtra("email");
@@ -168,7 +170,7 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
         mListTests.setAdapter(mTestsAdapter);
 
         mMeasurements = mExamination.getActivities();
-        mMeasurementsAdapter = new MeasurementsAdapter(mMeasurements);
+        mMeasurementsAdapter = new MeasurementsAdapter(this, mMeasurements, mExamination.getStatus() == ExaminationStatus.COMPLETED);
         mLayoutManager = new LinearLayoutManager(this);
         mListMeasurements.setLayoutManager(mLayoutManager);
         mListMeasurements.setItemAnimator(new DefaultItemAnimator());
@@ -221,14 +223,14 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                         if (mTests == null) {
                             mTests = new ArrayList<>();
                         }
-                        mTests.add(mNewItemInput.getText().toString());
+                        mTests.add(new Test(mNewItemInput.getText().toString()));
                         mExamination.setTests(mTests);
                         mTestsAdapter.notifyDataSetChanged();
                     } else {
                         if (mMeasurements == null) {
-                            mMeasurements = new ArrayList<String>();
+                            mMeasurements = new ArrayList<Measurement>();
                         }
-                        mMeasurements.add(mNewItemInput.getText().toString());
+                        mMeasurements.add(new Measurement(mNewItemInput.getText().toString()));
                         mExamination.setActivities(mMeasurements);
                         mMeasurementsAdapter.notifyDataSetChanged();
                     }
@@ -485,6 +487,16 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void updateExaminationMeasurements(List<Measurement> measurements) {
+        mExamination.setActivities(measurements);
+        updateExaminationInDb();
+    }
+
+    public void updateExaminationTests(List<Test> tests) {
+        mExamination.setTests(tests);
+        updateExaminationInDb();
     }
 
     public void updateExaminationInDb() {

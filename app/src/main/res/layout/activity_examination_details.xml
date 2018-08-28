@@ -152,7 +152,7 @@
         app:layout_constraintBottom_toTopOf="@+id/list_bottom_guideline"
         android:layout_marginTop="20dp"
         android:padding="10dp"
-        android:background="@drawable/dark_border"
+        android:background="@drawable/dark_border_thin"
         android:orientation="vertical"
         android:weightSum="6">
 
