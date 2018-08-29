@@ -69,64 +69,111 @@
     <string name="title_kicks">Ритания</string>
     <string name="title_contractions">Контракции</string>
 
+    <!--12th week-->
     <string name="first_examination_test1">Хемоглобин, еритроцити, хематокрит, левкоцити, MCV, MCH, СУЕ, кръвна захар, урина-седимент, уробилиноген, кетони</string>
     <string name="first_examination_test2">Определяне на кръвна група и Rh-фактор</string>
-    <string name="first_examination_test3">Онкопрофилактична цитонамазка от женски полови органи - при нужда</string>
+    <string name="first_examination_test3">Онкопрофилактична цитонамазка от женски полови органи</string>
     <string name="first_examination_test4">Изследване за сифилис</string>
     <string name="first_examination_test5">Изследване за хепатит B</string>
     <string name="first_examination_test6">Изследване за HIV</string>
     <string name="first_examination_test7">Микробиологично изследване на влагалищен секрет</string>
+    <string name="first_examination_test8">Ранен биохимичен скрининг</string>
 
     <string name="first_examination_act1">Анамнеза на рискови фактори (възраст, придружаващи заболяваия, усложнения на предишни бременности, вредни навици, професионални, други)</string>
     <string name="first_examination_act2">Определяне на вероятен термин на раждане (ВТР)</string>
     <string name="first_examination_act3">Измерване на артериално кръвно налягане</string>
-    <string name="first_examination_act4">Антропометрия (ръст, телесна маса)</string>
-    <string name="first_examination_act5">Гинекологичен статус</string>
-    <string name="first_examination_act6">Акушерска ехография</string>
+    <string name="first_examination_act4">Измерване на ръст</string>
+    <string name="first_examination_act5">Измерване на телесна маса</string>
+    <string name="first_examination_act6">Гинекологичен статус</string>
+    <string name="first_examination_act7">Гинекологична ехография</string>
 
+    <!--16th week-->
     <string name="second_examination_act1">Измерване на артериално кръвно налягане</string>
-    <string name="second_examination_act2">Антропометрия (ръст, телесна маса)</string>
-    <string name="second_examination_act3">Гинекологичен статус</string>
-    <string name="second_examination_act4">Акушерска ехография (в 16-та гестационна седмица)</string>
-    <string name="second_examination_act5">Обсъждане на резултати</string>
+    <string name="second_examination_act2">Измерване на ръст</string>
+    <string name="second_examination_act3">Измерване на теелсна маса</string>
+    <string name="second_examination_act4">Гинекологичен статус</string>
+    <string name="second_examination_act5">Гинекологична ехография</string>
+    <string name="second_examination_act6">Обсъждане на резултати</string>
 
-    <string name="third_examination_test1">Хемоглобин, еритроцити, хематокрит, левкоцити, MCV, MCH, СУЕ, кръвна захар, урина-седимент, уробилиноген</string>
+    <string name="second_examination_test1">Късен биохимичен скрининг</string>
+    <string name="second_examination_test2">Урокултура</string>
 
+    <!--20th week-->
     <string name="third_examination_act1">Измерване на артериално кръвно налягане</string>
-    <string name="third_examination_act2">Антропометрия (ръст, телесна маса)</string>
-    <string name="third_examination_act3">Сърдечна дейност на плода</string>
-    <string name="third_examination_act4">Обсъждане на резултати</string>
+    <string name="third_examination_act2">Измерване на ръст</string>
+    <string name="third_examination_act3">Измерване на телесна маса</string>
+    <string name="third_examination_act4">Сърдечна дейност на плода</string>
+    <string name="third_examination_act5">Обсъждане на резултати</string>
+
+    <!--24th week-->
+    <string name="fourth_examination_test1">Хемоглобин, еритроцити, хематокрит, левкоцити, MCV, MCH, СУЕ, кръвна захар, урина-седимент, уробилиноген</string>
 
     <string name="fourth_examination_act1">Измерване на артериално кръвно налягане</string>
-    <string name="fourth_examination_act2">Антропометрия (ръст, телесна маса)</string>
-    <string name="fourth_examination_act3">Сърдечна дейност на плода</string>
-    <string name="fourth_examination_act4">Обсъждане на резултати</string>
+    <string name="fourth_examination_act2">Измерване на ръст</string>
+    <string name="fourth_examination_act3">Измерване на телесна маса</string>
+    <string name="fourth_examination_act4">Измерване обиколка на корем</string>
+    <string name="fourth_examination_act5">Измерване височина на матката</string>
+    <string name="fourth_examination_act6">Сърдечна дейност на плода</string>
+    <string name="fourth_examination_act7">Обсъждане на резултати</string>
 
+    <!--28th week-->
     <string name="fifth_examination_act1">Измерване на артериално кръвно налягане</string>
-    <string name="fifth_examination_act2">Антропометрия (ръст, телесна маса)</string>
-    <string name="fifth_examination_act3">Сърдечна дейност на плода</string>
-    <string name="fifth_examination_act4">Обсъждане на резултати</string>
+    <string name="fifth_examination_act2">Измерване на ръст</string>
+    <string name="fifth_examination_act3">Измерване на телесна маса</string>
+    <string name="fifth_examination_act4">Измерване обиколка на корем</string>
+    <string name="fifth_examination_act5">Измерване височина на матката</string>
+    <string name="fifth_examination_act6">Сърдечна дейност на плода</string>
+    <string name="fifth_examination_act7">Обсъждане на резултати</string>
 
-    <string name="sixth_examination_test1">Хемоглобин, еритроцити, хематокрит, левкоцити, MCV, MCH, СУЕ, кръвна захар, урина-седимент, уробилиноген</string>
+    <string name="twenty_first_week_test1">Фетална морфология при специалист</string>
+
+    <!--32nd week-->
+    <string name="sixth_examination_test1">Микробиологично изследване на влагалищен секрет</string>
 
     <string name="sixth_examination_act1">Измерване на артериално кръвно налягане</string>
-    <string name="sixth_examination_act2">Антропометрия (ръст, телесна маса)</string>
-    <string name="sixth_examination_act3">Сърдечна дейност на плода</string>
-    <string name="sixth_examination_act4">Обсъждане на резултати</string>
+    <string name="sixth_examination_act2">Измерване на ръст</string>
+    <string name="sixth_examination_act3">Измерване на телесна маса</string>
+    <string name="sixth_examination_act4">Измерване обиколка на корем</string>
+    <string name="sixth_examination_act5">Измерване височина на матката</string>
+    <string name="sixth_examination_act6">Сърдечна дейност на плода</string>
+    <string name="sixth_examination_act7">Обсъждане на резултати</string>
 
-    <string name="seventh_examination_test1">Микробиологично изследване на влагалищен секрет</string>
+    <!-- 34th week -->
+    <string name="seventh_examination_test1">Хемоглобин, еритроцити, хематокрит, левкоцити, MCV, MCH, СУЕ, кръвна захар, урина-седимент, уробилиноген</string>
 
-    <string name="seventh_examination_act1">Измерване на артериално кръвно налягане - двукратно</string>
-    <string name="seventh_examination_act2">Антропометрия (ръст, телесна маса, външна пелвиметрия) - двукратно</string>
-    <string name="seventh_examination_act3">Гинекологичен статус</string>
-    <string name="seventh_examination_act4">Сърдечна дейност на плода - двукратно</string>
-    <string name="seventh_examination_act5">Обсъждане на резултати</string>
+    <string name="seventh_examination_act1">Измерване на артериално кръвно налягане</string>
+    <string name="seventh_examination_act2">Измерване на ръст</string>
+    <string name="seventh_examination_act3">Измерване на телесна маса</string>
+    <string name="seventh_examination_act4">Измерване обиколка на корем</string>
+    <string name="seventh_examination_act5">Измерване височина на матката</string>
+    <string name="seventh_examination_act6">Гинекологичен статус</string>
+    <string name="seventh_examination_act7">Сърдечна дейност на плода</string>
+    <string name="seventh_examination_act8">Обсъждане на резултати</string>
 
-    <string name="eighth_examination_act1">Измерване на артериално кръвно налягане - двукратно</string>
-    <string name="eighth_examination_act2">Антропометрия (ръст, телесна маса, външна пелвиметрика) - двукратно</string>
-    <string name="eighth_examination_act3">Акушерски статус</string>
-    <string name="eighth_examination_act4">Сърдечна дейност на плода - двукратно</string>
-    <string name="eighth_examination_act5">Обсъждане на резултати</string>
+    <!-- 36th week -->
+    <string name="seventh_1_examination_test1">Урокултура</string>
+
+    <!-- 38th week -->
+    <string name="eighth_examination_act1">Измерване на артериално кръвно налягане</string>
+    <string name="eighth_examination_act2">Измерване на ръст</string>
+    <string name="eighth_examination_act3">Измерване на телесна маса</string>
+    <string name="eighth_examination_act4">Измерване обиколка на корем</string>
+    <string name="eighth_examination_act5">Измерване височина на матката</string>
+    <string name="eighth_examination_act6">Акушерски статус</string>
+    <string name="eighth_examination_act7">Сърдечна дейност на плода</string>
+    <string name="eighth_examination_act8">Обсъждане на резултати</string>
+
+    <string name="seven_days_after_birth_examination_act1">Проследяване на нормална инволуция на матката</string>
+    <string name="seven_days_after_birth_examination_act2">Проследяване на лохии</string>
+    <string name="seven_days_after_birth_examination_act3">Проследяване на лактация</string>
+    <string name="seven_days_after_birth_examination_act4">Проследяване на оперативна рана</string>
+
+    <string name="forty_days_after_birth_exmaination_act1">Проследяване на нормална инволуция на матката</string>
+    <string name="forty_days_after_birth_exmaination_act2">Проследяване на лохии</string>
+    <string name="forty_days_after_birth_exmaination_act3">Проследяване на лактация</string>
+    <string name="forty_days_after_birth_exmaination_act4">Проследяване на оперативна рана</string>
+
+    <string name="forty_days_after_birth_examination_test1">Хемоглобин, еритроцити, хематокрит, левкоцити, MCV, MCH, СУЕ, кръвна захар</string>
 
     <string name="main_activity_weeks">седмица</string>
     <string name="main_activity_size_text" formatted="false">Вашето бебе е средно %sкг и %sсм</string>

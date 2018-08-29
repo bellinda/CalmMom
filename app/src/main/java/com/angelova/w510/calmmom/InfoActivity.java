@@ -182,7 +182,7 @@ public class InfoActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
                         mFirstDayOfLastMDate.set(year, monthOfYear, dayOfMonth);
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
                         mFirstDayOfMText.setText(sdf.format(mFirstDayOfLastMDate.getTime()));
                         mUser.setFirstDayOfLastMenstruation(mFirstDayOfMText.getText().toString());
                     }
@@ -621,54 +621,92 @@ public class InfoActivity extends AppCompatActivity {
 
     private List<Examination> getListWithMainExaminations() {
         List<Examination> examinations = new ArrayList<>();
+
+        List<Measurement> activities = Arrays.asList(new Measurement(getString(R.string.first_examination_act6)));
+
+        Examination afterTheDelayEx = new Examination("10 days after the delay", "", ExaminationStatus.CURRENT, new ArrayList<Test>(), activities);
+        examinations.add(afterTheDelayEx);
+
+        Examination seventhWeekEx = new Examination("7th week", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
+        examinations.add(seventhWeekEx);
+
         List<Test> tests = Arrays.asList(new Test(getString(R.string.first_examination_test1)), new Test(getString(R.string.first_examination_test2)),
                 new Test(getString(R.string.first_examination_test3)), new Test(getString(R.string.first_examination_test4)),
                 new Test(getString(R.string.first_examination_test5)), new Test(getString(R.string.first_examination_test6)),
-                new Test(getString(R.string.first_examination_test7)));
-        List<Measurement> activities = Arrays.asList(new Measurement(getString(R.string.first_examination_act1)), new Measurement(getString(R.string.first_examination_act2)),
+                new Test(getString(R.string.first_examination_test7)), new Test(getString(R.string.first_examination_test8)));
+        activities = Arrays.asList(new Measurement(getString(R.string.first_examination_act1)), new Measurement(getString(R.string.first_examination_act2)),
                 new Measurement(getString(R.string.first_examination_act3)), new Measurement(getString(R.string.first_examination_act4)),
-                new Measurement(getString(R.string.first_examination_act5)), new Measurement(getString(R.string.first_examination_act6)));
+                new Measurement(getString(R.string.first_examination_act5)), new Measurement(getString(R.string.first_examination_act6)), new Measurement(getString(R.string.first_examination_act7)));
 
-        Examination firstEx = new Examination("First, Second or Third Month", "", ExaminationStatus.CURRENT, tests, activities);
+        Examination firstEx = new Examination("12th week", "", ExaminationStatus.FUTURE, tests, activities);
         examinations.add(firstEx);
 
+        tests = Arrays.asList(new Test(getString(R.string.second_examination_test1)), new Test(getString(R.string.second_examination_test2)));
         activities = Arrays.asList(new Measurement(getString(R.string.second_examination_act1)), new Measurement(getString(R.string.second_examination_act2)),
-                new Measurement(getString(R.string.second_examination_act3)), new Measurement(getString(R.string.second_examination_act4)), new Measurement(getString(R.string.second_examination_act5)));
-        Examination secondEx = new Examination("Fourth Month", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
+                new Measurement(getString(R.string.second_examination_act3)), new Measurement(getString(R.string.second_examination_act4)), new Measurement(getString(R.string.second_examination_act5)),
+                new Measurement(getString(R.string.second_examination_act6)));
+        Examination secondEx = new Examination("16th week", "", ExaminationStatus.FUTURE, tests, activities);
         examinations.add(secondEx);
 
-        tests = Arrays.asList(new Test(getString(R.string.third_examination_test1)));
         activities = Arrays.asList(new Measurement(getString(R.string.third_examination_act1)), new Measurement(getString(R.string.third_examination_act2)), new Measurement(getString(R.string.third_examination_act3)),
-                new Measurement(getString(R.string.third_examination_act4)));
-        Examination thirdEx = new Examination("Fifth Month", "", ExaminationStatus.FUTURE, tests, activities);
+                new Measurement(getString(R.string.third_examination_act4)), new Measurement(getString(R.string.third_examination_act5)));
+        Examination thirdEx = new Examination("20th week", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
         examinations.add(thirdEx);
 
+        tests = Arrays.asList(new Test(getString(R.string.twenty_first_week_test1)));
+        Examination fetalMorphologyEx = new Examination("21st week - Fetal morphology", "", ExaminationStatus.FUTURE, tests, new ArrayList<Measurement>());
+        examinations.add(fetalMorphologyEx);
+
+        tests = Arrays.asList(new Test(getString(R.string.fourth_examination_test1)));
         activities = Arrays.asList(new Measurement(getString(R.string.fourth_examination_act1)), new Measurement(getString(R.string.fourth_examination_act2)), new Measurement(getString(R.string.fourth_examination_act3)),
-                new Measurement(getString(R.string.fourth_examination_act4)));
-        Examination fourthEx = new Examination("Sixth Month", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
+                new Measurement(getString(R.string.fourth_examination_act4)), new Measurement(getString(R.string.fourth_examination_act5)), new Measurement(getString(R.string.fourth_examination_act6)),
+                new Measurement(getString(R.string.fourth_examination_act7)));
+        Examination fourthEx = new Examination("24th week", "", ExaminationStatus.FUTURE, tests, activities);
         examinations.add(fourthEx);
 
         activities = Arrays.asList(new Measurement(getString(R.string.fifth_examination_act1)), new Measurement(getString(R.string.fifth_examination_act2)), new Measurement(getString(R.string.fifth_examination_act3)),
-                new Measurement(getString(R.string.fifth_examination_act4)));
-        Examination fifthEx = new Examination("Seventh Month", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
+                new Measurement(getString(R.string.fifth_examination_act4)), new Measurement(getString(R.string.fifth_examination_act5)), new Measurement(getString(R.string.fifth_examination_act6)),
+                new Measurement(getString(R.string.fifth_examination_act7)));
+        Examination fifthEx = new Examination("28th week", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
         examinations.add(fifthEx);
 
         tests = Arrays.asList(new Test(getString(R.string.sixth_examination_test1)));
         activities = Arrays.asList(new Measurement(getString(R.string.sixth_examination_act1)), new Measurement(getString(R.string.sixth_examination_act2)), new Measurement(getString(R.string.sixth_examination_act3)),
-                new Measurement(getString(R.string.sixth_examination_act4)));
-        Examination sixthEx = new Examination("Eighth Month", "", ExaminationStatus.FUTURE, tests, activities);
+                new Measurement(getString(R.string.sixth_examination_act4)), new Measurement(getString(R.string.sixth_examination_act5)), new Measurement(getString(R.string.sixth_examination_act6)),
+                new Measurement(getString(R.string.sixth_examination_act7)));
+        Examination sixthEx = new Examination("32nd week", "", ExaminationStatus.FUTURE, tests, activities);
         examinations.add(sixthEx);
 
         tests = Arrays.asList(new Test(getString(R.string.seventh_examination_test1)));
         activities = Arrays.asList(new Measurement(getString(R.string.seventh_examination_act1)), new Measurement(getString(R.string.seventh_examination_act2)),
-                new Measurement(getString(R.string.seventh_examination_act3)), new Measurement(getString(R.string.seventh_examination_act4)), new Measurement(getString(R.string.seventh_examination_act5)));
-        Examination seventhEx = new Examination("Ninth Month", "", ExaminationStatus.FUTURE, tests, activities);
+                new Measurement(getString(R.string.seventh_examination_act3)), new Measurement(getString(R.string.seventh_examination_act4)), new Measurement(getString(R.string.seventh_examination_act5)),
+                new Measurement(getString(R.string.seventh_examination_act6)), new Measurement(getString(R.string.seventh_examination_act7)), new Measurement(getString(R.string.seventh_examination_act8)));
+        Examination seventhEx = new Examination("34th week", "", ExaminationStatus.FUTURE, tests, activities);
         examinations.add(seventhEx);
 
+        tests = Arrays.asList(new Test(getString(R.string.seventh_1_examination_test1)));
+        Examination seventh2Ex = new Examination("36th week", "", ExaminationStatus.FUTURE, tests, activities);
+        examinations.add(seventh2Ex);
+
         activities = Arrays.asList(new Measurement(getString(R.string.eighth_examination_act1)), new Measurement(getString(R.string.eighth_examination_act2)),
-                new Measurement(getString(R.string.eighth_examination_act3)), new Measurement(getString(R.string.eighth_examination_act4)), new Measurement(getString(R.string.eighth_examination_act5)));
-        Examination eighthEx = new Examination("Tenth Month", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
+                new Measurement(getString(R.string.eighth_examination_act3)), new Measurement(getString(R.string.eighth_examination_act4)), new Measurement(getString(R.string.eighth_examination_act5)),
+                new Measurement(getString(R.string.eighth_examination_act6)), new Measurement(getString(R.string.eighth_examination_act7)), new Measurement(getString(R.string.eighth_examination_act8)));
+        Examination eighthEx = new Examination("38th week", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
         examinations.add(eighthEx);
+
+        Examination eighth2Ex = new Examination("39th week", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
+        examinations.add(eighth2Ex);
+
+        activities = Arrays.asList(new Measurement(getString(R.string.seven_days_after_birth_examination_act1)), new Measurement(getString(R.string.seven_days_after_birth_examination_act2)),
+                new Measurement(getString(R.string.seven_days_after_birth_examination_act3)), new Measurement(getString(R.string.seven_days_after_birth_examination_act4)));
+        Examination sevenDaysAfterBirthEx = new Examination("7 days after birth", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
+        examinations.add(sevenDaysAfterBirthEx);
+
+        activities = Arrays.asList(new Measurement(getString(R.string.forty_days_after_birth_exmaination_act1)), new Measurement(getString(R.string.forty_days_after_birth_exmaination_act2)),
+                new Measurement(getString(R.string.forty_days_after_birth_exmaination_act3)), new Measurement(getString(R.string.forty_days_after_birth_exmaination_act4)));
+        tests = Arrays.asList(new Test(getString(R.string.forty_days_after_birth_examination_test1)));
+        Examination fortyDaysAfterBirthEx = new Examination("40 days after birth", "", ExaminationStatus.FUTURE, tests, activities);
+        examinations.add(fortyDaysAfterBirthEx);
 
         return examinations;
     }
