@@ -322,7 +322,7 @@ public class WeightFragment extends Fragment implements OnChartGestureListener, 
 
     private List<Entry> getWeightValuesFromUser() {
         List<Entry> values = new ArrayList<>();
-        List<Weight> weights = mUser.getWeights();
+        List<Weight> weights = mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getWeights();
         if (weights == null) {
             values.add(new Entry(0, (float)mUser.getCurrentWeight()));
         } else {
@@ -376,7 +376,7 @@ public class WeightFragment extends Fragment implements OnChartGestureListener, 
         }
 
         if (!isTheWeekPresent) {
-            mUser.getWeights().add(weight);
+            mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getWeights().add(weight);
             userValues = getWeightValuesFromUser();
             userDataSet = new LineDataSet(userValues, "Data Set 1");
         } else {

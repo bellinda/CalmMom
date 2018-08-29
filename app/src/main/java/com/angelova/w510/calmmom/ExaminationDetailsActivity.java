@@ -502,14 +502,14 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
     public void updateExaminationInDb() {
         ObjectMapper m = new ObjectMapper();
         List<Examination> examinations = new ArrayList<>();
-        for (Examination ex : mUser.getExaminations()) {
+        for (Examination ex : mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getExaminations()) {
             if (ex.getTitle().equals(mExamination.getTitle())) {
                 examinations.add(mExamination);
             } else {
                 examinations.add(ex);
             }
         }
-        mUser.setExaminations(examinations);
+        mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).setExaminations(examinations);
         Map<String,Object> user = m.convertValue(mUser, Map.class);
 
         final DocumentReference userRef = mDb.collection("users").document(mUserEmail);

@@ -142,14 +142,15 @@ public class HealthStateActivity extends AppCompatActivity {
     public void updateUserWeightsInDb(Weight weight) {
         ObjectMapper m = new ObjectMapper();
         List<Weight> updatedWeights = new ArrayList<>();
-        for (Weight w : mUser.getWeights()) {
+        List<Weight> currentWeights = mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getWeights();
+        for (Weight w : currentWeights) {
             if (w.getWeek() == weight.getWeek()) {
                 updatedWeights.add(weight);
             } else {
                 updatedWeights.add(w);
             }
         }
-        mUser.setWeights(updatedWeights);
+        mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).setWeights(updatedWeights);
         Map<String, Object> user = m.convertValue(mUser, Map.class);
 
         final DocumentReference userRef = mDb.collection("users").document(mUserEmail);

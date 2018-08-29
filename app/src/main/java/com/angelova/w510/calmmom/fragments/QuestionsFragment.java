@@ -55,7 +55,8 @@ public class QuestionsFragment extends Fragment {
 
         //mDataList.clear();
 
-        List<Question> questions = mUser.getQuestions();
+        int pregnancyIndex = mUser.getPregnancyConsecutiveId();
+        List<Question> questions = mUser.getPregnancies().get(pregnancyIndex).getQuestions();
 //        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala", false));
 //        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "", false));
 //        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala", false));
@@ -66,7 +67,11 @@ public class QuestionsFragment extends Fragment {
 //        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala", false));
 //        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala", false));
 //        questions.add(new Question("Q: Some question coming from my mind... Some question ala bala portokala", "A: Some answer to the question coming from my mind... Some question ala bala portokala", false));
-        mDataList.addAll(questions);
+        if (questions != null && questions.size() > 0) {
+            mDataList.addAll(questions);
+        } else {
+            mDataList = new ArrayList<>();
+        }
 
         mAdapter = new QuestionsAdapter(mDataList, getActivity());
         mRecyclerView.setAdapter(mAdapter);

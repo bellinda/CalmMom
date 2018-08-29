@@ -20,17 +20,17 @@ public class User implements Serializable {
     private String familyHistories;
     private String complicationsOtherPregnancies;
     private String profileImage;
-    private String firstDayOfLastMenstruation;
+    //private String firstDayOfLastMenstruation;
     private boolean regularMenstruation;
     private int lengthOfMenstruation;
     private int durationOfMenstruation;
-    private List<Examination> examinations;
-    private List<Question> questions;
-    private List<Weight> weights;
-    private HashMap<String, List<UserActivity>> activities;
-    private List<Kick> kicks;
+//    private List<Examination> examinations;
+//    private List<Question> questions;
+//    private List<Weight> weights;
+//    private HashMap<String, List<UserActivity>> activities;
+//    private List<Kick> kicks;
     private List<RiskFactor> riskFactors;
-    private boolean firstPregnancy;
+    //private boolean firstPregnancy;
     private String lastDeliveryDate;
     private int liveBornKids;
     private int stillbornKids;
@@ -41,8 +41,10 @@ public class User implements Serializable {
     private int miscarriages;
     private int abortionsOnMedEvidence;
     private String takenMedicines;
-    private boolean bloodGroupIncompatibility;
-    private boolean unwantedPregnancy;
+    private List<Pregnancy> pregnancies;
+    private int pregnancyConsecutiveId;
+//    private boolean bloodGroupIncompatibility;
+//    private boolean unwantedPregnancy;
 
     public String getName() {
         return name;
@@ -124,13 +126,13 @@ public class User implements Serializable {
         this.profileImage = profileImage;
     }
 
-    public String getFirstDayOfLastMenstruation() {
-        return firstDayOfLastMenstruation;
-    }
-
-    public void setFirstDayOfLastMenstruation(String firstDayOfLastMenstruation) {
-        this.firstDayOfLastMenstruation = firstDayOfLastMenstruation;
-    }
+//    public String getFirstDayOfLastMenstruation() {
+//        return firstDayOfLastMenstruation;
+//    }
+//
+//    public void setFirstDayOfLastMenstruation(String firstDayOfLastMenstruation) {
+//        this.firstDayOfLastMenstruation = firstDayOfLastMenstruation;
+//    }
 
     public boolean isRegularMenstruation() {
         return regularMenstruation;
@@ -156,45 +158,45 @@ public class User implements Serializable {
         this.durationOfMenstruation = durationOfMenstruation;
     }
 
-    public List<Examination> getExaminations() {
-        return examinations;
-    }
-
-    public void setExaminations(List<Examination> examinations) {
-        this.examinations = examinations;
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
-
-    public List<Weight> getWeights() {
-        return weights;
-    }
-
-    public void setWeights(List<Weight> weights) {
-        this.weights = weights;
-    }
-
-    public HashMap<String, List<UserActivity>> getActivities() {
-        return activities;
-    }
-
-    public void setActivities(HashMap<String, List<UserActivity>> activities) {
-        this.activities = activities;
-    }
-
-    public List<Kick> getKicks() {
-        return kicks;
-    }
-
-    public void setKicks(List<Kick> kicks) {
-        this.kicks = kicks;
-    }
+//    public List<Examination> getExaminations() {
+//        return examinations;
+//    }
+//
+//    public void setExaminations(List<Examination> examinations) {
+//        this.examinations = examinations;
+//    }
+//
+//    public List<Question> getQuestions() {
+//        return questions;
+//    }
+//
+//    public void setQuestions(List<Question> questions) {
+//        this.questions = questions;
+//    }
+//
+//    public List<Weight> getWeights() {
+//        return weights;
+//    }
+//
+//    public void setWeights(List<Weight> weights) {
+//        this.weights = weights;
+//    }
+//
+//    public HashMap<String, List<UserActivity>> getActivities() {
+//        return activities;
+//    }
+//
+//    public void setActivities(HashMap<String, List<UserActivity>> activities) {
+//        this.activities = activities;
+//    }
+//
+//    public List<Kick> getKicks() {
+//        return kicks;
+//    }
+//
+//    public void setKicks(List<Kick> kicks) {
+//        this.kicks = kicks;
+//    }
 
     public List<RiskFactor> getRiskFactors() {
         return riskFactors;
@@ -204,13 +206,13 @@ public class User implements Serializable {
         this.riskFactors = riskFactors;
     }
 
-    public boolean isFirstPregnancy() {
-        return firstPregnancy;
-    }
-
-    public void setFirstPregnancy(boolean firstPregnancy) {
-        this.firstPregnancy = firstPregnancy;
-    }
+//    public boolean isFirstPregnancy() {
+//        return firstPregnancy;
+//    }
+//
+//    public void setFirstPregnancy(boolean firstPregnancy) {
+//        this.firstPregnancy = firstPregnancy;
+//    }
 
     public String getLastDeliveryDate() {
         return lastDeliveryDate;
@@ -292,19 +294,35 @@ public class User implements Serializable {
         this.takenMedicines = takenMedicines;
     }
 
-    public boolean isBloodGroupIncompatibility() {
-        return bloodGroupIncompatibility;
+//    public boolean isBloodGroupIncompatibility() {
+//        return bloodGroupIncompatibility;
+//    }
+//
+//    public void setBloodGroupIncompatibility(boolean bloodGroupIncompatibility) {
+//        this.bloodGroupIncompatibility = bloodGroupIncompatibility;
+//    }
+//
+//    public boolean isUnwantedPregnancy() {
+//        return unwantedPregnancy;
+//    }
+//
+//    public void setUnwantedPregnancy(boolean unwantedPregnancy) {
+//        this.unwantedPregnancy = unwantedPregnancy;
+//    }
+
+    public List<Pregnancy> getPregnancies() {
+        return pregnancies;
     }
 
-    public void setBloodGroupIncompatibility(boolean bloodGroupIncompatibility) {
-        this.bloodGroupIncompatibility = bloodGroupIncompatibility;
+    public void setPregnancies(List<Pregnancy> pregnancies) {
+        this.pregnancies = pregnancies;
     }
 
-    public boolean isUnwantedPregnancy() {
-        return unwantedPregnancy;
+    public int getPregnancyConsecutiveId() {
+        return pregnancyConsecutiveId;
     }
 
-    public void setUnwantedPregnancy(boolean unwantedPregnancy) {
-        this.unwantedPregnancy = unwantedPregnancy;
+    public void setPregnancyConsecutiveId(int pregnancyConsecutiveId) {
+        this.pregnancyConsecutiveId = pregnancyConsecutiveId;
     }
 }

@@ -66,7 +66,8 @@ public class ExaminationsFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
 
-        List<Examination> examinations = mUser.getExaminations();
+        int pregnancyIndex = mUser.getPregnancyConsecutiveId();
+        List<Examination> examinations = mUser.getPregnancies().get(pregnancyIndex).getExaminations();
         Collections.sort(examinations);
         mDataList.addAll(examinations);
 

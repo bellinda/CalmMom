@@ -56,7 +56,7 @@ public class TipsActivity extends AppCompatActivity {
         }
 
         mUser = (User) getIntent().getSerializableExtra("user");
-        currentPregnancyWeek = (int) (getDaysSinceDate(mUser.getFirstDayOfLastMenstruation()) / 7 + 1);
+        currentPregnancyWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getFirstDayOfLastMenstruation()) / 7 + 1);
         mDb = FirebaseFirestore.getInstance();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);

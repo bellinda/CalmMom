@@ -78,8 +78,8 @@ public class KicksFragment extends Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.kicks_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
-        if (mUser.getKicks() != null) {
-            mDataList.addAll(mUser.getKicks());
+        if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getKicks() != null) {
+            mDataList.addAll(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getKicks());
         }
         mAdapter = new KicksAdapter(mDataList, getActivity());
         mRecyclerView.setAdapter(mAdapter);
@@ -172,7 +172,7 @@ public class KicksFragment extends Fragment {
 
         ((KicksAndContractionsActivity)getActivity()).updateKicksInDb(mDataList);
 
-        mUser.setKicks(mDataList);
+        mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).setKicks(mDataList);
     }
 
     private String getTimeInMinutes(long startTime, long endTime) {

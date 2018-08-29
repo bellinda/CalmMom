@@ -100,7 +100,7 @@ public class KicksAndContractionsActivity extends AppCompatActivity {
 
     public void updateKicksInDb(List<Kick> kicks) {
         ObjectMapper m = new ObjectMapper();
-        mUser.setKicks(kicks);
+        mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).setKicks(kicks);
         Map<String, Object> user = m.convertValue(mUser, Map.class);
 
         final DocumentReference userRef = mDb.collection("users").document(mUserEmail);

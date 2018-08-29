@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         mCurrentDateView.setText(sdf.format(Calendar.getInstance().getTime()));
 
         mCurrentWeekView = (TextView) findViewById(R.id.current_week_view);
-        mCurrentPregnancyWeek = (int) (getDaysSinceDate(mUser.getFirstDayOfLastMenstruation()) / 7 + 1);
+        mCurrentPregnancyWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getFirstDayOfLastMenstruation()) / 7 + 1);
         mCurrentWeekView.setText(String.format("%d %s", mCurrentPregnancyWeek, getString(R.string.main_activity_weeks)));
 
         getSizes();
@@ -123,7 +123,10 @@ public class MainActivity extends AppCompatActivity {
         mProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                intent.putExtra("user", getIntent().getSerializableExtra("user"));
+                intent.putExtra("email", getIntent().getStringExtra("email"));
+                startActivity(intent);
             }
         });
     }

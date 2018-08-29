@@ -38,6 +38,7 @@ import com.melnykov.fab.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -79,6 +80,7 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
     private LinearLayout mOtherBarLayout;
 
     private User mUser;
+    private int pregnancyIndex;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,6 +92,7 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
             window.setStatusBarColor(Color.parseColor("#324A5F"));
         }
         mUser = (User) getArguments().getSerializable("user");
+        pregnancyIndex = mUser.getPregnancyConsecutiveId();
 
         mChart = (BarChart) rootView.findViewById(R.id.bar_chart_activities);
         mAddBtn = (FloatingActionButton) rootView.findViewById(R.id.add_activity_btn);
@@ -172,10 +175,10 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
         mAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddActivityDialog dialog = new AddActivityDialog(getActivity(), mUser.getActivities(), new AddActivityDialog.DialogClickListener() {
+                AddActivityDialog dialog = new AddActivityDialog(getActivity(), mUser.getPregnancies().get(pregnancyIndex).getActivities(), new AddActivityDialog.DialogClickListener() {
                     @Override
                     public void onSave(String week, List<UserActivity> activities) {
-                        mUser.getActivities().put(week, activities);
+                        mUser.getPregnancies().get(pregnancyIndex).getActivities().put(week, activities);
                         ((HealthStateActivity) getActivity()).updateUserInDb(mUser);
                         updateChart();
                         mActivitiesScroll.setVisibility(View.INVISIBLE);
@@ -190,8 +193,9 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
 
     private ArrayList<BarEntry> getBarEntriesFromUserActivities() {
         ArrayList<BarEntry> entries = new ArrayList<>();
-        for (String key : mUser.getActivities().keySet()) {
-            int activitiesDuration = getTotalActivitiesDuration(mUser.getActivities().get(key));
+        HashMap<String, List<UserActivity>> activities = mUser.getPregnancies().get(pregnancyIndex).getActivities();
+        for (String key : activities.keySet()) {
+            int activitiesDuration = getTotalActivitiesDuration(activities.get(key));
             entries.add(new BarEntry(Float.parseFloat(key), activitiesDuration));
         }
         return entries;
@@ -360,7 +364,7 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
         setToZeroBarsWidth();
         mActivitiesScroll.setVisibility(View.VISIBLE);
 
-        List<UserActivity> activities = mUser.getActivities().get(Integer.toString((int)e.getX()));
+        List<UserActivity> activities = mUser.getPregnancies().get(pregnancyIndex).getActivities().get(Integer.toString((int)e.getX()));
         if (activities.size() == 0) {
             setAllDurationsToZero();
         } else {

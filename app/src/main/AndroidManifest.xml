@@ -31,9 +31,13 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".HealthStateActivity" />
         <activity android:name=".TipsActivity" />
-        <activity android:name=".KicksAndContractionsActivity"></activity>
+        <activity android:name=".KicksAndContractionsActivity" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="627b66396e9d89fdbcaa048c8384959371ca7f85" />
+
+        <activity android:name=".ProfileActivity"></activity>
     </application>
+
 </manifest>

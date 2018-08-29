@@ -45,6 +45,8 @@ public class ExaminationsActivity extends AppCompatActivity {
     FirebaseStorage mStorage;
     StorageReference mStorageReference;
 
+    private int pregnancyIndex;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +73,8 @@ public class ExaminationsActivity extends AppCompatActivity {
                     if (document != null) {
                         //The user exists...
                         mUser = document.toObject(User.class);
+
+                        pregnancyIndex = mUser.getPregnancyConsecutiveId();
 
                         fragmentManager = getSupportFragmentManager();
                         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -140,7 +144,7 @@ public class ExaminationsActivity extends AppCompatActivity {
 
     public void updateExaminationsInDb(List<Examination> examinations) {
         ObjectMapper m = new ObjectMapper();
-        mUser.setExaminations(examinations);
+        mUser.getPregnancies().get(pregnancyIndex).setExaminations(examinations);
         Map<String,Object> user = m.convertValue(mUser, Map.class);
 
         final DocumentReference userRef = mDb.collection("users").document(mUserEmail);
@@ -170,7 +174,7 @@ public class ExaminationsActivity extends AppCompatActivity {
 
     public void updateQuestionsInDb(List<Question> questions) {
         ObjectMapper m = new ObjectMapper();
-        mUser.setQuestions(questions);
+        mUser.getPregnancies().get(pregnancyIndex).setQuestions(questions);
         Map<String, Object> user = m.convertValue(mUser, Map.class);
 
         final DocumentReference userRef = mDb.collection("users").document(mUserEmail);

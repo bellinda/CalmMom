@@ -33,6 +33,7 @@ import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationStatus;
 import com.angelova.w510.calmmom.models.FamilyHistory;
 import com.angelova.w510.calmmom.models.Measurement;
+import com.angelova.w510.calmmom.models.Pregnancy;
 import com.angelova.w510.calmmom.models.RiskFactor;
 import com.angelova.w510.calmmom.models.Test;
 import com.angelova.w510.calmmom.models.User;
@@ -118,6 +119,7 @@ public class InfoActivity extends AppCompatActivity {
 
     private User mUser;
     private String mUserEmail;
+    private Pregnancy mPregnancy;
     private FirebaseFirestore mDb;
     FirebaseStorage mStorage;
     StorageReference mStorageReference;
@@ -152,6 +154,8 @@ public class InfoActivity extends AppCompatActivity {
         mStorageReference = mStorage.getReference();
         mUserEmail = getIntent().getStringExtra("email");
 
+        mPregnancy = new Pregnancy();
+
         mProfileImage = (CircleImageView) findViewById(R.id.profile_image);
         mProfileText = (TextView) findViewById(R.id.profile_text);
 
@@ -184,7 +188,7 @@ public class InfoActivity extends AppCompatActivity {
                         mFirstDayOfLastMDate.set(year, monthOfYear, dayOfMonth);
                         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
                         mFirstDayOfMText.setText(sdf.format(mFirstDayOfLastMDate.getTime()));
-                        mUser.setFirstDayOfLastMenstruation(mFirstDayOfMText.getText().toString());
+                        mPregnancy.setFirstDayOfLastMenstruation(mFirstDayOfMText.getText().toString());
                     }
                 }, mFirstDayOfLastMDate.get(Calendar.YEAR), mFirstDayOfLastMDate.get(Calendar.MONTH), mFirstDayOfLastMDate.get(Calendar.DATE));
                 datePickerDialog.getDatePicker().setMaxDate(mCurrentDate.getTimeInMillis());
@@ -308,14 +312,14 @@ public class InfoActivity extends AppCompatActivity {
                     mUser.setDurationOfMenstruation(Integer.parseInt(mInputMenstruationDuration.getText().toString()));
 
                     List<Examination> mainExaminations = getListWithMainExaminations();
-                    mUser.setExaminations(mainExaminations);
+                    mPregnancy.setExaminations(mainExaminations);
 
                     List<Weight> weights = new ArrayList<>();
                     weights.add(new Weight(Double.parseDouble(mInputCurrWeight.getText().toString()), 0));
-                    mUser.setWeights(weights);
+                    mPregnancy.setWeights(weights);
 
                     HashMap<String, List<UserActivity>> activities = getInitialUserActivities();
-                    mUser.setActivities(activities);
+                    mPregnancy.setActivities(activities);
 
                     List<RiskFactor> riskFactors = new ArrayList<RiskFactor>();
                     if (mSmokeChkBox.isChecked()) {
@@ -342,7 +346,7 @@ public class InfoActivity extends AppCompatActivity {
                     mUser.setRiskFactors(riskFactors);
 
                     if (!mFirstPregnancySwitch.isChecked()) {
-                        mUser.setFirstPregnancy(false);
+                        mPregnancy.setFirstPregnancy(false);
                         if (mLiveBornKidsInput.getText() != null && !mLiveBornKidsInput.getText().toString().isEmpty()) {
                             mUser.setLiveBornKids(Integer.parseInt(mLiveBornKidsInput.getText().toString()));
                         }
@@ -356,7 +360,7 @@ public class InfoActivity extends AppCompatActivity {
                             mUser.setPosttermKids(Integer.parseInt(mPosttermInput.getText().toString()));
                         }
                     } else {
-                        mUser.setFirstPregnancy(true);
+                        mPregnancy.setFirstPregnancy(true);
                     }
 
                     if (mSterilityInput.getText() != null && !mSterilityInput.getText().toString().isEmpty()) {
@@ -402,12 +406,17 @@ public class InfoActivity extends AppCompatActivity {
                     }
 
                     if (mBloodGrIncompatibilitySwitch.isChecked()) {
-                        mUser.setBloodGroupIncompatibility(true);
+                        mPregnancy.setBloodGroupIncompatibility(true);
                     }
 
                     if (mUnwantedPregnancySwitch.isChecked()) {
-                        mUser.setUnwantedPregnancy(true);
+                        mPregnancy.setUnwantedPregnancy(true);
                     }
+
+                    mUser.setPregnancyConsecutiveId(0);
+                    List<Pregnancy> pregnancies = new ArrayList<Pregnancy>();
+                    pregnancies.add(mPregnancy);
+                    mUser.setPregnancies(pregnancies);
 
                     mSubmitBtn.setVisibility(View.GONE);
                     mSubmitLoader.setVisibility(View.VISIBLE);
