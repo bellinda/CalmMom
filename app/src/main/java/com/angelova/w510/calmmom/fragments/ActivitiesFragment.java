@@ -1,12 +1,15 @@
 package com.angelova.w510.calmmom.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,6 +85,8 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
     private User mUser;
     private int pregnancyIndex;
 
+    private int deviceWidth;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_activities, container, false);
@@ -124,6 +129,17 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
         mOtherBar = rootView.findViewById(R.id.other_bar);
         mOtherDuration = (TextView) rootView.findViewById(R.id.other_duration);
         mOtherBarLayout = (LinearLayout) rootView.findViewById(R.id.other_bar_layout);
+
+
+        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2){
+            Point size = new Point();
+            display.getSize(size);
+            deviceWidth = size.x;
+        } else {
+            deviceWidth = display.getWidth();
+        }
 
         final List<String> labels = new ArrayList<>();
         for (int i = 0; i <= 40; i++) {
@@ -212,6 +228,11 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
     }
 
     private int getMaxBarWidth(TextView durationView, LinearLayout wholeBarLayout) {
+
+        int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(deviceWidth, View.MeasureSpec.AT_MOST);
+        int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        durationView.measure(widthMeasureSpec, heightMeasureSpec);
+
         int textViewWidth = durationView.getMeasuredWidth();
         int wholeLayoutWidth = wholeBarLayout.getMeasuredWidth();
         return wholeLayoutWidth - textViewWidth;
@@ -365,9 +386,8 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
         mActivitiesScroll.setVisibility(View.VISIBLE);
 
         List<UserActivity> activities = mUser.getPregnancies().get(pregnancyIndex).getActivities().get(Integer.toString((int)e.getX()));
-        if (activities.size() == 0) {
-            setAllDurationsToZero();
-        } else {
+        setAllDurationsToZero();
+        if (activities.size() > 0) {
             int longestDuration = 0;
             ActivityType longestDurationType = ActivityType.Other;
 
@@ -380,9 +400,10 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
                 setDurationAsTextByType(act);
             }
 
+            int maxBarWidth = getMaxBarWidthByType(longestDurationType);
+
             for (UserActivity act : activities) {
                 float partFromLongestDuration = ((float) act.getDuration()) / ((float) longestDuration);
-                int maxBarWidth = getMaxBarWidthByType(longestDurationType);
                 float scale = getResources().getDisplayMetrics().density;
                 int dpAsPixels = (int) (5 * scale + 0.5f);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) (maxBarWidth * partFromLongestDuration) - dpAsPixels, (int) getResources().getDimension(R.dimen.details_color_bar_height));
