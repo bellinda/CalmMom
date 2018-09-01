@@ -65,6 +65,7 @@
     <string name="title_questions">Въпроси</string>
     <string name="title_weight">Тегло</string>
     <string name="title_activity">Дейности</string>
+    <string name="title_medicines">Лекарства</string>
     <string name="title_belly_img">Снимки на коремчето</string>
     <string name="title_kicks">Ритания</string>
     <string name="title_contractions">Контракции</string>
@@ -248,4 +249,21 @@
     <string name="dialog_reset_pass_email_label">Имейл</string>
     <string name="dialog_reset_pass_cancel">Отказа</string>
     <string name="dialog_reset_pass_send">Изпращане</string>
+
+    <string name="fragment_medicines_title">Прием на лекарства</string>
+    <string name="fragment_medicines_no_date_selected">Няма избрана дата от календара.</string>
+    <string name="fragment_medicines_no_medicines_taken_on_this_date">Все още няма данни за приети лекарства през този ден</string>
+
+    <string name="dialog_medicine_title">Прием на медикаменти</string>
+    <string name="dialog_medicine_title_label">Название на лекарството</string>
+    <string name="dialog_medicine_time_label">Време, когато е прието лекарството</string>
+    <string name="dialog_medicine_comment_label">Коментар</string>
+    <string name="dialog_medicine_no_title_set">Моля въведете названието на лекарството, което сте приели</string>
+    <string name="dialog_medicine_no_title_set_title">Внимание</string>
+
+    <string name="dialog_is_allowed_med_title">Внимание</string>
+    <string name="dialog_is_allowed_med_msg">Не забравяйте да се косултирате с Вашия лекар за този медикамент!</string>
+    <string name="dialog_is_allowed_med_add_to_allowed">В разрешени</string>
+    <string name="dialog_is_allowed_med_cancel">Отказ</string>
+
 </resources>

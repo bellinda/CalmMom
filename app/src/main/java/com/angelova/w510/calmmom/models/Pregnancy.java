@@ -19,6 +19,8 @@ public class Pregnancy implements Serializable {
     private boolean firstPregnancy;
     private boolean bloodGroupIncompatibility;
     private boolean unwantedPregnancy;
+    private List<Medicine> takenMedicines;
+    private List<Medicine> allowedMedicinesByDoctor;
 
     public String getFirstDayOfLastMenstruation() {
         return firstDayOfLastMenstruation;
@@ -90,5 +92,21 @@ public class Pregnancy implements Serializable {
 
     public void setUnwantedPregnancy(boolean unwantedPregnancy) {
         this.unwantedPregnancy = unwantedPregnancy;
+    }
+
+    public List<Medicine> getTakenMedicines() {
+        return takenMedicines;
+    }
+
+    public void setTakenMedicines(List<Medicine> takenMedicines) {
+        this.takenMedicines = takenMedicines;
+    }
+
+    public List<Medicine> getAllowedMedicinesByDoctor() {
+        return allowedMedicinesByDoctor;
+    }
+
+    public void setAllowedMedicinesByDoctor(List<Medicine> allowedMedicinesByDoctor) {
+        this.allowedMedicinesByDoctor = allowedMedicinesByDoctor;
     }
 }

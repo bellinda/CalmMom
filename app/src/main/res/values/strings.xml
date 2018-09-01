@@ -65,6 +65,7 @@
     <string name="title_questions">Questions</string>
     <string name="title_weight">Weight</string>
     <string name="title_activity">Activities</string>
+    <string name="title_medicines">Medicines</string>
     <string name="title_belly_img">Belly images</string>
     <string name="title_kicks">Kicks</string>
     <string name="title_contractions">Contractions</string>
@@ -251,4 +252,20 @@
     <string name="dialog_reset_pass_email_label">Email</string>
     <string name="dialog_reset_pass_cancel">Cancel</string>
     <string name="dialog_reset_pass_send">Send</string>
+
+    <string name="fragment_medicines_title">Taken medicines</string>
+    <string name="fragment_medicines_no_date_selected">No date selected from the calendar.</string>
+    <string name="fragment_medicines_no_medicines_taken_on_this_date">No data for taken medicines on this day yet</string>
+
+    <string name="dialog_medicine_title">Taken medicine</string>
+    <string name="dialog_medicine_title_label">Title</string>
+    <string name="dialog_medicine_time_label">Time when the medicine is taken</string>
+    <string name="dialog_medicine_comment_label">Comment</string>
+    <string name="dialog_medicine_no_title_set">Please enter the name of the medicine you took</string>
+    <string name="dialog_medicine_no_title_set_title">Warning</string>
+
+    <string name="dialog_is_allowed_med_title">Warning</string>
+    <string name="dialog_is_allowed_med_msg">Do not forget to consult your doctor for this medicine!</string>
+    <string name="dialog_is_allowed_med_add_to_allowed">Add to allowed</string>
+    <string name="dialog_is_allowed_med_cancel">Cancel</string>
 </resources>

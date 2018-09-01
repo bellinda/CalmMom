@@ -11,6 +11,11 @@
         android:title="@string/title_activity" />
 
     <item
+        android:id="@+id/navigation_medicines"
+        android:icon="@drawable/medicines_selector"
+        android:title="@string/title_medicines"/>
+
+    <item
         android:id="@+id/navigation_belly_img"
         android:icon="@drawable/belly_img_selector"
         android:title="@string/title_belly_img" />

@@ -43,4 +43,8 @@
 
     <dimen name="details_image_size">30dp</dimen>
     <dimen name="details_color_bar_height">20dp</dimen>
+
+    <dimen name="dialog_is_allowed_med_button_height">55dp</dimen>
+
+    <dimen name="medicine_item_height">45dp</dimen>
 </resources>
