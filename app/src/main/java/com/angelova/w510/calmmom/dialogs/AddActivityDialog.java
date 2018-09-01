@@ -109,36 +109,57 @@ public class AddActivityDialog extends Dialog {
                     mActivitiesDetailsScroll.setVisibility(View.VISIBLE);
 
                     List<UserActivity> userActivitiesThisWeek = userActivities.get(selectedItem);
-                    for (UserActivity act : userActivitiesThisWeek) {
-                        int hours = act.getDuration() / 60;
-                        int minutes = act.getDuration() % 60;
-                        if (act.getType() == ActivityType.Walking) {
-                            mWalkingHours.setText(String.format("%s", hours));
-                            mWalkingMinutes.setText(String.format("%s", minutes));
-                        } else if (act.getType() == ActivityType.Aerobics) {
-                            mAerobicsHours.setText(String.format("%s", hours));
-                            mAerobicsMinutes.setText(String.format("%s", minutes));
-                        } else if (act.getType() == ActivityType.Yoga) {
-                            mYogaHours.setText(String.format("%s", hours));
-                            mYogaMinutes.setText(String.format("%s", minutes));
-                        } else if (act.getType() == ActivityType.Pilates) {
-                            mPilatesHours.setText(String.format("%s", hours));
-                            mPilatesMinutes.setText(String.format("%s", minutes));
-                        } else if (act.getType() == ActivityType.Swimming) {
-                            mSwimmingHours.setText(String.format("%s", hours));
-                            mSwimmingMinutes.setText(String.format("%s", minutes));
-                        } else if (act.getType() == ActivityType.Dancing) {
-                            mDancingHours.setText(String.format("%s", hours));
-                            mDancingMinutes.setText(String.format("%s", minutes));
-                        } else if (act.getType() == ActivityType.Jogging) {
-                            mJoggingHours.setText(String.format("%s", hours));
-                            mJoggingMinutes.setText(String.format("%s", minutes));
-                        } else if (act.getType() == ActivityType.StationaryB) {
-                            mSCHours.setText(String.format("%s", hours));
-                            mSCMinutes.setText(String.format("%s", minutes));
-                        } else if (act.getType() == ActivityType.Other) {
-                            mOtherHours.setText(String.format("%s", hours));
-                            mOtherMinutes.setText(String.format("%s", minutes));
+                    if (userActivitiesThisWeek.size() == 0) {
+                        mWalkingHours.setText("");
+                        mWalkingMinutes.setText("");
+                        mAerobicsHours.setText("");
+                        mAerobicsMinutes.setText("");
+                        mYogaHours.setText("");
+                        mYogaMinutes.setText("");
+                        mPilatesHours.setText("");
+                        mPilatesMinutes.setText("");
+                        mSwimmingHours.setText("");
+                        mSwimmingMinutes.setText("");
+                        mDancingHours.setText("");
+                        mDancingMinutes.setText("");
+                        mJoggingHours.setText("");
+                        mJoggingMinutes.setText("");
+                        mSCHours.setText("");
+                        mSCMinutes.setText("");
+                        mOtherHours.setText("");
+                        mOtherMinutes.setText("");
+                    } else {
+                        for (UserActivity act : userActivitiesThisWeek) {
+                            int hours = act.getDuration() / 60;
+                            int minutes = act.getDuration() % 60;
+                            if (act.getType() == ActivityType.Walking) {
+                                mWalkingHours.setText(String.format("%s", hours));
+                                mWalkingMinutes.setText(String.format("%s", minutes));
+                            } else if (act.getType() == ActivityType.Aerobics) {
+                                mAerobicsHours.setText(String.format("%s", hours));
+                                mAerobicsMinutes.setText(String.format("%s", minutes));
+                            } else if (act.getType() == ActivityType.Yoga) {
+                                mYogaHours.setText(String.format("%s", hours));
+                                mYogaMinutes.setText(String.format("%s", minutes));
+                            } else if (act.getType() == ActivityType.Pilates) {
+                                mPilatesHours.setText(String.format("%s", hours));
+                                mPilatesMinutes.setText(String.format("%s", minutes));
+                            } else if (act.getType() == ActivityType.Swimming) {
+                                mSwimmingHours.setText(String.format("%s", hours));
+                                mSwimmingMinutes.setText(String.format("%s", minutes));
+                            } else if (act.getType() == ActivityType.Dancing) {
+                                mDancingHours.setText(String.format("%s", hours));
+                                mDancingMinutes.setText(String.format("%s", minutes));
+                            } else if (act.getType() == ActivityType.Jogging) {
+                                mJoggingHours.setText(String.format("%s", hours));
+                                mJoggingMinutes.setText(String.format("%s", minutes));
+                            } else if (act.getType() == ActivityType.StationaryB) {
+                                mSCHours.setText(String.format("%s", hours));
+                                mSCMinutes.setText(String.format("%s", minutes));
+                            } else if (act.getType() == ActivityType.Other) {
+                                mOtherHours.setText(String.format("%s", hours));
+                                mOtherMinutes.setText(String.format("%s", minutes));
+                            }
                         }
                     }
                 } else {
