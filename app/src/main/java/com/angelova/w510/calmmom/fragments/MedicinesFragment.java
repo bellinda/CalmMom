@@ -82,6 +82,8 @@ public class MedicinesFragment extends Fragment {
 
         loadAllEventsOnTheCalendar();
 
+        loadDataForCurrentDate();
+
         mCalendar.shouldSelectFirstDayOfMonthOnScroll(false);
 
         mMonthYearView.setText(dateFormatForMonth.format(mCalendar.getFirstDayOfCurrentMonth()));
@@ -105,7 +107,7 @@ public class MedicinesFragment extends Fragment {
                         mMedicines.add((Medicine)event.getData());
                     }
                     Collections.sort(mMedicines);
-                    mAdapter = new MedicinesAdapter(mMedicines, getActivity());
+                    mAdapter = new MedicinesAdapter(mMedicines, getAllowedMedicineTitles(), getActivity());
                     mRecyclerView.setAdapter(mAdapter);
                     mRecyclerView.setVisibility(View.VISIBLE);
                 } else {
@@ -133,12 +135,22 @@ public class MedicinesFragment extends Fragment {
                         ((HealthStateActivity) getActivity()).updateUserInDb(mUser);
 
                         addEventOnTheCalendar(medicine);
+                        if (mNoDataForTakenMedicinesView.getVisibility() == View.VISIBLE) {
+                            mMedicines = new ArrayList<Medicine>();
+                        }
                         mMedicines.add(medicine);
                         Collections.sort(mMedicines);
                         if (mAdapter != null) {
-                            mAdapter.notifyDataSetChanged();
+                            if (mNoDataForTakenMedicinesView.getVisibility() == View.VISIBLE) {
+                                mAdapter = new MedicinesAdapter(mMedicines, getAllowedMedicineTitles(), getActivity());
+                                mRecyclerView.setAdapter(mAdapter);
+                                mNoDataForTakenMedicinesView.setVisibility(View.GONE);
+                                mRecyclerView.setVisibility(View.VISIBLE);
+                            } else {
+                                mAdapter.notifyDataSetChanged();
+                            }
                         } else {
-                            mAdapter = new MedicinesAdapter(mMedicines, getActivity());
+                            mAdapter = new MedicinesAdapter(mMedicines, getAllowedMedicineTitles(), getActivity());
                             mRecyclerView.setAdapter(mAdapter);
                             mNoDataForTakenMedicinesView.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.VISIBLE);
@@ -165,6 +177,9 @@ public class MedicinesFragment extends Fragment {
                 }
                 mUser.getPregnancies().get(pregnancyIndex).getAllowedMedicinesByDoctor().add(medicine);
                 ((HealthStateActivity) getActivity()).updateUserInDb(mUser);
+
+                mAdapter = new MedicinesAdapter(mMedicines, getAllowedMedicineTitles(), getActivity());
+                mRecyclerView.setAdapter(mAdapter);
             }
         });
 
@@ -188,6 +203,31 @@ public class MedicinesFragment extends Fragment {
         }
     }
 
+    private void loadDataForCurrentDate() {
+        Calendar calendar = Calendar.getInstance();
+        mMedicines = new ArrayList<Medicine>();
+        mCurrentSelectedDate = calendar.getTime();
+
+        mNoDateSelectedView.setVisibility(View.GONE);
+        mAddTakenMedicineBtn.setVisibility(View.VISIBLE);
+
+        List<Event> events = mCalendar.getEvents(mCurrentSelectedDate);
+        if (events.size() > 0) {
+            mNoDataForTakenMedicinesView.setVisibility(View.GONE);
+
+            for (Event event : events) {
+                mMedicines.add((Medicine)event.getData());
+            }
+            Collections.sort(mMedicines);
+            mAdapter = new MedicinesAdapter(mMedicines, getAllowedMedicineTitles(), getActivity());
+            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        } else {
+            mRecyclerView.setVisibility(View.GONE);
+            mNoDataForTakenMedicinesView.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void addEventOnTheCalendar(Medicine medicine) {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy kk:mm", Locale.getDefault());
@@ -200,5 +240,13 @@ public class MedicinesFragment extends Fragment {
         } catch (ParseException pe) {
             pe.printStackTrace();
         }
+    }
+
+    private List<String> getAllowedMedicineTitles() {
+        List<String> allowedMedicineTitles = new ArrayList<>();
+        for (Medicine medicine : mUser.getPregnancies().get(pregnancyIndex).getAllowedMedicinesByDoctor()) {
+            allowedMedicineTitles.add(medicine.getTitle());
+        }
+        return allowedMedicineTitles;
     }
 }

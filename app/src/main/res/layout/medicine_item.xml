@@ -28,7 +28,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/ic_medicines"
-                android:scaleType="centerInside"/>
+                android:scaleType="centerInside"
+                android:id="@+id/medicine_icon"/>
         </LinearLayout>
 
         <LinearLayout
