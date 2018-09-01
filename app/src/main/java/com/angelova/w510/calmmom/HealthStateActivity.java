@@ -9,11 +9,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.fragments.ActivitiesFragment;
 import com.angelova.w510.calmmom.fragments.BellyImagesFragment;
+import com.angelova.w510.calmmom.fragments.MedicinesFragment;
 import com.angelova.w510.calmmom.fragments.WeightFragment;
 import com.angelova.w510.calmmom.models.User;
 import com.angelova.w510.calmmom.models.UserActivity;
@@ -98,41 +101,53 @@ public class HealthStateActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            if (fragmentManager != null) {
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-            switch (item.getItemId()) {
-                case R.id.navigation_weight:
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("user", mUser);
-                    bundle.putString("email", mUserEmail);
-                    // set Fragmentclass Arguments
-                    WeightFragment weightFragment = new WeightFragment();
-                    weightFragment.setArguments(bundle);
-                    transaction.replace(R.id.content, weightFragment).commit();
-                    if(getSupportActionBar() != null) {
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                    }
-                    return true;
-                case R.id.navigation_activity:
-                    Bundle bundleA = new Bundle();
-                    bundleA.putSerializable("user", mUser);
-                    ActivitiesFragment activitiesFragment = new ActivitiesFragment();
-                    activitiesFragment.setArguments(bundleA);
-                    transaction.replace(R.id.content, activitiesFragment).commit();
-                    if(getSupportActionBar() != null) {
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                    }
-                    return true;
-                case R.id.navigation_belly_img:
-                    Bundle bundleB = new Bundle();
-                    bundleB.putSerializable("user", mUser);
-                    BellyImagesFragment bellyImagesFragment = new BellyImagesFragment();
-                    bellyImagesFragment.setArguments(bundleB);
-                    transaction.replace(R.id.content, bellyImagesFragment).commit();
-                    if(getSupportActionBar() != null) {
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                    }
-                    return true;
+                switch (item.getItemId()) {
+                    case R.id.navigation_weight:
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", mUser);
+                        bundle.putString("email", mUserEmail);
+                        // set Fragmentclass Arguments
+                        WeightFragment weightFragment = new WeightFragment();
+                        weightFragment.setArguments(bundle);
+                        transaction.replace(R.id.content, weightFragment).commit();
+                        if (getSupportActionBar() != null) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        }
+                        return true;
+                    case R.id.navigation_activity:
+                        Bundle bundleA = new Bundle();
+                        bundleA.putSerializable("user", mUser);
+                        ActivitiesFragment activitiesFragment = new ActivitiesFragment();
+                        activitiesFragment.setArguments(bundleA);
+                        transaction.replace(R.id.content, activitiesFragment).commit();
+                        if (getSupportActionBar() != null) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        }
+                        return true;
+                    case R.id.navigation_medicines:
+                        Bundle bundleM = new Bundle();
+                        bundleM.putSerializable("user", mUser);
+                        MedicinesFragment medicinesFragment = new MedicinesFragment();
+                        medicinesFragment.setArguments(bundleM);
+                        transaction.replace(R.id.content, medicinesFragment).commit();
+                        if (getSupportActionBar() != null) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        }
+                        return true;
+                    case R.id.navigation_belly_img:
+                        Bundle bundleB = new Bundle();
+                        bundleB.putSerializable("user", mUser);
+                        BellyImagesFragment bellyImagesFragment = new BellyImagesFragment();
+                        bellyImagesFragment.setArguments(bundleB);
+                        transaction.replace(R.id.content, bellyImagesFragment).commit();
+                        if (getSupportActionBar() != null) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        }
+                        return true;
+                }
             }
             return false;
         }
@@ -188,5 +203,14 @@ public class HealthStateActivity extends AppCompatActivity {
                         System.out.println("Error updating document " + e);
                     }
                 });
+    }
+
+    public void showAlertDialogNow(String message, String title) {
+        WarnDialog warning = new WarnDialog(this, title, message, new WarnDialog.DialogClickListener() {
+            @Override
+            public void onClick() {
+            }
+        });
+        warning.show();
     }
 }
