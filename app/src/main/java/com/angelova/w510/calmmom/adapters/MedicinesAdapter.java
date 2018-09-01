@@ -44,6 +44,11 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.View
         } else {
             holder.mTakenOnView.setText(String.format("%s h", medicine.getTime()));
         }
+        if (medicine.getComments() != null && !medicine.getComments().isEmpty()) {
+            holder.mCommentView.setText(medicine.getComments());
+        } else {
+            holder.mCommentView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -54,12 +59,14 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mTitleView;
         private TextView mTakenOnView;
+        private TextView mCommentView;
 
         public ViewHolder(View view) {
             super(view);
 
             mTitleView = (TextView) view.findViewById(R.id.medicine_title);
             mTakenOnView = (TextView) view.findViewById(R.id.medicine_taken_on);
+            mCommentView = (TextView) view.findViewById(R.id.medicine_comment);
         }
     }
 }
