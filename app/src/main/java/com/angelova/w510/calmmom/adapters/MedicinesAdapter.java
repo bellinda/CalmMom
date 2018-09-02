@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.angelova.w510.calmmom.HealthStateActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.models.Medicine;
 
@@ -93,6 +94,15 @@ public class MedicinesAdapter extends RecyclerView.Adapter<MedicinesAdapter.View
             mTakenOnView = (TextView) view.findViewById(R.id.medicine_taken_on);
             mCommentView = (TextView) view.findViewById(R.id.medicine_comment);
             mIconView = (ImageView) view.findViewById(R.id.medicine_icon);
+
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int row = getAdapterPosition();
+                    ((HealthStateActivity)context).showYesNoDialogForDeletion(medicines.get(row));
+                    return true;
+                }
+            });
         }
     }
 }

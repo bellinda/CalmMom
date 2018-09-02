@@ -249,4 +249,34 @@ public class MedicinesFragment extends Fragment {
         }
         return allowedMedicineTitles;
     }
+
+    public void removeMedicineFromListAndCalendar(Medicine medicine) {
+        mMedicines.remove(medicine);
+        mAdapter.notifyDataSetChanged();
+
+        Event event = getCurrentMedicineEvent(medicine);
+        if (event != null) {
+            mCalendar.removeEvent(event);
+        }
+
+        if (mMedicines.size() == 0) {
+            mNoDataForTakenMedicinesView. setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        }
+    }
+
+    private Event getCurrentMedicineEvent(Medicine medicine) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+        try {
+            Date takenOn = sdf.parse(medicine.getTakenOn());
+            for (Event event : mCalendar.getEvents(takenOn)) {
+                if (event.getData().equals(medicine)) {
+                    return event;
+                }
+            }
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+        return null;
+    }
 }

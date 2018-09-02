@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -14,10 +15,12 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
+import com.angelova.w510.calmmom.dialogs.YesNoDialog;
 import com.angelova.w510.calmmom.fragments.ActivitiesFragment;
 import com.angelova.w510.calmmom.fragments.BellyImagesFragment;
 import com.angelova.w510.calmmom.fragments.MedicinesFragment;
 import com.angelova.w510.calmmom.fragments.WeightFragment;
+import com.angelova.w510.calmmom.models.Medicine;
 import com.angelova.w510.calmmom.models.User;
 import com.angelova.w510.calmmom.models.UserActivity;
 import com.angelova.w510.calmmom.models.Weight;
@@ -212,5 +215,29 @@ public class HealthStateActivity extends AppCompatActivity {
             }
         });
         warning.show();
+    }
+
+    public void showYesNoDialogForDeletion(final Medicine medicine) {
+        YesNoDialog dialog = new YesNoDialog(HealthStateActivity.this, getString(R.string.dialog_delete_medicine_message),
+                getString(R.string.dialog_delete_medicine_positive_btn),
+                getString(R.string.dialog_delete_medicine_negative_btn), new YesNoDialog.ButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick() {
+                mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getTakenMedicines().remove(medicine);
+                updateUserInDb(mUser);
+
+                Fragment f = getSupportFragmentManager().findFragmentById(R.id.content);
+                if (f instanceof MedicinesFragment) {
+                    ((MedicinesFragment) f).removeMedicineFromListAndCalendar(medicine);
+                }
+            }
+
+            @Override
+            public void onNegativeButtonClick() {
+
+            }
+        });
+
+        dialog.show();
     }
 }

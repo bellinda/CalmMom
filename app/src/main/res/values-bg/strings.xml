@@ -266,4 +266,7 @@
     <string name="dialog_is_allowed_med_add_to_allowed">В разрешени</string>
     <string name="dialog_is_allowed_med_cancel">Отказ</string>
 
+    <string name="dialog_delete_medicine_message">Сигурна ли сте, че искате да изтриете този запис?</string>
+    <string name="dialog_delete_medicine_positive_btn">Да</string>
+    <string name="dialog_delete_medicine_negative_btn">Не</string>
 </resources>
