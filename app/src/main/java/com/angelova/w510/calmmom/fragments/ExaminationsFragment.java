@@ -85,11 +85,13 @@ public class ExaminationsFragment extends Fragment {
                     public void onSave(Examination examination) {
                         mDataList.add(examination);
                         Collections.sort(mDataList);
-                        if (mDataList.indexOf(examination) == 0) {
+                        if (mDataList.indexOf(examination) == 0 && mDataList.get(1).getStatus() != ExaminationStatus.COMPLETED) {
                             mDataList.get(0).setStatus(ExaminationStatus.CURRENT);
                             for (int i = 1; i < mDataList.size(); i++) {
                                 mDataList.get(i).setStatus(ExaminationStatus.FUTURE);
                             }
+                        } else if (mDataList.indexOf(examination) == 0 && mDataList.get(1).getStatus() != ExaminationStatus.COMPLETED) {
+                            mDataList.get(0).setStatus(ExaminationStatus.COMPLETED);
                         }
                         mTimeLineAdapter.notifyDataSetChanged();
 
