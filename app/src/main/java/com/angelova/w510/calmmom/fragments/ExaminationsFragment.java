@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.angelova.w510.calmmom.ExaminationsActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.adapters.TimeLineAdapter;
 import com.angelova.w510.calmmom.dialogs.AddExaminationDialog;
@@ -85,6 +86,8 @@ public class ExaminationsFragment extends Fragment {
                         mDataList.add(examination);
                         Collections.sort(mDataList);
                         mTimeLineAdapter.notifyDataSetChanged();
+
+                        ((ExaminationsActivity) getActivity()).updateExaminationsInDb(mDataList);
                     }
                 });
                 dialog.show();
