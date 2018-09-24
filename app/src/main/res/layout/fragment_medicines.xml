@@ -28,32 +28,40 @@
         app:layout_constraintGuide_percent="0.55"
         android:id="@+id/calendar_bottom_guideline"/>
 
-    <TextView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/month_top_guideline"
+        android:layout_height="wrap_content"
         android:background="@color/colorContrast"
-        android:text="@string/fragment_medicines_title"
-        android:gravity="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_medicines_title"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/month_top_guideline"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toTopOf="@id/calendar_top_guideline"
         android:background="@color/colorContrastTransparent"
         android:id="@+id/month_year_view"
         tools:text="Aug 2018"
         android:textColor="@color/colorAccent"
         android:paddingLeft="20dp"
-        android:paddingTop="20dp"
+        android:gravity="center_vertical"
         android:textSize="21sp"/>
 
     <com.github.sundeepk.compactcalendarview.CompactCalendarView

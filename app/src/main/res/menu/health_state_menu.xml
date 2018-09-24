@@ -16,6 +16,11 @@
         android:title="@string/title_medicines"/>
 
     <item
+        android:id="@+id/navigation_meals"
+        android:icon="@drawable/meals_selector"
+        android:title="@string/title_meals" />
+
+    <item
         android:id="@+id/navigation_belly_img"
         android:icon="@drawable/belly_img_selector"
         android:title="@string/title_belly_img" />

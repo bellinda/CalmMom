@@ -18,6 +18,7 @@ import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.dialogs.YesNoDialog;
 import com.angelova.w510.calmmom.fragments.ActivitiesFragment;
 import com.angelova.w510.calmmom.fragments.BellyImagesFragment;
+import com.angelova.w510.calmmom.fragments.MealsFragment;
 import com.angelova.w510.calmmom.fragments.MedicinesFragment;
 import com.angelova.w510.calmmom.fragments.WeightFragment;
 import com.angelova.w510.calmmom.models.Medicine;
@@ -136,6 +137,16 @@ public class HealthStateActivity extends AppCompatActivity {
                         MedicinesFragment medicinesFragment = new MedicinesFragment();
                         medicinesFragment.setArguments(bundleM);
                         transaction.replace(R.id.content, medicinesFragment).commit();
+                        if (getSupportActionBar() != null) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        }
+                        return true;
+                    case R.id.navigation_meals:
+                        Bundle bundleMl = new Bundle();
+                        bundleMl.putSerializable("user", mUser);
+                        MealsFragment mealsFragment = new MealsFragment();
+                        mealsFragment.setArguments(bundleMl);
+                        transaction.replace(R.id.content, mealsFragment).commit();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }
