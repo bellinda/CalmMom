@@ -39,7 +39,10 @@
         app:selectedDateBackground="@color/colorContrastTransparent"
         app:selectorColor="@color/colorPrimary"
         app:textColorNormal="@color/colorAccent"
-        app:textColorSelected="@color/colorPrimary" />
+        app:textColorSelected="@color/colorPrimary"
+        app:sizeMiddleText="@dimen/horizontal_calendar_middle_text_size"
+        app:sizeTopText="@dimen/horizontal_calendar_top_text_size"
+        app:sizeBottomText="@dimen/horizontal_calendar_bottom_text_size" />
 
 
 

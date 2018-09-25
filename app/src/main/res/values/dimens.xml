@@ -47,4 +47,8 @@
     <dimen name="dialog_is_allowed_med_button_height">55dp</dimen>
 
     <dimen name="medicine_item_height">45dp</dimen>
+
+    <dimen name="horizontal_calendar_top_text_size">12sp</dimen>
+    <dimen name="horizontal_calendar_bottom_text_size">12sp</dimen>
+    <dimen name="horizontal_calendar_middle_text_size">22sp</dimen>
 </resources>
