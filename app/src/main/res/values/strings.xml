@@ -295,4 +295,6 @@
     <string name="dialog_meal_category_sea_food">Sea food</string>
     <string name="dialog_meal_category_sweets">Sweets</string>
     <string name="dialog_meal_category_other">Other</string>
+    <string name="dialog_meal_quantity_title">Quantity</string>
+    <string name="dialog_meal_quantity_metrix">gr</string>
 </resources>

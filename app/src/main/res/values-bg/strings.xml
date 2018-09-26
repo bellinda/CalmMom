@@ -292,4 +292,6 @@
     <string name="dialog_meal_category_sea_food">Морски дарове</string>
     <string name="dialog_meal_category_sweets">Захарни изделия</string>
     <string name="dialog_meal_category_other">Други</string>
+    <string name="dialog_meal_quantity_title">Количество</string>
+    <string name="dialog_meal_quantity_metrix">гр</string>
 </resources>
