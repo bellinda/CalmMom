@@ -270,4 +270,26 @@
     <string name="dialog_delete_medicine_message">Сигурна ли сте, че искате да изтриете този запис?</string>
     <string name="dialog_delete_medicine_positive_btn">Да</string>
     <string name="dialog_delete_medicine_negative_btn">Не</string>
+
+    <string name="fragment_meals_week_title">Седмица</string>
+    <string name="fragment_meals_day_title">Ден</string>
+    <string name="fragment_meals_progress_text">Препоръчителен седмичен прием</string>
+
+    <string name="dialog_meal_title">Хранене днес</string>
+    <string name="dialog_meal_title_label">Название</string>
+    <string name="dialog_meal_time_label">Време, когато е изядено</string>
+    <string name="dialog_meal_category_label">Категория</string>
+    <string name="dialog_meal_no_title_set">Моля въведете названието на храната</string>
+    <string name="dialog_meal_no_category_set">Моля въведете категорията на храната</string>
+    <string name="dialog_meal_no_title_set_title">Внимание</string>
+    <string name="dialog_meal_category_fruit">Плодове и зеленчуци</string>
+    <string name="dialog_meal_category_whole_grains">Пълнозърнести храни</string>
+    <string name="dialog_meal_category_milk">Мляко и млечни продукти</string>
+    <string name="dialog_meal_category_eggs">Яйца</string>
+    <string name="dialog_meal_category_bean">Бобови храни</string>
+    <string name="dialog_meal_category_meat">Месо</string>
+    <string name="dialog_meal_category_fish">Риба</string>
+    <string name="dialog_meal_category_sea_food">Морски дарове</string>
+    <string name="dialog_meal_category_sweets">Захарни изделия</string>
+    <string name="dialog_meal_category_other">Други</string>
 </resources>

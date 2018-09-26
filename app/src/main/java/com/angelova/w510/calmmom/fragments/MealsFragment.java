@@ -11,9 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.angelova.w510.calmmom.R;
+import com.angelova.w510.calmmom.dialogs.AddMealDialog;
+import com.angelova.w510.calmmom.models.Meal;
 import com.angelova.w510.calmmom.models.User;
+import com.github.lzyzsd.circleprogress.ArcProgress;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,6 +38,9 @@ import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 public class MealsFragment extends Fragment {
 
     private HorizontalCalendar horizontalCalendar;
+    private TextView mWeekDayView;
+    private ArcProgress mArcProgress;
+    private FloatingActionButton mAddBtn;
 
     private User mUser;
     private int pregnancyIndex;
@@ -52,6 +60,7 @@ public class MealsFragment extends Fragment {
         pregnancyIndex = mUser.getPregnancyConsecutiveId();
 
         int currentPregnancyWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation()) / 7 + 1);
+        int daysOfCurrentWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation()) % 7 + 1);
         int monthsGone = currentPregnancyWeek / 4;
         int monthsUpcoming = 10 - monthsGone;
 
@@ -71,7 +80,28 @@ public class MealsFragment extends Fragment {
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
+                int selectedPregnancyWeek = (int) (getDaysBetweenTwoDates(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation(), date.getTime()) / 7 + 1);
+                int daysOfSelectedWeek = (int) (getDaysBetweenTwoDates(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation(), date.getTime()) % 7 + 1);
+                mWeekDayView.setText(String.format(Locale.getDefault(), "%s %d, %s %d", getString(R.string.fragment_meals_week_title), selectedPregnancyWeek, getString(R.string.fragment_meals_day_title), daysOfSelectedWeek));
+            }
+        });
 
+        mWeekDayView = (TextView) rootView.findViewById(R.id.week_day_view);
+        mWeekDayView.setText(String.format(Locale.getDefault(), "%s %d, %s %d", getString(R.string.fragment_meals_week_title), currentPregnancyWeek, getString(R.string.fragment_meals_day_title), daysOfCurrentWeek));
+
+        mArcProgress = (ArcProgress) rootView.findViewById(R.id.arc_progress);
+
+        mAddBtn = (FloatingActionButton) rootView.findViewById(R.id.add_meal_btn);
+        mAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddMealDialog addMealDialog = new AddMealDialog(getActivity(), horizontalCalendar.getSelectedDate().getTime(), new AddMealDialog.DialogClickListener() {
+                    @Override
+                    public void onSave(Meal meal) {
+
+                    }
+                });
+                addMealDialog.show();
             }
         });
 
@@ -87,6 +117,23 @@ public class MealsFragment extends Fragment {
             Calendar cal1 = Calendar.getInstance();
             String formatted = sdf.format(cal1.getTime());
             cal1.setTime(sdf.parse(formatted));
+
+            long msDiff = cal1.getTimeInMillis() - cal.getTimeInMillis();
+            daysDiff = TimeUnit.MILLISECONDS.toDays(msDiff);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return daysDiff;
+    }
+
+    private long getDaysBetweenTwoDates(String startDate, Date endDate) {
+        long daysDiff = 0;
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
+        try {
+            cal.setTime(sdf.parse(startDate));
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(endDate);
 
             long msDiff = cal1.getTimeInMillis() - cal.getTimeInMillis();
             daysDiff = TimeUnit.MILLISECONDS.toDays(msDiff);
