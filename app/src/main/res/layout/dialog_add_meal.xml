@@ -109,7 +109,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/question_edit_view"
+                android:id="@+id/quantity_input"
                 android:background="@drawable/edit_text_bgr"
                 android:padding="5dp"
                 android:gravity="center_vertical|end"

@@ -4,8 +4,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.angelova.w510.calmmom.HealthStateActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.dialogs.AddMealDialog;
 import com.angelova.w510.calmmom.models.Meal;
@@ -22,13 +21,16 @@ import com.melnykov.fab.FloatingActionButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
-import devs.mulham.horizontalcalendar.HorizontalCalendarView;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 /**
@@ -98,7 +100,19 @@ public class MealsFragment extends Fragment {
                 AddMealDialog addMealDialog = new AddMealDialog(getActivity(), horizontalCalendar.getSelectedDate().getTime(), new AddMealDialog.DialogClickListener() {
                     @Override
                     public void onSave(Meal meal) {
+                        if (mUser.getPregnancies().get(pregnancyIndex).getMeals() == null) {
+                            mUser.getPregnancies().get(pregnancyIndex).setMeals(new HashMap<String, List<Meal>>());
+                        }
 
+                        if (mUser.getPregnancies().get(pregnancyIndex).getMeals().get(meal.getDate()) == null) {
+                            List<Meal> meals = Arrays.asList(meal);
+                            mUser.getPregnancies().get(pregnancyIndex).getMeals().put(meal.getDate(), meals);
+                        } else {
+                            mUser.getPregnancies().get(pregnancyIndex).getMeals().get(meal.getDate()).add(meal);
+                        }
+                        ((HealthStateActivity) getActivity()).updateUserInDb(mUser);
+
+                        //TODO: update data on screen
                     }
                 });
                 addMealDialog.show();

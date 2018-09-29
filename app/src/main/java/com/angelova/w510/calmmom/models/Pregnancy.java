@@ -3,6 +3,7 @@ package com.angelova.w510.calmmom.models;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by W510 on 29.8.2018 г..
@@ -21,6 +22,7 @@ public class Pregnancy implements Serializable {
     private boolean unwantedPregnancy;
     private List<Medicine> takenMedicines;
     private List<Medicine> allowedMedicinesByDoctor;
+    private Map<String, List<Meal>> meals;
 
     public String getFirstDayOfLastMenstruation() {
         return firstDayOfLastMenstruation;
@@ -108,5 +110,13 @@ public class Pregnancy implements Serializable {
 
     public void setAllowedMedicinesByDoctor(List<Medicine> allowedMedicinesByDoctor) {
         this.allowedMedicinesByDoctor = allowedMedicinesByDoctor;
+    }
+
+    public Map<String, List<Meal>> getMeals() {
+        return meals;
+    }
+
+    public void setMeals(Map<String, List<Meal>> meals) {
+        this.meals = meals;
     }
 }

@@ -1,16 +1,23 @@
 package com.angelova.w510.calmmom.models;
 
+import android.support.annotation.NonNull;
+
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by W510 on 26.9.2018 г..
  */
 
-public class Meal {
+public class Meal implements Serializable, Comparable<Meal> {
     private String title;
-    private Date date;
+    private int quantity;
+    private String date;
     private String time;
-    private String category;
+    private int category;
 
     public String getTitle() {
         return title;
@@ -20,11 +27,19 @@ public class Meal {
         this.title = title;
     }
 
-    public Date getDate() {
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -36,11 +51,30 @@ public class Meal {
         this.time = time;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
+    }
+
+    @Override
+    public int compareTo(@NonNull Meal meal) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy kk:mm", Locale.getDefault());
+
+        try {
+            Date currentItemDate = sdf.parse(String.format("%s %s", this.getDate(), this.getTime()));
+            Date otherItemDate = sdf.parse(String.format("%s %s", meal.getDate(), meal.getTime()));
+
+            if (currentItemDate.after(otherItemDate)) {
+                return -1;
+            } else if (currentItemDate.before(otherItemDate)) {
+                return 1;
+            }
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+        return 0;
     }
 }
