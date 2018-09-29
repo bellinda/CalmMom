@@ -20,8 +20,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
         android:layout_marginLeft="10dp"
         android:layout_gravity="center_vertical"
         android:padding="15dp"
@@ -41,14 +39,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="30sp"
-                    android:textColor="@color/colorContrastTransparent"
-                    tools:text="&#9719; "
-                    android:gravity="center"
-                    android:layout_gravity="center"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_fruit_veg"
+                    android:id="@+id/category_image"/>
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -57,7 +52,8 @@
                     android:textSize="12sp"
                     android:textColor="@color/colorContrastTransparent"
                     tools:text="12:30"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:paddingLeft="10dp"/>
             </LinearLayout>
 
             <android.support.v7.widget.AppCompatTextView

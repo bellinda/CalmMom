@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.angelova.w510.calmmom.HealthStateActivity;
 import com.angelova.w510.calmmom.R;
+import com.angelova.w510.calmmom.adapters.MealsTimelineAdapter;
 import com.angelova.w510.calmmom.dialogs.AddMealDialog;
 import com.angelova.w510.calmmom.models.Meal;
 import com.angelova.w510.calmmom.models.User;
@@ -24,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +47,11 @@ public class MealsFragment extends Fragment {
     private TextView mWeekDayView;
     private ArcProgress mArcProgress;
     private FloatingActionButton mAddBtn;
+    private TextView mNoDataView;
+    private MealsTimelineAdapter mMealsAdapter;
+    private RecyclerView mRecyclerView;
+
+    private List<Meal> meals;
 
     private User mUser;
     private int pregnancyIndex;
@@ -85,6 +94,19 @@ public class MealsFragment extends Fragment {
                 int selectedPregnancyWeek = (int) (getDaysBetweenTwoDates(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation(), date.getTime()) / 7 + 1);
                 int daysOfSelectedWeek = (int) (getDaysBetweenTwoDates(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation(), date.getTime()) % 7 + 1);
                 mWeekDayView.setText(String.format(Locale.getDefault(), "%s %d, %s %d", getString(R.string.fragment_meals_week_title), selectedPregnancyWeek, getString(R.string.fragment_meals_day_title), daysOfSelectedWeek));
+
+                getMealsForDate(date.getTime());
+                if (meals.size() > 0) {
+                    Collections.sort(meals);
+                    mMealsAdapter = new MealsTimelineAdapter(meals);
+                    mRecyclerView.setAdapter(mMealsAdapter);
+
+                    mNoDataView.setVisibility(View.GONE);
+                    mRecyclerView.setVisibility(View.VISIBLE);
+                } else {
+                    mRecyclerView.setVisibility(View.GONE);
+                    mNoDataView.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -112,12 +134,41 @@ public class MealsFragment extends Fragment {
                         }
                         ((HealthStateActivity) getActivity()).updateUserInDb(mUser);
 
-                        //TODO: update data on screen
+                        getMealsForDate(horizontalCalendar.getSelectedDate().getTime());
+                        if (meals.size() > 0) {
+                            Collections.sort(meals);
+                            mMealsAdapter = new MealsTimelineAdapter(meals);
+                            mRecyclerView.setAdapter(mMealsAdapter);
+
+                            mNoDataView.setVisibility(View.GONE);
+                            mRecyclerView.setVisibility(View.VISIBLE);
+                        } else {
+                            mRecyclerView.setVisibility(View.GONE);
+                            mNoDataView.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
                 addMealDialog.show();
             }
         });
+
+        mNoDataView = (TextView) rootView.findViewById(R.id.no_data_view);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setHasFixedSize(true);
+
+        getMealsForCurrentDate();
+        if (meals.size() > 0) {
+            Collections.sort(meals);
+            mMealsAdapter = new MealsTimelineAdapter(meals);
+            mRecyclerView.setAdapter(mMealsAdapter);
+
+            mNoDataView.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        } else {
+            mRecyclerView.setVisibility(View.GONE);
+            mNoDataView.setVisibility(View.VISIBLE);
+        }
 
         return rootView;
     }
@@ -155,5 +206,30 @@ public class MealsFragment extends Fragment {
             e.printStackTrace();
         }
         return daysDiff;
+    }
+
+    private void getMealsForCurrentDate() {
+        meals = new ArrayList<>();
+        if (mUser.getPregnancies().get(pregnancyIndex).getMeals() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            //the selected date on opening the fragment is always the current date
+            String date = sdf.format(Calendar.getInstance().getTime());
+            List<Meal> mealsForCurrentDate = mUser.getPregnancies().get(pregnancyIndex).getMeals().get(date);
+            if (mealsForCurrentDate != null) {
+                meals = mealsForCurrentDate;
+            }
+        }
+    }
+
+    private void getMealsForDate(Date date) {
+        meals = new ArrayList<>();
+        if (mUser.getPregnancies().get(pregnancyIndex).getMeals() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            String dateAsString = sdf.format(date);
+            List<Meal> mealsForCurrentDate = mUser.getPregnancies().get(pregnancyIndex).getMeals().get(dateAsString);
+            if (mealsForCurrentDate != null) {
+                meals = mealsForCurrentDate;
+            }
+        }
     }
 }
