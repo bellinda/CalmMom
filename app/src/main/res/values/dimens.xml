@@ -53,4 +53,5 @@
     <dimen name="horizontal_calendar_middle_text_size">22sp</dimen>
 
     <dimen name="add_meal_category_spinner_height">50dp</dimen>
+    <dimen name="add_meal_danger_text_size">14sp</dimen>
 </resources>

@@ -18,6 +18,7 @@ public class Meal implements Serializable, Comparable<Meal> {
     private String date;
     private String time;
     private int category;
+    private boolean dangerous;
 
     public String getTitle() {
         return title;
@@ -57,6 +58,14 @@ public class Meal implements Serializable, Comparable<Meal> {
 
     public void setCategory(int category) {
         this.category = category;
+    }
+
+    public boolean isDangerous() {
+        return dangerous;
+    }
+
+    public void setDangerous(boolean dangerous) {
+        this.dangerous = dangerous;
     }
 
     @Override

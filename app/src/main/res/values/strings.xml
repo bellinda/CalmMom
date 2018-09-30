@@ -297,4 +297,17 @@
     <string name="dialog_meal_category_other">Other</string>
     <string name="dialog_meal_quantity_title">Quantity</string>
     <string name="dialog_meal_quantity_metrix">gr</string>
+
+    <string name="dialog_meal_is_unpasteurized">Does this meal contain unpasteurized milk?</string>
+    <string name="dialog_meal_with_raw_eggs">Does this meal contain raw eggs?</string>
+    <string name="dialog_meal_raw_eggs">Were the eggs raw?</string>
+    <string name="dialog_meal_raw_undercooked">Was the meat raw or undercooked?</string>
+    <string name="dialog_meal_raw_fish">Was the fish raw or smoked?</string>
+    <string name="dialog_meal_raw_sea_food">Was the sea food raw or smoked?</string>
+    <string name="dialog_meal_pate">Does this meal contain pates (including vegetable or made of liver)?</string>
+    <string name="dialog_meal_soft_ripened_cheeses">Does this meal contain soft ripened cheeses like for example brie or camembert?</string>
+    <string name="dialog_meal_blue_cheeses">Does this meal contain blue cheeses like for example Roquefort?</string>
+    <string name="dialog_meal_other_sea_food">Does this meal contain raw or smoked sea food?</string>
+    <string name="dialog_meal_other_fish">Does this meal contain raw or smoked fish?</string>
+    <string name="dialog_meal_other_undercooked_meat">Does this meal contain raw or undercooked meat?</string>
 </resources>

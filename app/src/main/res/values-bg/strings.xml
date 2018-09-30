@@ -294,4 +294,17 @@
     <string name="dialog_meal_category_other">Други</string>
     <string name="dialog_meal_quantity_title">Количество</string>
     <string name="dialog_meal_quantity_metrix">гр</string>
+
+    <string name="dialog_meal_is_unpasteurized">Това хранене съдържаше ли непастьоризирано мляко?</string>
+    <string name="dialog_meal_with_raw_eggs">Това хранене съдържаше ли сурови яйца?</string>
+    <string name="dialog_meal_raw_eggs">Яйцата сурови ли бяха?</string>
+    <string name="dialog_meal_raw_undercooked">Месото беше ли сурово или полусурово?</string>
+    <string name="dialog_meal_raw_fish">Рибата беше ли сурова или пушена?</string>
+    <string name="dialog_meal_raw_sea_food">Морската храна беше ли сурова или пушена?</string>
+    <string name="dialog_meal_pate">Това хранене съдържаше ли някакъв вид пастет (независимо дали зеленчуков или от гъши дроб)?</string>
+    <string name="dialog_meal_soft_ripened_cheeses">Това хранене съдържаше ли меки сирена като например Бри или Камембер?</string>
+    <string name="dialog_meal_blue_cheeses">Това хранене съдържаше ли сини сирена като например Рокфор?</string>
+    <string name="dialog_meal_other_sea_food">Това хранене съдържаше ли сурови или пушени морски деликатеси?</string>
+    <string name="dialog_meal_other_fish">Това хранене съдържаше ли сурова или пушена риба?</string>
+    <string name="dialog_meal_other_undercooked_meat">Това хранене съдържаше ли сурово или полусурово месо?</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.angelova.w510.calmmom.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -50,37 +51,41 @@ public class MealsTimelineAdapter extends RecyclerView.Adapter<MealsTimelineAdap
         holder.mTime.setText(meal.getTime());
         holder.mTitle.setText(meal.getTitle());
 
+        if (meal.isDangerous()) {
+            holder.mTitle.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimaryDark));
+        }
+
         switch (meal.getCategory()) {
             case 0:
                 holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_fruit_veg));
-                return;
+                break;
             case 1:
                 holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_wheat_gain));
-                return;
+                break;
             case 2:
                 holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_milk));
-                return;
+                break;
             case 3:
                 holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_eggs));
-                return;
+                break;
             case 4:
                 holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_beans));
-                return;
+                break;
             case 5:
                 holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_meat));
-                return;
+                break;
             case 6:
                 holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_fish));
-                return;
+                break;
             case 7:
                 holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_sea_food));
-                return;
+                break;
             case 8:
                 holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_sweets));
-                return;
+                break;
             case 9:
                 holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_other));
-                return;
+                break;
         }
     }
 

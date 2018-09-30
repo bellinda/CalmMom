@@ -4,11 +4,14 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -42,6 +45,31 @@ public class AddMealDialog extends Dialog {
     private TextView mCancelBtn;
     private TextView mSaveBtn;
 
+    private LinearLayout mUnpasteurizedLayout;
+    private SwitchCompat mUnpasteurizedSwitch;
+    private LinearLayout mContainsRawEggsLayout;
+    private SwitchCompat mContainsRawEggsSwitch;
+    private LinearLayout mRawEggsLayout;
+    private SwitchCompat mRawEggsSwitch;
+    private LinearLayout mUndercookedLayout;
+    private SwitchCompat mUndercookedSwitch;
+    private LinearLayout mRawFishLayout;
+    private SwitchCompat mRawFishSwitch;
+    private LinearLayout mRawSeaFoodLayout;
+    private SwitchCompat mRawSeaFoodSwitch;
+    private LinearLayout mPateLayout;
+    private SwitchCompat mPateSwitch;
+    private LinearLayout mSoftRippedCheeseLayout;
+    private SwitchCompat mSoftRippedCheeseSwitch;
+    private LinearLayout mBlueCheeseLayout;
+    private SwitchCompat mBlueCheeseSwitch;
+    private LinearLayout mOtherSeaFoodLayout;
+    private SwitchCompat mOtherSeaFoodSwitch;
+    private LinearLayout mOtherFishLayout;
+    private SwitchCompat mOtherFishSwitch;
+    private LinearLayout mOtherMeatLayout;
+    private SwitchCompat mOtherMeatSwitch;
+
     private List<Integer> categoriesImages = new ArrayList<>();
     private List<String> categories = new ArrayList<>();
 
@@ -71,6 +99,31 @@ public class AddMealDialog extends Dialog {
         mCancelBtn = (TextView) findViewById(R.id.cancel_button);
         mSaveBtn = (TextView) findViewById(R.id.save_button);
 
+        mUnpasteurizedLayout = (LinearLayout) findViewById(R.id.unpasteurized_layout);
+        mUnpasteurizedSwitch = (SwitchCompat) findViewById(R.id.unpasteurized_switch);
+        mContainsRawEggsLayout = (LinearLayout) findViewById(R.id.contains_raw_eggs_layout);
+        mContainsRawEggsSwitch = (SwitchCompat) findViewById(R.id.contains_raw_eggs_switch);
+        mRawEggsLayout = (LinearLayout) findViewById(R.id.raw_eggs_layout);
+        mRawEggsSwitch = (SwitchCompat) findViewById(R.id.raw_eggs_switch);
+        mUndercookedLayout = (LinearLayout) findViewById(R.id.undercooked_layout);
+        mUndercookedSwitch = (SwitchCompat) findViewById(R.id.undercooked_switch);
+        mRawFishLayout = (LinearLayout) findViewById(R.id.raw_fish_layout);
+        mRawFishSwitch = (SwitchCompat) findViewById(R.id.raw_fish_switch);
+        mRawSeaFoodLayout = (LinearLayout) findViewById(R.id.raw_sea_food_layout);
+        mRawSeaFoodSwitch = (SwitchCompat) findViewById(R.id.raw_sea_food_switch);
+        mPateLayout = (LinearLayout) findViewById(R.id.pate_layout);
+        mPateSwitch = (SwitchCompat) findViewById(R.id.pate_switch);
+        mSoftRippedCheeseLayout = (LinearLayout) findViewById(R.id.soft_ripped_cheese_layout);
+        mSoftRippedCheeseSwitch = (SwitchCompat) findViewById(R.id.soft_ripped_cheese_switch);
+        mBlueCheeseLayout = (LinearLayout) findViewById(R.id.blue_cheese_layout);
+        mBlueCheeseSwitch = (SwitchCompat) findViewById(R.id.blue_cheese_switch);
+        mOtherSeaFoodLayout = (LinearLayout) findViewById(R.id.other_sea_food_layout);
+        mOtherSeaFoodSwitch = (SwitchCompat) findViewById(R.id.other_sea_food_switch);
+        mOtherFishLayout = (LinearLayout) findViewById(R.id.other_fish_layout);
+        mOtherFishSwitch = (SwitchCompat) findViewById(R.id.other_fish_switch);
+        mOtherMeatLayout = (LinearLayout) findViewById(R.id.other_undercooked_layout);
+        mOtherMeatSwitch = (SwitchCompat) findViewById(R.id.other_undercooked_switch);
+
         // Images from res/drawable folder
         categoriesImages = Arrays.asList(R.drawable.ic_fruit_veg, R.drawable.ic_wheat_gain, R.drawable.ic_milk, R.drawable.ic_eggs,
                 R.drawable.ic_beans, R.drawable.ic_meat, R.drawable.ic_fish, R.drawable.ic_sea_food,
@@ -90,6 +143,50 @@ public class AddMealDialog extends Dialog {
 
         MealCategoriesAdapter mealCategoriesAdapter = new MealCategoriesAdapter(getContext(), categoriesImages, categories);
         mCategorySpinner.setAdapter(mealCategoriesAdapter);
+
+        mCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                hideAllDangerQuestionsViews();
+                switch (i) {
+                    case 2:
+                        mUnpasteurizedLayout.setVisibility(View.VISIBLE);
+                        mSoftRippedCheeseLayout.setVisibility(View.VISIBLE);
+                        mBlueCheeseLayout.setVisibility(View.VISIBLE);
+                        return;
+                    case 3:
+                        mRawEggsLayout.setVisibility(View.VISIBLE);
+                        return;
+                    case 5:
+                        mUndercookedLayout.setVisibility(View.VISIBLE);
+                        mPateLayout.setVisibility(View.VISIBLE);
+                        return;
+                    case 6:
+                        mRawFishLayout.setVisibility(View.VISIBLE);
+                        return;
+                    case 7:
+                        mRawSeaFoodLayout.setVisibility(View.VISIBLE);
+                        return;
+                    case 8:
+                        mContainsRawEggsLayout.setVisibility(View.VISIBLE);
+                        return;
+                    case 9:
+                        mUnpasteurizedLayout.setVisibility(View.VISIBLE);
+                        mContainsRawEggsLayout.setVisibility(View.VISIBLE);
+                        mPateLayout.setVisibility(View.VISIBLE);
+                        mSoftRippedCheeseLayout.setVisibility(View.VISIBLE);
+                        mBlueCheeseLayout.setVisibility(View.VISIBLE);
+                        mOtherSeaFoodLayout.setVisibility(View.VISIBLE);
+                        mOtherFishLayout.setVisibility(View.VISIBLE);
+                        mOtherMeatLayout.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                hideAllDangerQuestionsViews();
+            }
+        });
 
         mTimeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,10 +223,12 @@ public class AddMealDialog extends Dialog {
                     }
                     int category = (Integer) mCategorySpinner.getSelectedItem();
                     String time = mTimeView.getText().toString();
+                    boolean isDangerous = getIsDangerousBasedOnCategory(category);
 
                     Meal meal = new Meal();
                     meal.setTitle(title);
                     meal.setCategory(category);
+                    meal.setDangerous(isDangerous);
                     if (quantity > 0) {
                         meal.setQuantity(quantity);
                     }
@@ -142,5 +241,39 @@ public class AddMealDialog extends Dialog {
                 }
             }
         });
+    }
+
+    private void hideAllDangerQuestionsViews() {
+        mUnpasteurizedLayout.setVisibility(View.GONE);
+        mContainsRawEggsLayout.setVisibility(View.GONE);
+        mRawEggsLayout.setVisibility(View.GONE);
+        mUndercookedLayout.setVisibility(View.GONE);
+        mRawFishLayout.setVisibility(View.GONE);
+        mRawSeaFoodLayout.setVisibility(View.GONE);
+        mPateLayout.setVisibility(View.GONE);
+        mSoftRippedCheeseLayout.setVisibility(View.GONE);
+        mBlueCheeseLayout.setVisibility(View.GONE);
+    }
+
+    private boolean getIsDangerousBasedOnCategory(int category) {
+        switch (category) {
+            case 2:
+                return mUnpasteurizedSwitch.isChecked() || mSoftRippedCheeseSwitch.isChecked() || mBlueCheeseSwitch.isChecked();
+            case 3:
+                return mRawEggsSwitch.isChecked();
+            case 5:
+                return mUndercookedSwitch.isChecked() || mPateSwitch.isChecked();
+            case 6:
+                return mRawFishSwitch.isChecked();
+            case 7:
+                return mRawSeaFoodSwitch.isChecked();
+            case 8:
+                return mContainsRawEggsSwitch.isChecked();
+            case 9:
+                return mUnpasteurizedSwitch.isChecked() || mContainsRawEggsSwitch.isChecked() || mPateSwitch.isChecked() || mSoftRippedCheeseSwitch.isChecked()
+                        || mBlueCheeseSwitch.isChecked() || mOtherSeaFoodSwitch.isChecked() || mOtherFishSwitch.isChecked() || mOtherMeatSwitch.isChecked();
+            default:
+                return false;
+        }
     }
 }
