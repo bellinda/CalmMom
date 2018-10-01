@@ -66,24 +66,27 @@ public class MealsTimelineAdapter extends RecyclerView.Adapter<MealsTimelineAdap
                 holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_milk));
                 break;
             case 3:
-                holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_eggs));
+                holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_dairy));
                 break;
             case 4:
-                holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_beans));
+                holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_eggs));
                 break;
             case 5:
-                holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_meat));
+                holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_beans));
                 break;
             case 6:
-                holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_fish));
+                holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_meat));
                 break;
             case 7:
-                holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_sea_food));
+                holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_fish));
                 break;
             case 8:
-                holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_sweets));
+                holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_sea_food));
                 break;
             case 9:
+                holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_sweets));
+                break;
+            case 10:
                 holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_other));
                 break;
         }

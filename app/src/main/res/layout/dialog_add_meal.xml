@@ -162,7 +162,7 @@
                     android:orientation="horizontal"
                     android:weightSum="6"
                     android:layout_marginBottom="10dp"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:layout_width="0dp"
@@ -461,7 +461,8 @@
                         android:text="@string/dialog_meal_quantity_metrix"
                         android:layout_marginLeft="10dp"
                         android:textSize="21sp"
-                        android:textColor="@color/colorContrast"/>
+                        android:textColor="@color/colorContrast"
+                        android:id="@+id/quantity_metrix_view"/>
 
                 </LinearLayout>
 

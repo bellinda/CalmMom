@@ -40,6 +40,7 @@ public class AddMealDialog extends Dialog {
     private TextView mNameInput;
     private Spinner mCategorySpinner;
     private EditText mQuantityInput;
+    private TextView mQuantityMetrix;
     private LinearLayout mTimeLayout;
     private TextView mTimeView;
     private TextView mCancelBtn;
@@ -93,6 +94,7 @@ public class AddMealDialog extends Dialog {
 
         mNameInput = (TextView) findViewById(R.id.input_title);
         mQuantityInput = (EditText) findViewById(R.id.quantity_input);
+        mQuantityMetrix = (TextView) findViewById(R.id.quantity_metrix_view);
         mCategorySpinner = (Spinner) findViewById(R.id.category_spinner);
         mTimeLayout = (LinearLayout) findViewById(R.id.meal_time_layout);
         mTimeView = (TextView) findViewById(R.id.meal_time_text);
@@ -125,14 +127,15 @@ public class AddMealDialog extends Dialog {
         mOtherMeatSwitch = (SwitchCompat) findViewById(R.id.other_undercooked_switch);
 
         // Images from res/drawable folder
-        categoriesImages = Arrays.asList(R.drawable.ic_fruit_veg, R.drawable.ic_wheat_gain, R.drawable.ic_milk, R.drawable.ic_eggs,
-                R.drawable.ic_beans, R.drawable.ic_meat, R.drawable.ic_fish, R.drawable.ic_sea_food,
+        categoriesImages = Arrays.asList(R.drawable.ic_fruit_veg, R.drawable.ic_wheat_gain, R.drawable.ic_milk, R.drawable.ic_dairy,
+                R.drawable.ic_eggs, R.drawable.ic_beans, R.drawable.ic_meat, R.drawable.ic_fish, R.drawable.ic_sea_food,
                 R.drawable.ic_sweets, R.drawable.ic_other);
 
         // timezones for each country
         categories = Arrays.asList(context.getString(R.string.dialog_meal_category_fruit),
                 context.getString(R.string.dialog_meal_category_whole_grains),
                 context.getString(R.string.dialog_meal_category_milk),
+                context.getString(R.string.dialog_meal_category_dairy),
                 context.getString(R.string.dialog_meal_category_eggs),
                 context.getString(R.string.dialog_meal_category_bean),
                 context.getString(R.string.dialog_meal_category_meat),
@@ -148,29 +151,33 @@ public class AddMealDialog extends Dialog {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 hideAllDangerQuestionsViews();
+                mQuantityMetrix.setVisibility(View.VISIBLE);
                 switch (i) {
                     case 2:
                         mUnpasteurizedLayout.setVisibility(View.VISIBLE);
+                        break;
+                    case 3:
                         mSoftRippedCheeseLayout.setVisibility(View.VISIBLE);
                         mBlueCheeseLayout.setVisibility(View.VISIBLE);
-                        return;
-                    case 3:
+                        break;
+                    case 4:
                         mRawEggsLayout.setVisibility(View.VISIBLE);
-                        return;
-                    case 5:
+                        mQuantityMetrix.setVisibility(View.GONE);
+                        break;
+                    case 6:
                         mUndercookedLayout.setVisibility(View.VISIBLE);
                         mPateLayout.setVisibility(View.VISIBLE);
-                        return;
-                    case 6:
-                        mRawFishLayout.setVisibility(View.VISIBLE);
-                        return;
+                        break;
                     case 7:
-                        mRawSeaFoodLayout.setVisibility(View.VISIBLE);
-                        return;
+                        mRawFishLayout.setVisibility(View.VISIBLE);
+                        break;
                     case 8:
-                        mContainsRawEggsLayout.setVisibility(View.VISIBLE);
-                        return;
+                        mRawSeaFoodLayout.setVisibility(View.VISIBLE);
+                        break;
                     case 9:
+                        mContainsRawEggsLayout.setVisibility(View.VISIBLE);
+                        break;
+                    case 10:
                         mUnpasteurizedLayout.setVisibility(View.VISIBLE);
                         mContainsRawEggsLayout.setVisibility(View.VISIBLE);
                         mPateLayout.setVisibility(View.VISIBLE);
@@ -179,6 +186,7 @@ public class AddMealDialog extends Dialog {
                         mOtherSeaFoodLayout.setVisibility(View.VISIBLE);
                         mOtherFishLayout.setVisibility(View.VISIBLE);
                         mOtherMeatLayout.setVisibility(View.VISIBLE);
+                        break;
                 }
             }
 

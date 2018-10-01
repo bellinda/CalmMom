@@ -284,7 +284,8 @@
     <string name="dialog_meal_no_title_set_title">Внимание</string>
     <string name="dialog_meal_category_fruit">Плодове/зеленчуци</string>
     <string name="dialog_meal_category_whole_grains">Зърнени храни</string>
-    <string name="dialog_meal_category_milk">Млечни продукти</string>
+    <string name="dialog_meal_category_milk">Мляко</string>
+    <string name="dialog_meal_category_dairy">Млечни продукти</string>
     <string name="dialog_meal_category_eggs">Яйца</string>
     <string name="dialog_meal_category_bean">Бобови храни</string>
     <string name="dialog_meal_category_meat">Месо</string>

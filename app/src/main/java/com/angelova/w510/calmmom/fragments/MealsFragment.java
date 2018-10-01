@@ -22,6 +22,7 @@ import com.angelova.w510.calmmom.models.User;
 import com.github.lzyzsd.circleprogress.ArcProgress;
 import com.melnykov.fab.FloatingActionButton;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,6 +57,9 @@ public class MealsFragment extends Fragment {
     private User mUser;
     private int pregnancyIndex;
 
+    private int currentWeek = 0;
+    private int currentDayOfWeek = 1;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -71,7 +75,9 @@ public class MealsFragment extends Fragment {
         pregnancyIndex = mUser.getPregnancyConsecutiveId();
 
         int currentPregnancyWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation()) / 7 + 1);
+        currentWeek = currentPregnancyWeek;
         int daysOfCurrentWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation()) % 7 + 1);
+        currentDayOfWeek = daysOfCurrentWeek;
         int monthsGone = currentPregnancyWeek / 4;
         int monthsUpcoming = 10 - monthsGone;
 
@@ -106,6 +112,14 @@ public class MealsFragment extends Fragment {
                 } else {
                     mRecyclerView.setVisibility(View.GONE);
                     mNoDataView.setVisibility(View.VISIBLE);
+                }
+
+                currentDayOfWeek = daysOfSelectedWeek;
+
+                if (selectedPregnancyWeek != currentWeek) {
+                    currentWeek = selectedPregnancyWeek;
+
+                    calculateWeekPercentage(date, daysOfSelectedWeek);
                 }
             }
         });
@@ -146,6 +160,8 @@ public class MealsFragment extends Fragment {
                             mRecyclerView.setVisibility(View.GONE);
                             mNoDataView.setVisibility(View.VISIBLE);
                         }
+
+                        calculateWeekPercentage(horizontalCalendar.getSelectedDate(), currentDayOfWeek);
                     }
                 });
                 addMealDialog.show();
@@ -169,6 +185,8 @@ public class MealsFragment extends Fragment {
             mRecyclerView.setVisibility(View.GONE);
             mNoDataView.setVisibility(View.VISIBLE);
         }
+
+        calculateWeekPercentage(Calendar.getInstance(), daysOfCurrentWeek);
 
         return rootView;
     }
@@ -231,5 +249,108 @@ public class MealsFragment extends Fragment {
                 meals = mealsForCurrentDate;
             }
         }
+    }
+
+    private List<Meal> getMealsForDate(String date) {
+        if (mUser.getPregnancies().get(pregnancyIndex).getMeals() != null) {
+            return mUser.getPregnancies().get(pregnancyIndex).getMeals().get(date);
+        }
+        return new ArrayList<>();
+    }
+
+    private List<String> getAllDatesFromSelectedWeek(Calendar currentDate, int dayOfCurrentWeek) {
+        List<String> datesInWeek = new ArrayList<>();
+        DateFormat format = new SimpleDateFormat("dd MMM yyyy");
+        currentDate.add(Calendar.DAY_OF_MONTH, 1 - dayOfCurrentWeek);
+
+        for (int i = 0; i < 7; i++) {
+            datesInWeek.add(format.format(currentDate.getTime()));
+            currentDate.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        return datesInWeek;
+    }
+
+    private int getQuantityForCategoryInWeek(List<String> datesInCurrentWeek, int category) {
+        int quantity = 0;
+        for (String date : datesInCurrentWeek) {
+            List<Meal> currentDateMeals = getMealsForDate(date);
+            if (currentDateMeals != null && currentDateMeals.size() > 0) {
+                for (Meal meal : currentDateMeals) {
+                    if (meal.getCategory() == category) {
+                        quantity += meal.getQuantity();
+                    }
+                }
+            }
+        }
+        return quantity;
+    }
+
+    private void calculateWeekPercentage(Calendar currentDate, int daysOfCurrentWeek) {
+        List<String> datesInCurrentWeek = getAllDatesFromSelectedWeek(currentDate, daysOfCurrentWeek);
+        int meatQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 6);
+        int fishQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 7);
+        int seaFoodQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 8);
+        int fruitsAndVegsQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 0);
+        int milkQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 2);
+        int dairyQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 3);
+        int eggsQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 4);
+        int wholeGrainsQuantity = getQuantityForCategoryInWeek(datesInCurrentWeek, 1);
+
+        int meatPercent = 0;
+        int fishPercent = 0;
+        int seaFoodPercent = 0;
+        int fruitsAndVegsPercent = 0;
+        int milkPercent = 0;
+        int dairyPercent = 0;
+        int eggsPercent = 0;
+        int wholeGrainsPercent =  0;
+
+        if (meatQuantityForWeek != 0) {
+            meatPercent = (int)Math.round(((double)meatQuantityForWeek / 1750) * 100);
+            if (meatPercent > 100) {
+                meatPercent = 100;
+            }
+        }
+        if (fishQuantityForWeek != 0) {
+            fishPercent = (int)Math.round(((double)fishQuantityForWeek / 300) * 100);
+        }
+        if (seaFoodQuantityForWeek != 0) {
+            seaFoodPercent = (int)Math.round(((double)seaFoodQuantityForWeek / 300) * 100);
+        }
+        if (fruitsAndVegsQuantityForWeek != 0) {
+            fruitsAndVegsPercent = (int)Math.round(((double)fruitsAndVegsQuantityForWeek / 1500) * 100);
+            if (fruitsAndVegsPercent > 100) {
+                fruitsAndVegsPercent = 100;
+            }
+        }
+        if (milkQuantityForWeek != 0) {
+            milkPercent = (int)Math.round(((double)milkQuantityForWeek / 5000) * 100);
+            if (milkPercent > 100) {
+                milkPercent = 100;
+            }
+        }
+        if (dairyQuantityForWeek != 0) {
+            dairyPercent = (int)Math.round(((double)dairyQuantityForWeek / 1200) * 100);
+            if (dairyPercent > 100) {
+                dairyPercent = 100;
+            }
+        }
+        if (eggsQuantityForWeek != 0) {
+            eggsPercent = (int)Math.round(((double)eggsQuantityForWeek / 20) * 100);
+            if (eggsPercent > 100) {
+                eggsPercent = 100;
+            }
+        }
+        if (wholeGrainsQuantity != 0) {
+            wholeGrainsPercent = (int)Math.round(((double)wholeGrainsQuantity / 1000) * 100);
+            if (wholeGrainsPercent > 100) {
+                wholeGrainsPercent = 100;
+            }
+        }
+
+        int fishAndSeaFoodTotalPercent = fishPercent + seaFoodPercent > 100 ? 100 : fishPercent + seaFoodPercent;
+
+        int totalPercent = (meatPercent + fishAndSeaFoodTotalPercent + fruitsAndVegsPercent + milkPercent + dairyPercent + eggsPercent + wholeGrainsPercent) / 7;
+        mArcProgress.setProgress(totalPercent);
     }
 }
