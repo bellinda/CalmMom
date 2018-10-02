@@ -40,7 +40,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:id="@+id/activities_scroll">
+            android:id="@+id/meal_data_scroll">
 
             <LinearLayout
                 android:layout_width="match_parent"
