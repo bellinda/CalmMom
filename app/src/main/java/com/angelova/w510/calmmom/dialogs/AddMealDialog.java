@@ -222,13 +222,12 @@ public class AddMealDialog extends Dialog {
             @Override
             public void onClick(View view) {
                 if (mNameInput.getText() == null || mNameInput.getText().toString().isEmpty()) {
-                    ((HealthStateActivity) context).showAlertDialogNow(context.getString(R.string.dialog_meal_no_title_set), context.getString(R.string.dialog_meal_no_title_set_title));
+                    ((HealthStateActivity) context).showAlertDialogNow(context.getString(R.string.dialog_meal_no_title_set), context.getString(R.string.dialog_meal_warning_title));
+                } else if (mQuantityInput.getText() == null || mQuantityInput.getText().toString().isEmpty()) {
+                    ((HealthStateActivity) context).showAlertDialogNow(context.getString(R.string.dialog_meal_no_quantity_set), context.getString(R.string.dialog_meal_warning_title));
                 } else {
                     String title = mNameInput.getText().toString();
-                    int quantity = 0;
-                    if (mQuantityInput.getText() != null && !TextUtils.isEmpty(mQuantityInput.getText().toString())) {
-                        quantity = Integer.parseInt(mQuantityInput.getText().toString());
-                    }
+                    int quantity = Integer.parseInt(mQuantityInput.getText().toString());
                     int category = (Integer) mCategorySpinner.getSelectedItem();
                     String time = mTimeView.getText().toString();
                     boolean isDangerous = getIsDangerousBasedOnCategory(category);
@@ -266,18 +265,20 @@ public class AddMealDialog extends Dialog {
     private boolean getIsDangerousBasedOnCategory(int category) {
         switch (category) {
             case 2:
-                return mUnpasteurizedSwitch.isChecked() || mSoftRippedCheeseSwitch.isChecked() || mBlueCheeseSwitch.isChecked();
+                return mUnpasteurizedSwitch.isChecked();
             case 3:
+                return mSoftRippedCheeseSwitch.isChecked() || mBlueCheeseSwitch.isChecked();
+            case 4:
                 return mRawEggsSwitch.isChecked();
-            case 5:
-                return mUndercookedSwitch.isChecked() || mPateSwitch.isChecked();
             case 6:
-                return mRawFishSwitch.isChecked();
+                return mUndercookedSwitch.isChecked() || mPateSwitch.isChecked();
             case 7:
-                return mRawSeaFoodSwitch.isChecked();
+                return mRawFishSwitch.isChecked();
             case 8:
-                return mContainsRawEggsSwitch.isChecked();
+                return mRawSeaFoodSwitch.isChecked();
             case 9:
+                return mContainsRawEggsSwitch.isChecked();
+            case 10:
                 return mUnpasteurizedSwitch.isChecked() || mContainsRawEggsSwitch.isChecked() || mPateSwitch.isChecked() || mSoftRippedCheeseSwitch.isChecked()
                         || mBlueCheeseSwitch.isChecked() || mOtherSeaFoodSwitch.isChecked() || mOtherFishSwitch.isChecked() || mOtherMeatSwitch.isChecked();
             default:
