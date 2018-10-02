@@ -141,7 +141,7 @@ public class MealsFragment extends Fragment {
                         }
 
                         if (mUser.getPregnancies().get(pregnancyIndex).getMeals().get(meal.getDate()) == null) {
-                            List<Meal> meals = Arrays.asList(meal);
+                            List<Meal> meals = new ArrayList<>(Arrays.asList(meal));
                             mUser.getPregnancies().get(pregnancyIndex).getMeals().put(meal.getDate(), meals);
                         } else {
                             mUser.getPregnancies().get(pregnancyIndex).getMeals().get(meal.getDate()).add(meal);
