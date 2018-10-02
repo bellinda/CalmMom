@@ -17,6 +17,7 @@ import com.angelova.w510.calmmom.HealthStateActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.adapters.MealsTimelineAdapter;
 import com.angelova.w510.calmmom.dialogs.AddMealDialog;
+import com.angelova.w510.calmmom.dialogs.RecomWeeklyIntakeDialog;
 import com.angelova.w510.calmmom.models.Meal;
 import com.angelova.w510.calmmom.models.User;
 import com.github.lzyzsd.circleprogress.ArcProgress;
@@ -33,6 +34,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
@@ -59,6 +61,26 @@ public class MealsFragment extends Fragment {
 
     private int currentWeek = 0;
     private int currentDayOfWeek = 1;
+
+    private int meatQuantityForWeek = 0;
+    private int fishQuantityForWeek = 0;
+    private int seaFoodQuantityForWeek = 0;
+    private int fruitsAndVegsQuantityForWeek = 0;
+    private int milkQuantityForWeek = 0;
+    private int dairyQuantityForWeek = 0;
+    private int eggsQuantityForWeek = 0;
+    private int wholeGrainsQuantity = 0;
+    private int beanFoodsQuantityForWeek = 0;
+
+    private int meatPercent = 0;
+    private int fishPercent = 0;
+    private int seaFoodPercent = 0;
+    private int fruitsAndVegsPercent = 0;
+    private int milkPercent = 0;
+    private int dairyPercent = 0;
+    private int eggsPercent = 0;
+    private int wholeGrainsPercent =  0;
+    private int beanFoodsPercent = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -128,6 +150,13 @@ public class MealsFragment extends Fragment {
         mWeekDayView.setText(String.format(Locale.getDefault(), "%s %d, %s %d", getString(R.string.fragment_meals_week_title), currentPregnancyWeek, getString(R.string.fragment_meals_day_title), daysOfCurrentWeek));
 
         mArcProgress = (ArcProgress) rootView.findViewById(R.id.arc_progress);
+        mArcProgress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RecomWeeklyIntakeDialog dialog = new RecomWeeklyIntakeDialog(getActivity(), getQuantitiesMap());
+                dialog.show();
+            }
+        });
 
         mAddBtn = (FloatingActionButton) rootView.findViewById(R.id.add_meal_btn);
         mAddBtn.setOnClickListener(new View.OnClickListener() {
@@ -287,23 +316,25 @@ public class MealsFragment extends Fragment {
 
     private void calculateWeekPercentage(Calendar currentDate, int daysOfCurrentWeek) {
         List<String> datesInCurrentWeek = getAllDatesFromSelectedWeek(currentDate, daysOfCurrentWeek);
-        int meatQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 6);
-        int fishQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 7);
-        int seaFoodQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 8);
-        int fruitsAndVegsQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 0);
-        int milkQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 2);
-        int dairyQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 3);
-        int eggsQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 4);
-        int wholeGrainsQuantity = getQuantityForCategoryInWeek(datesInCurrentWeek, 1);
+        meatQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 6);
+        fishQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 7);
+        seaFoodQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 8);
+        fruitsAndVegsQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 0);
+        milkQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 2);
+        dairyQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 3);
+        eggsQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 4);
+        wholeGrainsQuantity = getQuantityForCategoryInWeek(datesInCurrentWeek, 1);
+        beanFoodsQuantityForWeek = getQuantityForCategoryInWeek(datesInCurrentWeek, 5);
 
-        int meatPercent = 0;
-        int fishPercent = 0;
-        int seaFoodPercent = 0;
-        int fruitsAndVegsPercent = 0;
-        int milkPercent = 0;
-        int dairyPercent = 0;
-        int eggsPercent = 0;
-        int wholeGrainsPercent =  0;
+        meatPercent = 0;
+        fishPercent = 0;
+        seaFoodPercent = 0;
+        fruitsAndVegsPercent = 0;
+        milkPercent = 0;
+        dairyPercent = 0;
+        eggsPercent = 0;
+        wholeGrainsPercent =  0;
+        beanFoodsPercent = 0;
 
         if (meatQuantityForWeek != 0) {
             meatPercent = (int)Math.round(((double)meatQuantityForWeek / 1750) * 100);
@@ -347,10 +378,31 @@ public class MealsFragment extends Fragment {
                 wholeGrainsPercent = 100;
             }
         }
+        if (beanFoodsQuantityForWeek != 0) {
+            beanFoodsPercent = (int)Math.round(((double)beanFoodsQuantityForWeek / 500) * 100);
+            if (beanFoodsPercent > 100) {
+                beanFoodsPercent = 100;
+            }
+        }
 
         int fishAndSeaFoodTotalPercent = fishPercent + seaFoodPercent > 100 ? 100 : fishPercent + seaFoodPercent;
 
-        int totalPercent = (meatPercent + fishAndSeaFoodTotalPercent + fruitsAndVegsPercent + milkPercent + dairyPercent + eggsPercent + wholeGrainsPercent) / 7;
+        int totalPercent = (meatPercent + fishAndSeaFoodTotalPercent + fruitsAndVegsPercent + milkPercent + dairyPercent + eggsPercent + wholeGrainsPercent + beanFoodsPercent) / 8;
         mArcProgress.setProgress(totalPercent);
+    }
+
+    private Map<Integer, Integer> getQuantitiesMap() {
+        Map<Integer, Integer> quantitiesMap = new HashMap<>();
+        quantitiesMap.put(0, fruitsAndVegsQuantityForWeek);
+        quantitiesMap.put(1, wholeGrainsQuantity);
+        quantitiesMap.put(2, milkQuantityForWeek);
+        quantitiesMap.put(3, dairyQuantityForWeek);
+        quantitiesMap.put(4, eggsQuantityForWeek);
+        quantitiesMap.put(5, beanFoodsQuantityForWeek);
+        quantitiesMap.put(6, meatQuantityForWeek);
+        quantitiesMap.put(7, fishQuantityForWeek);
+        quantitiesMap.put(8, seaFoodQuantityForWeek);
+
+        return quantitiesMap;
     }
 }

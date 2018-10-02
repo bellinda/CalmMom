@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center"
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
+    android:paddingTop="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingBottom="10dp"
+    android:focusable="false"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/input_field_height"
+        android:id="@+id/title_view"
+        android:text="@string/dialog_recom_weekly_intake_title"
+        android:textSize="@dimen/warn_dialog_title_text_size"
+        android:textColor="@color/colorContrast"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:id="@+id/activities_scroll">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_recom_weekly_intake_fruit"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Recommended intake: 1500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/recommended_fruits"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Your current intake: 500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/current_fruits"/>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_recom_weekly_intake_whole_grains"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_marginTop="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Recommended intake: 1500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/recommended_whole_grains"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Your current intake: 500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/current_whole_grains"/>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_recom_weekly_intake_milk"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_marginTop="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Recommended intake: 1500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/recommended_milk"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Your current intake: 500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/current_milk"/>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_recom_weekly_intake_dairy"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_marginTop="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Recommended intake: 1500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/recommended_dairy"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Your current intake: 500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/current_dairy"/>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_recom_weekly_intake_eggs"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_marginTop="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Recommended intake: 20"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/recommended_eggs"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Your current intake: 10"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/current_eggs"/>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_recom_weekly_intake_bean"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_marginTop="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Recommended intake: 1500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/recommended_beans"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Your current intake: 500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/current_beans"/>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_recom_weekly_intake_meat"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_marginTop="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Recommended intake: 1500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/recommended_meat"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Your current intake: 500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/current_meat"/>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_recom_weekly_intake_fish_sea_food"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_marginTop="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Recommended intake: 300 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/recommended_fish"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Your current fish intake: 500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/current_fish"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Your current sea food intake: 500 gr"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/current_sea_food"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_recom_weekly_avoid_title"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:layout_marginTop="25dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_recom_weekly_avoid_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/warn_dialog_button_height"
+        android:layout_weight="1"
+        android:text="@string/dialog_recom_weekly_intake_btn_text"
+        android:gravity="center"
+        android:textSize="@dimen/warn_dialog_buttons_text_size"
+        android:textColor="@color/colorContrast"
+        android:id="@+id/ok_button"
+        android:background="@color/colorAccent"/>
+
+</LinearLayout>

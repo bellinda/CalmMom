@@ -312,4 +312,23 @@
     <string name="dialog_meal_other_sea_food">Does this meal contain raw or smoked sea food?</string>
     <string name="dialog_meal_other_fish">Does this meal contain raw or smoked fish?</string>
     <string name="dialog_meal_other_undercooked_meat">Does this meal contain raw or undercooked meat?</string>
+
+    <string name="dialog_recom_weekly_intake_title">Recommended weekly intake</string>
+    <string name="dialog_recom_weekly_intake_btn_text">OK</string>
+    <string name="dialog_recom_weekly_intake_fruit">Fruits and vegetables</string>
+    <string name="dialog_recom_weekly_intake_whole_grains">Whole grains</string>
+    <string name="dialog_recom_weekly_intake_milk">Milk</string>
+    <string name="dialog_recom_weekly_intake_dairy">Dairy</string>
+    <string name="dialog_recom_weekly_intake_eggs">Eggs</string>
+    <string name="dialog_recom_weekly_intake_bean">Bean foods</string>
+    <string name="dialog_recom_weekly_intake_meat">Meat</string>
+    <string name="dialog_recom_weekly_intake_fish_sea_food">Fish and sea food</string>
+    <string name="dialog_recom_weekly_intake_recommended" formatted="false">Recommended intake: %d gr</string>
+    <string name="dialog_recom_weekly_intake_your_intake" formatted="false">Your current intake: %d gr</string>
+    <string name="dialog_recom_weekly_intake_recommended_count" formatted="false">Recommended intake: %d</string>
+    <string name="dialog_recom_weekly_intake_your_intake_count" formatted="false">Your current intake: %d</string>
+    <string name="dialog_recom_weekly_intake_fish" formatted="false">Your current fish intake: %d gr</string>
+    <string name="dialog_recom_weekly_intake_sea_food" formatted="false">Your current sea food intake: %d gr</string>
+    <string name="dialog_recom_weekly_avoid_title">Foods to avoid during pregnancy</string>
+    <string name="dialog_recom_weekly_avoid_content">‣ Rare or undercooked meat\n‣ Fish with Mercury such as shark, swordfish and king mackerel\n‣ Raw or smoked seafood\n‣ Raw eggs\n‣ Soft and blue cheeses such as brie, Camembert, Roquefort, feta and Gorgonzola\n‣ Unpasteurized milk\n‣ Pate\n‣ Unwashed fruits and vegetables</string>
 </resources>

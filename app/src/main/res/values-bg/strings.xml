@@ -309,4 +309,23 @@
     <string name="dialog_meal_other_sea_food">Това хранене съдържаше ли сурови или пушени морски деликатеси?</string>
     <string name="dialog_meal_other_fish">Това хранене съдържаше ли сурова или пушена риба?</string>
     <string name="dialog_meal_other_undercooked_meat">Това хранене съдържаше ли сурово или полусурово месо?</string>
+
+    <string name="dialog_recom_weekly_intake_title">Препоръчителен седмичен прием</string>
+    <string name="dialog_recom_weekly_intake_btn_text">ОК</string>
+    <string name="dialog_recom_weekly_intake_fruit">Плодове/зеленчуци</string>
+    <string name="dialog_recom_weekly_intake_whole_grains">Зърнени храни</string>
+    <string name="dialog_recom_weekly_intake_milk">Мляко</string>
+    <string name="dialog_recom_weekly_intake_dairy">Млечни продукти</string>
+    <string name="dialog_recom_weekly_intake_eggs">Яйца</string>
+    <string name="dialog_recom_weekly_intake_bean">Бобови храни</string>
+    <string name="dialog_recom_weekly_intake_meat">Месо</string>
+    <string name="dialog_recom_weekly_intake_fish_sea_food">Риба и морски дарове</string>
+    <string name="dialog_recom_weekly_intake_recommended" formatted="false">Препоръчителен прием: %d гр</string>
+    <string name="dialog_recom_weekly_intake_your_intake" formatted="false">Вашият текущ прием: %d гр</string>
+    <string name="dialog_recom_weekly_intake_recommended_count" formatted="false">Препоръчителен прием: %d</string>
+    <string name="dialog_recom_weekly_intake_your_intake_count" formatted="false">Вашият текущ прием: %d</string>
+    <string name="dialog_recom_weekly_intake_fish" formatted="false">Вашият текущ прием на риба: %d гр</string>
+    <string name="dialog_recom_weekly_intake_sea_food" formatted="false">Вашият текущ прием на морски дарове: %d гр</string>
+    <string name="dialog_recom_weekly_avoid_title">Храни, които да избягвате по време на бременност</string>
+    <string name="dialog_recom_weekly_avoid_content">‣ Полу сурово месо\n‣ Риби, съдържащи живак, като например акула, риба меч и кралска скумрия\n‣ Сурови или пушени морски дарове\n‣ Сурови яйца\n‣ Меки и сини сирена като например бри, Камембер, Рокфор, фета и Горгонзола\n‣ Непастьоризирано мляко\n‣ Пастети\n‣ Неизмити плодове и зеленчуци</string>
 </resources>
