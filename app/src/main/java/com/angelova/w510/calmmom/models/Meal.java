@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -19,6 +20,7 @@ public class Meal implements Serializable, Comparable<Meal> {
     private String time;
     private int category;
     private boolean dangerous;
+    private List<Integer> dangerIndexes;
 
     public String getTitle() {
         return title;
@@ -66,6 +68,14 @@ public class Meal implements Serializable, Comparable<Meal> {
 
     public void setDangerous(boolean dangerous) {
         this.dangerous = dangerous;
+    }
+
+    public List<Integer> getDangerIndexes() {
+        return dangerIndexes;
+    }
+
+    public void setDangerIndexes(List<Integer> dangerIndexes) {
+        this.dangerIndexes = dangerIndexes;
     }
 
     @Override

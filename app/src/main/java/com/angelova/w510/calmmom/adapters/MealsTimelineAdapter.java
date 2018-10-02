@@ -1,7 +1,6 @@
 package com.angelova.w510.calmmom.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -9,14 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.angelova.w510.calmmom.HealthStateActivity;
 import com.angelova.w510.calmmom.R;
+import com.angelova.w510.calmmom.dialogs.AddEditMealDialog;
 import com.angelova.w510.calmmom.models.Meal;
-import com.angelova.w510.calmmom.utils.VectorDrawableUtils;
 import com.github.vipulasri.timelineview.TimelineView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MealsTimelineAdapter extends RecyclerView.Adapter<MealsTimelineAdapter.ViewHolder> {
 
@@ -96,6 +101,9 @@ public class MealsTimelineAdapter extends RecyclerView.Adapter<MealsTimelineAdap
                 holder.mCategoryImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_other));
                 break;
         }
+
+        holder.mTimelineView.setOnClickListener(editMealOnClickListener(meal));
+        holder.mContentLayout.setOnClickListener(editMealOnClickListener(meal));
     }
 
     @Override
@@ -103,13 +111,40 @@ public class MealsTimelineAdapter extends RecyclerView.Adapter<MealsTimelineAdap
         return mMeals.size();
     }
 
+    private View.OnClickListener editMealOnClickListener(final Meal meal) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+                try {
+                    Date mealDate = sdf.parse(meal.getDate());
+                    AddEditMealDialog dialog = new AddEditMealDialog(mContext, mealDate, meal, new AddEditMealDialog.DialogClickListener() {
+                        @Override
+                        public void onSave(Meal meal) {
+
+                        }
+
+                        @Override
+                        public void onSaveAfterEdit(Meal meal, Meal mealToEdit) {
+                            ((HealthStateActivity)mContext).saveMealAfterEdit(meal, mealToEdit);
+                        }
+                    });
+                    dialog.show();
+                } catch (ParseException pe) {
+                    pe.printStackTrace();
+                }
+            }
+        };
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView mTime;
-        public TextView mTitle;
-        public ImageView mCategoryImage;
-        public TimelineView mTimelineView;
+        private TextView mTime;
+        private TextView mTitle;
+        private ImageView mCategoryImage;
+        private TimelineView mTimelineView;
+        private LinearLayout mContentLayout;
 
         public ViewHolder(View itemView, int viewType) {
             super(itemView);
@@ -118,6 +153,7 @@ public class MealsTimelineAdapter extends RecyclerView.Adapter<MealsTimelineAdap
             mTitle = (TextView) itemView.findViewById(R.id.text_timeline_food);
             mCategoryImage = (ImageView) itemView.findViewById(R.id.category_image);
             mTimelineView = (TimelineView) itemView.findViewById(R.id.time_marker);
+            mContentLayout = (LinearLayout) itemView.findViewById(R.id.content_layout);
 
             mTimelineView.initLine(viewType);
         }

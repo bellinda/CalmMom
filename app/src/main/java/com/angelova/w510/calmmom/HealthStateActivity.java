@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -21,9 +20,9 @@ import com.angelova.w510.calmmom.fragments.BellyImagesFragment;
 import com.angelova.w510.calmmom.fragments.MealsFragment;
 import com.angelova.w510.calmmom.fragments.MedicinesFragment;
 import com.angelova.w510.calmmom.fragments.WeightFragment;
+import com.angelova.w510.calmmom.models.Meal;
 import com.angelova.w510.calmmom.models.Medicine;
 import com.angelova.w510.calmmom.models.User;
-import com.angelova.w510.calmmom.models.UserActivity;
 import com.angelova.w510.calmmom.models.Weight;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,7 +36,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -250,5 +248,12 @@ public class HealthStateActivity extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+
+    public void saveMealAfterEdit(Meal meal, Meal mealToEdit) {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.content);
+        if (f instanceof MealsFragment) {
+            ((MealsFragment) f ).saveMealAfterEdit(meal, mealToEdit);
+        }
     }
 }

@@ -5,13 +5,11 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -32,11 +30,12 @@ import java.util.Locale;
  * Created by W510 on 26.9.2018 г..
  */
 
-public class AddMealDialog extends Dialog {
+public class AddEditMealDialog extends Dialog {
 
     private Context context;
     private DialogClickListener listener;
     private Date selectedDate;
+    private Meal mealToEdit;
     private TextView mNameInput;
     private Spinner mCategorySpinner;
     private EditText mQuantityInput;
@@ -76,13 +75,15 @@ public class AddMealDialog extends Dialog {
 
     public interface DialogClickListener {
         void onSave(Meal meal);
+        void onSaveAfterEdit(Meal meal, Meal mealToEdit);
     }
 
-    public AddMealDialog(Context context, Date selectedDate, DialogClickListener onClickListener) {
+    public AddEditMealDialog(Context context, Date selectedDate, Meal meal, DialogClickListener onClickListener) {
         super(context);
         this.context = context;
         this.selectedDate = selectedDate;
         this.listener = onClickListener;
+        this.mealToEdit = meal;
     }
 
     @Override
@@ -229,6 +230,7 @@ public class AddMealDialog extends Dialog {
                     String title = mNameInput.getText().toString();
                     int quantity = Integer.parseInt(mQuantityInput.getText().toString());
                     int category = (Integer) mCategorySpinner.getSelectedItem();
+                    List<Integer> dangerIndexes = getIndexesOfSelectedDangers(category);
                     String time = mTimeView.getText().toString();
                     boolean isDangerous = getIsDangerousBasedOnCategory(category);
 
@@ -236,6 +238,7 @@ public class AddMealDialog extends Dialog {
                     meal.setTitle(title);
                     meal.setCategory(category);
                     meal.setDangerous(isDangerous);
+                    meal.setDangerIndexes(dangerIndexes);
                     if (quantity > 0) {
                         meal.setQuantity(quantity);
                     }
@@ -243,11 +246,25 @@ public class AddMealDialog extends Dialog {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
                     meal.setDate(sdf.format(selectedDate));
 
-                    listener.onSave(meal);
+                    if (mealToEdit != null) {
+                        listener.onSaveAfterEdit(meal, mealToEdit);
+                    } else {
+                        listener.onSave(meal);
+                    }
                     dismiss();
                 }
             }
         });
+
+        if (mealToEdit != null) {
+            mNameInput.setText(mealToEdit.getTitle());
+            mQuantityInput.setText(mealToEdit.getQuantity() + "");
+            mTimeView.setText(mealToEdit.getTime());
+            mCategorySpinner.setSelection(mealToEdit.getCategory());
+            if (mealToEdit.isDangerous()) {
+                markSelectedDangerousItems();
+            }
+        }
     }
 
     private void hideAllDangerQuestionsViews() {
@@ -283,6 +300,148 @@ public class AddMealDialog extends Dialog {
                         || mBlueCheeseSwitch.isChecked() || mOtherSeaFoodSwitch.isChecked() || mOtherFishSwitch.isChecked() || mOtherMeatSwitch.isChecked();
             default:
                 return false;
+        }
+    }
+
+    private List<Integer> getIndexesOfSelectedDangers(int category) {
+        List<Integer> indexes = new ArrayList<>();
+        switch (category) {
+            case 2:
+                if (mUnpasteurizedSwitch.isChecked()) {
+                    indexes.add(0);
+                    break;
+                }
+            case 3:
+                if (mSoftRippedCheeseSwitch.isChecked()) {
+                    indexes.add(0);
+                }
+                if (mBlueCheeseSwitch.isChecked()) {
+                    indexes.add(1);
+                }
+                break;
+            case 4:
+                if (mRawEggsSwitch.isChecked()) {
+                    indexes.add(0);
+                }
+                break;
+            case 6:
+                if (mUndercookedSwitch.isChecked()) {
+                    indexes.add(0);
+                }
+                if (mPateSwitch.isChecked()) {
+                    indexes.add(1);
+                }
+                break;
+            case 7:
+                if (mRawFishSwitch.isChecked()) {
+                    indexes.add(0);
+                }
+                break;
+            case 8:
+                if (mRawSeaFoodSwitch.isChecked()) {
+                    indexes.add(0);
+                }
+                break;
+            case 9:
+                if (mContainsRawEggsSwitch.isChecked()) {
+                    indexes.add(0);
+                }
+                break;
+            case 10:
+                if (mUnpasteurizedSwitch.isChecked()) {
+                    indexes.add(0);
+                }
+                if (mContainsRawEggsSwitch.isChecked()) {
+                    indexes.add(1);
+                }
+                if (mPateSwitch.isChecked()) {
+                    indexes.add(2);
+                }
+                if (mSoftRippedCheeseSwitch.isChecked()) {
+                    indexes.add(3);
+                }
+                if (mBlueCheeseSwitch.isChecked()) {
+                    indexes.add(4);
+                }
+                if (mBlueCheeseSwitch.isChecked()) {
+                    indexes.add(5);
+                }
+                if (mOtherSeaFoodSwitch.isChecked()) {
+                    indexes.add(6);
+                }
+                if (mOtherFishSwitch.isChecked()) {
+                    indexes.add(7);
+                }
+                if (mOtherFishSwitch.isChecked()) {
+                    indexes.add(8);
+                }
+                if (mOtherMeatSwitch.isChecked()) {
+                    indexes.add(9);
+                }
+                break;
+        }
+        return indexes;
+    }
+
+    private void markSelectedDangerousItems() {
+        switch (mealToEdit.getCategory()) {
+            case 2:
+                mUnpasteurizedSwitch.setChecked(true);
+                break;
+            case 3:
+                if (mealToEdit.getDangerIndexes().contains(0)) {
+                    mSoftRippedCheeseSwitch.setChecked(true);
+                }
+                if (mealToEdit.getDangerIndexes().contains(1)) {
+                    mBlueCheeseSwitch.setChecked(true);
+                }
+                break;
+            case 4:
+                mRawEggsSwitch.setChecked(true);
+                break;
+            case 6:
+                if (mealToEdit.getDangerIndexes().contains(0)) {
+                    mUndercookedSwitch.setChecked(true);
+                }
+                if (mealToEdit.getDangerIndexes().contains(1)) {
+                    mPateSwitch.setChecked(true);
+                }
+                break;
+            case 7:
+                mRawFishSwitch.setChecked(true);
+                break;
+            case 8:
+                mRawSeaFoodSwitch.setChecked(true);
+                break;
+            case 9:
+                mContainsRawEggsSwitch.setChecked(true);
+                break;
+            case 10:
+                if (mealToEdit.getDangerIndexes().contains(0)) {
+                    mUnpasteurizedSwitch.setChecked(true);
+                }
+                if (mealToEdit.getDangerIndexes().contains(1)) {
+                    mContainsRawEggsSwitch.setChecked(true);
+                }
+                if (mealToEdit.getDangerIndexes().contains(2)) {
+                    mPateSwitch.setChecked(true);
+                }
+                if (mealToEdit.getDangerIndexes().contains(3)) {
+                    mSoftRippedCheeseSwitch.setChecked(true);
+                }
+                if (mealToEdit.getDangerIndexes().contains(4)) {
+                    mBlueCheeseSwitch.setChecked(true);
+                }
+                if (mealToEdit.getDangerIndexes().contains(5)) {
+                    mOtherSeaFoodSwitch.setChecked(true);
+                }
+                if (mealToEdit.getDangerIndexes().contains(6)) {
+                    mOtherFishSwitch.setChecked(true);
+                }
+                if (mealToEdit.getDangerIndexes().contains(7)) {
+                    mOtherMeatSwitch.setChecked(true);
+                }
+                break;
         }
     }
 }

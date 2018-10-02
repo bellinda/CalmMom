@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.angelova.w510.calmmom.HealthStateActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.adapters.MealsTimelineAdapter;
-import com.angelova.w510.calmmom.dialogs.AddMealDialog;
+import com.angelova.w510.calmmom.dialogs.AddEditMealDialog;
 import com.angelova.w510.calmmom.dialogs.RecomWeeklyIntakeDialog;
 import com.angelova.w510.calmmom.models.Meal;
 import com.angelova.w510.calmmom.models.User;
@@ -162,35 +162,16 @@ public class MealsFragment extends Fragment {
         mAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddMealDialog addMealDialog = new AddMealDialog(getActivity(), horizontalCalendar.getSelectedDate().getTime(), new AddMealDialog.DialogClickListener() {
+                AddEditMealDialog addMealDialog = new AddEditMealDialog(getActivity(), horizontalCalendar.getSelectedDate().getTime(), null, new AddEditMealDialog.DialogClickListener() {
                     @Override
                     public void onSave(Meal meal) {
-                        if (mUser.getPregnancies().get(pregnancyIndex).getMeals() == null) {
-                            mUser.getPregnancies().get(pregnancyIndex).setMeals(new HashMap<String, List<Meal>>());
-                        }
-
-                        if (mUser.getPregnancies().get(pregnancyIndex).getMeals().get(meal.getDate()) == null) {
-                            List<Meal> meals = new ArrayList<>(Arrays.asList(meal));
-                            mUser.getPregnancies().get(pregnancyIndex).getMeals().put(meal.getDate(), meals);
-                        } else {
-                            mUser.getPregnancies().get(pregnancyIndex).getMeals().get(meal.getDate()).add(meal);
-                        }
-                        ((HealthStateActivity) getActivity()).updateUserInDb(mUser);
-
-                        getMealsForDate(horizontalCalendar.getSelectedDate().getTime());
-                        if (meals.size() > 0) {
-                            Collections.sort(meals);
-                            mMealsAdapter = new MealsTimelineAdapter(meals);
-                            mRecyclerView.setAdapter(mMealsAdapter);
-
-                            mNoDataView.setVisibility(View.GONE);
-                            mRecyclerView.setVisibility(View.VISIBLE);
-                        } else {
-                            mRecyclerView.setVisibility(View.GONE);
-                            mNoDataView.setVisibility(View.VISIBLE);
-                        }
-
+                        saveMeal(meal, null);
                         calculateWeekPercentage(horizontalCalendar.getSelectedDate(), currentDayOfWeek);
+                    }
+
+                    @Override
+                    public void onSaveAfterEdit(Meal meal, Meal mealToEdit) {
+
                     }
                 });
                 addMealDialog.show();
@@ -218,6 +199,40 @@ public class MealsFragment extends Fragment {
         calculateWeekPercentage(Calendar.getInstance(), daysOfCurrentWeek);
 
         return rootView;
+    }
+
+    private void saveMeal(Meal meal, Meal mealToEdit) {
+        if (mealToEdit != null) {
+            mUser.getPregnancies().get(pregnancyIndex).getMeals().get(meal.getDate()).remove(mealToEdit);
+        } else if (mUser.getPregnancies().get(pregnancyIndex).getMeals() == null) {
+            mUser.getPregnancies().get(pregnancyIndex).setMeals(new HashMap<String, List<Meal>>());
+        }
+
+        if (mUser.getPregnancies().get(pregnancyIndex).getMeals().get(meal.getDate()) == null) {
+            List<Meal> meals = new ArrayList<>(Arrays.asList(meal));
+            mUser.getPregnancies().get(pregnancyIndex).getMeals().put(meal.getDate(), meals);
+        } else {
+            mUser.getPregnancies().get(pregnancyIndex).getMeals().get(meal.getDate()).add(meal);
+        }
+        ((HealthStateActivity) getActivity()).updateUserInDb(mUser);
+
+        getMealsForDate(horizontalCalendar.getSelectedDate().getTime());
+        if (meals.size() > 0) {
+            Collections.sort(meals);
+            mMealsAdapter = new MealsTimelineAdapter(meals);
+            mRecyclerView.setAdapter(mMealsAdapter);
+
+            mNoDataView.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        } else {
+            mRecyclerView.setVisibility(View.GONE);
+            mNoDataView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void saveMealAfterEdit(Meal meal, Meal mealToEdit) {
+        saveMeal(meal, mealToEdit);
+        calculateWeekPercentage(horizontalCalendar.getSelectedDate(), currentDayOfWeek);
     }
 
     private long getDaysSinceDate(String startDate) {
