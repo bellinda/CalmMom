@@ -49,7 +49,13 @@ public class MealsTimelineAdapter extends RecyclerView.Adapter<MealsTimelineAdap
 
         holder.mTimelineView.setMarker(ContextCompat.getDrawable(mContext, R.drawable.ic_marker), ContextCompat.getColor(mContext, R.color.colorContrast));
         holder.mTime.setText(meal.getTime());
-        holder.mTitle.setText(meal.getTitle());
+        String title = "";
+        if (meal.getCategory() == 4) {
+            title = String.format("%s (%s)", meal.getTitle(), meal.getQuantity());
+        } else {
+            title = String.format("%s (%s %s)", meal.getTitle(), meal.getQuantity(), mContext.getString(R.string.dialog_meal_quantity_metrix));
+        }
+        holder.mTitle.setText(title);
 
         if (meal.isDangerous()) {
             holder.mTitle.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimaryDark));
