@@ -219,9 +219,6 @@ public class WaterFragment extends Fragment {
                     mUser.getPregnancies().get(pregnancyIndex).setWaterIntakes(new HashMap<String, Integer>());
                 }
 
-//                SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-//                String selectedDate = sdf.format(horizontalCalendar.getSelectedDate().getTime());
-
                 mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().put(selectedDate, currentGlassesCount);
                 ((HealthStateActivity) getActivity()).updateUserInDb(mUser);
             }
