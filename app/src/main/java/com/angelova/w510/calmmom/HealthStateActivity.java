@@ -19,6 +19,7 @@ import com.angelova.w510.calmmom.fragments.ActivitiesFragment;
 import com.angelova.w510.calmmom.fragments.BellyImagesFragment;
 import com.angelova.w510.calmmom.fragments.MealsFragment;
 import com.angelova.w510.calmmom.fragments.MedicinesFragment;
+import com.angelova.w510.calmmom.fragments.WaterFragment;
 import com.angelova.w510.calmmom.fragments.WeightFragment;
 import com.angelova.w510.calmmom.models.Meal;
 import com.angelova.w510.calmmom.models.Medicine;
@@ -149,16 +150,26 @@ public class HealthStateActivity extends AppCompatActivity {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }
                         return true;
-                    case R.id.navigation_belly_img:
-                        Bundle bundleB = new Bundle();
-                        bundleB.putSerializable("user", mUser);
-                        BellyImagesFragment bellyImagesFragment = new BellyImagesFragment();
-                        bellyImagesFragment.setArguments(bundleB);
-                        transaction.replace(R.id.content, bellyImagesFragment).commit();
+                    case R.id.navigation_water:
+                        Bundle bundleW = new Bundle();
+                        bundleW.putSerializable("user", mUser);
+                        WaterFragment waterFragment = new WaterFragment();
+                        waterFragment.setArguments(bundleW);
+                        transaction.replace(R.id.content, waterFragment).commit();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }
                         return true;
+//                    case R.id.navigation_belly_img:
+//                        Bundle bundleB = new Bundle();
+//                        bundleB.putSerializable("user", mUser);
+//                        BellyImagesFragment bellyImagesFragment = new BellyImagesFragment();
+//                        bellyImagesFragment.setArguments(bundleB);
+//                        transaction.replace(R.id.content, bellyImagesFragment).commit();
+//                        if (getSupportActionBar() != null) {
+//                            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//                        }
+//                        return true;
                 }
             }
             return false;

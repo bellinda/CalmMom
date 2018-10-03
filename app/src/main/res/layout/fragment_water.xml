@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorContrast"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_water"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <devs.mulham.horizontalcalendar.HorizontalCalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:background="@color/colorContrastTransparent"
+        app:selectedDateBackground="@color/colorContrastTransparent"
+        app:selectorColor="@color/colorPrimary"
+        app:textColorNormal="@color/colorAccent"
+        app:textColorSelected="@color/colorPrimary"
+        app:sizeMiddleText="@dimen/horizontal_calendar_middle_text_size"
+        app:sizeTopText="@dimen/horizontal_calendar_top_text_size"
+        app:sizeBottomText="@dimen/horizontal_calendar_bottom_text_size" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15"
+        android:id="@+id/week_day_view_left_guideline" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/calendarView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        tools:text="Week 16, Day 4"
+        android:id="@+id/week_day_view"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15"
+        android:id="@+id/water_left_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85"
+        android:id="@+id/water_right_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"
+        android:id="@+id/water_top_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8"
+        android:id="@+id/water_bottom_guideline" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@+id/water_left_guideline"
+        app:layout_constraintRight_toLeftOf="@+id/water_right_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/water_top_guideline"
+        app:layout_constraintBottom_toTopOf="@id/water_bottom_guideline"
+        android:src="@drawable/water_0"
+        android:id="@+id/water_graphic"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@+id/water_left_guideline"
+        app:layout_constraintRight_toLeftOf="@+id/water_right_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/water_top_guideline"
+        app:layout_constraintBottom_toTopOf="@id/water_bottom_guideline"
+        android:text="0"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:textColor="@color/colorContrast"
+        android:id="@+id/glasses_count"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/water_graphic"
+        android:gravity="center"
+        android:text="0/8"
+        android:textSize="30sp"
+        android:textColor="@color/colorContrast"
+        android:id="@+id/glasses_count_view"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/glasses_count_view"
+        android:gravity="center"
+        android:textColor="@color/colorContrastTransparent"
+        android:text="@string/fragment_water_glasses_text"
+        android:textSize="18sp"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.12"
+        android:id="@+id/remove_left_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.88"
+        android:id="@+id/add_right_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65"
+        android:id="@+id/remove_bottom_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.625"
+        android:id="@+id/add_bottom_guideline" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/remove_left_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/remove_bottom_guideline"
+        android:text="-"
+        android:textSize="100sp"
+        android:textColor="@color/colorContrastLiteTransparent"
+        android:id="@+id/remove_btn"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toLeftOf="@+id/add_right_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/add_bottom_guideline"
+        android:text="+"
+        android:textSize="70sp"
+        android:textColor="@color/colorContrastLiteTransparent"
+        android:id="@+id/add_btn"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        android:id="@+id/img_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="1.4"
+        android:id="@+id/img_right_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.68"
+        android:id="@+id/img_top_guideline" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1.15"
+        android:id="@+id/img_bottom_guideline" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/water_watermark"
+        app:layout_constraintRight_toLeftOf="@+id/img_right_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/img_bottom_guideline"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="@+id/img_guideline"
+        app:layout_constraintTop_toTopOf="@+id/img_top_guideline" />
+
+</android.support.constraint.ConstraintLayout>

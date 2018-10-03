@@ -67,6 +67,7 @@
     <string name="title_activity">Activities</string>
     <string name="title_medicines">Medicines</string>
     <string name="title_meals">Meals</string>
+    <string name="title_water">Water intake</string>
     <string name="title_belly_img">Belly images</string>
     <string name="title_kicks">Kicks</string>
     <string name="title_contractions">Contractions</string>
@@ -331,4 +332,6 @@
     <string name="dialog_recom_weekly_intake_sea_food" formatted="false">Your current sea food intake: %d gr</string>
     <string name="dialog_recom_weekly_avoid_title">Foods to avoid during pregnancy</string>
     <string name="dialog_recom_weekly_avoid_content">‣ Rare or undercooked meat\n‣ Fish with Mercury such as shark, swordfish and king mackerel\n‣ Raw or smoked seafood\n‣ Raw eggs\n‣ Soft and blue cheeses such as brie, Camembert, Roquefort, feta and Gorgonzola\n‣ Unpasteurized milk\n‣ Pate\n‣ Unwashed fruits and vegetables</string>
+
+    <string name="fragment_water_glasses_text">glasses (1 glass = 250 ml)</string>
 </resources>

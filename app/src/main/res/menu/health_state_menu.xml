@@ -21,7 +21,12 @@
         android:title="@string/title_meals" />
 
     <item
-        android:id="@+id/navigation_belly_img"
-        android:icon="@drawable/belly_img_selector"
-        android:title="@string/title_belly_img" />
+        android:id="@+id/navigation_water"
+        android:icon="@drawable/water_selector"
+        android:title="@string/title_water"/>
+
+    <!--<item-->
+        <!--android:id="@+id/navigation_belly_img"-->
+        <!--android:icon="@drawable/belly_img_selector"-->
+        <!--android:title="@string/title_belly_img" />-->
 </menu>
