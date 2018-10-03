@@ -363,20 +363,14 @@ public class AddEditMealDialog extends Dialog {
                 if (mBlueCheeseSwitch.isChecked()) {
                     indexes.add(4);
                 }
-                if (mBlueCheeseSwitch.isChecked()) {
+                if (mOtherSeaFoodSwitch.isChecked()) {
                     indexes.add(5);
                 }
-                if (mOtherSeaFoodSwitch.isChecked()) {
+                if (mOtherFishSwitch.isChecked()) {
                     indexes.add(6);
                 }
-                if (mOtherFishSwitch.isChecked()) {
-                    indexes.add(7);
-                }
-                if (mOtherFishSwitch.isChecked()) {
-                    indexes.add(8);
-                }
                 if (mOtherMeatSwitch.isChecked()) {
-                    indexes.add(9);
+                    indexes.add(7);
                 }
                 break;
         }
