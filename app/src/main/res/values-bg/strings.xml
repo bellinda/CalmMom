@@ -245,6 +245,12 @@
     <string name="fragment_kicks_date">Дата</string>
     <string name="fragment_kicks_duration">Продължителност</string>
     <string name="fragment_kicks_count">Брой ритания</string>
+    <string name="fragment_kicks_felt_baby_question">Усетихте ли движенията на бебето си днес?</string>
+    <string name="fragment_kicks_felt_baby_yes">Да</string>
+    <string name="fragment_kicks_felt_baby_no">Не</string>
+    <string name="fragment_kicks_felt_baby_title">Движения на бебето</string>
+    <string name="fragment_kicks_felt_baby_congrats">Поздравления! Справяте се отлично, продължавайте в същия дух!</string>
+    <string name="fragment_kicks_felt_baby_tip">Не се притеснявайте! Ако в продължение на целия ден не усетите детето да мърда, най-добре се свържете с Вашия лекар..</string>
 
     <string name="dialog_reset_pass_title">Подновяване на парола</string>
     <string name="dialog_reset_pass_msg">Моля въведете имейл адреса си, където ще получите писмо за подновяване на паролата Ви</string>

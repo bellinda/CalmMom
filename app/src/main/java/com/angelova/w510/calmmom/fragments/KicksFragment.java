@@ -21,6 +21,8 @@ import android.widget.TextView;
 import com.angelova.w510.calmmom.KicksAndContractionsActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.adapters.KicksAdapter;
+import com.angelova.w510.calmmom.dialogs.WarnDialog;
+import com.angelova.w510.calmmom.dialogs.YesNoDialog;
 import com.angelova.w510.calmmom.models.Kick;
 import com.angelova.w510.calmmom.models.User;
 
@@ -159,6 +161,10 @@ public class KicksFragment extends Fragment {
             }
         });
 
+        if (!isThereAnyDataForToday()) {
+            showDialogIfUserFeltTheBabyToday();
+        }
+
         return rootView;
     }
 
@@ -181,5 +187,47 @@ public class KicksFragment extends Fragment {
         int minutes = timeInSeconds / 60;
         int seconds = timeInSeconds % 60;
         return String.format("%02d:%02d min", minutes, seconds);
+    }
+
+    private void showDialogIfUserFeltTheBabyToday() {
+        YesNoDialog dialog = new YesNoDialog(getActivity(), getString(R.string.fragment_kicks_felt_baby_question),
+                getString(R.string.fragment_kicks_felt_baby_yes), getString(R.string.fragment_kicks_felt_baby_no), new YesNoDialog.ButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick() {
+                WarnDialog warnDialog = new WarnDialog(getActivity(), getString(R.string.fragment_kicks_felt_baby_title),
+                        getString(R.string.fragment_kicks_felt_baby_congrats), new WarnDialog.DialogClickListener() {
+                    @Override
+                    public void onClick() {
+
+                    }
+                });
+                warnDialog.show();
+            }
+
+            @Override
+            public void onNegativeButtonClick() {
+                WarnDialog warnDialog = new WarnDialog(getActivity(), getString(R.string.fragment_kicks_felt_baby_title),
+                        getString(R.string.fragment_kicks_felt_baby_tip), new WarnDialog.DialogClickListener() {
+                    @Override
+                    public void onClick() {
+
+                    }
+                });
+                warnDialog.show();
+            }
+        });
+        dialog.show();
+    }
+
+    private boolean isThereAnyDataForToday() {
+        List<Kick> userKicks = mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getKicks();
+        if (userKicks != null) {
+            for (Kick kick : userKicks) {
+                if (kick.getDate().equals(currentDate)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
