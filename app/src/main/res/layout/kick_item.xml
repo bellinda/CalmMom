@@ -29,6 +29,7 @@
         android:layout_height="@dimen/label_field_height"
         tools:text="10"
         android:textColor="@color/colorContrast"
+        android:textStyle="bold"
         android:layout_weight="3"
         android:gravity="center"
         android:id="@+id/count_view"/>

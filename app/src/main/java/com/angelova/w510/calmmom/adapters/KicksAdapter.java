@@ -1,6 +1,7 @@
 package com.angelova.w510.calmmom.adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,13 @@ public class KicksAdapter extends RecyclerView.Adapter<KicksAdapter.ViewHolder> 
         Kick kick = kicks.get(position);
         holder.mDateView.setText(kick.getDate());
         holder.mTimeView.setText(kick.getDuration());
-        holder.mCountView.setText(kick.getCount() + "");
+        holder.mCountView.setText(String.format(Locale.getDefault(), "%d", kick.getCount()));
+
+        if (kick.getCount() < 10) {
+            holder.mDateView.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+            holder.mTimeView.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+            holder.mCountView.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+        }
     }
 
     @Override
