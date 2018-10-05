@@ -92,6 +92,12 @@ public class ContractionsFragment extends Fragment {
                 mTimerAnimation.setVisibility(View.GONE);
                 mSecondaryButtonsLayout.setVisibility(View.GONE);
                 mTimerView.setText("00:00:00");
+                if (isContractionRunning) {
+                    isContractionRunning = false;
+                    mContractionsBtn.setText(getString(R.string.fragment_contractions_start_contraction));
+                    mEditor.remove("contractionStart");
+                    mEditor.apply();
+                }
                 stopTimer();
             }
         });
