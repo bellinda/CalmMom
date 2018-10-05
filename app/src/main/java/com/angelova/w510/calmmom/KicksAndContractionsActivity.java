@@ -55,9 +55,9 @@ public class KicksAndContractionsActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("user", mUser);
         // set Fragmentclass Arguments
-        KicksFragment examinationsFragment = new KicksFragment();
-        examinationsFragment.setArguments(bundle);
-        transaction.replace(R.id.content, examinationsFragment).commit();
+        ContractionsFragment contractionsFragment = new ContractionsFragment();
+        contractionsFragment.setArguments(bundle);
+        transaction.replace(R.id.content, contractionsFragment).commit();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -71,6 +71,16 @@ public class KicksAndContractionsActivity extends AppCompatActivity {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
             switch (item.getItemId()) {
+                case R.id.navigation_contractions:
+                    Bundle bundleC = new Bundle();
+                    bundleC.putSerializable("user", mUser);
+                    ContractionsFragment questionsFragment = new ContractionsFragment();
+                    questionsFragment.setArguments(bundleC);
+                    transaction.replace(R.id.content, questionsFragment).commit();
+                    if(getSupportActionBar() != null) {
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                    }
+                    return true;
                 case R.id.navigation_kicks:
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("user", mUser);
@@ -78,16 +88,6 @@ public class KicksAndContractionsActivity extends AppCompatActivity {
                     KicksFragment examinationsFragment = new KicksFragment();
                     examinationsFragment.setArguments(bundle);
                     transaction.replace(R.id.content, examinationsFragment).commit();
-                    if(getSupportActionBar() != null) {
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                    }
-                    return true;
-                case R.id.navigation_contractions:
-                    Bundle bundleC = new Bundle();
-                    bundleC.putSerializable("user", mUser);
-                    ContractionsFragment questionsFragment = new ContractionsFragment();
-                    questionsFragment.setArguments(bundleC);
-                    transaction.replace(R.id.content, questionsFragment).commit();
                     if(getSupportActionBar() != null) {
                         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                     }

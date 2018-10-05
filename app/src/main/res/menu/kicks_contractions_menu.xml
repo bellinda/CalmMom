@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_kicks"
-        android:icon="@drawable/kicks_selector"
-        android:title="@string/title_kicks" />
-
-    <item
         android:id="@+id/navigation_contractions"
         android:icon="@drawable/contractions_selector"
         android:title="@string/title_contractions" />
+
+    <item
+        android:id="@+id/navigation_kicks"
+        android:icon="@drawable/kicks_selector"
+        android:title="@string/title_kicks" />
 
 </menu>

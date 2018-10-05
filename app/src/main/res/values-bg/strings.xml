@@ -252,6 +252,13 @@
     <string name="fragment_kicks_felt_baby_congrats">Поздравления! Справяте се отлично, продължавайте в същия дух!</string>
     <string name="fragment_kicks_felt_baby_tip">Не се притеснявайте! Ако в продължение на целия ден не усетите детето да мърда, най-добре се свържете с Вашия лекар..</string>
 
+    <string name="fragment_contractions_start_timer">Пусни таймера</string>
+    <string name="fragment_contractions_stop_timer">Спри таймера</string>
+    <string name="fragment_contractions_start_contraction">Начало контракция</string>
+    <string name="fragment_contractions_stop_contraction">Край контракция</string>
+    <string name="fragment_contractions_painful_contraction">Болезнена ли е контракцията?</string>
+    <string name="fragment_contractions_painful_contraction_grad">Колко е болезнена?</string>
+
     <string name="dialog_reset_pass_title">Подновяване на парола</string>
     <string name="dialog_reset_pass_msg">Моля въведете имейл адреса си, където ще получите писмо за подновяване на паролата Ви</string>
     <string name="dialog_reset_pass_email_label">Имейл</string>
