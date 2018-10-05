@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 public class StopwatchService extends Service {
 
@@ -60,7 +59,7 @@ public class StopwatchService extends Service {
         return null;
     }
 
-    public void twoDatesBetweenTime() {
+    public void timeBetweenTwoDates() {
         try {
             currentTime = simpleDateFormat.parse(strDate);
 
@@ -73,7 +72,7 @@ public class StopwatchService extends Service {
             String timerValue = String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds);
             Log.e("TIME", timerValue);
 
-            fn_update(timerValue);
+            updateTime(timerValue);
 
             if (hours == 1) {
                 mEditor.putBoolean("finish", true).commit();
@@ -83,35 +82,6 @@ public class StopwatchService extends Service {
             mTimer.cancel();
             mTimer.purge();
         }
-
-//            int int_hours = Integer.valueOf(prefs.getString("hours", ""));
-//
-//            long int_timer = TimeUnit.HOURS.toMillis(int_hours);
-//            long long_hours = int_timer - diff;
-//            long diffSeconds2 = long_hours / 1000 % 60;
-//            long diffMinutes2 = long_hours / (60 * 1000) % 60;
-//            long diffHours2 = long_hours / (60 * 60 * 1000) % 24;
-//
-//
-//            if (long_hours > 0) {
-//                String str_testing = diffHours2 + ":" + diffMinutes2 + ":" + diffSeconds2;
-//
-//                Log.e("TIME", str_testing);
-//
-//                fn_update(str_testing);
-//            } else {
-//                mEditor.putBoolean("finish", true).commit();
-//                mTimer.cancel();
-//            }
-//        }catch (Exception e){
-//            mTimer.cancel();
-//            mTimer.purge();
-//
-//
-//        }
-//
-//        return "";
-
     }
 
     @Override
@@ -122,9 +92,8 @@ public class StopwatchService extends Service {
         Log.e("Service finish","Finish");
     }
 
-    private void fn_update(String str_time){
-
-        intent.putExtra("time",str_time);
+    private void updateTime(String timerValue){
+        intent.putExtra("time", timerValue);
         sendBroadcast(intent);
     }
 
@@ -138,15 +107,12 @@ public class StopwatchService extends Service {
                 public void run() {
 
                     calendar = Calendar.getInstance();
-                    simpleDateFormat = new SimpleDateFormat("HH:mm:ss.SSS");
+                    simpleDateFormat = new SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault());
                     strDate = simpleDateFormat.format(calendar.getTime());
                     Log.e("strDate", strDate);
-                    twoDatesBetweenTime();
-
+                    timeBetweenTwoDates();
                 }
-
             });
         }
-
     }
 }
