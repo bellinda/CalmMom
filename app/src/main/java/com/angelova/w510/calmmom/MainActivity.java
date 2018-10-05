@@ -1,8 +1,10 @@
 package com.angelova.w510.calmmom;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import com.angelova.w510.calmmom.models.BabySize;
 import com.angelova.w510.calmmom.models.User;
+import com.angelova.w510.calmmom.services.StopwatchService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     private int mCurrentPregnancyWeek;
     private FirebaseFirestore mDb;
 
+    SharedPreferences mPrefs;
+    SharedPreferences.Editor mEditor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
 
         mUser = (User) getIntent().getSerializableExtra("user");
         mDb = FirebaseFirestore.getInstance();
+
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mPrefs.edit();
 
         mCurrentDateView = (TextView) findViewById(R.id.current_date_view);
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
@@ -163,5 +172,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        System.out.println("DESTROYING");
+        Intent intent = new Intent(this, StopwatchService.class);
+        stopService(intent);
+
+        mEditor.clear().commit();
     }
 }
