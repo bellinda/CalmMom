@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
+    android:paddingTop="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingBottom="10dp"
+    android:focusable="false"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/input_field_height"
+        android:id="@+id/title_view"
+        android:text="@string/dialog_pain_title"
+        android:textSize="@dimen/warn_dialog_title_text_size"
+        android:textColor="@color/colorContrast"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/message_view"
+        android:text="@string/dialog_pain_message"
+        android:gravity="center"
+        android:textColor="@color/colorContrast"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:id="@+id/pain_grade_layout">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_pain"
+            android:id="@+id/pain_1"
+            android:tag="ic_pain"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_pain"
+            android:id="@+id/pain_2"
+            android:tag="ic_pain"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_pain"
+            android:id="@+id/pain_3"
+            android:tag="ic_pain"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_pain"
+            android:id="@+id/pain_4"
+            android:tag="ic_pain"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_pain"
+            android:id="@+id/pain_5"
+            android:tag="ic_pain"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#10000000"
+        android:elevation="1dp"
+        android:id="@+id/divider"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/warn_dialog_button_height"
+        android:text="@string/dialog_pain_btn"
+        android:gravity="center"
+        android:textSize="@dimen/warn_dialog_buttons_text_size"
+        android:textColor="@color/colorContrast"
+        android:id="@+id/save_button" />
+
+</LinearLayout>

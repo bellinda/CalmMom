@@ -344,4 +344,11 @@
     <string name="dialog_recom_weekly_avoid_content">‣ Полу сурово месо\n‣ Риби, съдържащи живак, като например акула, риба меч и кралска скумрия\n‣ Сурови или пушени морски дарове\n‣ Сурови яйца\n‣ Меки и сини сирена като например бри, Камембер, Рокфор, фета и Горгонзола\n‣ Непастьоризирано мляко\n‣ Пастети\n‣ Неизмити плодове и зеленчуци</string>
 
     <string name="fragment_water_glasses_text">чаши (1 чаша = 250 мл)</string>
+
+    <string name="dialog_pain_title">Сила на болката</string>
+    <string name="dialog_pain_message">Моля отбележете силата на болката от последната контракция</string>
+    <string name="dialog_pain_btn">Запази</string>
+    <string name="dialog_pain_question">Беше ли болезнена контракцията?</string>
+    <string name="dialog_pain_question_yes">Да</string>
+    <string name="dialog_pain_question_no">Не</string>
 </resources>

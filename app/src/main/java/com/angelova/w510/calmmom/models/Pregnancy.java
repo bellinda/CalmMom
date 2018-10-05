@@ -17,6 +17,7 @@ public class Pregnancy implements Serializable {
     private List<Weight> weights;
     private HashMap<String, List<UserActivity>> activities;
     private List<Kick> kicks;
+    private List<Contraction> contractions;
     private boolean firstPregnancy;
     private boolean bloodGroupIncompatibility;
     private boolean unwantedPregnancy;
@@ -71,6 +72,14 @@ public class Pregnancy implements Serializable {
 
     public void setKicks(List<Kick> kicks) {
         this.kicks = kicks;
+    }
+
+    public List<Contraction> getContractions() {
+        return contractions;
+    }
+
+    public void setContractions(List<Contraction> contractions) {
+        this.contractions = contractions;
     }
 
     public boolean isFirstPregnancy() {

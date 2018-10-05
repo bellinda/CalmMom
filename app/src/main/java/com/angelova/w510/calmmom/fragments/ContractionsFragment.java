@@ -20,6 +20,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.R;
+import com.angelova.w510.calmmom.dialogs.PainDialog;
+import com.angelova.w510.calmmom.dialogs.YesNoDialog;
+import com.angelova.w510.calmmom.models.Contraction;
 import com.angelova.w510.calmmom.services.StopwatchService;
 import com.github.ybq.android.spinkit.SpinKitView;
 
@@ -27,6 +30,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by W510 on 24.8.2018 г..
@@ -43,6 +47,11 @@ public class ContractionsFragment extends Fragment {
 
     SharedPreferences mPrefs;
     SharedPreferences.Editor mEditor;
+
+    private boolean isContractionRunning = false;
+
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault());
+    private SimpleDateFormat simpleDateFormatWithDate = new SimpleDateFormat("dd MMM yyyy, HH:mm:ss.SSS", Locale.getDefault());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,13 +96,46 @@ public class ContractionsFragment extends Fragment {
             }
         });
 
+        mContractionsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isContractionRunning) {
+                    mContractionsBtn.setText(getString(R.string.fragment_contractions_start_contraction));
+
+                    YesNoDialog dialog = new YesNoDialog(getActivity(), getString(R.string.dialog_pain_question),
+                            getString(R.string.dialog_pain_question_yes), getString(R.string.dialog_pain_question_no), new YesNoDialog.ButtonClickListener() {
+                        @Override
+                        public void onPositiveButtonClick() {
+                            PainDialog painDialog = new PainDialog(getActivity(), new PainDialog.DialogClickListener() {
+                                @Override
+                                public void onSave(int painGrade) {
+                                    saveContraction(true, painGrade);
+                                }
+                            });
+                            painDialog.show();
+                        }
+
+                        @Override
+                        public void onNegativeButtonClick() {
+                            saveContraction(false, 0);
+                        }
+                    });
+                    dialog.show();
+                } else {
+                    mContractionsBtn.setText(getString(R.string.fragment_contractions_stop_contraction));
+                    String startTime = simpleDateFormatWithDate.format(Calendar.getInstance().getTime());
+                    mEditor.putString("contractionStart", startTime).commit();
+                }
+
+                isContractionRunning = !isContractionRunning;
+            }
+        });
+
         return rootView;
     }
 
     private void startTimer() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss.SSS");
-
         String startTime = simpleDateFormat.format(calendar.getTime());
         mEditor.putString("data", startTime).commit();
 
@@ -107,6 +149,28 @@ public class ContractionsFragment extends Fragment {
         getActivity().stopService(intent);
 
         mEditor.clear().commit();
+    }
+
+    private void saveContraction(boolean painful, int grade) {
+        try {
+            Date contractionStart = simpleDateFormatWithDate.parse(mPrefs.getString("contractionStart", ""));
+            Date currentTime = Calendar.getInstance().getTime();
+
+            long diff = currentTime.getTime() - contractionStart.getTime();
+            long seconds = (diff / 1000) % 60;
+            long minutes = (diff / 1000) / 60;
+
+            String contractionDuration = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+            Contraction contraction = new Contraction(simpleDateFormat.format(contractionStart), simpleDateFormat.format(currentTime), contractionDuration, painful, grade);
+
+            //TODO: save contraction into user and DB
+
+            mEditor.remove("contractionStart");
+            mEditor.apply();
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
     }
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {

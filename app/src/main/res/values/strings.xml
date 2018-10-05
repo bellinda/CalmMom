@@ -347,4 +347,11 @@
     <string name="dialog_recom_weekly_avoid_content">‣ Rare or undercooked meat\n‣ Fish with Mercury such as shark, swordfish and king mackerel\n‣ Raw or smoked seafood\n‣ Raw eggs\n‣ Soft and blue cheeses such as brie, Camembert, Roquefort, feta and Gorgonzola\n‣ Unpasteurized milk\n‣ Pate\n‣ Unwashed fruits and vegetables</string>
 
     <string name="fragment_water_glasses_text">glasses (1 glass = 250 ml)</string>
+
+    <string name="dialog_pain_title">Pain grade</string>
+    <string name="dialog_pain_message">Set the pain grade of the current contraction</string>
+    <string name="dialog_pain_btn">Save</string>
+    <string name="dialog_pain_question">Was the contraction painful?</string>
+    <string name="dialog_pain_question_yes">Yes</string>
+    <string name="dialog_pain_question_no">No</string>
 </resources>
