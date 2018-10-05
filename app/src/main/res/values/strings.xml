@@ -265,6 +265,8 @@
     <string name="fragment_contractions_start_time">Start time</string>
     <string name="fragment_contractions_duration">Duration (min)</string>
     <string name="fragment_contractions_painful">Painful</string>
+    <string name="fragment_contractions_warning_title">Warning</string>
+    <string name="fragment_contractions_more_than_three" formatted="false">You had %d contractions in the last 10 minutes. Maybe it\'s time to call your doctor or directly go to the hospital.</string>
 
     <string name="dialog_reset_pass_title">Reset password</string>
     <string name="dialog_reset_pass_msg">Please enter your email address in order to receive an email for resetting your password</string>

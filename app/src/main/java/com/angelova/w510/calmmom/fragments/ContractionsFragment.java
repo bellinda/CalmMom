@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import com.angelova.w510.calmmom.KicksAndContractionsActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.adapters.ContractionsAdapter;
 import com.angelova.w510.calmmom.dialogs.PainDialog;
+import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.dialogs.YesNoDialog;
 import com.angelova.w510.calmmom.models.Contraction;
 import com.angelova.w510.calmmom.models.User;
@@ -57,6 +59,7 @@ public class ContractionsFragment extends Fragment {
     SharedPreferences.Editor mEditor;
 
     private boolean isContractionRunning = false;
+    private boolean serviceRunning = false;
 
     private User mUser;
     private RecyclerView mRecyclerView;
@@ -149,12 +152,29 @@ public class ContractionsFragment extends Fragment {
                     String startTime = simpleDateFormatWithDate.format(Calendar.getInstance().getTime());
                     mEditor.putString("contractionStart", startTime).commit();
 
-                    //TODO: check if there are 3 contractions in 10 minutes
+                    //+ 1 because the user just started a new contraction which is still not saved in the BD
+                    int contractionsCountInLast10Minutes = getCountOfContractionsInLast10Minutes() + 1;
+                    if (contractionsCountInLast10Minutes >= 3) {
+                        WarnDialog dialog = new WarnDialog(getActivity(), getString(R.string.fragment_contractions_warning_title),
+                                String.format(Locale.getDefault(), getString(R.string.fragment_contractions_more_than_three), contractionsCountInLast10Minutes),
+                                new WarnDialog.DialogClickListener() {
+                                    @Override
+                                    public void onClick() {
+
+                                    }
+                                });
+                        dialog.show();
+                    }
                 }
 
                 isContractionRunning = !isContractionRunning;
             }
         });
+
+        if (mPrefs.getString("contractionStart", null) != null) {
+            isContractionRunning = true;
+            mContractionsBtn.setText(getString(R.string.fragment_contractions_stop_contraction));
+        }
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.contractions_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -174,7 +194,6 @@ public class ContractionsFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         String startTime = simpleDateFormat.format(calendar.getTime());
         mEditor.putString("data", startTime).commit();
-
 
         Intent intent_service = new Intent(getActivity(), StopwatchService.class);
         getActivity().startService(intent_service);
@@ -215,11 +234,34 @@ public class ContractionsFragment extends Fragment {
         }
     }
 
+    private int getCountOfContractionsInLast10Minutes() {
+        int count = 0;
+        Date currentTime = Calendar.getInstance().getTime();
+        for (Contraction contraction : mDataList) {
+            String[] startTimeParts = contraction.getStartTime().split(":");
+            Calendar contractionCal = Calendar.getInstance();
+            contractionCal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(startTimeParts[0]));
+            contractionCal.set(Calendar.MINUTE, Integer.parseInt(startTimeParts[1]));
+            contractionCal.set(Calendar.SECOND, Integer.parseInt(startTimeParts[2]));
+            Date contractionDate = contractionCal.getTime();
+            if (currentTime.getTime() - contractionDate.getTime() <= 10*60*1000) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String time = intent.getStringExtra("time");
             mTimerView.setText(time);
+
+            if (mSecondaryButtonsLayout.getVisibility() == View.GONE) {
+                mTimerAnimation.setVisibility(View.VISIBLE);
+                mStartTimerBtn.setVisibility(View.GONE);
+                mSecondaryButtonsLayout.setVisibility(View.VISIBLE);
+            }
         }
     };
 

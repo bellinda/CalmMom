@@ -262,6 +262,8 @@
     <string name="fragment_contractions_start_time">Начало</string>
     <string name="fragment_contractions_duration">Време (мин)</string>
     <string name="fragment_contractions_painful">Болка</string>
+    <string name="fragment_contractions_warning_title">Внимание</string>
+    <string name="fragment_contractions_more_than_three" formatted="false">Имахте %d контракции през последните 10 минути. Може би е време да се обадите на Вашия лекар или направо да тръгнете за болницата.</string>
 
     <string name="dialog_reset_pass_title">Подновяване на парола</string>
     <string name="dialog_reset_pass_msg">Моля въведете имейл адреса си, където ще получите писмо за подновяване на паролата Ви</string>
