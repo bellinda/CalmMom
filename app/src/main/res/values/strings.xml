@@ -261,6 +261,10 @@
     <string name="fragment_contractions_stop_contraction">Stop contraction</string>
     <string name="fragment_contractions_painful_contraction">Is the contraction painful?</string>
     <string name="fragment_contractions_painful_contraction_grad">How much is it painful?</string>
+    <string name="fragment_contractions_date">Date</string>
+    <string name="fragment_contractions_start_time">Start time</string>
+    <string name="fragment_contractions_duration">Duration (min)</string>
+    <string name="fragment_contractions_painful">Painful</string>
 
     <string name="dialog_reset_pass_title">Reset password</string>
     <string name="dialog_reset_pass_msg">Please enter your email address in order to receive an email for resetting your password</string>

@@ -258,6 +258,10 @@
     <string name="fragment_contractions_stop_contraction">Край контракция</string>
     <string name="fragment_contractions_painful_contraction">Болезнена ли е контракцията?</string>
     <string name="fragment_contractions_painful_contraction_grad">Колко е болезнена?</string>
+    <string name="fragment_contractions_date">Дата</string>
+    <string name="fragment_contractions_start_time">Начало</string>
+    <string name="fragment_contractions_duration">Време (мин)</string>
+    <string name="fragment_contractions_painful">Болка</string>
 
     <string name="dialog_reset_pass_title">Подновяване на парола</string>
     <string name="dialog_reset_pass_msg">Моля въведете имейл адреса си, където ще получите писмо за подновяване на паролата Ви</string>

@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class Contraction implements Serializable {
 
+    private String date;
     private String startTime;
     private String endTime;
     private String duration;
@@ -14,12 +15,21 @@ public class Contraction implements Serializable {
 
     public Contraction() {}
 
-    public Contraction(String startTime, String endTime, String duration, boolean painful, int painGrade) {
+    public Contraction(String date, String startTime, String endTime, String duration, boolean painful, int painGrade) {
+        this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.duration = duration;
         this.painful = painful;
         this.painGrade = painGrade;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getStartTime() {

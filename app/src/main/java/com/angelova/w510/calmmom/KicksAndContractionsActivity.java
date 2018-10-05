@@ -118,4 +118,25 @@ public class KicksAndContractionsActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    public void updateUserInDb(User userToUpdate) {
+        ObjectMapper m = new ObjectMapper();
+
+        Map<String, Object> user = m.convertValue(userToUpdate, Map.class);
+
+        final DocumentReference userRef = mDb.collection("users").document(mUserEmail);
+        userRef.update(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("Error updating document " + e);
+                    }
+                });
+    }
 }

@@ -40,7 +40,7 @@ public class StopwatchService extends Service {
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         mEditor = prefs.edit();
         calendar = Calendar.getInstance();
-        simpleDateFormat = new SimpleDateFormat("HH:mm:ss.SSS");
+        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
 
         try {
             startTime = simpleDateFormat.parse(prefs.getString("data", ""));
@@ -107,7 +107,7 @@ public class StopwatchService extends Service {
                 public void run() {
 
                     calendar = Calendar.getInstance();
-                    simpleDateFormat = new SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault());
+                    simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
                     strDate = simpleDateFormat.format(calendar.getTime());
                     Log.e("strDate", strDate);
                     timeBetweenTwoDates();

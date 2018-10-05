@@ -10,6 +10,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,17 +21,23 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.angelova.w510.calmmom.KicksAndContractionsActivity;
 import com.angelova.w510.calmmom.R;
+import com.angelova.w510.calmmom.adapters.ContractionsAdapter;
 import com.angelova.w510.calmmom.dialogs.PainDialog;
 import com.angelova.w510.calmmom.dialogs.YesNoDialog;
 import com.angelova.w510.calmmom.models.Contraction;
+import com.angelova.w510.calmmom.models.User;
 import com.angelova.w510.calmmom.services.StopwatchService;
 import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -50,8 +58,14 @@ public class ContractionsFragment extends Fragment {
 
     private boolean isContractionRunning = false;
 
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault());
-    private SimpleDateFormat simpleDateFormatWithDate = new SimpleDateFormat("dd MMM yyyy, HH:mm:ss.SSS", Locale.getDefault());
+    private User mUser;
+    private RecyclerView mRecyclerView;
+    private ContractionsAdapter mAdapter;
+    private List<Contraction> mDataList = new ArrayList<>();
+
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+    private SimpleDateFormat simpleDateFormatWithDate = new SimpleDateFormat("dd MMM yyyy, HH:mm:ss", Locale.getDefault());
+    private SimpleDateFormat simpleDateFormatDate = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +77,8 @@ public class ContractionsFragment extends Fragment {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.parseColor("#324A5F"));
         }
+
+        mUser = (User) getArguments().getSerializable("user");
 
         mTimerView = (TextView) rootView.findViewById(R.id.timer_view);
 
@@ -105,6 +121,7 @@ public class ContractionsFragment extends Fragment {
         mContractionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final Date currentTime = Calendar.getInstance().getTime();
                 if (isContractionRunning) {
                     mContractionsBtn.setText(getString(R.string.fragment_contractions_start_contraction));
 
@@ -115,7 +132,7 @@ public class ContractionsFragment extends Fragment {
                             PainDialog painDialog = new PainDialog(getActivity(), new PainDialog.DialogClickListener() {
                                 @Override
                                 public void onSave(int painGrade) {
-                                    saveContraction(true, painGrade);
+                                    saveContraction(currentTime,true, painGrade);
                                 }
                             });
                             painDialog.show();
@@ -123,7 +140,7 @@ public class ContractionsFragment extends Fragment {
 
                         @Override
                         public void onNegativeButtonClick() {
-                            saveContraction(false, 0);
+                            saveContraction(currentTime, false, 0);
                         }
                     });
                     dialog.show();
@@ -131,11 +148,24 @@ public class ContractionsFragment extends Fragment {
                     mContractionsBtn.setText(getString(R.string.fragment_contractions_stop_contraction));
                     String startTime = simpleDateFormatWithDate.format(Calendar.getInstance().getTime());
                     mEditor.putString("contractionStart", startTime).commit();
+
+                    //TODO: check if there are 3 contractions in 10 minutes
                 }
 
                 isContractionRunning = !isContractionRunning;
             }
         });
+
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.contractions_list);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setHasFixedSize(true);
+        if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getContractions() != null) {
+            List<Contraction> contractions = mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getContractions();
+            Collections.reverse(contractions);
+            mDataList.addAll(contractions);
+        }
+        mAdapter = new ContractionsAdapter(mDataList, getActivity());
+        mRecyclerView.setAdapter(mAdapter);
 
         return rootView;
     }
@@ -157,10 +187,9 @@ public class ContractionsFragment extends Fragment {
         mEditor.clear().commit();
     }
 
-    private void saveContraction(boolean painful, int grade) {
+    private void saveContraction(Date currentTime, boolean painful, int grade) {
         try {
             Date contractionStart = simpleDateFormatWithDate.parse(mPrefs.getString("contractionStart", ""));
-            Date currentTime = Calendar.getInstance().getTime();
 
             long diff = currentTime.getTime() - contractionStart.getTime();
             long seconds = (diff / 1000) % 60;
@@ -168,9 +197,16 @@ public class ContractionsFragment extends Fragment {
 
             String contractionDuration = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
-            Contraction contraction = new Contraction(simpleDateFormat.format(contractionStart), simpleDateFormat.format(currentTime), contractionDuration, painful, grade);
+            Contraction contraction = new Contraction(simpleDateFormatDate.format(contractionStart), simpleDateFormat.format(contractionStart), simpleDateFormat.format(currentTime), contractionDuration, painful, grade);
 
-            //TODO: save contraction into user and DB
+            if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getContractions() == null) {
+                mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).setContractions(new ArrayList<Contraction>());
+            }
+            mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getContractions().add(contraction);
+            ((KicksAndContractionsActivity)getActivity()).updateUserInDb(mUser);
+
+            mDataList.add(0, contraction);
+            mAdapter.notifyDataSetChanged();
 
             mEditor.remove("contractionStart");
             mEditor.apply();
