@@ -357,4 +357,11 @@
     <string name="dialog_pain_question">Беше ли болезнена контракцията?</string>
     <string name="dialog_pain_question_yes">Да</string>
     <string name="dialog_pain_question_no">Не</string>
+
+    <string name="activity_profile_pregnancies_btn">Избери бременност</string>
+    <string name="activity_profile_forum_btn">Форум</string>
+    <string name="activity_profile_add_image">Добави\nснимка</string>
+    <string name="activity_profile_first_pregnancy">1ва бременност</string>
+    <string name="activity_profile_second_pregnancy">2ра бременност</string>
+    <string name="activity_profile_other_pregnancy" formatted="false">%dта бременност</string>
 </resources>

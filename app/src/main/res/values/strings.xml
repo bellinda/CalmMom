@@ -360,4 +360,11 @@
     <string name="dialog_pain_question">Was the contraction painful?</string>
     <string name="dialog_pain_question_yes">Yes</string>
     <string name="dialog_pain_question_no">No</string>
+
+    <string name="activity_profile_pregnancies_btn">Choose pregnancy</string>
+    <string name="activity_profile_forum_btn">Forum</string>
+    <string name="activity_profile_add_image">Add\nimage</string>
+    <string name="activity_profile_first_pregnancy">1st pregnancy</string>
+    <string name="activity_profile_second_pregnancy">2nd pregnancy</string>
+    <string name="activity_profile_other_pregnancy" formatted="false">%dth pregnancy</string>
 </resources>

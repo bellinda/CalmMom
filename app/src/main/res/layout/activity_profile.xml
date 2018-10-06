@@ -55,14 +55,15 @@
                 android:src="@color/colorAccent"
                 app:civ_border_width="2dp"
                 app:civ_border_color="@color/colorContrast"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:focusable="true"/>
 
             <TextView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:text="Add\nimage"
+                android:text="@string/activity_profile_add_image"
                 android:textSize="@dimen/profile_image_text_size"
                 android:id="@+id/profile_text"
                 android:textColor="@color/colorContrast"/>
@@ -89,7 +90,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="1st pregnancy"
+            android:text="@string/activity_profile_first_pregnancy"
             android:textColor="@color/colorAccentTransparent"
             android:id="@+id/pregnancy_count"/>
 
@@ -130,7 +131,7 @@
             app:layout_constraintBottom_toTopOf="@id/bottom_buttons_guideline"
             android:layout_gravity="center"
             android:background="@drawable/border_only_button_thin"
-            android:text="Choose pregnancy"
+            android:text="@string/activity_profile_pregnancies_btn"
             android:textAllCaps="false"
             android:textColor="@drawable/button_profile_text_color_dark"
             android:id="@+id/other_pregnancies_btn"/>
@@ -158,7 +159,7 @@
             app:layout_constraintBottom_toTopOf="@id/bottom_buttons_guideline"
             android:layout_gravity="center"
             android:background="@drawable/border_only_button_thin"
-            android:text="Forum"
+            android:text="@string/activity_profile_forum_btn"
             android:textAllCaps="false"
             android:textColor="@drawable/button_profile_text_color_dark"
             android:id="@+id/forum_btn"/>
