@@ -5,72 +5,167 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.angelova.w510.calmmom.ProfileActivity"
-    android:background="@drawable/profile_drawable">
+    android:background="@color/colorAccent">
 
     <android.support.constraint.Guideline
         android:layout_width="1dp"
         android:layout_height="1dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.18"
-        android:id="@+id/top_image_guideline"/>
-
-    <android.support.constraint.Guideline
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5"
-        android:id="@+id/left_image_guideline"/>
+        android:id="@+id/bottom_dark_layout_guideline"/>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@+id/left_image_guideline"
-        app:layout_constraintTop_toBottomOf="@id/top_image_guideline"
-        android:id="@+id/image_view">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_dark_layout_guideline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@color/colorContrast"
+        android:elevation="10dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@color/colorAccent"
-            app:civ_border_width="2dp"
-            app:civ_border_color="@color/colorContrast"
-            android:clickable="true"/>
+        <!--Image layout -->
+
+        <android.support.constraint.Guideline
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.07"
+            android:id="@+id/top_image_guideline"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/left_image_guideline"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.52" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/top_image_guideline"
+            android:id="@+id/image_view">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@color/colorAccent"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/colorContrast"
+                android:clickable="true"/>
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:text="Add\nimage"
+                android:textSize="@dimen/profile_image_text_size"
+                android:id="@+id/profile_text"
+                android:textColor="@color/colorContrast"/>
+        </RelativeLayout>
 
         <TextView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/image_view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="20dp"
+            tools:text="Gabriela Yonkova"
+            android:textColor="@color/colorAccentTransparent"
+            android:textSize="20sp"
+            android:id="@+id/name_field"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/name_field"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:textAlignment="center"
-            android:text="Add\nimage"
-            android:textSize="@dimen/profile_image_text_size"
-            android:id="@+id/profile_text"
-            android:textColor="@color/colorContrast"/>
-    </RelativeLayout>
+            android:text="1st pregnancy"
+            android:textColor="@color/colorAccentTransparent"
+            android:id="@+id/pregnancy_count"/>
 
-    <android.support.constraint.Guideline
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.14"
-        android:id="@+id/bottom_name_guideline"/>
+        <android.support.constraint.Guideline
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.79"
+            android:id="@+id/top_buttons_guideline"/>
 
-    <android.support.constraint.Guideline
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1"
-        android:id="@+id/left_name_guideline"/>
+        <android.support.constraint.Guideline
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.93"
+            android:id="@+id/bottom_buttons_guideline"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_name_guideline"
-        app:layout_constraintLeft_toRightOf="@id/left_name_guideline"
-        tools:text="Gabriela Yonkova"
-        android:textColor="@color/colorAccent"
-        android:textSize="30sp"
-        android:id="@+id/name_field"/>
+        <android.support.constraint.Guideline
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05"
+            android:id="@+id/left_explore_guideline"/>
+
+        <android.support.constraint.Guideline
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.45"
+            android:id="@+id/right_explore_guideline"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toRightOf="@id/left_explore_guideline"
+            app:layout_constraintRight_toLeftOf="@id/right_explore_guideline"
+            app:layout_constraintTop_toBottomOf="@id/top_buttons_guideline"
+            app:layout_constraintBottom_toTopOf="@id/bottom_buttons_guideline"
+            android:layout_gravity="center"
+            android:background="@drawable/border_only_button_thin"
+            android:text="Choose pregnancy"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_profile_text_color_dark"
+            android:id="@+id/other_pregnancies_btn"/>
+
+        <android.support.constraint.Guideline
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"
+            android:id="@+id/left_forum_guideline"/>
+
+        <android.support.constraint.Guideline
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95"
+            android:id="@+id/right_forum_guideline"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toRightOf="@id/left_forum_guideline"
+            app:layout_constraintRight_toLeftOf="@id/right_forum_guideline"
+            app:layout_constraintTop_toBottomOf="@id/top_buttons_guideline"
+            app:layout_constraintBottom_toTopOf="@id/bottom_buttons_guideline"
+            android:layout_gravity="center"
+            android:background="@drawable/border_only_button_thin"
+            android:text="Forum"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_profile_text_color_dark"
+            android:id="@+id/forum_btn"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+
 
     <android.support.constraint.Guideline
         android:layout_width="1dp"
@@ -107,8 +202,7 @@
             android:text="@string/menstruation_label"
             android:textColor="@color/colorContrast"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="5dp"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"

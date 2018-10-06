@@ -5,6 +5,7 @@
     <color name="colorAccent">#fdfcfa</color>
     <color name="colorContrast">#324A5F</color>
     <color name="colorAccentTransparent">#c3fdfcfa</color>
+    <color name="colorAccentTransparentLite">#6bfdfcfa</color>
     <color name="colorContrastTransparent">#c3324a5f</color>
     <color name="colorContrastLiteTransparent">#8b324a5f</color>
     <color name="colorPrimaryTransparent">#c3fa7b6a</color>
