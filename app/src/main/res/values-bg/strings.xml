@@ -370,4 +370,8 @@
     <string name="activity_profile_other_pregnancy" formatted="false">%dта бременност</string>
 
     <string name="fragment_themes_no_items">Няма налични теми. Можете да бъдете първия човек, постнал тема във форума.</string>
+
+    <string name="fragment_answered_by_me_no_items">Все още нямате писани отговори в теми от форума.</string>
+
+    <string name="fragment_my_themes_no_items">Все още нямате пуснати теми във форума.</string>
 </resources>

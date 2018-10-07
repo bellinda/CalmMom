@@ -7,6 +7,34 @@
     tools:context=".fragments.AnsweredByMeFragment"
     android:background="@color/colorAccent">
 
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9"
+        android:id="@+id/bottom_list_guideline"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_list_guideline">
+
+        <include layout="@layout/content_answered_by_me" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/fragment_answered_by_me_no_items"
+        android:gravity="center"
+        android:id="@+id/no_items_view"
+        android:visibility="gone"/>
+
 
     <android.support.constraint.Guideline
         android:layout_width="0dp"

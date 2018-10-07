@@ -92,6 +92,7 @@ public class ForumActivity extends AppCompatActivity {
                     case R.id.navigation_answered_by_me:
                         Bundle bundleA = new Bundle();
                         bundleA.putSerializable("user", mUser);
+                        bundleA.putString("email", mUserEmail);
                         AnsweredByMeFragment answeredByMeFragment = new AnsweredByMeFragment();
                         answeredByMeFragment.setArguments(bundleA);
                         transaction.replace(R.id.content, answeredByMeFragment).commit();
@@ -102,6 +103,7 @@ public class ForumActivity extends AppCompatActivity {
                     case R.id.navigation_my_themes:
                         Bundle bundleM = new Bundle();
                         bundleM.putSerializable("user", mUser);
+                        bundleM.putString("email", mUserEmail);
                         MyThemesFragment myThemesFragment = new MyThemesFragment();
                         myThemesFragment.setArguments(bundleM);
                         transaction.replace(R.id.content, myThemesFragment).commit();

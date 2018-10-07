@@ -94,7 +94,6 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
                         mDataList.clear();
                         mDataList.addAll(themes);
                         mAdapter.notifyDataSetChanged();
-                        isRefreshing = false;
                     } else {
                         mDataList.addAll(themes);
                         mAdapter = new ThemesAdapter(mDataList, getActivity());
@@ -105,6 +104,7 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
                     mNoItemsView.setVisibility(View.VISIBLE);
                 }
                 mSwipeRefreshLayout.setRefreshing(false);
+                isRefreshing = false;
             }
         });
     }
