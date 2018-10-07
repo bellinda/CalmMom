@@ -377,4 +377,12 @@
     <string name="fragment_answered_by_me_no_items">You still don\'t have answers in any of the themes in the forum.</string>
 
     <string name="fragment_my_themes_no_items">You still don\'t have any themes posted in the forum.</string>
+
+    <string name="dialog_add_theme_dialog_title">New theme</string>
+    <string name="dialog_add_theme_post_btn">Post</string>
+    <string name="dialog_add_theme_cancel_btn">Cancel</string>
+    <string name="dialog_add_theme_title">Title</string>
+    <string name="dialog_add_theme_content">Content</string>
+    <string name="dialog_add_theme_not_all_data">Please enter the title and content of the theme you want to post</string>
+    <string name="dialog_add_theme_not_all_data_title">Warning</string>
 </resources>

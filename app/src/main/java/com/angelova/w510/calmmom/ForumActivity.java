@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.fragments.AnsweredByMeFragment;
 import com.angelova.w510.calmmom.fragments.MyThemesFragment;
 import com.angelova.w510.calmmom.fragments.ThemesFragment;
@@ -117,4 +118,13 @@ public class ForumActivity extends AppCompatActivity {
         }
 
     };
+
+    public void showAlertDialogNow(String message, String title) {
+        WarnDialog warning = new WarnDialog(this, title, message, new WarnDialog.DialogClickListener() {
+            @Override
+            public void onClick() {
+            }
+        });
+        warning.show();
+    }
 }

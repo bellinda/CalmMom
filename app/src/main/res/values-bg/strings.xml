@@ -374,4 +374,10 @@
     <string name="fragment_answered_by_me_no_items">Все още нямате писани отговори в теми от форума.</string>
 
     <string name="fragment_my_themes_no_items">Все още нямате пуснати теми във форума.</string>
+
+    <string name="dialog_add_theme_dialog_title">Нова тема</string>
+    <string name="dialog_add_theme_post_btn">Публикувай</string>
+    <string name="dialog_add_theme_cancel_btn">Отказ</string>
+    <string name="dialog_add_theme_title">Заглавие</string>
+    <string name="dialog_add_theme_content">Съдържание</string>
 </resources>

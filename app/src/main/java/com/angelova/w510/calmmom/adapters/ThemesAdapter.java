@@ -35,10 +35,14 @@ public class ThemesAdapter extends RecyclerView.Adapter<ThemesAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         Theme theme = themes.get(position);
 
-        if (Locale.getDefault().getLanguage().equalsIgnoreCase("bg")) {
-            holder.mTitleView.setText(theme.getTitle());
+        if (theme.getTitleEn() != null && !theme.getTitleEn().isEmpty()) {
+            if (Locale.getDefault().getLanguage().equalsIgnoreCase("bg")) {
+                holder.mTitleView.setText(theme.getTitle());
+            } else {
+                holder.mTitleView.setText(theme.getTitleEn());
+            }
         } else {
-            holder.mTitleView.setText(theme.getTitleEn());
+            holder.mTitleView.setText(theme.getTitle());
         }
 
         holder.mAuthorView.setText(theme.getAuthor());
