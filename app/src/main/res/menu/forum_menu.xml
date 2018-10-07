@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_themes"
+        android:icon="@drawable/all_themes_selctor"
+        android:title="@string/title_themes" />
+
+    <item
+        android:id="@+id/navigation_answered_by_me"
+        android:icon="@drawable/answered_by_me_selector"
+        android:title="@string/title_answered_by_me" />
+
+    <item
+        android:id="@+id/navigation_my_themes"
+        android:icon="@drawable/my_themes_selector"
+        android:title="@string/title_my_themes"/>
+</menu>

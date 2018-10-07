@@ -28,6 +28,7 @@
     <string name="risk_factor_food_allergy">Алергия към храни</string>
     <string name="risk_factor_med_allergy">Алергия към лекарства</string>
     <string name="first_pregnancy_title">Първа бременност?</string>
+    <string name="consecutive_pregnancy">Поредност на бременността</string>
     <string name="last_delivery">Последно раждане на дата</string>
     <string name="kids_alive">Живородени деца (брой)</string>
     <string name="kids_dead">Мъртвородени деца (брой)</string>
@@ -71,6 +72,9 @@
     <string name="title_belly_img">Снимки на коремчето</string>
     <string name="title_kicks">Ритания</string>
     <string name="title_contractions">Контракции</string>
+    <string name="title_themes">Всички теми</string>
+    <string name="title_answered_by_me">С мое участие</string>
+    <string name="title_my_themes">Моите теми</string>
 
     <!--12th week-->
     <string name="first_examination_test1">Хемоглобин, еритроцити, хематокрит, левкоцити, MCV, MCH, СУЕ, кръвна захар, урина-седимент, уробилиноген, кетони</string>
@@ -364,4 +368,6 @@
     <string name="activity_profile_first_pregnancy">1ва бременност</string>
     <string name="activity_profile_second_pregnancy">2ра бременност</string>
     <string name="activity_profile_other_pregnancy" formatted="false">%dта бременност</string>
+
+    <string name="fragment_themes_no_items">Няма налични теми. Можете да бъдете първия човек, постнал тема във форума.</string>
 </resources>

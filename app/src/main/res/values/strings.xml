@@ -28,6 +28,7 @@
     <string name="risk_factor_food_allergy">Food Allergy</string>
     <string name="risk_factor_med_allergy">Medicines Allergy</string>
     <string name="first_pregnancy_title">First pregnancy?</string>
+    <string name="consecutive_pregnancy">Pregnancy count (including the current one)</string>
     <string name="last_delivery">Date of last delivery</string>
     <string name="kids_alive">Live births (count)</string>
     <string name="kids_dead">Stillborn children (count)</string>
@@ -71,6 +72,9 @@
     <string name="title_belly_img">Belly images</string>
     <string name="title_kicks">Kicks</string>
     <string name="title_contractions">Contractions</string>
+    <string name="title_themes">All themes</string>
+    <string name="title_answered_by_me">Answered by me</string>
+    <string name="title_my_themes">My themes</string>
 
     <!--12th week-->
     <string name="first_examination_test1">Хемоглобин, еритроцити, хематокрит, левкоцити, MCV, MCH, СУЕ, кръвна захар, урина-седимент, уробилиноген, кетони</string>
@@ -97,7 +101,7 @@
     <string name="second_examination_act4">Гинекологичен статус</string>
     <string name="second_examination_act5">Гинекологична ехография</string>
     <string name="second_examination_act6">Обсъждане на резултати</string>
-    
+
     <string name="second_examination_test1">Късен биохимичен скрининг</string>
     <string name="second_examination_test2">Урокултура</string>
 
@@ -367,4 +371,6 @@
     <string name="activity_profile_first_pregnancy">1st pregnancy</string>
     <string name="activity_profile_second_pregnancy">2nd pregnancy</string>
     <string name="activity_profile_other_pregnancy" formatted="false">%dth pregnancy</string>
+
+    <string name="fragment_themes_no_items">No themes available yet. You could be the first one addign a theme.</string>
 </resources>
