@@ -90,11 +90,13 @@ public class InfoActivity extends AppCompatActivity {
     private CheckBox mMedAllChkBox;
 
     private SwitchCompat mFirstPregnancySwitch;
+    private LinearLayout mPregnancyCountLayout;
     private LinearLayout mLastDeliveryLayout;
     private LinearLayout mLiveBornKidsLayout;
     private LinearLayout mStillbornKidsLayout;
     private LinearLayout mPrematureLayout;
     private LinearLayout mPosttermLayout;
+    private EditText mPregnancyCountInput;
     private TextView mLastDeliveryDateInput;
     private EditText mLiveBornKidsInput;
     private EditText mStillbornKidsInput;
@@ -206,11 +208,13 @@ public class InfoActivity extends AppCompatActivity {
         mFoodAllChkBox = (CheckBox) findViewById(R.id.factor_food_allergy);
         mMedAllChkBox = (CheckBox) findViewById(R.id.factor_med_allergy);
         mFirstPregnancySwitch = (SwitchCompat) findViewById(R.id.first_pregnancy_switch);
+        mPregnancyCountLayout = (LinearLayout) findViewById(R.id.cons_pregnancy_layout);
         mLastDeliveryLayout = (LinearLayout) findViewById(R.id.last_delivery_layout);
         mLiveBornKidsLayout = (LinearLayout) findViewById(R.id.live_kids_layout);
         mStillbornKidsLayout = (LinearLayout) findViewById(R.id.lstillborn_kids_layout);
         mPrematureLayout = (LinearLayout) findViewById(R.id.premature_layout);
         mPosttermLayout = (LinearLayout) findViewById(R.id.postmature_layout);
+        mPregnancyCountInput = (EditText) findViewById(R.id.consequtive_pregnancy);
         mLastDeliveryDateInput = (TextView) findViewById(R.id.last_delivery_text);
         mLiveBornKidsInput = (EditText) findViewById(R.id.live_kids_count);
         mStillbornKidsInput = (EditText) findViewById(R.id.stillborn_kids_count);
@@ -220,12 +224,14 @@ public class InfoActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    mPregnancyCountLayout.setVisibility(View.GONE);
                     mLastDeliveryLayout.setVisibility(View.GONE);
                     mLiveBornKidsLayout.setVisibility(View.GONE);
                     mStillbornKidsLayout.setVisibility(View.GONE);
                     mPrematureLayout.setVisibility(View.GONE);
                     mPosttermLayout.setVisibility(View.GONE);
                 } else {
+                    mPregnancyCountLayout.setVisibility(View.VISIBLE);
                     mLastDeliveryLayout.setVisibility(View.VISIBLE);
                     mLiveBornKidsLayout.setVisibility(View.VISIBLE);
                     mStillbornKidsLayout.setVisibility(View.VISIBLE);
@@ -347,6 +353,9 @@ public class InfoActivity extends AppCompatActivity {
 
                     if (!mFirstPregnancySwitch.isChecked()) {
                         mPregnancy.setFirstPregnancy(false);
+                        if (mPregnancyCountInput.getText() != null && !mPregnancyCountInput.getText().toString().isEmpty()) {
+                            mUser.setPregnancyCount(Integer.parseInt(mPregnancyCountInput.getText().toString()));
+                        }
                         if (mLiveBornKidsInput.getText() != null && !mLiveBornKidsInput.getText().toString().isEmpty()) {
                             mUser.setLiveBornKids(Integer.parseInt(mLiveBornKidsInput.getText().toString()));
                         }

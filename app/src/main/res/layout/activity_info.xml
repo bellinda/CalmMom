@@ -566,6 +566,35 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="@dimen/switch_button_height"
+                android:gravity="center_vertical"
+                android:id="@+id/cons_pregnancy_layout"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginTop="15dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorContrast"
+                    android:textSize="@dimen/add_item_label_text_size"
+                    android:text="@string/consecutive_pregnancy"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/consequtive_pregnancy"
+                    android:layout_weight="1"
+                    android:theme="@style/MyContrastEditTextTheme"
+                    android:inputType="number"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:id="@+id/last_delivery_layout"

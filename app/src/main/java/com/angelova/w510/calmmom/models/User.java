@@ -24,6 +24,7 @@ public class User implements Serializable {
     private int lengthOfMenstruation;
     private int durationOfMenstruation;
     private List<RiskFactor> riskFactors;
+    private int pregnancyCount;
     private String lastDeliveryDate;
     private int liveBornKids;
     private int stillbornKids;
@@ -147,6 +148,14 @@ public class User implements Serializable {
 
     public void setRiskFactors(List<RiskFactor> riskFactors) {
         this.riskFactors = riskFactors;
+    }
+
+    public int getPregnancyCount() {
+        return pregnancyCount;
+    }
+
+    public void setPregnancyCount(int pregnancyCount) {
+        this.pregnancyCount = pregnancyCount;
     }
 
     public String getLastDeliveryDate() {

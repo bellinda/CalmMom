@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
@@ -33,6 +34,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Locale;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -43,6 +45,9 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView mAddImageText;
     private TextView mNameTextView;
     private TextView mMenstruationDate;
+    private TextView mPregnancyIndex;
+    private Button mChoosePregnancyBtn;
+    private Button mForumBtn;
 
     private User mUser;
     private String mUserEmail;
@@ -76,6 +81,9 @@ public class ProfileActivity extends AppCompatActivity {
         mAddImageText = (TextView) findViewById(R.id.profile_text);
         mNameTextView = (TextView) findViewById(R.id.name_field);
         mMenstruationDate = (TextView) findViewById(R.id.menstruation_text);
+        mPregnancyIndex = (TextView) findViewById(R.id.pregnancy_count);
+        mChoosePregnancyBtn = (Button) findViewById(R.id.other_pregnancies_btn);
+        mForumBtn = (Button) findViewById(R.id.forum_btn);
 
         if (mUser.getProfileImage() != null && !mUser.getProfileImage().isEmpty()) {
             mAddImageText.setVisibility(View.GONE);
@@ -96,6 +104,43 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         mNameTextView.setText(mUser.getName());
+        if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).isFirstPregnancy()) {
+            mPregnancyIndex.setText(getString(R.string.activity_profile_first_pregnancy));
+        } else {
+            int pregnanciesCount = mUser.getPregnancyCount();
+            if (pregnanciesCount == 2) {
+                mPregnancyIndex.setText(getString(R.string.activity_profile_second_pregnancy));
+            } else {
+                mPregnancyIndex.setText(String.format(Locale.getDefault(), getString(R.string.activity_profile_other_pregnancy), pregnanciesCount));
+            }
+        }
+
+        mChoosePregnancyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).isFirstPregnancy()) {
+                    WarnDialog dialog = new WarnDialog(ProfileActivity.this, "Warning", "This is your first pregnancy, so there is no other information available to be shown", new WarnDialog.DialogClickListener() {
+                        @Override
+                        public void onClick() {
+
+                        }
+                    });
+                    dialog.show();
+                } else {
+                    //TODO: add logic for switching between pregnancies (1st - dialog to select to which pregnancy they want to switch)
+                }
+            }
+        });
+
+        mForumBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, ForumActivity.class);
+                intent.putExtra("user", mUser);
+                intent.putExtra("email", mUserEmail);
+                startActivity(intent);
+            }
+        });
 
         mMenstruationDate.setText(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getFirstDayOfLastMenstruation());
     }
