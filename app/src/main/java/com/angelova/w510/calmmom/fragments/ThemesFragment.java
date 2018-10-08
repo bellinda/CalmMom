@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,11 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.adapters.ThemesAdapter;
 import com.angelova.w510.calmmom.dialogs.AddThemeDialog;
+import com.angelova.w510.calmmom.interfaces.IOnBackPressed;
 import com.angelova.w510.calmmom.models.Theme;
 import com.angelova.w510.calmmom.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,17 +36,25 @@ import com.melnykov.fab.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
-public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, IOnBackPressed {
 
     private User mUser;
     private String mUserEmail;
     private TextView mNoItemsView;
+    private ConstraintLayout mListLayout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private List<Theme> mDataList = new ArrayList<>();
     private ThemesAdapter mAdapter;
     private FloatingActionButton mAddBtn;
+
+    private LinearLayout mItemLayout;
+    private TextView mTitleView;
+    private TextView mContentView;
+    private TextView mAuthorView;
+    private TextView mDateView;
 
     private FirebaseFirestore mDb;
 
@@ -64,6 +75,7 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
         mDb = FirebaseFirestore.getInstance();
 
+        mListLayout = (ConstraintLayout) rootView.findViewById(R.id.list_view);
         mNoItemsView = (TextView) rootView.findViewById(R.id.no_items_view);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -96,6 +108,12 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
                 dialog.show();
             }
         });
+
+        mItemLayout = (LinearLayout) rootView.findViewById(R.id.item_view);
+        mTitleView = (TextView) rootView.findViewById(R.id.title_view);
+        mContentView = (TextView) rootView.findViewById(R.id.content_view);
+        mAuthorView = (TextView) rootView.findViewById(R.id.author_view);
+        mDateView = (TextView) rootView.findViewById(R.id.date_view);
 
         return rootView;
     }
@@ -153,9 +171,44 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         });
     }
 
+    public void showThemeDetails(Theme theme) {
+        mListLayout.setVisibility(View.GONE);
+        mAddBtn.setVisibility(View.GONE);
+        if (theme.getTitleEn() != null && !theme.getTitleEn().isEmpty()) {
+            if (Locale.getDefault().getLanguage().equalsIgnoreCase("bg")) {
+                mTitleView.setText(theme.getTitle());
+                mContentView.setText(theme.getContent());
+            } else {
+                mTitleView.setText(theme.getTitleEn());
+                mContentView.setText(theme.getContentEn());
+            }
+        } else {
+            mTitleView.setText(theme.getTitle());
+            mContentView.setText(theme.getContent());
+        }
+
+        mAuthorView.setText(theme.getAuthor());
+        mDateView.setText(theme.getSubmittedOn());
+        mItemLayout.setVisibility(View.VISIBLE);
+    }
+
     @Override
     public void onRefresh() {
         isRefreshing = true;
         getAllThemes();
+    }
+
+
+    @Override
+    public boolean onBackPressed() {
+        if (mItemLayout.getVisibility() == View.VISIBLE) {
+            mItemLayout.setVisibility(View.GONE);
+            mListLayout.setVisibility(View.VISIBLE);
+            mAddBtn.setVisibility(View.VISIBLE);
+            isRefreshing = true;
+            getAllThemes();
+            return true;
+        }
+        return false;
     }
 }

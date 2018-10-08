@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,8 @@ import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.fragments.AnsweredByMeFragment;
 import com.angelova.w510.calmmom.fragments.MyThemesFragment;
 import com.angelova.w510.calmmom.fragments.ThemesFragment;
+import com.angelova.w510.calmmom.interfaces.IOnBackPressed;
+import com.angelova.w510.calmmom.models.Theme;
 import com.angelova.w510.calmmom.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -126,5 +129,19 @@ public class ForumActivity extends AppCompatActivity {
             }
         });
         warning.show();
+    }
+
+    public void showThemeDetails(Theme theme) {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.content);
+        if (f instanceof ThemesFragment) {
+            ((ThemesFragment) f).showThemeDetails(theme);
+        }
+    }
+
+    @Override public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content);
+        if (!(fragment instanceof IOnBackPressed) || !((IOnBackPressed) fragment).onBackPressed()) {
+            super.onBackPressed();
+        }
     }
 }

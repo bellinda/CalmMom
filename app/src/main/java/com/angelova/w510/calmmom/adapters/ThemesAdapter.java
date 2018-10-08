@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.angelova.w510.calmmom.ForumActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.models.Theme;
 
@@ -33,7 +34,7 @@ public class ThemesAdapter extends RecyclerView.Adapter<ThemesAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Theme theme = themes.get(position);
+        final Theme theme = themes.get(position);
 
         if (theme.getTitleEn() != null && !theme.getTitleEn().isEmpty()) {
             if (Locale.getDefault().getLanguage().equalsIgnoreCase("bg")) {
@@ -52,6 +53,15 @@ public class ThemesAdapter extends RecyclerView.Adapter<ThemesAdapter.ViewHolder
         } else {
             holder.mAnswersCountView.setText("0");
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (context instanceof ForumActivity) {
+                    ((ForumActivity) context).showThemeDetails(theme);
+                }
+            }
+        });
     }
 
     @Override
