@@ -91,6 +91,7 @@ public class AnsweredByMeFragment extends Fragment implements SwipeRefreshLayout
                     if (theme.getAnswers() != null) {
                         for (Answer answer : theme.getAnswers()) {
                             if (answer.getAuthor().equals(mUserEmail)) {
+                                theme.setDbId(document.getId());
                                 themes.add(theme);
                                 break;
                             }

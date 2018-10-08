@@ -18,16 +18,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.R;
+import com.angelova.w510.calmmom.adapters.AnswersAdapter;
 import com.angelova.w510.calmmom.adapters.ThemesAdapter;
+import com.angelova.w510.calmmom.dialogs.AddAnswerDialog;
 import com.angelova.w510.calmmom.dialogs.AddThemeDialog;
 import com.angelova.w510.calmmom.interfaces.IOnBackPressed;
+import com.angelova.w510.calmmom.models.Answer;
 import com.angelova.w510.calmmom.models.Theme;
 import com.angelova.w510.calmmom.models.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -37,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, IOnBackPressed {
 
@@ -50,15 +56,22 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private ThemesAdapter mAdapter;
     private FloatingActionButton mAddBtn;
 
-    private LinearLayout mItemLayout;
+    private ConstraintLayout mItemLayout;
     private TextView mTitleView;
     private TextView mContentView;
     private TextView mAuthorView;
     private TextView mDateView;
+    private SwipeRefreshLayout mAnswersRefreshLayout;
+    private RecyclerView mAnswersRecyclerView;
+    private List<Answer> mAnswersList = new ArrayList<>();
+    private AnswersAdapter mAnswersAdapter;
+    private LinearLayout mAddAnswerBtn;
 
     private FirebaseFirestore mDb;
 
     private boolean isRefreshing = false;
+
+    private Theme mSelectedTheme;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -109,11 +122,43 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             }
         });
 
-        mItemLayout = (LinearLayout) rootView.findViewById(R.id.item_view);
+        mItemLayout = (ConstraintLayout) rootView.findViewById(R.id.item_view);
         mTitleView = (TextView) rootView.findViewById(R.id.title_view);
         mContentView = (TextView) rootView.findViewById(R.id.content_view);
         mAuthorView = (TextView) rootView.findViewById(R.id.author_view);
         mDateView = (TextView) rootView.findViewById(R.id.date_view);
+        mAnswersRecyclerView = (RecyclerView) rootView.findViewById(R.id.answers_recyclerView);
+        mAnswersRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mAnswersRecyclerView.setHasFixedSize(true);
+        mAnswersRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.answers_swipe_container);
+        mAddAnswerBtn = (LinearLayout) rootView.findViewById(R.id.add_answer_btn);
+
+        mAddAnswerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddAnswerDialog dialog = new AddAnswerDialog(getActivity(), mSelectedTheme, new AddAnswerDialog.DialogClickListener() {
+                    @Override
+                    public void onPost(Answer answer) {
+                        answer.setAuthor(mUserEmail);
+                        if (mSelectedTheme.getAnswers() == null) {
+                            mSelectedTheme.setAnswers(new ArrayList<Answer>());
+                        }
+                        mSelectedTheme.getAnswers().add(answer);
+                        updateThemeInDb();
+
+                        showAnswers(mSelectedTheme);
+                    }
+                });
+                dialog.show();
+            }
+        });
+
+        mAnswersRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshTheme();
+            }
+        });
 
         return rootView;
     }
@@ -127,22 +172,25 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Theme theme = document.toObject(Theme.class);
+                    theme.setDbId(document.getId());
                     themes.add(theme);
                 }
                 if(themes.size() > 0) {
                     Collections.sort(themes);
                     mNoItemsView.setVisibility(View.GONE);
                     mRecyclerView.setVisibility(View.VISIBLE);
-                    if (mAdapter == null) {
-                        mAdapter = new ThemesAdapter(mDataList, getActivity());
-                        mRecyclerView.setAdapter(mAdapter);
-                    }
                     if (isRefreshing) {
                         mDataList.clear();
                         mDataList.addAll(themes);
+                        if (mAdapter == null) {
+                            mAdapter = new ThemesAdapter(mDataList, getActivity());
+                            mRecyclerView.setAdapter(mAdapter);
+                        }
                         mAdapter.notifyDataSetChanged();
                     } else {
                         mDataList.addAll(themes);
+                        mAdapter = new ThemesAdapter(mDataList, getActivity());
+                        mRecyclerView.setAdapter(mAdapter);
                     }
                 } else {
                     mRecyclerView.setVisibility(View.GONE);
@@ -172,6 +220,7 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
     }
 
     public void showThemeDetails(Theme theme) {
+        mSelectedTheme = theme;
         mListLayout.setVisibility(View.GONE);
         mAddBtn.setVisibility(View.GONE);
         if (theme.getTitleEn() != null && !theme.getTitleEn().isEmpty()) {
@@ -189,7 +238,55 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
         mAuthorView.setText(theme.getAuthor());
         mDateView.setText(theme.getSubmittedOn());
+
+        showAnswers(theme);
+
         mItemLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void showAnswers(Theme theme) {
+        if (theme.getAnswers() != null) {
+            List<Answer> answers = theme.getAnswers();
+            Collections.sort(answers);
+
+            //mNoItemsView.setVisibility(View.GONE);
+            mAnswersRecyclerView.setVisibility(View.VISIBLE);
+            mAnswersList.clear();
+            mAnswersList.addAll(answers);
+            if (mAnswersAdapter == null) {
+                mAnswersAdapter = new AnswersAdapter(mAnswersList, getActivity());
+                mAnswersRecyclerView.setAdapter(mAnswersAdapter);
+            }
+            mAnswersAdapter.notifyDataSetChanged();
+        } else {
+
+        }
+        mAnswersRefreshLayout.setRefreshing(false);
+    }
+
+    private void updateThemeInDb() {
+        ObjectMapper m = new ObjectMapper();
+        Map<String,Object> themeMap = m.convertValue(mSelectedTheme, Map.class);
+        themeMap.remove("dbId");
+
+        mDb.collection("themes").document(mSelectedTheme.getDbId()).update(themeMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                //TODO: refresh all theme answers
+            }
+        });
+    }
+
+    private void refreshTheme() {
+        mDb.collection("themes").document(mSelectedTheme.getDbId()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                mSelectedTheme = task.getResult().toObject(Theme.class);
+                mSelectedTheme.setDbId(task.getResult().getId());
+
+                showAnswers(mSelectedTheme);
+            }
+        });
     }
 
     @Override

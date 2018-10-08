@@ -2,6 +2,8 @@ package com.angelova.w510.calmmom.models;
 
 import android.support.annotation.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,6 +21,8 @@ public class Theme implements Serializable, Comparable<Theme> {
     private List<Answer> answers;
     private String submittedOn;
     private String lastAnsweredOn;
+    @JsonIgnore
+    private String dbId;
 
     public String getAuthor() {
         return author;
@@ -82,6 +86,14 @@ public class Theme implements Serializable, Comparable<Theme> {
 
     public void setLastAnsweredOn(String lastAnsweredOn) {
         this.lastAnsweredOn = lastAnsweredOn;
+    }
+
+    public String getDbId() {
+        return dbId;
+    }
+
+    public void setDbId(String dbId) {
+        this.dbId = dbId;
     }
 
     @Override

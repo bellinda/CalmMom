@@ -8,5 +8,6 @@
     <color name="colorAccentTransparentLite">#6bfdfcfa</color>
     <color name="colorContrastTransparent">#c3324a5f</color>
     <color name="colorContrastLiteTransparent">#8b324a5f</color>
+    <color name="colorContrastLiteTransparentForForum">#2a324a5f</color>
     <color name="colorPrimaryTransparent">#c3fa7b6a</color>
 </resources>

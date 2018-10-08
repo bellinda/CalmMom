@@ -385,4 +385,12 @@
     <string name="dialog_add_theme_content">Content</string>
     <string name="dialog_add_theme_not_all_data">Please enter the title and content of the theme you want to post</string>
     <string name="dialog_add_theme_not_all_data_title">Warning</string>
+
+    <string name="dialog_add_answer_title">Your answer</string>
+    <string name="dialog_add_answer_theme">to theme:</string>
+    <string name="dialog_add_answer_answer_label">Answer</string>
+    <string name="dialog_add_answer_post">Post</string>
+    <string name="dialog_add_answer_cancel">Cancel</string>
+    <string name="dialog_add_answer_not_all_data">Please enter the answer you want to post</string>
+    <string name="dialog_add_answer_not_all_data_title">Warning</string>
 </resources>

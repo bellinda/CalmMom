@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
+    android:paddingTop="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingBottom="10dp"
+    android:focusable="false"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_field_height"
+        android:text="@string/dialog_add_answer_title"
+        android:textSize="@dimen/warn_dialog_title_text_size"
+        android:textColor="@color/colorContrast"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/message_view"
+        android:text="Your document is sent successfully and some more text"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:visibility="invisible"
+        android:textSize="11sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/recipients_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_add_answer_theme"
+            android:layout_weight="5"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/add_theme_dialog_text_size"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/colorContrast"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:textColor="@color/colorContrast"
+            android:textStyle="bold"
+            android:id="@+id/theme_title_view"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_add_answer_answer_label"
+            android:textSize="@dimen/add_theme_dialog_text_size"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/colorContrast"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/add_theme_dialog_multiline_edit_height"
+            android:background="@drawable/dark_border"
+            android:layout_weight="8"
+            android:padding="5dp"
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
+            android:scrollbars="vertical"
+            android:textColor="@color/colorContrast"
+            android:theme="@style/MyEditTextInDialogTheme"
+            android:id="@+id/answer_view"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/warn_dialog_button_height"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/warn_dialog_button_height"
+            android:layout_weight="1"
+            android:text="@string/dialog_add_answer_cancel"
+            android:gravity="center"
+            android:textSize="@dimen/warn_dialog_buttons_text_size"
+            android:textColor="@color/colorContrast"
+            android:id="@+id/cancel_button"
+            android:background="@color/colorAccent"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorContrast"/>
+
+        <TextView
+            android:id="@+id/post_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/warn_dialog_button_height"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="@string/dialog_add_answer_post"
+            android:textColor="@color/colorContrast"
+            android:textSize="@dimen/warn_dialog_buttons_text_size" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

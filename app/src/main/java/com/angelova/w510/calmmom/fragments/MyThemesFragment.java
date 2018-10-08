@@ -110,6 +110,7 @@ public class MyThemesFragment extends Fragment implements SwipeRefreshLayout.OnR
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Theme theme = document.toObject(Theme.class);
+                    theme.setDbId(document.getId());
                     themes.add(theme);
                 }
                 if(themes.size() > 0) {
