@@ -1,9 +1,15 @@
 package com.angelova.w510.calmmom.models;
 
-import java.io.Serializable;
-import java.util.List;
+import android.support.annotation.NonNull;
 
-public class Theme implements Serializable {
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+public class Theme implements Serializable, Comparable<Theme> {
 
     private String author;
     private String title;
@@ -76,5 +82,24 @@ public class Theme implements Serializable {
 
     public void setLastAnsweredOn(String lastAnsweredOn) {
         this.lastAnsweredOn = lastAnsweredOn;
+    }
+
+    @Override
+    public int compareTo(@NonNull Theme theme) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault());
+
+        try {
+            Date currentItemDate = sdf.parse(this.getLastAnsweredOn());
+            Date otherItemDate = sdf.parse(theme.getLastAnsweredOn());
+
+            if (currentItemDate.after(otherItemDate)) {
+                return -1;
+            } else if (currentItemDate.before(otherItemDate)) {
+                return 1;
+            }
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+        return 0;
     }
 }

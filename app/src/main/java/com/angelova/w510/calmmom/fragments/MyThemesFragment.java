@@ -32,6 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MyThemesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
@@ -112,6 +113,7 @@ public class MyThemesFragment extends Fragment implements SwipeRefreshLayout.OnR
                     themes.add(theme);
                 }
                 if(themes.size() > 0) {
+                    Collections.sort(themes);
                     mNoItemsView.setVisibility(View.GONE);
                     mRecyclerView.setVisibility(View.VISIBLE);
                     if (mAdapter == null) {

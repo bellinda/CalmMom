@@ -17,25 +17,33 @@ import android.widget.TextView;
 
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.adapters.ThemesAdapter;
+import com.angelova.w510.calmmom.dialogs.AddThemeDialog;
 import com.angelova.w510.calmmom.models.Theme;
 import com.angelova.w510.calmmom.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private User mUser;
+    private String mUserEmail;
     private TextView mNoItemsView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private List<Theme> mDataList = new ArrayList<>();
     private ThemesAdapter mAdapter;
+    private FloatingActionButton mAddBtn;
 
     private FirebaseFirestore mDb;
 
@@ -52,6 +60,7 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         }
 
         mUser = (User) getArguments().getSerializable("user");
+        mUserEmail = getArguments().getString("email");
 
         mDb = FirebaseFirestore.getInstance();
 
@@ -73,6 +82,21 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             }
         });
 
+        mAddBtn = (FloatingActionButton) rootView.findViewById(R.id.add_theme_btn);
+        mAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddThemeDialog dialog = new AddThemeDialog(getActivity(), new AddThemeDialog.DialogClickListener() {
+                    @Override
+                    public void onPost(Theme theme) {
+                        theme.setAuthor(mUserEmail);
+                        saveThemeInDb(theme);
+                    }
+                });
+                dialog.show();
+            }
+        });
+
         return rootView;
     }
 
@@ -88,16 +112,19 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
                     themes.add(theme);
                 }
                 if(themes.size() > 0) {
+                    Collections.sort(themes);
                     mNoItemsView.setVisibility(View.GONE);
                     mRecyclerView.setVisibility(View.VISIBLE);
+                    if (mAdapter == null) {
+                        mAdapter = new ThemesAdapter(mDataList, getActivity());
+                        mRecyclerView.setAdapter(mAdapter);
+                    }
                     if (isRefreshing) {
                         mDataList.clear();
                         mDataList.addAll(themes);
                         mAdapter.notifyDataSetChanged();
                     } else {
                         mDataList.addAll(themes);
-                        mAdapter = new ThemesAdapter(mDataList, getActivity());
-                        mRecyclerView.setAdapter(mAdapter);
                     }
                 } else {
                     mRecyclerView.setVisibility(View.GONE);
@@ -105,6 +132,23 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
                 }
                 mSwipeRefreshLayout.setRefreshing(false);
                 isRefreshing = false;
+            }
+        });
+    }
+
+    private void saveThemeInDb(Theme theme) {
+        mDb.collection("themes").add(theme)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        System.out.println("DocumentSnapshot successfully written!");
+                        isRefreshing = true;
+                        getAllThemes();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println("Error writing document " + e.getMessage());
             }
         });
     }
