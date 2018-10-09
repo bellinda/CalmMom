@@ -137,6 +137,8 @@ public class ForumActivity extends AppCompatActivity {
             ((ThemesFragment) f).showThemeDetails(theme);
         } else if (f instanceof MyThemesFragment) {
             ((MyThemesFragment) f).showThemeDetails(theme);
+        } else if (f instanceof AnsweredByMeFragment) {
+            ((AnsweredByMeFragment) f).showThemeDetails(theme);
         }
     }
 
