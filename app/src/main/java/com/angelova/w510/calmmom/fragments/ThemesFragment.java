@@ -66,6 +66,7 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private List<Answer> mAnswersList = new ArrayList<>();
     private AnswersAdapter mAnswersAdapter;
     private LinearLayout mAddAnswerBtn;
+    private TextView mNoAnswersView;
 
     private FirebaseFirestore mDb;
 
@@ -132,6 +133,7 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         mAnswersRecyclerView.setHasFixedSize(true);
         mAnswersRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.answers_swipe_container);
         mAddAnswerBtn = (LinearLayout) rootView.findViewById(R.id.add_answer_btn);
+        mNoAnswersView = (TextView) rootView.findViewById(R.id.no_answers_view);
 
         mAddAnswerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +149,7 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
                         updateThemeInDb();
 
                         showAnswers(mSelectedTheme);
+                        mAnswersRecyclerView.scrollToPosition(mSelectedTheme.getAnswers().size() - 1);
                     }
                 });
                 dialog.show();
@@ -249,7 +252,7 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             List<Answer> answers = theme.getAnswers();
             Collections.sort(answers);
 
-            //mNoItemsView.setVisibility(View.GONE);
+            mNoAnswersView.setVisibility(View.GONE);
             mAnswersRecyclerView.setVisibility(View.VISIBLE);
             mAnswersList.clear();
             mAnswersList.addAll(answers);
@@ -259,7 +262,8 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             }
             mAnswersAdapter.notifyDataSetChanged();
         } else {
-
+            mAnswersRecyclerView.setVisibility(View.GONE);
+            mNoAnswersView.setVisibility(View.VISIBLE);
         }
         mAnswersRefreshLayout.setRefreshing(false);
     }

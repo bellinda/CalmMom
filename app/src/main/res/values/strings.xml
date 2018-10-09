@@ -372,7 +372,8 @@
     <string name="activity_profile_second_pregnancy">2nd pregnancy</string>
     <string name="activity_profile_other_pregnancy" formatted="false">%dth pregnancy</string>
 
-    <string name="fragment_themes_no_items">No themes available yet. You could be the first one addign a theme.</string>
+    <string name="fragment_themes_no_items">No themes available yet. You could be the first one adding a theme.</string>
+    <string name="fragment_themes_no_answers_to_theme">There are still no answers to this theme. Be the first one writing one.</string>
 
     <string name="fragment_answered_by_me_no_items">You still don\'t have answers in any of the themes in the forum.</string>
 

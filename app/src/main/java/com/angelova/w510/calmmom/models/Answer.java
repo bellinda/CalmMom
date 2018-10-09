@@ -47,9 +47,9 @@ public class Answer implements Serializable, Comparable<Answer> {
             Date otherItemDate = sdf.parse(answer.getSubmittedOn());
 
             if (currentItemDate.after(otherItemDate)) {
-                return -1;
-            } else if (currentItemDate.before(otherItemDate)) {
                 return 1;
+            } else if (currentItemDate.before(otherItemDate)) {
+                return -1;
             }
         } catch (ParseException pe) {
             pe.printStackTrace();
