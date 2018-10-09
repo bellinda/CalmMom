@@ -371,10 +371,13 @@
 
     <string name="fragment_themes_no_items">Няма налични теми. Можете да бъдете първия човек, публикувал тема във форума.</string>
     <string name="fragment_themes_no_answers_to_theme">Все още няма отговори на тази тема. Бъдете първия човек, който ще отговори.</string>
+    <string name="fragment_themes_add_answer">Добави отговор</string>
 
     <string name="fragment_answered_by_me_no_items">Все още нямате писани отговори в теми от форума.</string>
+    <string name="fragment_answered_by_me_add_answer">Добави отговор</string>
 
     <string name="fragment_my_themes_no_items">Все още нямате пуснати теми във форума.</string>
+    <string name="fragment_my_themes_add_answer">Добави отговор</string>
 
     <string name="dialog_add_theme_dialog_title">Нова тема</string>
     <string name="dialog_add_theme_post_btn">Публикувай</string>

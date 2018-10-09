@@ -146,10 +146,8 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
                             mSelectedTheme.setAnswers(new ArrayList<Answer>());
                         }
                         mSelectedTheme.getAnswers().add(answer);
+                        mSelectedTheme.setLastAnsweredOn(answer.getSubmittedOn());
                         updateThemeInDb();
-
-                        showAnswers(mSelectedTheme);
-                        mAnswersRecyclerView.scrollToPosition(mSelectedTheme.getAnswers().size() - 1);
                     }
                 });
                 dialog.show();
@@ -276,7 +274,8 @@ public class ThemesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         mDb.collection("themes").document(mSelectedTheme.getDbId()).update(themeMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                //TODO: refresh all theme answers
+                showAnswers(mSelectedTheme);
+                mAnswersRecyclerView.scrollToPosition(mSelectedTheme.getAnswers().size() - 1);
             }
         });
     }

@@ -135,6 +135,8 @@ public class ForumActivity extends AppCompatActivity {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.content);
         if (f instanceof ThemesFragment) {
             ((ThemesFragment) f).showThemeDetails(theme);
+        } else if (f instanceof MyThemesFragment) {
+            ((MyThemesFragment) f).showThemeDetails(theme);
         }
     }
 

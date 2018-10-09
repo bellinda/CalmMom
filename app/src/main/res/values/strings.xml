@@ -374,10 +374,13 @@
 
     <string name="fragment_themes_no_items">No themes available yet. You could be the first one adding a theme.</string>
     <string name="fragment_themes_no_answers_to_theme">There are still no answers to this theme. Be the first one writing one.</string>
+    <string name="fragment_themes_add_answer">Add answer</string>
 
     <string name="fragment_answered_by_me_no_items">You still don\'t have answers in any of the themes in the forum.</string>
+    <string name="fragment_answered_by_me_add_answer">Add answer</string>
 
     <string name="fragment_my_themes_no_items">You still don\'t have any themes posted in the forum.</string>
+    <string name="fragment_my_themes_add_answer">Add answer</string>
 
     <string name="dialog_add_theme_dialog_title">New theme</string>
     <string name="dialog_add_theme_post_btn">Post</string>
