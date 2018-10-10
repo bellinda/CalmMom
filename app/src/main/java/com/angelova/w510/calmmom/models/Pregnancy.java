@@ -12,6 +12,7 @@ import java.util.Map;
 public class Pregnancy implements Serializable {
 
     private String firstDayOfLastMenstruation;
+    private String estimatedDeliveryDate;
     private List<Examination> examinations;
     private List<Question> questions;
     private List<Weight> weights;
@@ -32,6 +33,14 @@ public class Pregnancy implements Serializable {
 
     public void setFirstDayOfLastMenstruation(String firstDayOfLastMenstruation) {
         this.firstDayOfLastMenstruation = firstDayOfLastMenstruation;
+    }
+
+    public String getEstimatedDeliveryDate() {
+        return estimatedDeliveryDate;
+    }
+
+    public void setEstimatedDeliveryDate(String estimatedDeliveryDate) {
+        this.estimatedDeliveryDate = estimatedDeliveryDate;
     }
 
     public List<Examination> getExaminations() {

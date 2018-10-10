@@ -14,12 +14,15 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.angelova.w510.calmmom.dialogs.LoadingDialog;
 import com.angelova.w510.calmmom.models.BabySize;
 import com.angelova.w510.calmmom.models.User;
 import com.angelova.w510.calmmom.services.StopwatchService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -46,12 +49,15 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton mProfileBtn;
 
     private User mUser;
+    private String mUserEmail;
     private BabySize mCurrentBabySize;
     private int mCurrentPregnancyWeek;
     private FirebaseFirestore mDb;
 
     SharedPreferences mPrefs;
     SharedPreferences.Editor mEditor;
+
+    LoadingDialog mLoadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mUser = (User) getIntent().getSerializableExtra("user");
+        mUserEmail = getIntent().getStringExtra("email");
         mDb = FirebaseFirestore.getInstance();
 
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -138,6 +145,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        if (mPrefs.getBoolean("shouldReload", false)) {
+            getUserData();
+            mEditor.remove("shouldReload").commit();
+        }
     }
 
     private long getDaysSinceDate(String startDate) {
@@ -169,12 +181,41 @@ public class MainActivity extends AppCompatActivity {
                         mCurrentBabySize = mapper.convertValue(sizes.get(Integer.toString(mCurrentPregnancyWeek)), BabySize.class);
                     }
                     mBabySizeView.setText(String.format(getString(R.string.main_activity_size_text), Float.toString(mCurrentBabySize.getWeight()), Float.toString(mCurrentBabySize.getLength())));
+
+                    if (mLoadingDialog != null) {
+                        mLoadingDialog.dismiss();
+                    }
                 }
             }
         });
     }
 
+    private void getUserData() {
+        final DocumentReference userRef = mDb.collection("users").document(mUserEmail);
+        userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        mUser = document.toObject(User.class);
+                        reloadData();
+                    } else {
+                        //The user doesn't exist...
+                        //createUser(email);
+                    }
+
+                }
+            }
+        });
+    }
+
+    private void reloadData() {
+        mCurrentPregnancyWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getFirstDayOfLastMenstruation()) / 7 + 1);
+        mCurrentWeekView.setText(String.format(Locale.getDefault(), "%d %s", mCurrentPregnancyWeek, getString(R.string.main_activity_weeks)));
+        getSizes();
+    }
 
     @Override
     public void onDestroy() {
@@ -185,5 +226,17 @@ public class MainActivity extends AppCompatActivity {
         stopService(intent);
 
         mEditor.clear().commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (mPrefs.getBoolean("shouldReload", false)) {
+            mLoadingDialog = new LoadingDialog(MainActivity.this, getString(R.string.main_activity_reloading_msg));
+            mLoadingDialog.show();
+            getUserData();
+            mEditor.remove("shouldReload").commit();
+        }
     }
 }

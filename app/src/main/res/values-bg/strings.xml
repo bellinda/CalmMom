@@ -184,6 +184,7 @@
 
     <string name="main_activity_weeks">седмица</string>
     <string name="main_activity_size_text" formatted="false">Вашето бебе е средно %sкг и %sсм</string>
+    <string name="main_activity_reloading_msg">Обновяване, моля изчакайте&#8230;</string>
 
     <string name="dialog_add_examination_title">Добавяне на преглед</string>
 
@@ -368,6 +369,7 @@
     <string name="activity_profile_first_pregnancy">1ва бременност</string>
     <string name="activity_profile_second_pregnancy">2ра бременност</string>
     <string name="activity_profile_other_pregnancy" formatted="false">%dта бременност</string>
+    <string name="activity_profile_edd">Очакван термин</string>
 
     <string name="fragment_themes_no_items">Няма налични теми. Можете да бъдете първия човек, публикувал тема във форума.</string>
     <string name="fragment_themes_no_answers_to_theme">Все още няма отговори на тази тема. Бъдете първия човек, който ще отговори.</string>

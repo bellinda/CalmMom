@@ -1,7 +1,9 @@
 package com.angelova.w510.calmmom;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -9,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -18,6 +21,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
@@ -34,20 +39,27 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static java.util.Calendar.DATE;
 
 public class ProfileActivity extends AppCompatActivity {
 
     private CircleImageView mImageView;
     private TextView mAddImageText;
     private TextView mNameTextView;
-    private TextView mMenstruationDate;
     private TextView mPregnancyIndex;
     private Button mChoosePregnancyBtn;
     private Button mForumBtn;
+    private LinearLayout mDDLayout;
+    private TextView mDeliveryDate;
 
     private User mUser;
     private String mUserEmail;
@@ -58,6 +70,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     private Uri mFilePath;
     private static final int SELECT_FILE = 1023;
+
+    final Calendar mExpectedDeliveryDate = Calendar.getInstance();
+
+    SharedPreferences mPrefs;
+    SharedPreferences.Editor mEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +87,9 @@ public class ProfileActivity extends AppCompatActivity {
             window.setStatusBarColor(Color.parseColor("#324A5F"));
         }
 
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mPrefs.edit();
+
         mUser = (User) getIntent().getSerializableExtra("user");
         mUserEmail = getIntent().getStringExtra("email");
 
@@ -80,10 +100,11 @@ public class ProfileActivity extends AppCompatActivity {
         mImageView = (CircleImageView) findViewById(R.id.profile_image);
         mAddImageText = (TextView) findViewById(R.id.profile_text);
         mNameTextView = (TextView) findViewById(R.id.name_field);
-        mMenstruationDate = (TextView) findViewById(R.id.menstruation_text);
         mPregnancyIndex = (TextView) findViewById(R.id.pregnancy_count);
         mChoosePregnancyBtn = (Button) findViewById(R.id.other_pregnancies_btn);
         mForumBtn = (Button) findViewById(R.id.forum_btn);
+        mDDLayout = (LinearLayout) findViewById(R.id.dd_view);
+        mDeliveryDate = (TextView) findViewById(R.id.delivery_date);
 
         if (mUser.getProfileImage() != null && !mUser.getProfileImage().isEmpty()) {
             mAddImageText.setVisibility(View.GONE);
@@ -142,7 +163,43 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        mMenstruationDate.setText(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getFirstDayOfLastMenstruation());
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+
+            if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getEstimatedDeliveryDate() == null || mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getEstimatedDeliveryDate().isEmpty()) {
+                Date firstDayOfLM = sdf.parse(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getFirstDayOfLastMenstruation());
+                Date deliveryDate = new Date(firstDayOfLM.getTime() + 280 * 24 * 3600 * 1000l);
+                mDeliveryDate.setText(sdf.format(deliveryDate));
+                mExpectedDeliveryDate.setTime(deliveryDate);
+            } else {
+                mDeliveryDate.setText(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getEstimatedDeliveryDate());
+                mExpectedDeliveryDate.setTime(sdf.parse(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getEstimatedDeliveryDate()));
+            }
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+
+        mDDLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(ProfileActivity.this, R.style.AppTheme_DialogThemeDark, new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                        mExpectedDeliveryDate.set(year, monthOfYear, dayOfMonth);
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+                        mDeliveryDate.setText(sdf.format(mExpectedDeliveryDate.getTime()));
+                        mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).setEstimatedDeliveryDate(mDeliveryDate.getText().toString());
+                        String firstDayOfLastMenstruation = getFirstDayOfLastMenstruation();
+                        mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).setFirstDayOfLastMenstruation(firstDayOfLastMenstruation);
+                        updateUser();
+                        mEditor.putBoolean("shouldReload", true).commit();
+                    }
+                }, mExpectedDeliveryDate.get(Calendar.YEAR), mExpectedDeliveryDate.get(Calendar.MONTH), mExpectedDeliveryDate.get(DATE));
+                datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+                datePickerDialog.show();
+            }
+        });
     }
 
     @Override
@@ -246,6 +303,13 @@ public class ProfileActivity extends AppCompatActivity {
                         System.out.println("Error writing document " + e.getMessage());
                     }
                 });
+    }
+
+    private String getFirstDayOfLastMenstruation() {
+        Date expectedDeliveryDate = mExpectedDeliveryDate.getTime();
+        Date firstDayOfLM = new Date(expectedDeliveryDate.getTime() - 280 * 24 * 3600 * 1000l);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        return sdf.format(firstDayOfLM);
     }
 
     private void showAlertDialogNow(String message, String title) {

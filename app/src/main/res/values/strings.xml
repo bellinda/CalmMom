@@ -184,6 +184,7 @@
 
     <string name="main_activity_weeks">week</string>
     <string name="main_activity_size_text" formatted="false">Your baby is avg. %skg and %scm</string>
+    <string name="main_activity_reloading_msg">Reloading data, please wait&#8230;</string>
 
     <string name="dialog_add_examination_title">Add New Examination</string>
 
@@ -371,6 +372,7 @@
     <string name="activity_profile_first_pregnancy">1st pregnancy</string>
     <string name="activity_profile_second_pregnancy">2nd pregnancy</string>
     <string name="activity_profile_other_pregnancy" formatted="false">%dth pregnancy</string>
+    <string name="activity_profile_edd">Estimated delivery date</string>
 
     <string name="fragment_themes_no_items">No themes available yet. You could be the first one adding a theme.</string>
     <string name="fragment_themes_no_answers_to_theme">There are still no answers to this theme. Be the first one writing one.</string>
