@@ -37,6 +37,7 @@ public class User implements Serializable {
     private String takenMedicines;
     private List<Pregnancy> pregnancies;
     private int pregnancyConsecutiveId;
+    private String applicationLanguage;
 
     public String getName() {
         return name;
@@ -252,5 +253,13 @@ public class User implements Serializable {
 
     public void setPregnancyConsecutiveId(int pregnancyConsecutiveId) {
         this.pregnancyConsecutiveId = pregnancyConsecutiveId;
+    }
+
+    public String getApplicationLanguage() {
+        return applicationLanguage;
+    }
+
+    public void setApplicationLanguage(String applicationLanguage) {
+        this.applicationLanguage = applicationLanguage;
     }
 }

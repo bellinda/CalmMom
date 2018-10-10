@@ -237,6 +237,10 @@ public class MainActivity extends AppCompatActivity {
             mLoadingDialog.show();
             getUserData();
             mEditor.remove("shouldReload").commit();
+        } else if (mPrefs.getBoolean("shouldUpdateLanguage", false)) {
+            mEditor.remove("shouldUpdateLanguage").commit();
+            finish();
+            startActivity(getIntent());
         }
     }
 }

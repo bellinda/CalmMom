@@ -2,9 +2,12 @@ package com.angelova.w510.calmmom;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,17 +15,21 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
@@ -60,6 +67,8 @@ public class ProfileActivity extends AppCompatActivity {
     private Button mForumBtn;
     private LinearLayout mDDLayout;
     private TextView mDeliveryDate;
+    private RadioButton mEnLanguage;
+    private RadioButton mBgLanguage;
 
     private User mUser;
     private String mUserEmail;
@@ -75,6 +84,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     SharedPreferences mPrefs;
     SharedPreferences.Editor mEditor;
+
+    public static final String INTENT_EXTRA_CHANGE_LANGUAGE = "language_change";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +116,8 @@ public class ProfileActivity extends AppCompatActivity {
         mForumBtn = (Button) findViewById(R.id.forum_btn);
         mDDLayout = (LinearLayout) findViewById(R.id.dd_view);
         mDeliveryDate = (TextView) findViewById(R.id.delivery_date);
+        mEnLanguage = (RadioButton) findViewById(R.id.lang_en);
+        mBgLanguage = (RadioButton) findViewById(R.id.lang_bg);
 
         if (mUser.getProfileImage() != null && !mUser.getProfileImage().isEmpty()) {
             mAddImageText.setVisibility(View.GONE);
@@ -200,7 +213,41 @@ public class ProfileActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
+        if (Locale.getDefault().getLanguage().equals("en")) {
+            mEnLanguage.setOnCheckedChangeListener(null);
+            mEnLanguage.setChecked(true);
+            mEnLanguage.setOnCheckedChangeListener(mEnCheckListener);
+            mBgLanguage.setOnCheckedChangeListener(mBgCheckListener);
+        } else {
+            mBgLanguage.setOnCheckedChangeListener(null);
+            mBgLanguage.setChecked(true);
+            mBgLanguage.setOnCheckedChangeListener(mBgCheckListener);
+            mEnLanguage.setOnCheckedChangeListener(mEnCheckListener);
+        }
     }
+
+    CompoundButton.OnCheckedChangeListener mEnCheckListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+            if (isChecked) {
+                updateResources(ProfileActivity.this, "en");
+                mUser.setApplicationLanguage("en");
+                updateUser();
+            }
+        }
+    };
+
+    CompoundButton.OnCheckedChangeListener mBgCheckListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+            if (isChecked) {
+                updateResources(ProfileActivity.this, "bg");
+                mUser.setApplicationLanguage("bg");
+                updateUser();
+            }
+        }
+    };
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -310,6 +357,22 @@ public class ProfileActivity extends AppCompatActivity {
         Date firstDayOfLM = new Date(expectedDeliveryDate.getTime() - 280 * 24 * 3600 * 1000l);
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
         return sdf.format(firstDayOfLM);
+    }
+
+    private void updateResources(Context context, String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+
+        Resources resources = context.getResources();
+
+        Configuration configuration = resources.getConfiguration();
+        configuration.locale = locale;
+
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+
+        mEditor.putBoolean("shouldUpdateLanguage", true).commit();
+        finish();
+        startActivity(getIntent());
     }
 
     private void showAlertDialogNow(String message, String title) {

@@ -1,6 +1,9 @@
 package com.angelova.w510.calmmom;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +33,7 @@ import com.melnykov.fab.FloatingActionButton;
 
 import io.fabric.sdk.android.Fabric;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
@@ -153,14 +157,16 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-
-//                    Toast.makeText(LoginActivity.this, task.getResult().toString(),
-//                            Toast.LENGTH_SHORT).show();
-
                     if (document != null) {
                         //The user exists...
                         if (document.contains("name")) {
                             User user = document.toObject(User.class);
+                            String applicationLanguage = user.getApplicationLanguage();
+                            if (applicationLanguage == null || applicationLanguage.equals("en")) {
+                                updateResources(LoginActivity.this, "en");
+                            } else {
+                                updateResources(LoginActivity.this, "bg");
+                            }
                             //open main menu
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("email", mEmail.getText().toString());
@@ -205,6 +211,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         warning.show();
+    }
+
+    private void updateResources(Context context, String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+
+        Resources resources = context.getResources();
+
+        Configuration configuration = resources.getConfiguration();
+        configuration.locale = locale;
+
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
     }
 
     @Override
