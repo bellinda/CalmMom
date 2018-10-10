@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@id/current_week_view"
         app:layout_constraintLeft_toRightOf="@id/left_header_guideline"
         app:layout_constraintRight_toLeftOf="@id/middle_header_guideline"
-        android:text="Your baby is avg. 2.5kg and 48cm"
+        tools:text="Your baby is avg. 2.5kg and 48cm"
         android:textColor="@color/colorAccent"
         android:gravity="center"
         android:textSize="@dimen/menu_baby_size_text_size"
