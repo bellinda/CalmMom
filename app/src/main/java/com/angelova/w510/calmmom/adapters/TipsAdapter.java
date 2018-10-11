@@ -46,18 +46,21 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.ViewHolder> {
             holder.mCustomLayout.setVisibility(View.GONE);
             holder.mCustomDoneLayout.setVisibility(View.GONE);
             holder.mDoneBtn.setVisibility(View.GONE);
+            holder.mCancelBtn.setVisibility(View.GONE);
             holder.mWeekLayout.setVisibility(View.VISIBLE);
             holder.mWeekView.setText(tip.getWeek());
         } else if (tip.isDone()) {
             holder.mWeekLayout.setVisibility(View.GONE);
             holder.mCustomLayout.setVisibility(View.GONE);
             holder.mDoneBtn.setVisibility(View.GONE);
+            holder.mCancelBtn.setVisibility(View.GONE);
             holder.mCustomDoneLayout.setVisibility(View.VISIBLE);
         } else {
             holder.mWeekLayout.setVisibility(View.GONE);
             holder.mCustomDoneLayout.setVisibility(View.GONE);
             holder.mCustomLayout.setVisibility(View.VISIBLE);
             holder.mDoneBtn.setVisibility(View.VISIBLE);
+            holder.mCancelBtn.setVisibility(View.VISIBLE);
         }
         if (Locale.getDefault().getLanguage().equalsIgnoreCase("bg")) {
             holder.mTipView.setText(tip.getBgContent());
@@ -69,6 +72,16 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 tip.setDone(true);
+                notifyDataSetChanged();
+                List<Tip> customTips = getCustomTipsFromAll();
+                ((TipsActivity) context).updateTipsInDb(customTips);
+            }
+        });
+
+        holder.mCancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tips.remove(tip);
                 notifyDataSetChanged();
                 List<Tip> customTips = getCustomTipsFromAll();
                 ((TipsActivity) context).updateTipsInDb(customTips);
@@ -98,6 +111,7 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.ViewHolder> {
         private LinearLayout mCustomLayout;
         private LinearLayout mCustomDoneLayout;
         private TextView mDoneBtn;
+        private TextView mCancelBtn;
 
         public ViewHolder(View view) {
             super(view);
@@ -108,6 +122,7 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsAdapter.ViewHolder> {
             mCustomLayout = (LinearLayout) view.findViewById(R.id.custom_layout);
             mCustomDoneLayout = (LinearLayout) view.findViewById(R.id.custom_done_layout);
             mDoneBtn = (TextView) view.findViewById(R.id.done_button);
+            mCancelBtn = (TextView) view.findViewById(R.id.cancel_button);
         }
     }
 }

@@ -55,6 +55,7 @@
     <string name="custom_tip_blood_groups">When you have a blood group incompatibility with your partner, you need to talk with your doctor about the additional tests that need to be done.</string>
     <string name="custom_tip_family_history">Consult with your health care provider for the risks based on the family history you have.</string>
     <string name="custom_tip_pregnancies_history">Did you consult with your health care provider for the additional tests that need to be done because of your pregnancies history?</string>
+    <string name="custom_tip_not_enough_activities">Your weight is increasing but you are not giving information for any activities. Move more to stay healthy.</string>
 
     <string name="illness_name_label">Title</string>
     <string name="illness_date_label">Reference Date</string>
@@ -257,6 +258,7 @@
 
     <string name="tips_week_label">Week</string>
     <string name="tips_done_label">Done</string>
+    <string name="tips_cancel_label">Cancel</string>
     <string name="tips_loading_message">Updating tips&#8230;</string>
 
     <string name="fragment_kicks_start">Start counting</string>

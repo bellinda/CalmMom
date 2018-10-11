@@ -1,7 +1,10 @@
 package com.angelova.w510.calmmom;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.preference.PreferenceManager;
@@ -19,11 +22,16 @@ import android.widget.TextView;
 
 import com.angelova.w510.calmmom.dialogs.LoadingDialog;
 import com.angelova.w510.calmmom.models.BabySize;
+import com.angelova.w510.calmmom.models.Pregnancy;
 import com.angelova.w510.calmmom.models.Tip;
 import com.angelova.w510.calmmom.models.User;
+import com.angelova.w510.calmmom.models.UserActivity;
+import com.angelova.w510.calmmom.models.Weight;
 import com.angelova.w510.calmmom.services.StopwatchService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -35,6 +43,7 @@ import com.melnykov.fab.FloatingActionButton;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -158,6 +167,24 @@ public class MainActivity extends AppCompatActivity {
         if (hasNotDoneTips()) {
             blinkTipsButton();
         }
+
+        mCurrentPregnancyWeek = 5;
+        Pregnancy currentPregnancy = mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId());
+        Weight currentWeekWeight = getWeightByWeek(currentPregnancy, mCurrentPregnancyWeek);
+        Weight previousWeekWeight = getWeightByWeek(currentPregnancy, mCurrentPregnancyWeek - 5);
+        if (currentWeekWeight != null && previousWeekWeight != null) {
+            List<UserActivity> currentWeekActivities = currentPregnancy.getActivities().get(Integer.toString(mCurrentPregnancyWeek));
+            if ((currentWeekActivities == null || currentWeekActivities.size() == 0) && currentWeekWeight.getValue() - previousWeekWeight.getValue() > 0) {
+                if (!isNotEnoughActivitiesTipPresent()) {
+                    mUser.getCustomTips().add(new Tip(null, getString(R.string.custom_tip_not_enough_activities), getLocalizedResources(MainActivity.this, new Locale("bg")).getString(R.string.custom_tip_not_enough_activities), true, false));
+                    updateUser();
+                }
+            } else {
+                removeNotEnoughActivitiesTipIfPresent();
+            }
+        } else {
+            removeNotEnoughActivitiesTipIfPresent();
+        }
     }
 
     private long getDaysSinceDate(String startDate) {
@@ -225,6 +252,25 @@ public class MainActivity extends AppCompatActivity {
         getSizes();
     }
 
+    private void updateUser() {
+        ObjectMapper m = new ObjectMapper();
+        Map<String,Object> user = m.convertValue(mUser, Map.class);
+
+        mDb.collection("users").document(mUserEmail).set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("Error writing document " + e.getMessage());
+                    }
+                });
+    }
+
     private boolean hasNotDoneTips() {
         if (mUser.getCustomTips() == null) {
             return false;
@@ -246,6 +292,45 @@ public class MainActivity extends AppCompatActivity {
         mTipsItem.startAnimation(animation);
     }
 
+    private Weight getWeightByWeek(Pregnancy pregnancy, int week) {
+        for (Weight weight : pregnancy.getWeights()) {
+            if (weight.getWeek() == week) {
+                return weight;
+            }
+        }
+        return null;
+    }
+
+    private void removeNotEnoughActivitiesTipIfPresent() {
+        for (int i = 0; i < mUser.getCustomTips().size(); i++) {
+            Tip tip = mUser.getCustomTips().get(i);
+            if (tip.getContent().equals(getString(R.string.custom_tip_not_enough_activities))) {
+                mUser.getCustomTips().remove(i);
+                updateUser();
+                break;
+            }
+        }
+    }
+
+    private boolean isNotEnoughActivitiesTipPresent() {
+        for (int i = 0; i < mUser.getCustomTips().size(); i++) {
+            Tip tip = mUser.getCustomTips().get(i);
+            if (tip.getContent().equals(getString(R.string.custom_tip_not_enough_activities))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @NonNull
+    Resources getLocalizedResources(Context context, Locale desiredLocale) {
+        Configuration conf = context.getResources().getConfiguration();
+        conf = new Configuration(conf);
+        conf.setLocale(desiredLocale);
+        Context localizedContext = context.createConfigurationContext(conf);
+        return localizedContext.getResources();
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -262,7 +347,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         if (mTipsItem.getAnimation() != null) {
-            mTipsItem.getAnimation().cancel();
+            mTipsItem.clearAnimation();
         }
     }
 

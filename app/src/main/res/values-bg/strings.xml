@@ -55,6 +55,7 @@
     <string name="custom_tip_blood_groups">В случай на несъответствие на Вашата кръвна група и тази на партньора Ви, трябва да се посъветвате с Вашия лекар относно допълнителните изследвания, които е необходимо да Ви бъдат направени.</string>
     <string name="custom_tip_family_history">Консултирайте се с Вашия лекар по отношение на рисквоете, които крие Вашата фамилна обремененост.</string>
     <string name="custom_tip_pregnancies_history">Посъветвахте ли се с Вашия лекар за допълнителните изследвания, които е необходимо да се направят поради историята на Вашите бременности?</string>
+    <string name="custom_tip_not_enough_activities">Теглото Ви се повишава, а няма информация за активности тази седмица. Движете се повече, за да сте здрава.</string>
 
     <string name="illness_name_label">Title</string>
     <string name="illness_date_label">Reference Date</string>
@@ -254,6 +255,7 @@
 
     <string name="tips_week_label">Седмица</string>
     <string name="tips_done_label">Готово</string>
+    <string name="tips_cancel_label">Отхвърляне</string>
     <string name="tips_loading_message">Обновяване на съветите&#8230;</string>
 
     <string name="fragment_kicks_start">Започни броенето</string>
