@@ -1,7 +1,9 @@
 package com.angelova.w510.calmmom;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,11 +16,15 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.angelova.w510.calmmom.adapters.TipsAdapter;
+import com.angelova.w510.calmmom.dialogs.LoadingDialog;
 import com.angelova.w510.calmmom.models.Tip;
 import com.angelova.w510.calmmom.models.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -36,6 +42,7 @@ import java.util.concurrent.TimeUnit;
 public class TipsActivity extends AppCompatActivity {
 
     private User mUser;
+    private String mUserEmail;
     private List<Tip> mTips = new ArrayList<>();
     private TipsAdapter mAdapter;
     private RecyclerView mRecyclerView;
@@ -43,6 +50,9 @@ public class TipsActivity extends AppCompatActivity {
 
     private FirebaseFirestore mDb;
     int currentPregnancyWeek = 0;
+
+    SharedPreferences mPrefs;
+    SharedPreferences.Editor mEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +66,12 @@ public class TipsActivity extends AppCompatActivity {
         }
 
         mUser = (User) getIntent().getSerializableExtra("user");
+        mUserEmail = getIntent().getStringExtra("email");
         currentPregnancyWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getFirstDayOfLastMenstruation()) / 7 + 1);
         mDb = FirebaseFirestore.getInstance();
+
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mPrefs.edit();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -84,6 +98,9 @@ public class TipsActivity extends AppCompatActivity {
                         }
                     }
                     Collections.sort(mTips);
+                    if (mUser.getCustomTips() != null) {
+                        mTips.addAll(0, mUser.getCustomTips());
+                    }
                     mAdapter = new TipsAdapter(mTips, TipsActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                     mLoader.setVisibility(View.GONE);
@@ -108,5 +125,30 @@ public class TipsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return daysDiff;
+    }
+
+    public void updateTipsInDb(List<Tip> tips) {
+        final LoadingDialog dialog = new LoadingDialog(TipsActivity.this, getString(R.string.tips_loading_message));
+        dialog.show();
+        ObjectMapper m = new ObjectMapper();
+        mUser.setCustomTips(tips);
+        Map<String,Object> user = m.convertValue(mUser, Map.class);
+
+        final DocumentReference userRef = mDb.collection("users").document(mUserEmail);
+        userRef.update(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("DocumentSnapshot successfully updated!");
+                        mEditor.putBoolean("shouldReload", true).commit();
+                        dialog.dismiss();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("Error updating document " + e);
+                    }
+                });
     }
 }

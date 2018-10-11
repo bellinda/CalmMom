@@ -38,6 +38,7 @@ public class User implements Serializable {
     private List<Pregnancy> pregnancies;
     private int pregnancyConsecutiveId;
     private String applicationLanguage;
+    private List<Tip> customTips;
 
     public String getName() {
         return name;
@@ -261,5 +262,13 @@ public class User implements Serializable {
 
     public void setApplicationLanguage(String applicationLanguage) {
         this.applicationLanguage = applicationLanguage;
+    }
+
+    public List<Tip> getCustomTips() {
+        return customTips;
+    }
+
+    public void setCustomTips(List<Tip> customTips) {
+        this.customTips = customTips;
     }
 }

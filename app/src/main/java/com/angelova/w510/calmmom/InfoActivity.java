@@ -2,8 +2,11 @@ package com.angelova.w510.calmmom;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -36,6 +39,7 @@ import com.angelova.w510.calmmom.models.Measurement;
 import com.angelova.w510.calmmom.models.Pregnancy;
 import com.angelova.w510.calmmom.models.RiskFactor;
 import com.angelova.w510.calmmom.models.Test;
+import com.angelova.w510.calmmom.models.Tip;
 import com.angelova.w510.calmmom.models.User;
 import com.angelova.w510.calmmom.models.UserActivity;
 import com.angelova.w510.calmmom.models.Weight;
@@ -56,6 +60,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -309,6 +314,7 @@ public class InfoActivity extends AppCompatActivity {
                 } else if (mInputMenstruationDuration.getText() == null || mInputMenstruationDuration.getText().toString().isEmpty()) {
                     showAlertDialogNow("Please enter the average duration of your menstruation", "Warning");
                 } else {
+                    List<Tip> customTips = new ArrayList<>();
                     mUser.setName(mInputName.getText().toString());
                     mUser.setAge(Integer.parseInt(mInputAge.getText().toString()));
                     mUser.setCurrentHeight(Double.parseDouble(mInputCurrHeight.getText().toString()));
@@ -330,24 +336,32 @@ public class InfoActivity extends AppCompatActivity {
                     List<RiskFactor> riskFactors = new ArrayList<RiskFactor>();
                     if (mSmokeChkBox.isChecked()) {
                         riskFactors.add(RiskFactor.Smoking);
+                        customTips.add(new Tip(null, getString(R.string.custom_tip_smoking), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_smoking), true, false));
                     }
                     if (mAlcoholChkBox.isChecked()) {
                         riskFactors.add(RiskFactor.Alcohol);
+                        customTips.add(new Tip(null, getString(R.string.custom_tip_alcohol), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_alcohol), true, false));
                     }
                     if (mOverweightChkBox.isChecked()) {
                         riskFactors.add(RiskFactor.Overweight);
+                        customTips.add(new Tip(null, getString(R.string.custom_tip_overweight), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_overweight), true, false));
                     }
                     if (mAgeChkBox.isChecked()) {
                         riskFactors.add(RiskFactor.Age);
+                        customTips.add(new Tip(null, getString(R.string.custom_tip_age), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_age), true, false));
                     }
                     if (mUnderfeedingChkBox.isChecked()) {
                         riskFactors.add(RiskFactor.UnderFeeding);
+                        customTips.add(new Tip(null, getString(R.string.custom_tip_underfeeding), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_underfeeding), true, false));
                     }
                     if (mFoodAllChkBox.isChecked()) {
                         riskFactors.add(RiskFactor.FoodAllergy);
                     }
                     if (mMedAllChkBox.isChecked()) {
                         riskFactors.add(RiskFactor.MedicinesAllergy);
+                    }
+                    if (mFoodAllChkBox.isChecked() || mMedAllChkBox.isChecked()) {
+                        customTips.add(new Tip(null, getString(R.string.custom_tip_allergy), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_allergy), true, false));
                     }
                     mUser.setRiskFactors(riskFactors);
 
@@ -390,6 +404,10 @@ public class InfoActivity extends AppCompatActivity {
                         }
                     }
 
+                    if (mAbortionSwitch.isChecked() || (!mPregnancy.isFirstPregnancy() && mUser.getStillbornKids() > 0) || mUser.getComplicationsOtherPregnancies() != null) {
+                        customTips.add(new Tip(null, getString(R.string.custom_tip_pregnancies_history), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_pregnancies_history), true, false));
+                    }
+
                     if (mInfectiousDiseases.getText() != null && !mInfectiousDiseases.getText().toString().isEmpty()) {
                         mUser.setInfectiousDiseases(mInfectiousDiseases.getText().toString());
                     }
@@ -404,6 +422,7 @@ public class InfoActivity extends AppCompatActivity {
 
                     if (mFamilyHistory.getText() != null && !mFamilyHistory.getText().toString().isEmpty()) {
                         mUser.setFamilyHistories(mFamilyHistory.getText().toString());
+                        customTips.add(new Tip(null, getString(R.string.custom_tip_family_history), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_family_history), true, false));
                     }
 
                     if (mFeaturesAndComplications.getText() != null && !mFeaturesAndComplications.getText().toString().isEmpty()) {
@@ -416,12 +435,14 @@ public class InfoActivity extends AppCompatActivity {
 
                     if (mBloodGrIncompatibilitySwitch.isChecked()) {
                         mPregnancy.setBloodGroupIncompatibility(true);
+                        customTips.add(new Tip(null, getString(R.string.custom_tip_blood_groups), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_blood_groups), true, false));
                     }
 
                     if (mUnwantedPregnancySwitch.isChecked()) {
                         mPregnancy.setUnwantedPregnancy(true);
                     }
 
+                    mUser.setCustomTips(customTips);
                     mUser.setPregnancyConsecutiveId(0);
                     List<Pregnancy> pregnancies = new ArrayList<Pregnancy>();
                     pregnancies.add(mPregnancy);
@@ -735,6 +756,15 @@ public class InfoActivity extends AppCompatActivity {
             activities.put(Integer.toString(i), new ArrayList<UserActivity>());
         }
         return activities;
+    }
+
+    @NonNull
+    Resources getLocalizedResources(Context context, Locale desiredLocale) {
+        Configuration conf = context.getResources().getConfiguration();
+        conf = new Configuration(conf);
+        conf.setLocale(desiredLocale);
+        Context localizedContext = context.createConfigurationContext(conf);
+        return localizedContext.getResources();
     }
 
     private void showAlertDialogNow(String message, String title) {

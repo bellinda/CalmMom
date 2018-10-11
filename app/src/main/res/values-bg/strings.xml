@@ -46,6 +46,16 @@
     <string name="features_complications">Особености и усложнения при предишни бременности и раждания</string>
     <string name="info_submit">Save info</string>
 
+    <string name="custom_tip_age">Напредналата възраст може да бъде предпоставка за проблеми с плода, затова се консултирайте с Вашия лекар за допълнителните изследвания, които са необходими в случая.</string>
+    <string name="custom_tip_smoking">Пушенето може да увреди плода. Консултирайте се с Вашия лекар за повече информация.</string>
+    <string name="custom_tip_alcohol">Алкохолът може да увреди плода. Консултирайте се с Вашия лекар за повече информация.</string>
+    <string name="custom_tip_overweight">Наднорменото тегло увеличава възможността да настъпят усложнения по време на бременността Ви. Консултирайте се с Вашия лекар за това, какво би било добре да се предприеме.</string>
+    <string name="custom_tip_underfeeding">Недохранването може да навреди на Вас и на развиващото се все още бебе както в краткосрочен, така и в дългосрочен план, затова е препоръчително да се посъветвате с Вашия лекар.</string>
+    <string name="custom_tip_allergy">Споделете с Вашия лекар, че имате алергии, за да намалите рисковете за Вас и Вашето бебе.</string>
+    <string name="custom_tip_blood_groups">В случай на несъответствие на Вашата кръвна група и тази на партньора Ви, трябва да се посъветвате с Вашия лекар относно допълнителните изследвания, които е необходимо да Ви бъдат направени.</string>
+    <string name="custom_tip_family_history">Консултирайте се с Вашия лекар по отношение на рисквоете, които крие Вашата фамилна обремененост.</string>
+    <string name="custom_tip_pregnancies_history">Посъветвахте ли се с Вашия лекар за допълнителните изследвания, които е необходимо да се направят поради историята на Вашите бременности?</string>
+
     <string name="illness_name_label">Title</string>
     <string name="illness_date_label">Reference Date</string>
     <string name="illness_medicines_label">Taken medicines</string>
@@ -243,6 +253,8 @@
     <string name="dialog_add_activity_other">Друго</string>
 
     <string name="tips_week_label">Седмица</string>
+    <string name="tips_done_label">Готово</string>
+    <string name="tips_loading_message">Обновяване на съветите&#8230;</string>
 
     <string name="fragment_kicks_start">Започни броенето</string>
     <string name="fragment_kicks_stop">Спри броенето</string>
@@ -370,6 +382,7 @@
     <string name="activity_profile_second_pregnancy">2ра бременност</string>
     <string name="activity_profile_other_pregnancy" formatted="false">%dта бременност</string>
     <string name="activity_profile_edd">Очакван термин</string>
+    <string name="activity_profile_language_label">Език на приложението</string>
     <string name="activity_profile_language_en">Английски</string>
     <string name="activity_profile_language_bg">Български</string>
 

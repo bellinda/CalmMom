@@ -46,6 +46,16 @@
     <string name="features_complications">Features and complications of previous pregnancies and deliveries</string>
     <string name="info_submit">Save info</string>
 
+    <string name="custom_tip_age">Advanced age could cause fetus damages, therefore it is advised to contact your doctor.</string>
+    <string name="custom_tip_smoking">Smoking could damage the fetus. Consult your health care provider for more information.</string>
+    <string name="custom_tip_alcohol">Drinking alcohol could damage the fetus. Consult your health care provider for more information.</string>
+    <string name="custom_tip_overweight">Being overweight makes it more likely that you\'ll be affected by certain complications. Check with your doctor if something needs to be done.</string>
+    <string name="custom_tip_underfeeding">Underfeeding could affect both the pregnant woman and developing baby in the short and long-term, therefore it is advised to contact your doctor.</string>
+    <string name="custom_tip_allergy">Tell to your health care provider that you have allergies inorder to reduce the risks for you and your baby.</string>
+    <string name="custom_tip_blood_groups">When you have a blood group incompatibility with your partner, you need to talk with your doctor about the additional tests that need to be done.</string>
+    <string name="custom_tip_family_history">Consult with your health care provider for the risks based on the family history you have.</string>
+    <string name="custom_tip_pregnancies_history">Did you consult with your health care provider for the additional tests that need to be done because of your pregnancies history?</string>
+
     <string name="illness_name_label">Title</string>
     <string name="illness_date_label">Reference Date</string>
     <string name="illness_medicines_label">Taken medicines</string>
@@ -246,6 +256,8 @@
     <string name="dialog_add_activity_other">Other</string>
 
     <string name="tips_week_label">Week</string>
+    <string name="tips_done_label">Done</string>
+    <string name="tips_loading_message">Updating tips&#8230;</string>
 
     <string name="fragment_kicks_start">Start counting</string>
     <string name="fragment_kicks_stop">Stop counting</string>
@@ -373,6 +385,7 @@
     <string name="activity_profile_second_pregnancy">2nd pregnancy</string>
     <string name="activity_profile_other_pregnancy" formatted="false">%dth pregnancy</string>
     <string name="activity_profile_edd">Estimated delivery date</string>
+    <string name="activity_profile_language_label">Application language</string>
     <string name="activity_profile_language_en">English</string>
     <string name="activity_profile_language_bg">Bulgarian</string>
 

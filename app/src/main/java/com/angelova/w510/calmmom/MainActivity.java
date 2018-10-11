@@ -11,11 +11,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.dialogs.LoadingDialog;
 import com.angelova.w510.calmmom.models.BabySize;
+import com.angelova.w510.calmmom.models.Tip;
 import com.angelova.w510.calmmom.models.User;
 import com.angelova.w510.calmmom.services.StopwatchService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -117,8 +121,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, TipsActivity.class);
-                intent.putExtra("user", getIntent().getSerializableExtra("user"));
-                //intent.putExtra("email", getIntent().getStringExtra("email"));
+                intent.putExtra("user", mUser);
+                intent.putExtra("email", getIntent().getStringExtra("email"));
                 startActivity(intent);
             }
         });
@@ -129,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, KicksAndContractionsActivity.class);
-                intent.putExtra("user", getIntent().getSerializableExtra("user"));
+                intent.putExtra("user", mUser);
                 intent.putExtra("email", getIntent().getStringExtra("email"));
                 startActivity(intent);
             }
@@ -140,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                intent.putExtra("user", getIntent().getSerializableExtra("user"));
+                intent.putExtra("user", mUser);
                 intent.putExtra("email", getIntent().getStringExtra("email"));
                 startActivity(intent);
             }
@@ -149,6 +153,10 @@ public class MainActivity extends AppCompatActivity {
         if (mPrefs.getBoolean("shouldReload", false)) {
             getUserData();
             mEditor.remove("shouldReload").commit();
+        }
+
+        if (hasNotDoneTips()) {
+            blinkTipsButton();
         }
     }
 
@@ -217,6 +225,27 @@ public class MainActivity extends AppCompatActivity {
         getSizes();
     }
 
+    private boolean hasNotDoneTips() {
+        if (mUser.getCustomTips() == null) {
+            return false;
+        }
+        for (Tip tip : mUser.getCustomTips()) {
+            if (!tip.isDone()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void blinkTipsButton() {
+        Animation animation = new AlphaAnimation(1, 0);
+        animation.setDuration(1000);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setRepeatMode(Animation.REVERSE);
+        mTipsItem.startAnimation(animation);
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -226,6 +255,15 @@ public class MainActivity extends AppCompatActivity {
         stopService(intent);
 
         mEditor.clear().commit();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (mTipsItem.getAnimation() != null) {
+            mTipsItem.getAnimation().cancel();
+        }
     }
 
     @Override
