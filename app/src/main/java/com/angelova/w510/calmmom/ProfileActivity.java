@@ -41,6 +41,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -69,6 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView mDeliveryDate;
     private RadioButton mEnLanguage;
     private RadioButton mBgLanguage;
+    private Button mLogoutBtn;
 
     private User mUser;
     private String mUserEmail;
@@ -118,6 +120,7 @@ public class ProfileActivity extends AppCompatActivity {
         mDeliveryDate = (TextView) findViewById(R.id.delivery_date);
         mEnLanguage = (RadioButton) findViewById(R.id.lang_en);
         mBgLanguage = (RadioButton) findViewById(R.id.lang_bg);
+        mLogoutBtn = (Button) findViewById(R.id.log_out_btn);
 
         if (mUser.getProfileImage() != null && !mUser.getProfileImage().isEmpty()) {
             mAddImageText.setVisibility(View.GONE);
@@ -225,6 +228,19 @@ public class ProfileActivity extends AppCompatActivity {
             mBgLanguage.setOnCheckedChangeListener(mBgCheckListener);
             mEnLanguage.setOnCheckedChangeListener(mEnCheckListener);
         }
+
+        mLogoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mEditor.clear();
+                mEditor.apply();
+                FirebaseAuth.getInstance().signOut();
+                Intent loginPageIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                loginPageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(loginPageIntent);
+                finishAffinity();
+            }
+        });
     }
 
     CompoundButton.OnCheckedChangeListener mEnCheckListener = new CompoundButton.OnCheckedChangeListener() {

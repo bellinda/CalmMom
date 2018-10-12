@@ -387,6 +387,9 @@
     <string name="activity_profile_language_label">Език на приложението</string>
     <string name="activity_profile_language_en">Английски</string>
     <string name="activity_profile_language_bg">Български</string>
+    <string name="activity_profile_end_pregnancy_btn">Край на бременността</string>
+    <string name="activity_profile_start_pregnancy_btn">Нова бременност</string>
+    <string name="activity_profile_log_out_btn">Изход</string>
 
     <string name="fragment_themes_no_items">Няма налични теми. Можете да бъдете първия човек, публикувал тема във форума.</string>
     <string name="fragment_themes_no_answers_to_theme">Все още няма отговори на тази тема. Бъдете първия човек, който ще отговори.</string>

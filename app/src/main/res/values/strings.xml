@@ -390,6 +390,9 @@
     <string name="activity_profile_language_label">Application language</string>
     <string name="activity_profile_language_en">English</string>
     <string name="activity_profile_language_bg">Bulgarian</string>
+    <string name="activity_profile_end_pregnancy_btn">End pregnancy</string>
+    <string name="activity_profile_start_pregnancy_btn">Start pregnancy</string>
+    <string name="activity_profile_log_out_btn">Log out</string>
 
     <string name="fragment_themes_no_items">No themes available yet. You could be the first one adding a theme.</string>
     <string name="fragment_themes_no_answers_to_theme">There are still no answers to this theme. Be the first one writing one.</string>

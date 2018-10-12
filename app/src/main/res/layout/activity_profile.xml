@@ -172,7 +172,7 @@
         android:layout_width="1dp"
         android:layout_height="1dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintGuide_percent="0.55"
         android:id="@+id/top_data_guideline"/>
 
     <android.support.constraint.Guideline
@@ -296,5 +296,75 @@
                 android:text="@string/activity_profile_language_bg" />
         </info.hoang8f.android.segmented.SegmentedGroup>
     </LinearLayout>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.88"
+        android:id="@+id/top_bottom_buttons_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95"
+        android:id="@+id/bottom_bottom_buttons_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05"
+        android:id="@+id/left_end_button_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.45"
+        android:id="@+id/right_end_button_guideline"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@id/left_end_button_guideline"
+        app:layout_constraintRight_toLeftOf="@id/right_end_button_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_bottom_buttons_guideline"
+        app:layout_constraintBottom_toTopOf="@id/bottom_bottom_buttons_guideline"
+        android:layout_gravity="center"
+        android:background="@drawable/border_only_button_dark_thin"
+        android:text="@string/activity_profile_end_pregnancy_btn"
+        android:textAllCaps="false"
+        android:textColor="@drawable/button_text_color_dark_to_white"
+        android:id="@+id/end_pregnancy_btn"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        android:id="@+id/left_logout_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95"
+        android:id="@+id/right_logout_guideline"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@id/left_logout_guideline"
+        app:layout_constraintRight_toLeftOf="@id/right_logout_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_bottom_buttons_guideline"
+        app:layout_constraintBottom_toTopOf="@id/bottom_bottom_buttons_guideline"
+        android:layout_gravity="center"
+        android:background="@drawable/border_only_button_dark_thin"
+        android:text="@string/activity_profile_log_out_btn"
+        android:textAllCaps="false"
+        android:textColor="@drawable/button_text_color_dark_to_white"
+        android:id="@+id/log_out_btn"/>
 
 </android.support.constraint.ConstraintLayout>

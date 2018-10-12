@@ -547,4 +547,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(getIntent());
         }
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
