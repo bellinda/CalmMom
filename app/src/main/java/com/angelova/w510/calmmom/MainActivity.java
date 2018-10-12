@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -58,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView mCurrentDateView;
     private TextView mCurrentWeekView;
     private TextView mBabySizeView;
+    private ImageView mSizeImage;
+    private TextView mSizeText;
+    private LinearLayout mSizeImageLayout;
+    private TextView mTooSmallSizeText;
 
     private FloatingActionButton mProfileBtn;
 
@@ -100,6 +106,12 @@ public class MainActivity extends AppCompatActivity {
 
         getSizes();
         mBabySizeView = (TextView) findViewById(R.id.baby_size_view);
+        mSizeImage = (ImageView) findViewById(R.id.size_image);
+        mSizeText = (TextView) findViewById(R.id.size_text);
+        mSizeImageLayout = (LinearLayout) findViewById(R.id.size_image_layout);
+        mTooSmallSizeText = (TextView) findViewById(R.id.too_small_view);
+
+        setImageAndTextBasedOnWeek();
 
         mExaminationsItem = (LinearLayout) findViewById(R.id.examinations_layout);
 
@@ -250,6 +262,7 @@ public class MainActivity extends AppCompatActivity {
         mCurrentPregnancyWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getFirstDayOfLastMenstruation()) / 7 + 1);
         mCurrentWeekView.setText(String.format(Locale.getDefault(), "%d %s", mCurrentPregnancyWeek, getString(R.string.main_activity_weeks)));
         getSizes();
+        setImageAndTextBasedOnWeek();
     }
 
     private void updateUser() {
@@ -302,24 +315,192 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void removeNotEnoughActivitiesTipIfPresent() {
-        for (int i = 0; i < mUser.getCustomTips().size(); i++) {
-            Tip tip = mUser.getCustomTips().get(i);
-            if (tip.getContent().equals(getString(R.string.custom_tip_not_enough_activities))) {
-                mUser.getCustomTips().remove(i);
-                updateUser();
-                break;
+        if (mUser.getCustomTips() != null) {
+            for (int i = 0; i < mUser.getCustomTips().size(); i++) {
+                Tip tip = mUser.getCustomTips().get(i);
+                if (tip.getContent().equals(getString(R.string.custom_tip_not_enough_activities))) {
+                    mUser.getCustomTips().remove(i);
+                    updateUser();
+                    break;
+                }
             }
         }
     }
 
     private boolean isNotEnoughActivitiesTipPresent() {
-        for (int i = 0; i < mUser.getCustomTips().size(); i++) {
-            Tip tip = mUser.getCustomTips().get(i);
-            if (tip.getContent().equals(getString(R.string.custom_tip_not_enough_activities))) {
-                return true;
+        if (mUser.getCustomTips() != null) {
+            for (int i = 0; i < mUser.getCustomTips().size(); i++) {
+                Tip tip = mUser.getCustomTips().get(i);
+                if (tip.getContent().equals(getString(R.string.custom_tip_not_enough_activities))) {
+                    return true;
+                }
             }
         }
         return false;
+    }
+
+    private void setImageAndTextBasedOnWeek() {
+        mSizeImageLayout.setVisibility(View.VISIBLE);
+        mSizeText.setVisibility(View.VISIBLE);
+        mTooSmallSizeText.setVisibility(View.GONE);
+
+        switch (mCurrentPregnancyWeek) {
+            case 1:
+            case 2:
+            case 3:
+                mSizeImageLayout.setVisibility(View.GONE);
+                mSizeText.setVisibility(View.GONE);
+                mTooSmallSizeText.setVisibility(View.VISIBLE);
+                break;
+            case 4:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_apple_seeds));
+                mSizeText.setText(getString(R.string.size_apple_seeds));
+                break;
+            case 5:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_black_pepper_corn));
+                mSizeText.setText(getString(R.string.size_black_pepper_corn));
+                break;
+            case 6:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_pea));
+                mSizeText.setText(getString(R.string.size_pea));
+                break;
+            case 7:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_blueberry));
+                mSizeText.setText(getString(R.string.size_blueberry));
+                break;
+            case 8:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_olive));
+                mSizeText.setText(getString(R.string.size_olive));
+                break;
+            case 9:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_raspberry));
+                mSizeText.setText(getString(R.string.size_raspberry));
+                break;
+            case 10:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_strawberry));
+                mSizeText.setText(getString(R.string.size_strawberry));
+                break;
+            case 11:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_apricote));
+                mSizeText.setText(getString(R.string.size_apricot));
+                break;
+            case 12:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_fig));
+                mSizeText.setText(getString(R.string.size_fig));
+                break;
+            case 13:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_plum));
+                mSizeText.setText(getString(R.string.size_plum));
+                break;
+            case 14:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_lemon));
+                mSizeText.setText(getString(R.string.size_lemon));
+                break;
+            case 15:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_peach));
+                mSizeText.setText(getString(R.string.size_peach));
+                break;
+            case 16:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_orange));
+                mSizeText.setText(getString(R.string.size_orange));
+                break;
+            case 17:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_avocado));
+                mSizeText.setText(getString(R.string.size_avocado));
+                break;
+            case 18:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_onion));
+                mSizeText.setText(getString(R.string.size_onion));
+                break;
+            case 19:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_pomegranate));
+                mSizeText.setText(getString(R.string.size_pomegranate));
+                break;
+            case 20:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_beef_tomato));
+                mSizeText.setText(getString(R.string.size_beef_tomato));
+                break;
+            case 21:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_pepper));
+                mSizeText.setText(getString(R.string.size_pepper));
+                break;
+            case 22:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_sweet_potatoe));
+                mSizeText.setText(getString(R.string.size_sweet_potato));
+                break;
+            case 23:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_mango));
+                mSizeText.setText(getString(R.string.size_mango));
+                break;
+            case 24:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_papaya));
+                mSizeText.setText(getString(R.string.size_papaya));
+                break;
+            case 25:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_grapefruit));
+                mSizeText.setText(getString(R.string.size_grapefruit));
+                break;
+            case 26:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_swede));
+                mSizeText.setText(getString(R.string.size_swede));
+                break;
+            case 27:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_broccoli_head));
+                mSizeText.setText(getString(R.string.size_broccoli_head));
+                break;
+            case 28:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_canteloupe_melon));
+                mSizeText.setText(getString(R.string.size_canteloupe_melon));
+                break;
+            case 29:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_cauliflower));
+                mSizeText.setText(getString(R.string.size_cauliflower));
+                break;
+            case 30:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_iceberg_lettuce));
+                mSizeText.setText(getString(R.string.size_iceberg_lettuce));
+                break;
+            case 31:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_aubergine));
+                mSizeText.setText(getString(R.string.size_aubergine));
+                break;
+            case 32:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_coconut));
+                mSizeText.setText(getString(R.string.size_coconut));
+                break;
+            case 33:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_butternut_squash));
+                mSizeText.setText(getString(R.string.size_butternut_squash));
+                break;
+            case 34:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_cabbage));
+                mSizeText.setText(getString(R.string.size_cabbage));
+                break;
+            case 35:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_pineapple));
+                mSizeText.setText(getString(R.string.size_pineapple));
+                break;
+            case 36:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_bananas));
+                mSizeText.setText(getString(R.string.size_bananas));
+                break;
+            case 37:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_melon));
+                mSizeText.setText(getString(R.string.size_melon));
+                break;
+            case 38:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_marrow));
+                mSizeText.setText(getString(R.string.size_marrow));
+                break;
+            case 39:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_pumpkin));
+                mSizeText.setText(getString(R.string.size_pumpkin));
+                break;
+            case 40:
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_watermelon));
+                mSizeText.setText(getString(R.string.size_watermelon));
+                break;
+        }
     }
 
     @NonNull
