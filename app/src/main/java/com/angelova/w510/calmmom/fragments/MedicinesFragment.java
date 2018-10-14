@@ -190,15 +190,18 @@ public class MedicinesFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy kk:mm", Locale.getDefault());
 
-        for (Medicine medicine : mUser.getPregnancies().get(pregnancyIndex).getTakenMedicines()) {
-            try {
-                Date date = sdf.parse(String.format("%s %s", medicine.getTakenOn(), medicine.getTime()));
-                calendar.setTime(date);
+        if (mUser.getPregnancies().get(pregnancyIndex).getTakenMedicines() != null) {
 
-                Event ev1 = new Event(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryTransparent, null), calendar.getTimeInMillis(), medicine);
-                mCalendar.addEvent(ev1);
-            } catch (ParseException pe) {
-                pe.printStackTrace();
+            for (Medicine medicine : mUser.getPregnancies().get(pregnancyIndex).getTakenMedicines()) {
+                try {
+                    Date date = sdf.parse(String.format("%s %s", medicine.getTakenOn(), medicine.getTime()));
+                    calendar.setTime(date);
+
+                    Event ev1 = new Event(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryTransparent, null), calendar.getTimeInMillis(), medicine);
+                    mCalendar.addEvent(ev1);
+                } catch (ParseException pe) {
+                    pe.printStackTrace();
+                }
             }
         }
     }
