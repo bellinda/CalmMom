@@ -180,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
             blinkTipsButton();
         }
 
-        mCurrentPregnancyWeek = 5;
         Pregnancy currentPregnancy = mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId());
         Weight currentWeekWeight = getWeightByWeek(currentPregnancy, mCurrentPregnancyWeek);
         Weight previousWeekWeight = getWeightByWeek(currentPregnancy, mCurrentPregnancyWeek - 5);
