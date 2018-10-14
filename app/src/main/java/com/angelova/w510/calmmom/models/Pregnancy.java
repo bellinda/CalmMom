@@ -26,6 +26,7 @@ public class Pregnancy implements Serializable {
     private List<Medicine> allowedMedicinesByDoctor;
     private Map<String, List<Meal>> meals;
     private Map<String, Integer> waterIntakes;
+    private PregnancyOutcome pregnancyOutcome;
 
     public String getFirstDayOfLastMenstruation() {
         return firstDayOfLastMenstruation;
@@ -145,5 +146,13 @@ public class Pregnancy implements Serializable {
 
     public void setWaterIntakes(Map<String, Integer> waterIntakes) {
         this.waterIntakes = waterIntakes;
+    }
+
+    public PregnancyOutcome getPregnancyOutcome() {
+        return pregnancyOutcome;
+    }
+
+    public void setPregnancyOutcome(PregnancyOutcome pregnancyOutcome) {
+        this.pregnancyOutcome = pregnancyOutcome;
     }
 }

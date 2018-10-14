@@ -87,6 +87,12 @@
     <string name="title_answered_by_me">Answered by me</string>
     <string name="title_my_themes">My themes</string>
 
+    <!--10 days after delay-->
+    <string name="ten_days_exaination_title">10 days after the delay</string>
+
+    <!--7th week-->
+    <string name="seventh_week_examination_title">7th week</string>
+
     <!--12th week-->
     <string name="first_examination_test1">Хемоглобин, еритроцити, хематокрит, левкоцити, MCV, MCH, СУЕ, кръвна захар, урина-седимент, уробилиноген, кетони</string>
     <string name="first_examination_test2">Определяне на кръвна група и Rh-фактор</string>
@@ -477,7 +483,13 @@
     <string name="dialog_end_pregnancy_hours_of_labour">Hours of labour</string>
     <string name="dialog_end_pregnancy_hours">h</string>
     <string name="dialog_end_pregnancy_complications">Complications / Features</string>
-    <string name="dialog_end_pregnancy_date">Date when the baby was born</string>
-    <string name="dialog_end_pregnancy_time">Time when the baby was born</string>
+    <string name="dialog_end_pregnancy_date">Date</string>
+    <string name="dialog_end_pregnancy_time">Time</string>
+    <string name="dialog_end_pregnancy_missing_data_title">Warning</string>
+    <string name="dialog_end_pregnancy_no_outcome">Please select the pregnancy outcome</string>
+    <string name="dialog_end_pregnancy_no_sex">Please select the sex of the baby</string>
+    <string name="dialog_end_pregnancy_no_weight">Please enter the weight of the baby</string>
+    <string name="dialog_end_pregnancy_no_length">Please enter the length of the baby</string>
+    <string name="dialog_end_pregnancy_no_name">Please enter the name of the baby</string>
 
 </resources>

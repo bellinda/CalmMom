@@ -663,10 +663,10 @@ public class InfoActivity extends AppCompatActivity {
 
         List<Measurement> activities = Arrays.asList(new Measurement(getString(R.string.first_examination_act6)));
 
-        Examination afterTheDelayEx = new Examination("10 days after the delay", "", ExaminationStatus.CURRENT, new ArrayList<Test>(), activities);
+        Examination afterTheDelayEx = new Examination(getString(R.string.ten_days_exaination_title), "", ExaminationStatus.CURRENT, new ArrayList<Test>(), activities);
         examinations.add(afterTheDelayEx);
 
-        Examination seventhWeekEx = new Examination("7th week", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
+        Examination seventhWeekEx = new Examination(getString(R.string.ten_days_exaination_title), "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
         examinations.add(seventhWeekEx);
 
         List<Test> tests = Arrays.asList(new Test(getString(R.string.first_examination_test1)), new Test(getString(R.string.first_examination_test2)),
@@ -735,17 +735,6 @@ public class InfoActivity extends AppCompatActivity {
 
         Examination eighth2Ex = new Examination("39th week", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
         examinations.add(eighth2Ex);
-
-        activities = Arrays.asList(new Measurement(getString(R.string.seven_days_after_birth_examination_act1)), new Measurement(getString(R.string.seven_days_after_birth_examination_act2)),
-                new Measurement(getString(R.string.seven_days_after_birth_examination_act3)), new Measurement(getString(R.string.seven_days_after_birth_examination_act4)));
-        Examination sevenDaysAfterBirthEx = new Examination("7 days after birth", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
-        examinations.add(sevenDaysAfterBirthEx);
-
-        activities = Arrays.asList(new Measurement(getString(R.string.forty_days_after_birth_exmaination_act1)), new Measurement(getString(R.string.forty_days_after_birth_exmaination_act2)),
-                new Measurement(getString(R.string.forty_days_after_birth_exmaination_act3)), new Measurement(getString(R.string.forty_days_after_birth_exmaination_act4)));
-        tests = Arrays.asList(new Test(getString(R.string.forty_days_after_birth_examination_test1)));
-        Examination fortyDaysAfterBirthEx = new Examination("40 days after birth", "", ExaminationStatus.FUTURE, tests, activities);
-        examinations.add(fortyDaysAfterBirthEx);
 
         return examinations;
     }

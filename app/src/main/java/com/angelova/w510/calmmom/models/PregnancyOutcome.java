@@ -6,6 +6,7 @@ public class PregnancyOutcome implements Serializable {
 
     private OutcomeType outcomeType;
     private String date;
+    private String time;
     private String babySex;
     private String babyName;
     private String babyWeight;
@@ -30,6 +31,14 @@ public class PregnancyOutcome implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getBabySex() {

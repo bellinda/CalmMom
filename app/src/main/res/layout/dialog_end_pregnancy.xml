@@ -78,6 +78,63 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:paddingBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/outcome_date_layout"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/dialog_end_pregnancy_date"
+            android:layout_gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="@color/colorContrast"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:weightSum="8"
+            android:layout_marginLeft="20dp"
+            android:gravity="right">
+
+            <TextView
+                android:id="@+id/outcome_date_text"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="5"
+                android:background="@drawable/pickers_bgr"
+                android:gravity="center"
+                android:padding="5dp"
+                tools:text="31/01/2018"
+                android:textColor="@color/colorContrast"
+                android:textSize="@dimen/end_pregnancy_dialog_date_text_size" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/ic_date" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -117,9 +174,121 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_end_pregnancy_date"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorContrast"
+                    android:layout_marginLeft="10dp"/>
+
+                <LinearLayout
+                    android:id="@+id/birth_date_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal"
+                    android:weightSum="8"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="right">
+
+                    <TextView
+                        android:id="@+id/birth_date_text"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:background="@drawable/pickers_bgr"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        tools:text="31/01/2018"
+                        android:textColor="@color/colorContrast"
+                        android:textSize="@dimen/end_pregnancy_dialog_date_text_size" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/select_date_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/ic_date" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_end_pregnancy_time"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorContrast"
+                    android:layout_marginLeft="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal"
+                    android:weightSum="8"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="right"
+                    android:id="@+id/birth_time_layout">
+
+                    <TextView
+                        android:id="@+id/birth_time_text"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:background="@drawable/pickers_bgr"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="09:00"
+                        android:textColor="@color/colorContrast"
+                        android:textSize="@dimen/end_pregnancy_dialog_date_text_size" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/select_time_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/ic_time" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -34,8 +34,13 @@ import android.widget.TextView;
 
 import com.angelova.w510.calmmom.dialogs.EndPregnancyDialog;
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
+import com.angelova.w510.calmmom.models.Examination;
+import com.angelova.w510.calmmom.models.ExaminationStatus;
+import com.angelova.w510.calmmom.models.Measurement;
 import com.angelova.w510.calmmom.models.PregnancyOutcome;
+import com.angelova.w510.calmmom.models.Test;
 import com.angelova.w510.calmmom.models.User;
+import com.angelova.w510.calmmom.models.UserActivity;
 import com.bumptech.glide.Glide;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.Continuation;
@@ -51,8 +56,11 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -252,7 +260,28 @@ public class ProfileActivity extends AppCompatActivity {
                 EndPregnancyDialog dialog = new EndPregnancyDialog(ProfileActivity.this, new EndPregnancyDialog.DialogClickListener() {
                     @Override
                     public void onSave(PregnancyOutcome outcome) {
+                        mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).setPregnancyOutcome(outcome);
 
+                        List<Examination> examinations = mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getExaminations();
+                        for(int i = examinations.size() - 1; i >= 0; i--) {
+                            if (examinations.get(i).getStatus() == ExaminationStatus.FUTURE || examinations.get(i).getStatus() == ExaminationStatus.CURRENT) {
+                                examinations.remove(i);
+                            }
+                        }
+
+                        List<Measurement> activities = Arrays.asList(new Measurement(getString(R.string.seven_days_after_birth_examination_act1)), new Measurement(getString(R.string.seven_days_after_birth_examination_act2)),
+                                new Measurement(getString(R.string.seven_days_after_birth_examination_act3)), new Measurement(getString(R.string.seven_days_after_birth_examination_act4)));
+                        Examination sevenDaysAfterBirthEx = new Examination("7 days after birth", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
+                        examinations.add(sevenDaysAfterBirthEx);
+
+                        activities = Arrays.asList(new Measurement(getString(R.string.forty_days_after_birth_exmaination_act1)), new Measurement(getString(R.string.forty_days_after_birth_exmaination_act2)),
+                                new Measurement(getString(R.string.forty_days_after_birth_exmaination_act3)), new Measurement(getString(R.string.forty_days_after_birth_exmaination_act4)));
+                        List<Test> tests = Arrays.asList(new Test(getString(R.string.forty_days_after_birth_examination_test1)));
+                        Examination fortyDaysAfterBirthEx = new Examination("40 days after birth", "", ExaminationStatus.FUTURE, tests, activities);
+                        examinations.add(fortyDaysAfterBirthEx);
+                        mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).setExaminations(examinations);
+
+                        updateUser();
                     }
                 });
                 dialog.show();
