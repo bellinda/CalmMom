@@ -455,4 +455,25 @@
     <string name="size_marrow">Размер на голяма тиквичка</string>
     <string name="size_pumpkin">Размер на тиква</string>
     <string name="size_watermelon">Размер на диня</string>
+
+    <string name="dialog_end_pregnancy_title">Край на бременността</string>
+    <string name="dialog_end_pregnancy_outcome">Изход от бременността</string>
+    <string name="dialog_end_pregnancy_outcome_abortion">Аборт</string>
+    <string name="dialog_end_pregnancy_outcome_miscarriage">Помятане</string>
+    <string name="dialog_end_pregnancy_outcome_live">Живо раждане</string>
+    <string name="dialog_end_pregnancy_outcome_still">Мъртво раждане</string>
+    <string name="dialog_end_pregnancy_comments">Коментари</string>
+    <string name="dialog_end_pregnancy_baby_sex">Пол на бебето</string>
+    <string name="dialog_end_pregnancy_baby_sex_m">Момче</string>
+    <string name="dialog_end_pregnancy_baby_sex_f">Момиче</string>
+    <string name="dialog_end_pregnancy_baby_length">Дължина на бебето</string>
+    <string name="dialog_end_pregnancy_baby_length_metrix">см</string>
+    <string name="dialog_end_pregnancy_baby_weight">Тегло на бебето</string>
+    <string name="dialog_end_pregnancy_baby_weight_metrix">кг</string>
+    <string name="dialog_end_pregnancy_baby_name">Име на бебето</string>
+    <string name="dialog_end_pregnancy_hours_of_labour">Продължителност на раждането</string>
+    <string name="dialog_end_pregnancy_hours">ч</string>
+    <string name="dialog_end_pregnancy_complications">Усложнения / Особености</string>
+    <string name="dialog_end_pregnancy_date">Дата на раждане на бебето</string>
+    <string name="dialog_end_pregnancy_time">Час на раждане на бебето</string>
 </resources>

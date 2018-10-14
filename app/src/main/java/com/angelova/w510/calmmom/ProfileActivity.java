@@ -32,7 +32,9 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.angelova.w510.calmmom.dialogs.EndPregnancyDialog;
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
+import com.angelova.w510.calmmom.models.PregnancyOutcome;
 import com.angelova.w510.calmmom.models.User;
 import com.bumptech.glide.Glide;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -71,6 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
     private RadioButton mEnLanguage;
     private RadioButton mBgLanguage;
     private Button mLogoutBtn;
+    private Button mEndPregnancyBtn;
 
     private User mUser;
     private String mUserEmail;
@@ -121,6 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
         mEnLanguage = (RadioButton) findViewById(R.id.lang_en);
         mBgLanguage = (RadioButton) findViewById(R.id.lang_bg);
         mLogoutBtn = (Button) findViewById(R.id.log_out_btn);
+        mEndPregnancyBtn = (Button) findViewById(R.id.end_pregnancy_btn);
 
         if (mUser.getProfileImage() != null && !mUser.getProfileImage().isEmpty()) {
             mAddImageText.setVisibility(View.GONE);
@@ -239,6 +243,19 @@ public class ProfileActivity extends AppCompatActivity {
                 loginPageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(loginPageIntent);
                 finishAffinity();
+            }
+        });
+
+        mEndPregnancyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EndPregnancyDialog dialog = new EndPregnancyDialog(ProfileActivity.this, new EndPregnancyDialog.DialogClickListener() {
+                    @Override
+                    public void onSave(PregnancyOutcome outcome) {
+
+                    }
+                });
+                dialog.show();
             }
         });
     }
@@ -391,7 +408,7 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(getIntent());
     }
 
-    private void showAlertDialogNow(String message, String title) {
+    public void showAlertDialogNow(String message, String title) {
         WarnDialog warning = new WarnDialog(this, title, message, new WarnDialog.DialogClickListener() {
             @Override
             public void onClick() {

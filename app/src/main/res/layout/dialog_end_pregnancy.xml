@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
+    android:paddingTop="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingBottom="10dp"
+    android:focusable="false"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/input_field_height"
+        android:id="@+id/title_view"
+        android:text="@string/dialog_end_pregnancy_title"
+        android:textSize="@dimen/warn_dialog_title_text_size"
+        android:textColor="@color/colorContrast"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:weightSum="11">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_end_pregnancy_outcome"
+            android:layout_weight="5"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="@color/colorContrast"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dialog_add_weight_spinner_height"
+            android:layout_weight="6"
+            android:background="@drawable/dark_border_thin"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                android:spinnerMode="dropdown" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/spinner_arrow" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/comments_layout"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_end_pregnancy_comments"
+            android:textSize="18sp"
+            android:textColor="@color/colorContrast"/>
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/end_pregnancy_dialog_multiline_edit_height"
+            android:background="@drawable/dark_border"
+            android:layout_weight="8"
+            android:padding="5dp"
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
+            android:scrollbars="vertical"
+            android:textColor="@color/colorContrast"
+            android:theme="@style/MyEditTextInDialogTheme"
+            android:id="@+id/comments_view"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:id="@+id/live_birth_data"
+        android:layout_marginTop="10dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_end_pregnancy_baby_sex"
+                    android:layout_weight="5"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorContrast"
+                    android:layout_marginLeft="10dp"/>
+
+                <RadioGroup
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:weightSum="2"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/sex_m"
+                        android:text="@string/dialog_end_pregnancy_baby_sex_m"
+                        android:theme="@style/DarkRadioButton"
+                        android:textColor="@color/colorContrast"/>
+
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/sex_f"
+                        android:text="@string/dialog_end_pregnancy_baby_sex_f"
+                        android:theme="@style/DarkRadioButton"
+                        android:textColor="@color/colorContrast"/>
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_end_pregnancy_baby_name"
+                    android:layout_weight="5"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorContrast"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="5"
+                    android:padding="5dp"
+                    android:id="@+id/baby_name_input"
+                    android:theme="@style/MyEditTextInDialogTheme"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_end_pregnancy_baby_length"
+                    android:layout_weight="7"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorContrast"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:theme="@style/MyEditTextInDialogTheme"
+                    android:id="@+id/baby_length_input"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_end_pregnancy_baby_length_metrix"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorContrast"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_end_pregnancy_baby_weight"
+                    android:layout_weight="7"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorContrast"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:theme="@style/MyEditTextInDialogTheme"
+                    android:id="@+id/baby_weight_input"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_end_pregnancy_baby_weight_metrix"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorContrast"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/dialog_end_pregnancy_hours_of_labour"
+                    android:layout_weight="7"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorContrast"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/input_field_height"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal"
+                    android:padding="5dp"
+                    android:gravity="right"
+                    android:theme="@style/MyEditTextInDialogTheme"
+                    android:id="@+id/hours_of_labour_input"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dialog_end_pregnancy_hours"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorContrast"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_end_pregnancy_complications"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorContrast"/>
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/end_pregnancy_dialog_short_multiline_edit_height"
+                    android:background="@drawable/dark_border"
+                    android:layout_weight="8"
+                    android:padding="5dp"
+                    android:gravity="top|start"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/colorContrast"
+                    android:theme="@style/MyEditTextInDialogTheme"
+                    android:id="@+id/complications_value"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/warn_dialog_button_height"
+        android:weightSum="2"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/warn_dialog_button_height"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:gravity="center"
+            android:textSize="@dimen/warn_dialog_buttons_text_size"
+            android:textColor="@color/colorContrast"
+            android:id="@+id/cancel_button"
+            android:background="@color/colorAccent"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorContrast"/>
+
+        <TextView
+            android:id="@+id/save_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/warn_dialog_button_height"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="Save"
+            android:textColor="@color/colorContrast"
+            android:textSize="@dimen/warn_dialog_buttons_text_size" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

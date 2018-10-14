@@ -458,4 +458,26 @@
     <string name="size_marrow">Size of a marrow</string>
     <string name="size_pumpkin">Size of a pumpkin</string>
     <string name="size_watermelon">Size of a watermelon</string>
+
+    <string name="dialog_end_pregnancy_title">End pregnancy</string>
+    <string name="dialog_end_pregnancy_outcome">Pregnancy outcome</string>
+    <string name="dialog_end_pregnancy_outcome_abortion">Abortion</string>
+    <string name="dialog_end_pregnancy_outcome_miscarriage">Miscarriage</string>
+    <string name="dialog_end_pregnancy_outcome_live">Live birth</string>
+    <string name="dialog_end_pregnancy_outcome_still">Still birth</string>
+    <string name="dialog_end_pregnancy_comments">Comments</string>
+    <string name="dialog_end_pregnancy_baby_sex">Baby Sex</string>
+    <string name="dialog_end_pregnancy_baby_sex_m">Boy</string>
+    <string name="dialog_end_pregnancy_baby_sex_f">Girl</string>
+    <string name="dialog_end_pregnancy_baby_length">Baby length</string>
+    <string name="dialog_end_pregnancy_baby_length_metrix">cm</string>
+    <string name="dialog_end_pregnancy_baby_weight">Baby weight</string>
+    <string name="dialog_end_pregnancy_baby_weight_metrix">kg</string>
+    <string name="dialog_end_pregnancy_baby_name">Baby name</string>
+    <string name="dialog_end_pregnancy_hours_of_labour">Hours of labour</string>
+    <string name="dialog_end_pregnancy_hours">h</string>
+    <string name="dialog_end_pregnancy_complications">Complications / Features</string>
+    <string name="dialog_end_pregnancy_date">Date when the baby was born</string>
+    <string name="dialog_end_pregnancy_time">Time when the baby was born</string>
+
 </resources>
