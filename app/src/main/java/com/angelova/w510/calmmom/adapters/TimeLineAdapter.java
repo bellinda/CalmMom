@@ -130,7 +130,6 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
 
                     }
                 }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE));
-                datePickerDialog.getDatePicker().setMinDate(currentDate.getTimeInMillis());
                 datePickerDialog.show();
             }
         });
@@ -159,7 +158,6 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
 
                     }
                 }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE));
-                datePickerDialog.getDatePicker().setMinDate(currentDate.getTimeInMillis());
                 datePickerDialog.show();
             }
         });
