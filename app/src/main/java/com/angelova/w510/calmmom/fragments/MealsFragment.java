@@ -82,6 +82,8 @@ public class MealsFragment extends Fragment {
     private int wholeGrainsPercent =  0;
     private int beanFoodsPercent = 0;
 
+    private Date endedPregnancyDate = null;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -103,6 +105,15 @@ public class MealsFragment extends Fragment {
         int monthsGone = currentPregnancyWeek / 4;
         int monthsUpcoming = 10 - monthsGone;
 
+        if (mUser.getPregnancies().get(pregnancyIndex).getPregnancyOutcome() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            try {
+                endedPregnancyDate = sdf.parse(mUser.getPregnancies().get(pregnancyIndex).getPregnancyOutcome().getDate());
+            } catch (ParseException pe) {
+                pe.printStackTrace();
+            }
+        }
+
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.MONTH, monthsUpcoming);
         int lastDayOfEndMonth = endDate.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -119,29 +130,39 @@ public class MealsFragment extends Fragment {
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
-                int selectedPregnancyWeek = (int) (getDaysBetweenTwoDates(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation(), date.getTime()) / 7 + 1);
-                int daysOfSelectedWeek = (int) (getDaysBetweenTwoDates(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation(), date.getTime()) % 7 + 1);
-                mWeekDayView.setText(String.format(Locale.getDefault(), "%s %d, %s %d", getString(R.string.fragment_meals_week_title), selectedPregnancyWeek, getString(R.string.fragment_meals_day_title), daysOfSelectedWeek));
+                if (endedPregnancyDate == null || !date.getTime().after(endedPregnancyDate)) {
+                    mWeekDayView.setVisibility(View.VISIBLE);
+                    mArcProgress.setVisibility(View.VISIBLE);
 
-                getMealsForDate(date.getTime());
-                if (meals.size() > 0) {
-                    Collections.sort(meals);
-                    mMealsAdapter = new MealsTimelineAdapter(meals);
-                    mRecyclerView.setAdapter(mMealsAdapter);
+                    int selectedPregnancyWeek = (int) (getDaysBetweenTwoDates(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation(), date.getTime()) / 7 + 1);
+                    int daysOfSelectedWeek = (int) (getDaysBetweenTwoDates(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation(), date.getTime()) % 7 + 1);
+                    mWeekDayView.setText(String.format(Locale.getDefault(), "%s %d, %s %d", getString(R.string.fragment_meals_week_title), selectedPregnancyWeek, getString(R.string.fragment_meals_day_title), daysOfSelectedWeek));
 
-                    mNoDataView.setVisibility(View.GONE);
-                    mRecyclerView.setVisibility(View.VISIBLE);
+                    getMealsForDate(date.getTime());
+                    if (meals.size() > 0) {
+                        Collections.sort(meals);
+                        mMealsAdapter = new MealsTimelineAdapter(meals);
+                        mRecyclerView.setAdapter(mMealsAdapter);
+
+                        mNoDataView.setVisibility(View.GONE);
+                        mRecyclerView.setVisibility(View.VISIBLE);
+                    } else {
+                        mRecyclerView.setVisibility(View.GONE);
+                        mNoDataView.setVisibility(View.VISIBLE);
+                    }
+
+                    currentDayOfWeek = daysOfSelectedWeek;
+
+                    if (selectedPregnancyWeek != currentWeek) {
+                        currentWeek = selectedPregnancyWeek;
+
+                        calculateWeekPercentage(date, daysOfSelectedWeek);
+                    }
                 } else {
+                    mWeekDayView.setVisibility(View.GONE);
                     mRecyclerView.setVisibility(View.GONE);
+                    mArcProgress.setVisibility(View.GONE);
                     mNoDataView.setVisibility(View.VISIBLE);
-                }
-
-                currentDayOfWeek = daysOfSelectedWeek;
-
-                if (selectedPregnancyWeek != currentWeek) {
-                    currentWeek = selectedPregnancyWeek;
-
-                    calculateWeekPercentage(date, daysOfSelectedWeek);
                 }
             }
         });
@@ -197,6 +218,14 @@ public class MealsFragment extends Fragment {
         }
 
         calculateWeekPercentage(Calendar.getInstance(), daysOfCurrentWeek);
+
+        if (mUser.getPregnancies().get(pregnancyIndex).getPregnancyOutcome() != null) {
+            mAddBtn.setVisibility(View.GONE);
+            mWeekDayView.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.GONE);
+            mArcProgress.setVisibility(View.GONE);
+            mNoDataView.setVisibility(View.VISIBLE);
+        }
 
         return rootView;
     }

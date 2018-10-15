@@ -48,6 +48,8 @@ public class WaterFragment extends Fragment {
     private String selectedDate;
     private SimpleDateFormat sdf;
 
+    private Date endedPregnancyDate = null;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -69,6 +71,15 @@ public class WaterFragment extends Fragment {
         int monthsGone = currentPregnancyWeek / 4;
         int monthsUpcoming = 10 - monthsGone;
 
+        if (mUser.getPregnancies().get(pregnancyIndex).getPregnancyOutcome() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            try {
+                endedPregnancyDate = sdf.parse(mUser.getPregnancies().get(pregnancyIndex).getPregnancyOutcome().getDate());
+            } catch (ParseException pe) {
+                pe.printStackTrace();
+            }
+        }
+
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.MONTH, monthsUpcoming);
         int lastDayOfEndMonth = endDate.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -85,14 +96,21 @@ public class WaterFragment extends Fragment {
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
-                int selectedPregnancyWeek = (int) (getDaysBetweenTwoDates(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation(), date.getTime()) / 7 + 1);
-                int daysOfSelectedWeek = (int) (getDaysBetweenTwoDates(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation(), date.getTime()) % 7 + 1);
-                mWeekDayView.setText(String.format(Locale.getDefault(), "%s %d, %s %d", getString(R.string.fragment_meals_week_title), selectedPregnancyWeek, getString(R.string.fragment_meals_day_title), daysOfSelectedWeek));
+                if (endedPregnancyDate == null || !date.getTime().after(endedPregnancyDate)) {
+                    mWeekDayView.setVisibility(View.VISIBLE);
 
-                selectedDate = sdf.format(date.getTime());
+                    int selectedPregnancyWeek = (int) (getDaysBetweenTwoDates(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation(), date.getTime()) / 7 + 1);
+                    int daysOfSelectedWeek = (int) (getDaysBetweenTwoDates(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation(), date.getTime()) % 7 + 1);
+                    mWeekDayView.setText(String.format(Locale.getDefault(), "%s %d, %s %d", getString(R.string.fragment_meals_week_title), selectedPregnancyWeek, getString(R.string.fragment_meals_day_title), daysOfSelectedWeek));
 
-                currentGlassesCount = getWaterIntakeForDate(date);
-                renderDataAfterCountChange();
+                    selectedDate = sdf.format(date.getTime());
+
+                    currentGlassesCount = getWaterIntakeForDate(date);
+                    renderDataAfterCountChange();
+                } else {
+                    mWeekDayView.setVisibility(View.GONE);
+                }
+
             }
         });
 
@@ -129,6 +147,12 @@ public class WaterFragment extends Fragment {
         selectedDate = sdf.format(Calendar.getInstance().getTime());
         currentGlassesCount = getWaterIntakeForCurrentDay();
         renderDataAfterCountChange();
+
+        if (mUser.getPregnancies().get(pregnancyIndex).getPregnancyOutcome() != null) {
+            mAddBtn.setVisibility(View.GONE);
+            mRemoveBtn.setVisibility(View.GONE);
+            mWeekDayView.setVisibility(View.GONE);
+        }
 
         return rootView;
     }
@@ -173,7 +197,9 @@ public class WaterFragment extends Fragment {
             SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
             //the selected date on opening the fragment is always the current date
             String date = sdf.format(Calendar.getInstance().getTime());
-            return mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(date);
+            if (mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(date) != null) {
+                return mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(date);
+            }
         }
         return 0;
     }
