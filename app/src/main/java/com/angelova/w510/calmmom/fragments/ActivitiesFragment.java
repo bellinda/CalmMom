@@ -204,6 +204,10 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
             }
         });
 
+        if (mUser.getPregnancies().get(pregnancyIndex).getPregnancyOutcome() != null) {
+            mAddBtn.setVisibility(View.GONE);
+        }
+
         return rootView;
     }
 

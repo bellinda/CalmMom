@@ -182,6 +182,10 @@ public class WeightFragment extends Fragment implements OnChartGestureListener, 
             }
         });
 
+        if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getPregnancyOutcome() != null) {
+            mAddDataBtn.setVisibility(View.GONE);
+        }
+
         return rootView;
     }
 

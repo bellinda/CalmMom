@@ -165,6 +165,10 @@ public class MedicinesFragment extends Fragment {
             }
         });
 
+        if (mUser.getPregnancies().get(pregnancyIndex).getPregnancyOutcome() != null) {
+            mAddTakenMedicineBtn.setVisibility(View.GONE);
+        }
+
         return rootView;
     }
 
