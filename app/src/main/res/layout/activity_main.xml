@@ -47,6 +47,81 @@
         android:textSize="@dimen/menu_date_text_size"
         android:id="@+id/current_date_view"/>
 
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.07"
+        android:id="@+id/left_start_button_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6"
+        android:id="@+id/right_start_button_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.18"
+        android:id="@+id/top_start_button_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.26"
+        android:id="@+id/bottom_start_button_guideline"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@id/left_start_button_guideline"
+        app:layout_constraintRight_toLeftOf="@id/right_start_button_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_start_button_guideline"
+        app:layout_constraintBottom_toTopOf="@id/bottom_start_button_guideline"
+        android:layout_gravity="center"
+        android:background="@drawable/border_only_button_thin"
+        android:text="@string/main_activity_start_btn"
+        android:textAllCaps="false"
+        android:textColor="@drawable/button_profile_text_color_dark"
+        android:textSize="18sp"
+        android:id="@+id/start_pregnancy_btn"
+        android:visibility="gone"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65"
+        android:id="@+id/left_image_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.26"
+        android:id="@+id/bottom_image_guideline"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@id/left_image_guideline"
+        app:layout_constraintRight_toLeftOf="@id/right_header_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_header_guideline"
+        app:layout_constraintBottom_toTopOf="@id/bottom_image_guideline"
+        android:id="@+id/pregnancy_image"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_logo"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"

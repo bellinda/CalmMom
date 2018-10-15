@@ -202,6 +202,9 @@
     <string name="main_activity_weeks">week</string>
     <string name="main_activity_size_text" formatted="false">Your baby is avg. %skg and %scm</string>
     <string name="main_activity_reloading_msg">Reloading data, please wait&#8230;</string>
+    <string name="main_activity_gave_birth" formatted="false">You gave birth on %s at %sh</string>
+    <string name="main_activity_baby_size" formatted="false">Your baby was %dcm and %skg</string>
+    <string name="main_activity_start_btn">Start pregnancy</string>
 
     <string name="dialog_add_examination_title">Add New Examination</string>
 

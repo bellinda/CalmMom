@@ -282,6 +282,7 @@ public class ProfileActivity extends AppCompatActivity {
                         mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).setExaminations(examinations);
 
                         updateUser();
+                        mEditor.putBoolean("shouldReload", true).commit();
                     }
                 });
                 dialog.show();

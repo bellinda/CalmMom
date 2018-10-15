@@ -202,6 +202,9 @@
     <string name="main_activity_weeks">седмица</string>
     <string name="main_activity_size_text" formatted="false">Вашето бебе е средно %sкг и %sсм</string>
     <string name="main_activity_reloading_msg">Обновяване, моля изчакайте&#8230;</string>
+    <string name="main_activity_gave_birth" formatted="false">Родихте на %s в %sч.</string>
+    <string name="main_activity_baby_size" formatted="false">Вашето бебе беше %dсм и %sкг</string>
+    <string name="main_activity_start_btn">Започни бременност</string>
 
     <string name="dialog_add_examination_title">Добавяне на преглед</string>
 

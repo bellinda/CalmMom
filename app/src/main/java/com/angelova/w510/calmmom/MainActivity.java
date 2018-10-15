@@ -12,19 +12,23 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.dialogs.LoadingDialog;
 import com.angelova.w510.calmmom.models.BabySize;
+import com.angelova.w510.calmmom.models.OutcomeType;
 import com.angelova.w510.calmmom.models.Pregnancy;
+import com.angelova.w510.calmmom.models.PregnancyOutcome;
 import com.angelova.w510.calmmom.models.Tip;
 import com.angelova.w510.calmmom.models.User;
 import com.angelova.w510.calmmom.models.UserActivity;
@@ -64,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView mSizeText;
     private LinearLayout mSizeImageLayout;
     private TextView mTooSmallSizeText;
+    private View mSeparatorView;
+    private Button mStartPregnancyBtn;
+    private LinearLayout mPregnancyImage;
 
     private FloatingActionButton mProfileBtn;
 
@@ -104,14 +111,22 @@ public class MainActivity extends AppCompatActivity {
         mCurrentPregnancyWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getFirstDayOfLastMenstruation()) / 7 + 1);
         mCurrentWeekView.setText(String.format("%d %s", mCurrentPregnancyWeek, getString(R.string.main_activity_weeks)));
 
-        getSizes();
         mBabySizeView = (TextView) findViewById(R.id.baby_size_view);
         mSizeImage = (ImageView) findViewById(R.id.size_image);
         mSizeText = (TextView) findViewById(R.id.size_text);
         mSizeImageLayout = (LinearLayout) findViewById(R.id.size_image_layout);
         mTooSmallSizeText = (TextView) findViewById(R.id.too_small_view);
+        mSeparatorView = findViewById(R.id.separator);
+        mStartPregnancyBtn = (Button) findViewById(R.id.start_pregnancy_btn);
+        mPregnancyImage = (LinearLayout) findViewById(R.id.pregnancy_image);
 
-        setImageAndTextBasedOnWeek();
+        if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getPregnancyOutcome() == null) {
+            getSizes();
+            setImageAndTextBasedOnWeek();
+        } else {
+            PregnancyOutcome outcome = mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getPregnancyOutcome();
+            loadOutcomeData(outcome);
+        }
 
         mExaminationsItem = (LinearLayout) findViewById(R.id.examinations_layout);
 
@@ -176,25 +191,28 @@ public class MainActivity extends AppCompatActivity {
             mEditor.remove("shouldReload").commit();
         }
 
-        if (hasNotDoneTips()) {
-            blinkTipsButton();
-        }
+        if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getPregnancyOutcome() == null) {
 
-        Pregnancy currentPregnancy = mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId());
-        Weight currentWeekWeight = getWeightByWeek(currentPregnancy, mCurrentPregnancyWeek);
-        Weight previousWeekWeight = getWeightByWeek(currentPregnancy, mCurrentPregnancyWeek - 5);
-        if (currentWeekWeight != null && previousWeekWeight != null) {
-            List<UserActivity> currentWeekActivities = currentPregnancy.getActivities().get(Integer.toString(mCurrentPregnancyWeek));
-            if ((currentWeekActivities == null || currentWeekActivities.size() == 0) && currentWeekWeight.getValue() - previousWeekWeight.getValue() > 0) {
-                if (!isNotEnoughActivitiesTipPresent()) {
-                    mUser.getCustomTips().add(new Tip(null, getString(R.string.custom_tip_not_enough_activities), getLocalizedResources(MainActivity.this, new Locale("bg")).getString(R.string.custom_tip_not_enough_activities), true, false));
-                    updateUser();
+            if (hasNotDoneTips()) {
+                blinkTipsButton();
+            }
+
+            Pregnancy currentPregnancy = mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId());
+            Weight currentWeekWeight = getWeightByWeek(currentPregnancy, mCurrentPregnancyWeek);
+            Weight previousWeekWeight = getWeightByWeek(currentPregnancy, mCurrentPregnancyWeek - 5);
+            if (currentWeekWeight != null && previousWeekWeight != null) {
+                List<UserActivity> currentWeekActivities = currentPregnancy.getActivities().get(Integer.toString(mCurrentPregnancyWeek));
+                if ((currentWeekActivities == null || currentWeekActivities.size() == 0) && currentWeekWeight.getValue() - previousWeekWeight.getValue() > 0) {
+                    if (!isNotEnoughActivitiesTipPresent()) {
+                        mUser.getCustomTips().add(new Tip(null, getString(R.string.custom_tip_not_enough_activities), getLocalizedResources(MainActivity.this, new Locale("bg")).getString(R.string.custom_tip_not_enough_activities), true, false));
+                        updateUser();
+                    }
+                } else {
+                    removeNotEnoughActivitiesTipIfPresent();
                 }
             } else {
                 removeNotEnoughActivitiesTipIfPresent();
             }
-        } else {
-            removeNotEnoughActivitiesTipIfPresent();
         }
     }
 
@@ -258,10 +276,59 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void reloadData() {
-        mCurrentPregnancyWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getFirstDayOfLastMenstruation()) / 7 + 1);
-        mCurrentWeekView.setText(String.format(Locale.getDefault(), "%d %s", mCurrentPregnancyWeek, getString(R.string.main_activity_weeks)));
-        getSizes();
-        setImageAndTextBasedOnWeek();
+        if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getPregnancyOutcome() == null) {
+            mCurrentPregnancyWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getFirstDayOfLastMenstruation()) / 7 + 1);
+            mCurrentWeekView.setText(String.format(Locale.getDefault(), "%d %s", mCurrentPregnancyWeek, getString(R.string.main_activity_weeks)));
+            getSizes();
+            setImageAndTextBasedOnWeek();
+        } else {
+            PregnancyOutcome outcome = mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getPregnancyOutcome();
+            loadOutcomeData(outcome);
+        }
+    }
+
+    private void loadOutcomeData(PregnancyOutcome outcome) {
+        if (outcome.getOutcomeType() == OutcomeType.LiveBirth) {
+            mSizeImageLayout.setVisibility(View.VISIBLE);
+            mSizeText.setVisibility(View.VISIBLE);
+            mTooSmallSizeText.setVisibility(View.GONE);
+            mCurrentDateView.setVisibility(View.GONE);
+            mStartPregnancyBtn.setVisibility(View.GONE);
+            mPregnancyImage.setVisibility(View.GONE);
+
+            mCurrentWeekView.setText(String.format(getString(R.string.main_activity_gave_birth), outcome.getDate(), outcome.getTime()));
+            mBabySizeView.setText(String.format(getString(R.string.main_activity_baby_size), outcome.getBabyLength(), outcome.getBabyWeight()));
+
+            if (outcome.getBabySex().equals("m")) {
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_baby_boy));
+            } else {
+                mSizeImage.setBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_baby_girl));
+            }
+            mSizeText.setText(outcome.getBabyName());
+            mSizeText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        } else {
+            mSizeImageLayout.setVisibility(View.GONE);
+            mSizeText.setVisibility(View.GONE);
+            mTooSmallSizeText.setVisibility(View.GONE);
+            mCurrentDateView.setVisibility(View.VISIBLE);
+            mCurrentWeekView.setVisibility(View.GONE);
+            mSeparatorView.setVisibility(View.GONE);
+            mBabySizeView.setVisibility(View.GONE);
+            mSizeImage.setVisibility(View.GONE);
+            mStartPregnancyBtn.setVisibility(View.VISIBLE);
+            mPregnancyImage.setVisibility(View.VISIBLE);
+
+            mStartPregnancyBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }
+
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
     }
 
     private void updateUser() {
