@@ -278,7 +278,7 @@
     <string name="fragment_kicks_felt_baby_no">Не</string>
     <string name="fragment_kicks_felt_baby_title">Движения на бебето</string>
     <string name="fragment_kicks_felt_baby_congrats">Поздравления! Справяте се отлично, продължавайте в същия дух!</string>
-    <string name="fragment_kicks_felt_baby_tip">Не се притеснявайте! Ако в продължение на целия ден не усетите детето да мърда, най-добре се свържете с Вашия лекар..</string>
+    <string name="fragment_kicks_felt_baby_tip">Запазете спокойствие! Ако в продължение на целия ден не усетите детето да мърда, най-добре се свържете с Вашия лекар..</string>
 
     <string name="fragment_contractions_start_timer">Пусни таймера</string>
     <string name="fragment_contractions_stop_timer">Спри таймера</string>

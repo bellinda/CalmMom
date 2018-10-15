@@ -187,6 +187,10 @@ public class ContractionsFragment extends Fragment {
         mAdapter = new ContractionsAdapter(mDataList, getActivity());
         mRecyclerView.setAdapter(mAdapter);
 
+        if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getPregnancyOutcome() != null) {
+            mStartTimerBtn.setVisibility(View.GONE);
+        }
+
         return rootView;
     }
 

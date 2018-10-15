@@ -339,6 +339,21 @@
         android:textColor="@drawable/button_text_color_dark_to_white"
         android:id="@+id/end_pregnancy_btn"/>
 
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@id/left_end_button_guideline"
+        app:layout_constraintRight_toLeftOf="@id/right_end_button_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_bottom_buttons_guideline"
+        app:layout_constraintBottom_toTopOf="@id/bottom_bottom_buttons_guideline"
+        android:layout_gravity="center"
+        android:background="@drawable/border_only_button_dark_thin"
+        android:text="@string/activity_profile_start_pregnancy_btn"
+        android:textAllCaps="false"
+        android:textColor="@drawable/button_text_color_dark_to_white"
+        android:id="@+id/start_pregnancy_btn"
+        android:visibility="gone"/>
+
     <android.support.constraint.Guideline
         android:layout_width="1dp"
         android:layout_height="1dp"

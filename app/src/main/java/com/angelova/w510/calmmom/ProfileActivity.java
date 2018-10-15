@@ -77,11 +77,13 @@ public class ProfileActivity extends AppCompatActivity {
     private Button mChoosePregnancyBtn;
     private Button mForumBtn;
     private LinearLayout mDDLayout;
+    private LinearLayout mEstimatedDDLayout;
     private TextView mDeliveryDate;
     private RadioButton mEnLanguage;
     private RadioButton mBgLanguage;
     private Button mLogoutBtn;
     private Button mEndPregnancyBtn;
+    private Button mStartPregnancyBtn;
 
     private User mUser;
     private String mUserEmail;
@@ -129,10 +131,12 @@ public class ProfileActivity extends AppCompatActivity {
         mForumBtn = (Button) findViewById(R.id.forum_btn);
         mDDLayout = (LinearLayout) findViewById(R.id.dd_view);
         mDeliveryDate = (TextView) findViewById(R.id.delivery_date);
+        mEstimatedDDLayout = (LinearLayout) findViewById(R.id.delivery_date_layout);
         mEnLanguage = (RadioButton) findViewById(R.id.lang_en);
         mBgLanguage = (RadioButton) findViewById(R.id.lang_bg);
         mLogoutBtn = (Button) findViewById(R.id.log_out_btn);
         mEndPregnancyBtn = (Button) findViewById(R.id.end_pregnancy_btn);
+        mStartPregnancyBtn = (Button) findViewById(R.id.start_pregnancy_btn);
 
         if (mUser.getProfileImage() != null && !mUser.getProfileImage().isEmpty()) {
             mAddImageText.setVisibility(View.GONE);
@@ -288,6 +292,19 @@ public class ProfileActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+
+        mStartPregnancyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: add logic for starting a new pregnancy
+            }
+        });
+
+        if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getPregnancyOutcome() != null) {
+            mEstimatedDDLayout.setVisibility(View.GONE);
+            mEndPregnancyBtn.setVisibility(View.GONE);
+            mStartPregnancyBtn.setVisibility(View.VISIBLE);
+        }
     }
 
     CompoundButton.OnCheckedChangeListener mEnCheckListener = new CompoundButton.OnCheckedChangeListener() {

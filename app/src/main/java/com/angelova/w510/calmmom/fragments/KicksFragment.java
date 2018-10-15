@@ -161,8 +161,12 @@ public class KicksFragment extends Fragment {
             }
         });
 
-        if (!isThereAnyDataForToday()) {
-            showDialogIfUserFeltTheBabyToday();
+        if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getPregnancyOutcome() != null) {
+            mCountBtn.setVisibility(View.GONE);
+        } else {
+            if (!isThereAnyDataForToday()) {
+                showDialogIfUserFeltTheBabyToday();
+            }
         }
 
         return rootView;
