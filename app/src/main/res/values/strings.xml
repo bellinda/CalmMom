@@ -488,11 +488,36 @@
     <string name="dialog_end_pregnancy_complications">Complications / Features</string>
     <string name="dialog_end_pregnancy_date">Date</string>
     <string name="dialog_end_pregnancy_time">Time</string>
+    <string name="dialog_end_pregnancy_abortion_purpose">Purpose</string>
+    <string name="dialog_end_pregnancy_abortion_purpose_med">On medical evidence</string>
+    <string name="dialog_end_pregnancy_abortion_purpose_des">As desired</string>
     <string name="dialog_end_pregnancy_missing_data_title">Warning</string>
     <string name="dialog_end_pregnancy_no_outcome">Please select the pregnancy outcome</string>
     <string name="dialog_end_pregnancy_no_sex">Please select the sex of the baby</string>
     <string name="dialog_end_pregnancy_no_weight">Please enter the weight of the baby</string>
     <string name="dialog_end_pregnancy_no_length">Please enter the length of the baby</string>
     <string name="dialog_end_pregnancy_no_name">Please enter the name of the baby</string>
+    <string name="dialog_end_pregnancy_no_abortion_purpose">Please enter the purpose of the abortion</string>
+
+    <string name="dialog_start_pregnancy_title">Start pregnancy</string>
+    <string name="dialog_start_pregnancy_weight">Current weight</string>
+    <string name="dialog_start_pregnancy_weight_metrix">kg</string>
+    <string name="dialog_start_pregnancy_last_menstruation">First day of last\nmenstruation</string>
+    <string name="dialog_start_pregnancy_regular_menstruation">Regular menstruation?</string>
+    <string name="dialog_start_pregnancy_menstruation_length">Menstruation cycle length</string>
+    <string name="dialog_start_pregnancy_menstruation_duration">Duration of menstruation</string>
+    <string name="dialog_start_pregnancy_days_label">days</string>
+    <string name="dialog_start_pregnancy_unwanted">Unwanted pregnancy</string>
+    <string name="dialog_start_pregnancy_blood_incompatibility">Blood group incompatibility between parents</string>
+    <string name="dialog_start_pregnancy_risk_factor_title">Risk factors</string>
+    <string name="dialog_start_pregnancy_risk_factor_smoke">Smoking</string>
+    <string name="dialog_start_pregnancy_risk_factor_alcohol">Drinking Alcohol</string>
+    <string name="dialog_start_pregnancy_risk_factor_overweight">Overweight</string>
+    <string name="dialog_start_pregnancy_risk_factor_age">Age</string>
+    <string name="dialog_start_pregnancy_risk_factor_under_feeding">Underfeeding</string>
+    <string name="dialog_start_pregnancy_risk_factor_food_allergy">Food Allergy</string>
+    <string name="dialog_start_pregnancy_risk_factor_med_allergy">Medicines Allergy</string>
+    <string name="dialog_start_pregnancy_not_all_data">Please enter all the data before submitting</string>
+    <string name="dialog_start_pregnancy_not_all_data_title">Warning</string>
 
 </resources>

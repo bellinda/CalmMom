@@ -137,6 +137,50 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
+        android:paddingBottom="10dp"
+        android:id="@+id/abortion_purpose_layout"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/dialog_end_pregnancy_abortion_purpose"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="@color/colorContrast"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/med_purpose"
+                android:text="@string/dialog_end_pregnancy_abortion_purpose_med"
+                android:theme="@style/DarkRadioButton"
+                android:textColor="@color/colorContrast"/>
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/desired"
+                android:text="@string/dialog_end_pregnancy_abortion_purpose_des"
+                android:theme="@style/DarkRadioButton"
+                android:textColor="@color/colorContrast"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:id="@+id/comments_layout"
         android:visibility="gone">

@@ -20,6 +20,7 @@ import android.widget.TimePicker;
 
 import com.angelova.w510.calmmom.ProfileActivity;
 import com.angelova.w510.calmmom.R;
+import com.angelova.w510.calmmom.models.AbortionPurpose;
 import com.angelova.w510.calmmom.models.OutcomeType;
 import com.angelova.w510.calmmom.models.PregnancyOutcome;
 
@@ -49,6 +50,9 @@ public class EndPregnancyDialog extends Dialog {
     private EditText mBabyLengthInput;
     private EditText mHoursInput;
     private EditText mComplicationsInput;
+    private LinearLayout mAbortionPurposeLayout;
+    private AppCompatRadioButton mDesiredAbortion;
+    private AppCompatRadioButton mMedPurposeAbortion;
     private TextView mCancelBtn;
     private TextView mSaveBtn;
 
@@ -85,6 +89,9 @@ public class EndPregnancyDialog extends Dialog {
         mBabyWeightInput = (EditText) findViewById(R.id.baby_weight_input);
         mHoursInput = (EditText) findViewById(R.id.hours_of_labour_input);
         mComplicationsInput = (EditText) findViewById(R.id.complications_value);
+        mAbortionPurposeLayout = (LinearLayout) findViewById(R.id.abortion_purpose_layout);
+        mDesiredAbortion = (AppCompatRadioButton) findViewById(R.id.desired);
+        mMedPurposeAbortion = (AppCompatRadioButton) findViewById(R.id.med_purpose);
         mCancelBtn = (TextView) findViewById(R.id.cancel_button);
         mSaveBtn = (TextView) findViewById(R.id.save_button);
 
@@ -109,6 +116,9 @@ public class EndPregnancyDialog extends Dialog {
                     mCommentsLayout.setVisibility(View.VISIBLE);
                     mOutcomeDateLayout.setVisibility(View.VISIBLE);
                     mLiveBirthDataView.setVisibility(View.GONE);
+                    if (position == 1) {
+                        mAbortionPurposeLayout.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     mCommentsLayout.setVisibility(View.GONE);
                     mOutcomeDateLayout.setVisibility(View.GONE);
@@ -192,13 +202,25 @@ public class EndPregnancyDialog extends Dialog {
                     PregnancyOutcome outcome = new PregnancyOutcome();
                     outcome.setOutcomeType(OutcomeType.fromValue(outcomeType - 1));
                     if (outcomeType != 3) {
-                        if (mCommentsView.getText() != null && !mCommentsView.getText().toString().isEmpty()) {
-                            outcome.setComments(mCommentsView.getText().toString());
-                        }
-                        outcome.setDate(mOutcomeDateView.getText().toString());
+                        if (mAbortionPurposeLayout.getVisibility() == View.VISIBLE && !mDesiredAbortion.isChecked() && !mMedPurposeAbortion.isChecked()) {
+                            ((ProfileActivity) activity).showAlertDialogNow(activity.getString(R.string.dialog_end_pregnancy_no_abortion_purpose), activity.getString(R.string.dialog_end_pregnancy_missing_data_title));
+                        } else {
+                            if (mCommentsView.getText() != null && !mCommentsView.getText().toString().isEmpty()) {
+                                outcome.setComments(mCommentsView.getText().toString());
+                            }
+                            outcome.setDate(mOutcomeDateView.getText().toString());
+                            if (outcomeType == 1) {
 
-                        listener.onSave(outcome);
-                        dismiss();
+                                if (mDesiredAbortion.isChecked()) {
+                                    outcome.setAbortionPurpose(AbortionPurpose.Desired);
+                                } else {
+                                    outcome.setAbortionPurpose(AbortionPurpose.MedicalEvidence);
+                                }
+                            }
+
+                            listener.onSave(outcome);
+                            dismiss();
+                        }
                     } else  {
                         if (!mBoyRadioButton.isChecked() && !mGirlRadioButton.isChecked()) {
                             ((ProfileActivity) activity).showAlertDialogNow(activity.getString(R.string.dialog_end_pregnancy_no_sex), activity.getString(R.string.dialog_end_pregnancy_missing_data_title));

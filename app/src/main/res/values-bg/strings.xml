@@ -485,10 +485,35 @@
     <string name="dialog_end_pregnancy_complications">Усложнения / Особености</string>
     <string name="dialog_end_pregnancy_date">Дата</string>
     <string name="dialog_end_pregnancy_time">Час</string>
+    <string name="dialog_end_pregnancy_abortion_purpose">Причина</string>
+    <string name="dialog_end_pregnancy_abortion_purpose_med">По мед. показания</string>
+    <string name="dialog_end_pregnancy_abortion_purpose_des">По желание</string>
     <string name="dialog_end_pregnancy_missing_data_title">Внимание</string>
     <string name="dialog_end_pregnancy_no_outcome">Моля изберете вида на изхода от бременността</string>
     <string name="dialog_end_pregnancy_no_sex">Моля изберете какъв е полът на бебето</string>
     <string name="dialog_end_pregnancy_no_weight">Моля въведете теглото на бебето</string>
     <string name="dialog_end_pregnancy_no_length">Моля въведете дължината на бебето</string>
     <string name="dialog_end_pregnancy_no_name">Моля въведете името на бебето</string>
+    <string name="dialog_end_pregnancy_no_abortion_purpose">Моля въведете причината за аборта</string>
+
+    <string name="dialog_start_pregnancy_title">Начало на бременност</string>
+    <string name="dialog_start_pregnancy_weight">Текущо тегло</string>
+    <string name="dialog_start_pregnancy_weight_metrix">кг</string>
+    <string name="dialog_start_pregnancy_last_menstruation">Първи ден на последната\nменструация</string>
+    <string name="dialog_start_pregnancy_regular_menstruation">Редовна менструация?</string>
+    <string name="dialog_start_pregnancy_menstruation_length">Периодичност на меструацията</string>
+    <string name="dialog_start_pregnancy_menstruation_duration">Продължителност на менструцията</string>
+    <string name="dialog_start_pregnancy_days_label">дни</string>
+    <string name="dialog_start_pregnancy_unwanted">Нежелана бременност</string>
+    <string name="dialog_start_pregnancy_blood_incompatibility">Кръвногрупова несъвместимост между родителите</string>
+    <string name="dialog_start_pregnancy_risk_factor_title">Рискови фактори</string>
+    <string name="dialog_start_pregnancy_risk_factor_smoke">Тютюнопушене</string>
+    <string name="dialog_start_pregnancy_risk_factor_alcohol">Злоупотреба с алкохол</string>
+    <string name="dialog_start_pregnancy_risk_factor_overweight">Наднормено тегло</string>
+    <string name="dialog_start_pregnancy_risk_factor_age">Възраст</string>
+    <string name="dialog_start_pregnancy_risk_factor_under_feeding">Недохранване</string>
+    <string name="dialog_start_pregnancy_risk_factor_food_allergy">Алергия към храни</string>
+    <string name="dialog_start_pregnancy_risk_factor_med_allergy">Алергия към лекарства</string>
+    <string name="dialog_start_pregnancy_not_all_data">Моля въведете цялата информация преди да запазите</string>
+    <string name="dialog_start_pregnancy_not_all_data_title">Внимание</string>
 </resources>

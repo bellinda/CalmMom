@@ -14,6 +14,7 @@ public class PregnancyOutcome implements Serializable {
     private String complications;
     private int hoursOfLabour;
     private String comments;
+    private AbortionPurpose abortionPurpose;
 
     public PregnancyOutcome() {}
 
@@ -95,5 +96,13 @@ public class PregnancyOutcome implements Serializable {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public AbortionPurpose getAbortionPurpose() {
+        return abortionPurpose;
+    }
+
+    public void setAbortionPurpose(AbortionPurpose abortionPurpose) {
+        this.abortionPurpose = abortionPurpose;
     }
 }

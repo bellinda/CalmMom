@@ -33,12 +33,18 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.dialogs.EndPregnancyDialog;
+import com.angelova.w510.calmmom.dialogs.StartPregnancyDialog;
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
+import com.angelova.w510.calmmom.models.AbortionPurpose;
 import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationStatus;
 import com.angelova.w510.calmmom.models.Measurement;
+import com.angelova.w510.calmmom.models.OutcomeType;
+import com.angelova.w510.calmmom.models.Pregnancy;
 import com.angelova.w510.calmmom.models.PregnancyOutcome;
+import com.angelova.w510.calmmom.models.RiskFactor;
 import com.angelova.w510.calmmom.models.Test;
+import com.angelova.w510.calmmom.models.Tip;
 import com.angelova.w510.calmmom.models.User;
 import com.angelova.w510.calmmom.models.UserActivity;
 import com.bumptech.glide.Glide;
@@ -265,6 +271,20 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onSave(PregnancyOutcome outcome) {
                         mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).setPregnancyOutcome(outcome);
+                        if (outcome.getOutcomeType() == OutcomeType.Abortion) {
+                            if (outcome.getAbortionPurpose() == AbortionPurpose.Desired) {
+                                mUser.setDesiredAbortions(mUser.getDesiredAbortions() + 1);
+                            } else {
+                                mUser.setAbortionsOnMedEvidence(mUser.getAbortionsOnMedEvidence() + 1);
+                            }
+                        } else if (outcome.getOutcomeType() == OutcomeType.Miscarriage) {
+                            mUser.setMiscarriages(mUser.getMiscarriages() + 1);
+                        } else if (outcome.getOutcomeType() == OutcomeType.StillBirth) {
+                            mUser.setStillbornKids(mUser.getStillbornKids() + 1);
+                        } else {
+                            mUser.setLiveBornKids(mUser.getLiveBornKids() + 1);
+                            mUser.setLastDeliveryDate(outcome.getDate());
+                        }
 
                         List<Examination> examinations = mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getExaminations();
                         for(int i = examinations.size() - 1; i >= 0; i--) {
@@ -285,6 +305,8 @@ public class ProfileActivity extends AppCompatActivity {
                         examinations.add(fortyDaysAfterBirthEx);
                         mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).setExaminations(examinations);
 
+                        mUser.setCustomTips(new ArrayList<Tip>());
+
                         updateUser();
                         mEditor.putBoolean("shouldReload", true).commit();
                     }
@@ -296,7 +318,57 @@ public class ProfileActivity extends AppCompatActivity {
         mStartPregnancyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: add logic for starting a new pregnancy
+                StartPregnancyDialog dialog = new StartPregnancyDialog(ProfileActivity.this, mUser, new StartPregnancyDialog.DialogClickListener() {
+                    @Override
+                    public void onSave(Pregnancy pregnancy, double currentWeight, boolean isRegular, int menLength, int menDuration, List<RiskFactor> riskFactors, List<Tip> customTips) {
+                        mUser.setCurrentWeight(currentWeight);
+                        mUser.setRegularMenstruation(isRegular);
+                        mUser.setLengthOfMenstruation(menLength);
+                        mUser.setDurationOfMenstruation(menDuration);
+                        mUser.setRiskFactors(riskFactors);
+                        mUser.getPregnancies().add(pregnancy);
+                        mUser.setPregnancyCount(mUser.getPregnancyCount() + 1);
+                        mUser.setPregnancyConsecutiveId(mUser.getPregnancyConsecutiveId() + 1);
+                        if (mUser.getStillbornKids() > 0 || mUser.getDesiredAbortions() > 0 || mUser.getAbortionsOnMedEvidence() > 0 || mUser.getMiscarriages() > 0 || mUser.getComplicationsOtherPregnancies() != null) {
+                            customTips.add(new Tip(null, getString(R.string.custom_tip_pregnancies_history), getLocalizedResources(ProfileActivity.this, new Locale("bg")).getString(R.string.custom_tip_pregnancies_history), true, false));
+                        }
+                        if (mUser.getFamilyHistories() != null) {
+                            customTips.add(new Tip(null, getString(R.string.custom_tip_family_history), getLocalizedResources(ProfileActivity.this, new Locale("bg")).getString(R.string.custom_tip_family_history), true, false));
+                        }
+                        mUser.setCustomTips(customTips);
+
+                        updateUser();
+                        mEditor.putBoolean("shouldReload", true).commit();
+
+                        try {
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+
+                            if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getEstimatedDeliveryDate() == null || mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getEstimatedDeliveryDate().isEmpty()) {
+                                Date firstDayOfLM = sdf.parse(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getFirstDayOfLastMenstruation());
+                                Date deliveryDate = new Date(firstDayOfLM.getTime() + 280 * 24 * 3600 * 1000l);
+                                mDeliveryDate.setText(sdf.format(deliveryDate));
+                                mExpectedDeliveryDate.setTime(deliveryDate);
+                            } else {
+                                mDeliveryDate.setText(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getEstimatedDeliveryDate());
+                                mExpectedDeliveryDate.setTime(sdf.parse(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getEstimatedDeliveryDate()));
+                            }
+                        } catch (ParseException pe) {
+                            pe.printStackTrace();
+                        }
+
+                        int pregnanciesCount = mUser.getPregnancyCount();
+                        if (pregnanciesCount == 2) {
+                            mPregnancyIndex.setText(getString(R.string.activity_profile_second_pregnancy));
+                        } else {
+                            mPregnancyIndex.setText(String.format(Locale.getDefault(), getString(R.string.activity_profile_other_pregnancy), pregnanciesCount));
+                        }
+
+                        mEstimatedDDLayout.setVisibility(View.VISIBLE);
+                        mEndPregnancyBtn.setVisibility(View.VISIBLE);
+                        mStartPregnancyBtn.setVisibility(View.GONE);
+                    }
+                });
+                dialog.show();
             }
         });
 
@@ -453,6 +525,15 @@ public class ProfileActivity extends AppCompatActivity {
         mEditor.putBoolean("shouldUpdateLanguage", true).commit();
         finish();
         startActivity(getIntent());
+    }
+
+    @NonNull
+    Resources getLocalizedResources(Context context, Locale desiredLocale) {
+        Configuration conf = context.getResources().getConfiguration();
+        conf = new Configuration(conf);
+        conf.setLocale(desiredLocale);
+        Context localizedContext = context.createConfigurationContext(conf);
+        return localizedContext.getResources();
     }
 
     public void showAlertDialogNow(String message, String title) {

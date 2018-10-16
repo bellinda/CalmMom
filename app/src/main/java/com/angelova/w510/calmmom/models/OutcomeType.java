@@ -19,9 +19,9 @@ public enum OutcomeType {
     }
 
     public static OutcomeType fromValue(int value) {
-        for (OutcomeType riskFactor : OutcomeType.values()) {
-            if (riskFactor.getType() == value) {
-                return riskFactor;
+        for (OutcomeType type : OutcomeType.values()) {
+            if (type.getType() == value) {
+                return type;
             }
         }
         return null;
