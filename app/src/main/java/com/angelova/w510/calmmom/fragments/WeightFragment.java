@@ -371,8 +371,8 @@ public class WeightFragment extends Fragment implements OnChartGestureListener, 
 
         boolean isTheWeekPresent = false;
         for (Entry entry : userValues) {
-            if (entry.getX() == weight.getWeek()) {
-                updatedUserValues.add(new Entry(weight.getWeek(), (float) weight.getValue()));
+            if (entry.getX() * 5 == weight.getWeek()) {
+                updatedUserValues.add(new Entry(entry.getX(), (float) weight.getValue()));
                 isTheWeekPresent = true;
             } else {
                 updatedUserValues.add(entry);
