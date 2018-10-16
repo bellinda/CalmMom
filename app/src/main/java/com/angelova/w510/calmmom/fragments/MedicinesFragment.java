@@ -251,8 +251,10 @@ public class MedicinesFragment extends Fragment {
 
     private List<String> getAllowedMedicineTitles() {
         List<String> allowedMedicineTitles = new ArrayList<>();
-        for (Medicine medicine : mUser.getPregnancies().get(pregnancyIndex).getAllowedMedicinesByDoctor()) {
-            allowedMedicineTitles.add(medicine.getTitle());
+        if (mUser.getPregnancies().get(pregnancyIndex).getAllowedMedicinesByDoctor() != null) {
+            for (Medicine medicine : mUser.getPregnancies().get(pregnancyIndex).getAllowedMedicinesByDoctor()) {
+                allowedMedicineTitles.add(medicine.getTitle());
+            }
         }
         return allowedMedicineTitles;
     }
