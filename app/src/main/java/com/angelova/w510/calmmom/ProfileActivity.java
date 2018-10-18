@@ -199,8 +199,8 @@ public class ProfileActivity extends AppCompatActivity {
         mChoosePregnancyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).isFirstPregnancy()) {
-                    WarnDialog dialog = new WarnDialog(ProfileActivity.this, "Warning", "This is your first pregnancy, so there is no other information available to be shown", new WarnDialog.DialogClickListener() {
+                if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).isFirstPregnancy() || mUser.getPregnancies().size() == 1) {
+                    WarnDialog dialog = new WarnDialog(ProfileActivity.this, getString(R.string.dialog_list_pregnancies_only_one_title), getString(R.string.dialog_list_pregnancies_only_one), new WarnDialog.DialogClickListener() {
                         @Override
                         public void onClick() {
 

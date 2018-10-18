@@ -526,5 +526,7 @@
     <string name="dialog_list_pregnancies_cancel_btn">Cancel</string>
     <string name="dialog_list_pregnancies_same_pregnancy">The selected pregnancy is the one that is currently loaded</string>
     <string name="dialog_list_pregnancies_same_pregnancy_title">Warning</string>
+    <string name="dialog_list_pregnancies_only_one">This is your first pregnancy in the app, so there is no other information available to be shown</string>
+    <string name="dialog_list_pregnancies_only_one_title">Warning</string>
 
 </resources>

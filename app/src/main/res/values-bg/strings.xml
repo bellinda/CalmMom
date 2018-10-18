@@ -523,4 +523,6 @@
     <string name="dialog_list_pregnancies_cancel_btn">Затвори</string>
     <string name="dialog_list_pregnancies_same_pregnancy">Избраната бременност е тази, която е заредена в момента</string>
     <string name="dialog_list_pregnancies_same_pregnancy_title">Внимание</string>
+    <string name="dialog_list_pregnancies_only_one">Това е първата Ви бременност в приложението. Няма друга информация, която да може да бъде показана.</string>
+    <string name="dialog_list_pregnancies_only_one_title">Внимание</string>
 </resources>
