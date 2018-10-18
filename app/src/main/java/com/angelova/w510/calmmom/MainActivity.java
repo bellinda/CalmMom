@@ -315,6 +315,7 @@ public class MainActivity extends AppCompatActivity {
         if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getPregnancyOutcome() == null) {
             mCurrentPregnancyWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getFirstDayOfLastMenstruation()) / 7 + 1);
             mCurrentWeekView.setText(String.format(Locale.getDefault(), "%d %s", mCurrentPregnancyWeek, getString(R.string.main_activity_weeks)));
+            mCurrentDateView.setVisibility(View.VISIBLE);
             getSizes();
             setImageAndTextBasedOnWeek();
             if (mStartPregnancyBtn.getVisibility() == View.VISIBLE) {

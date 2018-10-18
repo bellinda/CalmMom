@@ -15,13 +15,11 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -33,6 +31,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.angelova.w510.calmmom.dialogs.EndPregnancyDialog;
+import com.angelova.w510.calmmom.dialogs.ListPregnanciesDialog;
 import com.angelova.w510.calmmom.dialogs.StartPregnancyDialog;
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.models.AbortionPurpose;
@@ -46,7 +45,6 @@ import com.angelova.w510.calmmom.models.RiskFactor;
 import com.angelova.w510.calmmom.models.Test;
 import com.angelova.w510.calmmom.models.Tip;
 import com.angelova.w510.calmmom.models.User;
-import com.angelova.w510.calmmom.models.UserActivity;
 import com.bumptech.glide.Glide;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.Continuation;
@@ -103,6 +101,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     final Calendar mExpectedDeliveryDate = Calendar.getInstance();
 
+    private ListPregnanciesDialog choosePregnancyDialog;
+
     SharedPreferences mPrefs;
     SharedPreferences.Editor mEditor;
 
@@ -149,6 +149,24 @@ public class ProfileActivity extends AppCompatActivity {
             Glide.with(getApplicationContext()).load(mUser.getProfileImage()).into(mImageView);
         }
 
+        choosePregnancyDialog = new ListPregnanciesDialog(ProfileActivity.this, mUser.getPregnancies(), new ListPregnanciesDialog.DialogClickListener() {
+            @Override
+            public void onItemClicked(Pregnancy pregnancy) {
+                int pregnancyIndex = mUser.getPregnancies().indexOf(pregnancy);
+                if (pregnancyIndex == mUser.getPregnancyConsecutiveId()) {
+                    showAlertDialogNow(getString(R.string.dialog_list_pregnancies_same_pregnancy), getString(R.string.dialog_list_pregnancies_same_pregnancy_title));
+                } else {
+                    mUser.setPregnancyConsecutiveId(pregnancyIndex);
+                    updateUser();
+                    mEditor.putBoolean("shouldReload", true);
+                    mEditor.apply();
+                    choosePregnancyDialog.dismiss();
+                    //showAlertDialogNow("The pregnancy is switched. Go to the main menu to observe the data for it.", "Warning");
+                    onBackPressed();
+                }
+            }
+        });
+
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,11 +184,15 @@ public class ProfileActivity extends AppCompatActivity {
         if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).isFirstPregnancy()) {
             mPregnancyIndex.setText(getString(R.string.activity_profile_first_pregnancy));
         } else {
-            int pregnanciesCount = mUser.getPregnancyCount();
-            if (pregnanciesCount == 2) {
-                mPregnancyIndex.setText(getString(R.string.activity_profile_second_pregnancy));
+            if (mUser.getPregnancyConsecutiveId() != mUser.getPregnancies().size() - 1) {
+                mPregnancyIndex.setVisibility(View.GONE);
             } else {
-                mPregnancyIndex.setText(String.format(Locale.getDefault(), getString(R.string.activity_profile_other_pregnancy), pregnanciesCount));
+                int pregnanciesCount = mUser.getPregnancyCount();
+                if (pregnanciesCount == 2) {
+                    mPregnancyIndex.setText(getString(R.string.activity_profile_second_pregnancy));
+                } else {
+                    mPregnancyIndex.setText(String.format(Locale.getDefault(), getString(R.string.activity_profile_other_pregnancy), pregnanciesCount));
+                }
             }
         }
 
@@ -186,7 +208,7 @@ public class ProfileActivity extends AppCompatActivity {
                     });
                     dialog.show();
                 } else {
-                    //TODO: add logic for switching between pregnancies (1st - dialog to select to which pregnancy they want to switch)
+                    choosePregnancyDialog.show();
                 }
             }
         });

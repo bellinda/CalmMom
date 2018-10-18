@@ -520,4 +520,11 @@
     <string name="dialog_start_pregnancy_not_all_data">Please enter all the data before submitting</string>
     <string name="dialog_start_pregnancy_not_all_data_title">Warning</string>
 
+    <string name="dialog_list_pregnancies_item_text">Pregnancy finished on</string>
+    <string name="dialog_list_pregnancies_estimated">Exprected delivery date -</string>
+    <string name="dialog_list_pregnancies_title">Available pregnancies in the app</string>
+    <string name="dialog_list_pregnancies_cancel_btn">Cancel</string>
+    <string name="dialog_list_pregnancies_same_pregnancy">The selected pregnancy is the one that is currently loaded</string>
+    <string name="dialog_list_pregnancies_same_pregnancy_title">Warning</string>
+
 </resources>

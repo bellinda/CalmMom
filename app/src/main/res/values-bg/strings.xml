@@ -516,4 +516,11 @@
     <string name="dialog_start_pregnancy_risk_factor_med_allergy">Алергия към лекарства</string>
     <string name="dialog_start_pregnancy_not_all_data">Моля въведете цялата информация преди да запазите</string>
     <string name="dialog_start_pregnancy_not_all_data_title">Внимание</string>
+
+    <string name="dialog_list_pregnancies_item_text">Бременност, завършила на</string>
+    <string name="dialog_list_pregnancies_estimated">Очаквана дата на раждане -</string>
+    <string name="dialog_list_pregnancies_title">Налични бременности в приложението</string>
+    <string name="dialog_list_pregnancies_cancel_btn">Затвори</string>
+    <string name="dialog_list_pregnancies_same_pregnancy">Избраната бременност е тази, която е заредена в момента</string>
+    <string name="dialog_list_pregnancies_same_pregnancy_title">Внимание</string>
 </resources>
