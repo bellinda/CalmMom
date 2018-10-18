@@ -128,7 +128,7 @@
         app:layout_constraintTop_toBottomOf="@id/current_date_view"
         app:layout_constraintLeft_toRightOf="@id/left_header_guideline"
         app:layout_constraintRight_toLeftOf="@id/middle_header_guideline"
-        android:text="36 weeks"
+        tools:text="36 weeks"
         android:textColor="@color/colorAccent"
         android:gravity="center"
         android:textSize="@dimen/menu_weeks_text_size"
@@ -254,7 +254,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Examinations"
+            android:text="@string/main_activity_examinations_label"
             android:gravity="center"
             android:textColor="@color/colorContrast"
             android:layout_marginTop="10dp"/>
@@ -278,7 +278,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Health state"
+            android:text="@string/main_activity_health_label"
             android:gravity="center"
             android:textColor="@color/colorContrast"
             android:layout_marginTop="10dp"/>
@@ -303,7 +303,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kicks and Contractions"
+            android:text="@string/main_activity_kicks_label"
             android:gravity="center"
             android:textColor="@color/colorContrast"
             android:layout_marginTop="10dp"/>
@@ -328,7 +328,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tips"
+            android:text="@string/main_activity_tips_label"
             android:gravity="center"
             android:textColor="@color/colorContrast"
             android:layout_marginTop="10dp"/>

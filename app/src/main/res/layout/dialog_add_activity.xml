@@ -78,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:id="@+id/activities_scroll"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -722,7 +722,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/warn_dialog_button_height"
             android:layout_weight="1"
-            android:text="Cancel"
+            android:text="@string/dialog_add_activity_cancel_btn"
             android:gravity="center"
             android:textSize="@dimen/warn_dialog_buttons_text_size"
             android:textColor="@color/colorContrast"
@@ -741,7 +741,7 @@
             android:layout_weight="1"
             android:background="@color/colorAccent"
             android:gravity="center"
-            android:text="Save"
+            android:text="@string/dialog_add_activity_save_btn"
             android:textColor="@color/colorContrast"
             android:textSize="@dimen/warn_dialog_buttons_text_size" />
     </LinearLayout>

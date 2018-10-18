@@ -60,7 +60,7 @@
                 android:background="@drawable/pickers_bgr"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="31/01/2018"
+                tools:text="31/01/2018"
                 android:textColor="@color/colorContrast"
                 android:textSize="@dimen/date_text_size" />
 
@@ -147,7 +147,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/warn_dialog_button_height"
             android:layout_weight="1"
-            android:text="Cancel"
+            android:text="@string/examination_cancel_btn"
             android:gravity="center"
             android:textSize="@dimen/warn_dialog_buttons_text_size"
             android:textColor="@color/colorContrast"
@@ -166,7 +166,7 @@
             android:layout_weight="1"
             android:background="@color/colorAccent"
             android:gravity="center"
-            android:text="Save"
+            android:text="@string/examination_save_btn"
             android:textColor="@color/colorContrast"
             android:textSize="@dimen/warn_dialog_buttons_text_size" />
     </LinearLayout>

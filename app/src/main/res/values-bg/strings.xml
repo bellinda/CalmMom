@@ -205,6 +205,10 @@
     <string name="main_activity_gave_birth" formatted="false">Родихте на %s в %sч.</string>
     <string name="main_activity_baby_size" formatted="false">Вашето бебе беше %dсм и %sкг</string>
     <string name="main_activity_start_btn">Започни бременност</string>
+    <string name="main_activity_examinations_label">Прегледи</string>
+    <string name="main_activity_health_label">Здравословно състояние</string>
+    <string name="main_activity_kicks_label">Ритания и Контракции</string>
+    <string name="main_activity_tips_label">Съвети</string>
 
     <string name="dialog_add_examination_title">Добавяне на преглед</string>
 
@@ -216,6 +220,9 @@
     <string name="examination_no_tests">Няма насрочени изследвания</string>
     <string name="examination_documents_title">Резултати и документи</string>
     <string name="examination_images_title">Снимки</string>
+    <string name="examination_no_documents">0 добавени документа</string>
+    <string name="examination_one_document">1 добавен документ</string>
+    <string name="examination_documents">%1$d добавени документа</string>
     <string name="examination_no_text_adding_test">Моля въведете название на изследване преди да запазите</string>
     <string name="examination_no_text_adding_mes">Моля въведете название на измерване преди да запазите</string>
     <string name="examination_no_text_title">Внимание</string>
@@ -224,6 +231,8 @@
     <string name="examination_set_to_current_negative_btn">Не</string>
     <string name="examination_set_to_current_no_date">Моля изберете дата за този преглед, преди да го направите текущ</string>
     <string name="examination_set_to_current_no_date_title">Внимание</string>
+    <string name="examination_cancel_btn">Отказ</string>
+    <string name="examination_save_btn">Запази</string>
 
     <string name="questions_add_answer">Добави отговор</string>
     <string name="delete_question_title">Внимание</string>
@@ -236,11 +245,14 @@
     <string name="fragment_weight_weeks">Седмици</string>
     <string name="fragment_weight_chart_description">Текущо vs. очаквано тегло/седмица</string>
     <string name="fragment_weight_title">Текущо vs очаквано увеличаване на теглото</string>
+    <string name="fragment_weight_add_btn">Добави</string>
 
     <string name="dialog_add_weight_title">Добавяне на тегло за седмица</string>
     <string name="dialog_add_weight_weight_label">Тегло</string>
     <string name="dialog_add_weight_kilos">кг</string>
     <string name="dialog_add_weight_week_label">Седмица</string>
+    <string name="dialog_add_weight_cancel_btn">Отказ</string>
+    <string name="dialog_add_weight_save_btn">Запази</string>
 
     <string name="fragment_activities_marker_hour">1 час</string>
     <string name="fragment_activities_marker_minutes">Минути</string>
@@ -248,19 +260,22 @@
     <string name="fragment_activities_hours">ч.</string>
     <string name="fragment_activities_duration">Продължителност на дейностите в минути</string>
     <string name="fragment_activities_title">Дейности през седмиците</string>
+    <string name="fragment_activities_chart_description">Минути активност на седмица</string>
 
     <string name="dialog_add_activity">Добавяне на активност</string>
     <string name="dialog_add_activity_hours">ч</string>
-    <string name="dialog_add_activity_mins">мин</string>
+    <string name="dialog_add_activity_mins">м</string>
     <string name="dialog_add_activity_walking">Вървене</string>
     <string name="dialog_add_activity_aerobics">Аеробика</string>
     <string name="dialog_add_activity_yoga">Йога</string>
     <string name="dialog_add_activity_pilates">Пилатес</string>
     <string name="dialog_add_activity_swimming">Плуване</string>
     <string name="dialog_add_activity_dancing">Танци</string>
-    <string name="dialog_add_activity_sc">Велоаргометър</string>
+    <string name="dialog_add_activity_sc">Стационарно колоездене</string>
     <string name="dialog_add_activity_jogging">Тичане</string>
     <string name="dialog_add_activity_other">Друго</string>
+    <string name="dialog_add_activity_cancel_btn">Отказ</string>
+    <string name="dialog_add_activity_save_btn">Запази</string>
 
     <string name="tips_week_label">Седмица</string>
     <string name="tips_done_label">Готово</string>
@@ -309,6 +324,8 @@
     <string name="dialog_medicine_comment_label">Коментар</string>
     <string name="dialog_medicine_no_title_set">Моля въведете названието на лекарството, което сте приели</string>
     <string name="dialog_medicine_no_title_set_title">Внимание</string>
+    <string name="dialog_medicine_cancel_btn">Отказ</string>
+    <string name="dialog_medicine_save_btn">Запази</string>
 
     <string name="dialog_is_allowed_med_title">Внимание</string>
     <string name="dialog_is_allowed_med_msg">Не забравяйте да се косултирате с Вашия лекар за този медикамент!</string>
@@ -321,7 +338,8 @@
 
     <string name="fragment_meals_week_title">Седмица</string>
     <string name="fragment_meals_day_title">Ден</string>
-    <string name="fragment_meals_progress_text">Препоръчителен седмичен прием</string>
+    <string name="fragment_meals_progress_text">Желателен седмичен прием</string>
+    <string name="fragment_meals_no_data_text">Няма данни за направените хранения на избрания от Вас ден</string>
 
     <string name="dialog_meal_title">Хранене днес</string>
     <string name="dialog_meal_title_label">Название</string>
@@ -344,6 +362,8 @@
     <string name="dialog_meal_category_other">Други</string>
     <string name="dialog_meal_quantity_title">Количество</string>
     <string name="dialog_meal_quantity_metrix">гр</string>
+    <string name="dialog_meal_cancel_btn">Отказ</string>
+    <string name="dialog_meal_save_btn">Запази</string>
 
     <string name="dialog_meal_is_unpasteurized">Това хранене съдържаше ли непастьоризирано мляко?</string>
     <string name="dialog_meal_with_raw_eggs">Това хранене съдържаше ли сурови яйца?</string>

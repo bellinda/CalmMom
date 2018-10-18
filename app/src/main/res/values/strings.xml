@@ -205,6 +205,10 @@
     <string name="main_activity_gave_birth" formatted="false">You gave birth on %s at %sh</string>
     <string name="main_activity_baby_size" formatted="false">Your baby was %dcm and %skg</string>
     <string name="main_activity_start_btn">Start pregnancy</string>
+    <string name="main_activity_examinations_label">Examinations</string>
+    <string name="main_activity_health_label">Health state</string>
+    <string name="main_activity_kicks_label">Kicks and Contractions</string>
+    <string name="main_activity_tips_label">Tips</string>
 
     <string name="dialog_add_examination_title">Add New Examination</string>
 
@@ -227,6 +231,8 @@
     <string name="examination_set_to_current_negative_btn">No</string>
     <string name="examination_set_to_current_no_date">Please select a date for this examination before setting it to current</string>
     <string name="examination_set_to_current_no_date_title">Warning</string>
+    <string name="examination_cancel_btn">Cancel</string>
+    <string name="examination_save_btn">Save</string>
 
     <string name="questions_add_answer">Add answer</string>
     <string name="delete_question_title">Warning</string>
@@ -239,11 +245,14 @@
     <string name="fragment_weight_weeks">Weeks</string>
     <string name="fragment_weight_chart_description">Current vs. expected weight/week</string>
     <string name="fragment_weight_title">Current vs Expected Weight Gain</string>
+    <string name="fragment_weight_add_btn">Add data</string>
 
     <string name="dialog_add_weight_title">Add weight for week</string>
     <string name="dialog_add_weight_weight_label">Weight</string>
     <string name="dialog_add_weight_kilos">kg</string>
     <string name="dialog_add_weight_week_label">Week</string>
+    <string name="dialog_add_weight_cancel_btn">Cancel</string>
+    <string name="dialog_add_weight_save_btn">Save</string>
 
     <string name="fragment_activities_marker_hour">1 hour</string>
     <string name="fragment_activities_marker_minutes">Minutes</string>
@@ -251,6 +260,7 @@
     <string name="fragment_activities_hours">h</string>
     <string name="fragment_activities_duration">Activity Duration in Minutes</string>
     <string name="fragment_activities_title">Activities in the weeks</string>
+    <string name="fragment_activities_chart_description">Minutes activities in week</string>
 
     <string name="dialog_add_activity">Add activities data</string>
     <string name="dialog_add_activity_hours">h</string>
@@ -264,6 +274,8 @@
     <string name="dialog_add_activity_sc">Stationary Cycling</string>
     <string name="dialog_add_activity_jogging">Jogging</string>
     <string name="dialog_add_activity_other">Other</string>
+    <string name="dialog_add_activity_cancel_btn">Cancel</string>
+    <string name="dialog_add_activity_save_btn">Save</string>
 
     <string name="tips_week_label">Week</string>
     <string name="tips_done_label">Done</string>
@@ -312,6 +324,8 @@
     <string name="dialog_medicine_comment_label">Comment</string>
     <string name="dialog_medicine_no_title_set">Please enter the name of the medicine you took</string>
     <string name="dialog_medicine_no_title_set_title">Warning</string>
+    <string name="dialog_medicine_cancel_btn">Cancel</string>
+    <string name="dialog_medicine_save_btn">Save</string>
 
     <string name="dialog_is_allowed_med_title">Warning</string>
     <string name="dialog_is_allowed_med_msg">Do not forget to consult your doctor for this medicine!</string>
@@ -325,6 +339,7 @@
     <string name="fragment_meals_week_title">Week</string>
     <string name="fragment_meals_day_title">Day</string>
     <string name="fragment_meals_progress_text">Recommended weekly intake</string>
+    <string name="fragment_meals_no_data_text">No data available for the meals on the selected date</string>
 
     <string name="dialog_meal_title">Meals today</string>
     <string name="dialog_meal_title_label">Title</string>
@@ -347,6 +362,8 @@
     <string name="dialog_meal_category_other">Other</string>
     <string name="dialog_meal_quantity_title">Quantity</string>
     <string name="dialog_meal_quantity_metrix">gr</string>
+    <string name="dialog_meal_cancel_btn">Cancel</string>
+    <string name="dialog_meal_save_btn">Save</string>
 
     <string name="dialog_meal_is_unpasteurized">Does this meal contain unpasteurized milk?</string>
     <string name="dialog_meal_with_raw_eggs">Does this meal contain raw eggs?</string>

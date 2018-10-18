@@ -28,6 +28,7 @@ import com.angelova.w510.calmmom.models.User;
 import com.angelova.w510.calmmom.models.UserActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -185,6 +186,10 @@ public class ActivitiesFragment extends Fragment implements OnChartValueSelected
         mChart.setVisibleXRangeMaximum(12);
         mChart.animateX(500);
         mChart.getAxisLeft().setAxisMinimum(0);
+
+        Description description = new Description();
+        description.setText(getString(R.string.fragment_activities_chart_description));
+        mChart.setDescription(description);
 
         mChart.setOnChartValueSelectedListener(this);
 
