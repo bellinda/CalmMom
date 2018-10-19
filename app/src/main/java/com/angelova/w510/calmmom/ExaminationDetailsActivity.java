@@ -45,6 +45,7 @@ import android.widget.TimePicker;
 import com.angelova.w510.calmmom.adapters.MeasurementsAdapter;
 import com.angelova.w510.calmmom.adapters.TestsAdapter;
 import com.angelova.w510.calmmom.dialogs.ListDialog;
+import com.angelova.w510.calmmom.dialogs.LoadingDialog;
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationDocument;
@@ -126,6 +127,8 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
 
     private int mImagesHeight;
 
+    private LoadingDialog mLoadingDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,6 +183,8 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
         mListMeasurements.setLayoutManager(mLayoutManager);
         mListMeasurements.setItemAnimator(new DefaultItemAnimator());
         mListMeasurements.setAdapter(mMeasurementsAdapter);
+
+        mLoadingDialog = new LoadingDialog(this, getString(R.string.examination_uploading));
 
         mTestsBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -319,10 +324,11 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
             }
         });
 
-        if (mExamination.getDocuments() != null && mExamination.getDocuments().size() > 0) {
-            mDocumentsViewBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+
+        mDocumentsViewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mExamination.getDocuments() != null && mExamination.getDocuments().size() > 0) {
                     ListDialog dialog = new ListDialog(ExaminationDetailsActivity.this, mExamination.getDocuments(), new ListDialog.DialogClickListener() {
                         @Override
                         public void onItemClicked(ExaminationDocument document) {
@@ -331,8 +337,8 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                     });
                     dialog.show();
                 }
-            });
-        }
+            }
+        });
 
         if (mExamination.getDate() != null && !TextUtils.isEmpty(mExamination.getDate())) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault());
@@ -344,7 +350,8 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                 pe.printStackTrace();
             }
         } else {
-            mDateView.setText(getString(R.string.time_line_adapter_no_date));
+            //mDateView.setText(getString(R.string.time_line_adapter_no_date));
+            //mDateView.setText("dd MMM yyyy");
         }
 
         if (mExamination.getStatus() != ExaminationStatus.COMPLETED) {
@@ -482,14 +489,15 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                     selectedFilesNames.add(displayName);
                     //update user documents for current examination
 
-                    if (isDocumentsSelected) {
-                        if (mExamination.getDocuments() != null) {
-                            mDocumentsCounter.setText(String.format(getString(R.string.examination_documents), mExamination.getDocuments().size() + 1));
-                        } else {
-                            mDocumentsCounter.setText(getString(R.string.examination_no_documents));
-                        }
-                    }
+                    mLoadingDialog.show();
                     uploadDocument(uri, displayName);
+//                    if (isDocumentsSelected) {
+//                        if (mExamination.getDocuments() != null) {
+//                            mDocumentsCounter.setText(String.format(getString(R.string.examination_documents), mExamination.getDocuments().size() + 1));
+//                        } else {
+//                            mDocumentsCounter.setText(getString(R.string.examination_no_documents));
+//                        }
+//                    }
 //                    if (mSelectedFilesLabel.getVisibility() == View.GONE) {
 //                        mSelectedFilesLabel.setVisibility(View.VISIBLE);
 //                    }
@@ -566,6 +574,12 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                         }
                         mExamination.getDocuments().add(new ExaminationDocument(downloadUri.toString(), fileName));
                         isDocumentsSelected = false;
+
+                        if (mExamination.getDocuments() != null) {
+                            mDocumentsCounter.setText(String.format(getString(R.string.examination_documents), mExamination.getDocuments().size()));
+                        } else {
+                            mDocumentsCounter.setText(getString(R.string.examination_no_documents));
+                        }
                     } else {
                         if (mExamination.getImages() == null) {
                             mExamination.setImages(new ArrayList<ExaminationDocument>());
@@ -575,6 +589,7 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                     }
 
                     updateExaminationInDb();
+                    mLoadingDialog.dismiss();
                 } else {
                     // Handle failures
                     // ...
