@@ -255,6 +255,7 @@
     <string name="examination_set_to_current_no_date_title">Внимание</string>
     <string name="examination_cancel_btn">Отказ</string>
     <string name="examination_save_btn">Запази</string>
+    <string name="examination_uploading">Записване&#8230;</string>
 
     <string name="questions_add_answer">Добави отговор</string>
     <string name="delete_question_title">Внимание</string>
@@ -305,7 +306,7 @@
     <string name="tips_loading_message">Обновяване на съветите&#8230;</string>
 
     <string name="fragment_kicks_start">Започни броенето</string>
-    <string name="fragment_kicks_stop">Спри броенето</string>
+    <string name="fragment_kicks_stop">Спри</string>
     <string name="fragment_kicks_kick">Ритане</string>
     <string name="fragment_kicks_date">Дата</string>
     <string name="fragment_kicks_duration">Времетраене</string>
