@@ -5,8 +5,11 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
@@ -156,7 +159,9 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
             mTests = mExamination.getTests();
             mTestsAdapter = new TestsAdapter(this, mTests, mExamination.getStatus() == ExaminationStatus.COMPLETED);
         } else {
-            mTestsAdapter = new TestsAdapter(this, Arrays.asList(new Test(getString(R.string.examination_no_tests))), mExamination.getStatus() == ExaminationStatus.COMPLETED);
+            Resources bgResources = getLocalizedResources(ExaminationDetailsActivity.this, new Locale("bg"));
+            Resources enResources = getLocalizedResources(ExaminationDetailsActivity.this, new Locale("en"));
+            mTestsAdapter = new TestsAdapter(this, Arrays.asList(new Test(bgResources.getString(R.string.examination_no_tests), enResources.getString(R.string.examination_no_tests))), mExamination.getStatus() == ExaminationStatus.COMPLETED);
         }
         mUser = (User) getIntent().getSerializableExtra("user");
         mUserEmail = getIntent().getStringExtra("email");
@@ -223,14 +228,22 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                         if (mTests == null) {
                             mTests = new ArrayList<>();
                         }
-                        mTests.add(new Test(mNewItemInput.getText().toString()));
+                        if (Locale.getDefault().getLanguage().equalsIgnoreCase("en")) {
+                            mTests.add(new Test("", mNewItemInput.getText().toString()));
+                        } else {
+                            mTests.add(new Test(mNewItemInput.getText().toString(), ""));
+                        }
                         mExamination.setTests(mTests);
                         mTestsAdapter.notifyDataSetChanged();
                     } else {
                         if (mMeasurements == null) {
                             mMeasurements = new ArrayList<Measurement>();
                         }
-                        mMeasurements.add(new Measurement(mNewItemInput.getText().toString()));
+                        if (Locale.getDefault().getLanguage().equalsIgnoreCase("en")) {
+                            mMeasurements.add(new Measurement("", mNewItemInput.getText().toString()));
+                        } else {
+                            mMeasurements.add(new Measurement(mNewItemInput.getText().toString(), ""));
+                        }
                         mExamination.setActivities(mMeasurements);
                         mMeasurementsAdapter.notifyDataSetChanged();
                     }
@@ -676,6 +689,15 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
             }
         });
         warning.show();
+    }
+
+    @NonNull
+    Resources getLocalizedResources(Context context, Locale desiredLocale) {
+        Configuration conf = context.getResources().getConfiguration();
+        conf = new Configuration(conf);
+        conf.setLocale(desiredLocale);
+        Context localizedContext = context.createConfigurationContext(conf);
+        return localizedContext.getResources();
     }
 
     @Override

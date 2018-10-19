@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by W510 on 24.5.2018 г..
@@ -104,7 +105,11 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
         else
             holder.mDate.setText(mContext.getString(R.string.time_line_adapter_no_date));
 
-        holder.mMessage.setText(timeLineModel.getTitle());
+        if (Locale.getDefault().getLanguage().equalsIgnoreCase("en")) {
+            holder.mMessage.setText(timeLineModel.getTitle());
+        } else {
+            holder.mMessage.setText(timeLineModel.getTitleBg());
+        }
 
         holder.mMessage.setOnClickListener(new View.OnClickListener() {
             @Override

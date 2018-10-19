@@ -8,18 +8,21 @@ import java.io.Serializable;
 
 public class Test implements Serializable {
     private String title;
+    private String titleEn;
     private boolean done;
 
     public Test() {
     }
 
-    public Test (String title, boolean done) {
+    public Test (String title, String titleEn, boolean done) {
         this.title = title;
+        this.titleEn = titleEn;
         this.done = done;
     }
 
-    public Test(String title) {
+    public Test(String title, String titleEn) {
         this.title = title;
+        this.titleEn = titleEn;
     }
 
     public String getTitle() {
@@ -28,6 +31,14 @@ public class Test implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getTitleEn() {
+        return titleEn;
+    }
+
+    public void setTitleEn(String titleEn) {
+        this.titleEn = titleEn;
     }
 
     public boolean isDone() {

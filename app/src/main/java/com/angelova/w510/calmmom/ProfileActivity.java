@@ -315,15 +315,22 @@ public class ProfileActivity extends AppCompatActivity {
                             }
                         }
 
-                        List<Measurement> activities = Arrays.asList(new Measurement(getString(R.string.seven_days_after_birth_examination_act1)), new Measurement(getString(R.string.seven_days_after_birth_examination_act2)),
-                                new Measurement(getString(R.string.seven_days_after_birth_examination_act3)), new Measurement(getString(R.string.seven_days_after_birth_examination_act4)));
-                        Examination sevenDaysAfterBirthEx = new Examination("7 days after birth", "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
+                        Resources enResources = getLocalizedResources(ProfileActivity.this, new Locale("en"));
+                        Resources bgResources = getLocalizedResources(ProfileActivity.this, new Locale("bg"));
+
+                        List<Measurement> activities = Arrays.asList(new Measurement(bgResources.getString(R.string.seven_days_after_birth_examination_act1), enResources.getString(R.string.seven_days_after_birth_examination_act1)),
+                                new Measurement(bgResources.getString(R.string.seven_days_after_birth_examination_act2), enResources.getString(R.string.seven_days_after_birth_examination_act2)),
+                                new Measurement(bgResources.getString(R.string.seven_days_after_birth_examination_act3), enResources.getString(R.string.seven_days_after_birth_examination_act3)),
+                                new Measurement(bgResources.getString(R.string.seven_days_after_birth_examination_act4), enResources.getString(R.string.seven_days_after_birth_examination_act4)));
+                        Examination sevenDaysAfterBirthEx = new Examination(enResources.getString(R.string.seven_days_after_birth_title), bgResources.getString(R.string.seven_days_after_birth_title), "", ExaminationStatus.FUTURE, new ArrayList<Test>(), activities);
                         examinations.add(sevenDaysAfterBirthEx);
 
-                        activities = Arrays.asList(new Measurement(getString(R.string.forty_days_after_birth_exmaination_act1)), new Measurement(getString(R.string.forty_days_after_birth_exmaination_act2)),
-                                new Measurement(getString(R.string.forty_days_after_birth_exmaination_act3)), new Measurement(getString(R.string.forty_days_after_birth_exmaination_act4)));
-                        List<Test> tests = Arrays.asList(new Test(getString(R.string.forty_days_after_birth_examination_test1)));
-                        Examination fortyDaysAfterBirthEx = new Examination("40 days after birth", "", ExaminationStatus.FUTURE, tests, activities);
+                        activities = Arrays.asList(new Measurement(bgResources.getString(R.string.forty_days_after_birth_exmaination_act1), enResources.getString(R.string.forty_days_after_birth_exmaination_act1)),
+                                new Measurement(bgResources.getString(R.string.forty_days_after_birth_exmaination_act2), enResources.getString(R.string.forty_days_after_birth_exmaination_act2)),
+                                new Measurement(bgResources.getString(R.string.forty_days_after_birth_exmaination_act3), enResources.getString(R.string.forty_days_after_birth_exmaination_act3)),
+                                new Measurement(bgResources.getString(R.string.forty_days_after_birth_exmaination_act4), enResources.getString(R.string.forty_days_after_birth_exmaination_act4)));
+                        List<Test> tests = Arrays.asList(new Test(bgResources.getString(R.string.forty_days_after_birth_examination_test1), enResources.getString(R.string.forty_days_after_birth_examination_test1)));
+                        Examination fortyDaysAfterBirthEx = new Examination(enResources.getString(R.string.forty_days_after_birth_title), bgResources.getString(R.string.forty_days_after_birth_title), "", ExaminationStatus.FUTURE, tests, activities);
                         examinations.add(fortyDaysAfterBirthEx);
                         mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).setExaminations(examinations);
 

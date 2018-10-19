@@ -85,7 +85,7 @@
         android:id="@+id/ok_button"
         app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
         app:layout_constraintRight_toRightOf="@+id/guideline_right"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintTop_toBottomOf="@+id/divider"/>
 
     <!--</LinearLayout>-->
 

@@ -94,6 +94,8 @@
     <string name="seventh_week_examination_title">7ма седмица</string>
 
     <!--12th week-->
+    <string name="first_examination_title">12та седмица</string>
+
     <string name="first_examination_test1">Хемоглобин, еритроцити, хематокрит, левкоцити, MCV, MCH, СУЕ, кръвна захар, урина-седимент, уробилиноген, кетони</string>
     <string name="first_examination_test2">Определяне на кръвна група и Rh-фактор</string>
     <string name="first_examination_test3">Онкопрофилактична цитонамазка от женски полови органи</string>
@@ -112,6 +114,8 @@
     <string name="first_examination_act7">Гинекологична ехография</string>
 
     <!--16th week-->
+    <string name="second_examination_title">16та седмица</string>
+
     <string name="second_examination_act1">Измерване на артериално кръвно налягане</string>
     <string name="second_examination_act2">Измерване на ръст</string>
     <string name="second_examination_act3">Измерване на теелсна маса</string>
@@ -123,6 +127,8 @@
     <string name="second_examination_test2">Урокултура</string>
 
     <!--20th week-->
+    <string name="third_examination_title">20та седмица</string>
+
     <string name="third_examination_act1">Измерване на артериално кръвно налягане</string>
     <string name="third_examination_act2">Измерване на ръст</string>
     <string name="third_examination_act3">Измерване на телесна маса</string>
@@ -130,6 +136,8 @@
     <string name="third_examination_act5">Обсъждане на резултати</string>
 
     <!--24th week-->
+    <string name="fourth_examination_title">24та седмица</string>
+
     <string name="fourth_examination_test1">Хемоглобин, еритроцити, хематокрит, левкоцити, MCV, MCH, СУЕ, кръвна захар, урина-седимент, уробилиноген</string>
 
     <string name="fourth_examination_act1">Измерване на артериално кръвно налягане</string>
@@ -141,6 +149,8 @@
     <string name="fourth_examination_act7">Обсъждане на резултати</string>
 
     <!--28th week-->
+    <string name="fifth_examination_title">28ма седмица</string>
+
     <string name="fifth_examination_act1">Измерване на артериално кръвно налягане</string>
     <string name="fifth_examination_act2">Измерване на ръст</string>
     <string name="fifth_examination_act3">Измерване на телесна маса</string>
@@ -149,9 +159,12 @@
     <string name="fifth_examination_act6">Сърдечна дейност на плода</string>
     <string name="fifth_examination_act7">Обсъждане на резултати</string>
 
+    <string name="twenty_first_week_title">21ва седмица - Фетална морфология</string>
     <string name="twenty_first_week_test1">Фетална морфология при специалист</string>
 
     <!--32nd week-->
+    <string name="sixth_examination_title">32ра седмица</string>
+
     <string name="sixth_examination_test1">Микробиологично изследване на влагалищен секрет</string>
 
     <string name="sixth_examination_act1">Измерване на артериално кръвно налягане</string>
@@ -163,6 +176,7 @@
     <string name="sixth_examination_act7">Обсъждане на резултати</string>
 
     <!-- 34th week -->
+    <string name="seventh_examination_title">34та седмица</string>
     <string name="seventh_examination_test1">Хемоглобин, еритроцити, хематокрит, левкоцити, MCV, MCH, СУЕ, кръвна захар, урина-седимент, уробилиноген</string>
 
     <string name="seventh_examination_act1">Измерване на артериално кръвно налягане</string>
@@ -175,9 +189,12 @@
     <string name="seventh_examination_act8">Обсъждане на резултати</string>
 
     <!-- 36th week -->
+    <string name="seventh_1_examination_title">3та седмица</string>
     <string name="seventh_1_examination_test1">Урокултура</string>
 
     <!-- 38th week -->
+    <string name="eight_examination_title">38ма седмица</string>
+
     <string name="eighth_examination_act1">Измерване на артериално кръвно налягане</string>
     <string name="eighth_examination_act2">Измерване на ръст</string>
     <string name="eighth_examination_act3">Измерване на телесна маса</string>
@@ -187,11 +204,16 @@
     <string name="eighth_examination_act7">Сърдечна дейност на плода</string>
     <string name="eighth_examination_act8">Обсъждане на резултати</string>
 
+    <!--39th week-->
+    <string name="ninth_examination_title">39та седмица</string>
+
+    <string name="seven_days_after_birth_title">7 дена след раждането</string>
     <string name="seven_days_after_birth_examination_act1">Проследяване на нормална инволуция на матката</string>
     <string name="seven_days_after_birth_examination_act2">Проследяване на лохии</string>
     <string name="seven_days_after_birth_examination_act3">Проследяване на лактация</string>
     <string name="seven_days_after_birth_examination_act4">Проследяване на оперативна рана</string>
 
+    <string name="forty_days_after_birth_title">40 дена след раждането</string>
     <string name="forty_days_after_birth_exmaination_act1">Проследяване на нормална инволуция на матката</string>
     <string name="forty_days_after_birth_exmaination_act2">Проследяване на лохии</string>
     <string name="forty_days_after_birth_exmaination_act3">Проследяване на лактация</string>
@@ -286,14 +308,14 @@
     <string name="fragment_kicks_stop">Спри броенето</string>
     <string name="fragment_kicks_kick">Ритане</string>
     <string name="fragment_kicks_date">Дата</string>
-    <string name="fragment_kicks_duration">Продължителност</string>
-    <string name="fragment_kicks_count">Брой ритания</string>
+    <string name="fragment_kicks_duration">Времетраене</string>
+    <string name="fragment_kicks_count">Ритания</string>
     <string name="fragment_kicks_felt_baby_question">Усетихте ли движенията на бебето си днес?</string>
     <string name="fragment_kicks_felt_baby_yes">Да</string>
     <string name="fragment_kicks_felt_baby_no">Не</string>
     <string name="fragment_kicks_felt_baby_title">Движения на бебето</string>
     <string name="fragment_kicks_felt_baby_congrats">Поздравления! Справяте се отлично, продължавайте в същия дух!</string>
-    <string name="fragment_kicks_felt_baby_tip">Запазете спокойствие! Ако в продължение на целия ден не усетите детето да мърда, най-добре се свържете с Вашия лекар..</string>
+    <string name="fragment_kicks_felt_baby_tip">Запазете спокойствие! Ако през целия ден не усетите детето да мърда, най-добре се свържете с Вашия лекар.</string>
 
     <string name="fragment_contractions_start_timer">Пусни таймера</string>
     <string name="fragment_contractions_stop_timer">Спри таймера</string>
@@ -515,6 +537,8 @@
     <string name="dialog_end_pregnancy_no_length">Моля въведете дължината на бебето</string>
     <string name="dialog_end_pregnancy_no_name">Моля въведете името на бебето</string>
     <string name="dialog_end_pregnancy_no_abortion_purpose">Моля въведете причината за аборта</string>
+    <string name="dialog_end_pregnancy_cancel_btn">Отказ</string>
+    <string name="dialog_end_pregnancy_save_btn">Запази</string>
 
     <string name="dialog_start_pregnancy_title">Начало на бременност</string>
     <string name="dialog_start_pregnancy_weight">Текущо тегло</string>
@@ -536,6 +560,8 @@
     <string name="dialog_start_pregnancy_risk_factor_med_allergy">Алергия към лекарства</string>
     <string name="dialog_start_pregnancy_not_all_data">Моля въведете цялата информация преди да запазите</string>
     <string name="dialog_start_pregnancy_not_all_data_title">Внимание</string>
+    <string name="dialog_start_pregnancy_cancel_btn">Отказ</string>
+    <string name="dialog_start_pregnancy_save_btn">Запази</string>
 
     <string name="dialog_list_pregnancies_item_text">Бременност, завършила на</string>
     <string name="dialog_list_pregnancies_estimated">Очаквана дата на раждане -</string>

@@ -15,6 +15,7 @@ import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.models.Measurement;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by W510 on 16.7.2018 г..
@@ -43,7 +44,15 @@ public class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapte
     @Override
     public void onBindViewHolder(final MeasurementsAdapter.ViewHolder holder, int position) {
         final Measurement mes = measurementsList.get(position);
-        holder.mes.setText(mes.getTitle()); //⌘
+        if (mes.getTitle() != null && mes.getTitleEn() != null) {
+            if (Locale.getDefault().getLanguage().equalsIgnoreCase("en")) {
+                holder.mes.setText(mes.getTitleEn()); //⌘
+            } else {
+                holder.mes.setText(mes.getTitle());
+            }
+        } else {
+            holder.mes.setText(mes.getTitle() != null ? mes.getTitle() : mes.getTitleEn());
+        }
         if (isPastExamination && !mes.isDone()) {
             if (!holder.check.isChecked()) {
                 holder.mes.setTextColor(Color.parseColor("#fa7665"));

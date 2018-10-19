@@ -17,6 +17,7 @@ import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.models.Test;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by W510 on 15.7.2018 г..
@@ -45,8 +46,29 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Test test = testsList.get(position);
-        holder.test.setText(test.getTitle()); //⌘
-        if (isPastExamination && !test.isDone()) {
+        boolean isNoDataItem = false;
+        if (test.getTitle() != null && test.getTitleEn() != null) {
+            if (Locale.getDefault().getLanguage().equalsIgnoreCase("en")) {
+                holder.test.setText(test.getTitleEn()); //⌘
+                if (test.getTitleEn().equals(context.getString(R.string.examination_no_tests))) {
+                    holder.check.setVisibility(View.INVISIBLE);
+                    isNoDataItem = true;
+                }
+            } else {
+                if (test.getTitle().equals(context.getString(R.string.examination_no_tests))) {
+                    holder.check.setVisibility(View.INVISIBLE);
+                    isNoDataItem = true;
+                }
+                holder.test.setText(test.getTitle());
+            }
+        } else {
+            if (test.getTitle().equals(context.getString(R.string.examination_no_tests)) || test.getTitleEn().equals(context.getString(R.string.examination_no_tests))) {
+                holder.check.setVisibility(View.INVISIBLE);
+                isNoDataItem = true;
+            }
+            holder.test.setText(test.getTitle() != null ? test.getTitle() : test.getTitleEn());
+        }
+        if (isPastExamination && !test.isDone() && !isNoDataItem) {
             if (!holder.check.isChecked()) {
                 holder.test.setTextColor(Color.parseColor("#fa7665"));
             }

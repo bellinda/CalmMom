@@ -36,6 +36,7 @@ import com.angelova.w510.calmmom.models.User;
 import com.angelova.w510.calmmom.models.UserActivity;
 import com.angelova.w510.calmmom.models.Weight;
 import com.angelova.w510.calmmom.services.StopwatchService;
+import com.angelova.w510.calmmom.utils.PregnancyUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

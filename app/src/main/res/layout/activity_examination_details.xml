@@ -56,7 +56,10 @@
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/new_examination_date_text_size"
         android:text="26th June 2018"
-        android:id="@+id/date_text_view"/>
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/date_text_view" />
 
     <android.support.constraint.Guideline
         android:layout_width="1dp"
