@@ -47,6 +47,10 @@ public class KicksAdapter extends RecyclerView.Adapter<KicksAdapter.ViewHolder> 
             holder.mDateView.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
             holder.mTimeView.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
             holder.mCountView.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+        } else {
+            holder.mDateView.setTextColor(ContextCompat.getColor(context, R.color.colorContrast));
+            holder.mTimeView.setTextColor(ContextCompat.getColor(context, R.color.colorContrast));
+            holder.mCountView.setTextColor(ContextCompat.getColor(context, R.color.colorContrast));
         }
     }
 
