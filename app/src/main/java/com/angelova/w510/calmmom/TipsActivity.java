@@ -90,11 +90,30 @@ public class TipsActivity extends AppCompatActivity {
                     ObjectMapper mapper = new ObjectMapper();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Map<String, Object> tipsFromDB = document.getData();
-                        for (String key : tipsFromDB.keySet()) {
-                            Tip tip = mapper.convertValue(tipsFromDB.get(key), Tip.class);
-                            if (Integer.parseInt(tip.getWeek()) <= currentPregnancyWeek) {
-                                mTips.add(tip);
-                            }
+                        if (currentPregnancyWeek <= 12) {
+                            Tip tip = mapper.convertValue(tipsFromDB.get("12"), Tip.class);
+                            mTips.add(tip);
+                        } else if (currentPregnancyWeek <= 20) {
+                            Tip tip = mapper.convertValue(tipsFromDB.get("12"), Tip.class);
+                            mTips.add(tip);
+                            tip = mapper.convertValue(tipsFromDB.get("20"), Tip.class);
+                            mTips.add(tip);
+                        } else if (currentPregnancyWeek <= 30) {
+                            Tip tip = mapper.convertValue(tipsFromDB.get("12"), Tip.class);
+                            mTips.add(tip);
+                            tip = mapper.convertValue(tipsFromDB.get("20"), Tip.class);
+                            mTips.add(tip);
+                            tip = mapper.convertValue(tipsFromDB.get("30"), Tip.class);
+                            mTips.add(tip);
+                        } else {
+                            Tip tip = mapper.convertValue(tipsFromDB.get("12"), Tip.class);
+                            mTips.add(tip);
+                            tip = mapper.convertValue(tipsFromDB.get("20"), Tip.class);
+                            mTips.add(tip);
+                            tip = mapper.convertValue(tipsFromDB.get("30"), Tip.class);
+                            mTips.add(tip);
+                            tip = mapper.convertValue(tipsFromDB.get("30"), Tip.class);
+                            mTips.add(tip);
                         }
                     }
                     Collections.sort(mTips);
