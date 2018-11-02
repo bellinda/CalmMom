@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -14,6 +15,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -69,6 +71,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
 import com.jsibbold.zoomage.ZoomageView;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -129,6 +132,9 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
 
     private LoadingDialog mLoadingDialog;
 
+    SharedPreferences mPrefs;
+    SharedPreferences.Editor mEditor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,6 +145,9 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.parseColor("#324A5F"));
         }
+
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mPrefs.edit();
 
         mListTests = (RecyclerView) findViewById(R.id.tests_list);
         mListMeasurements = (RecyclerView) findViewById(R.id.mes_list);
@@ -158,7 +167,7 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
         mDateView = (TextView) findViewById(R.id.date_text_view);
 
         mExamination = (Examination) getIntent().getSerializableExtra("examination");
-        if (mExamination.getTests().size() > 0) {
+        if (mExamination.getTests() != null && mExamination.getTests().size() > 0) {
             mTests = mExamination.getTests();
             mTestsAdapter = new TestsAdapter(this, mTests, mExamination.getStatus() == ExaminationStatus.COMPLETED);
         } else {
@@ -539,6 +548,10 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         System.out.println("DocumentSnapshot successfully updated!");
+                        Gson gson = new Gson();
+                        String userJson = gson.toJson(mUser);
+                        mEditor.putString("user", userJson);
+                        mEditor.apply();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

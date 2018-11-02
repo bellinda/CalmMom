@@ -190,6 +190,8 @@ public class ProfileActivity extends AppCompatActivity {
                 int pregnanciesCount = mUser.getPregnancyCount();
                 if (pregnanciesCount == 2) {
                     mPregnancyIndex.setText(getString(R.string.activity_profile_second_pregnancy));
+                } else if (pregnanciesCount == 3) {
+                    mPregnancyIndex.setText(getString(R.string.activity_profile_third_pregnancy));
                 } else {
                     mPregnancyIndex.setText(String.format(Locale.getDefault(), getString(R.string.activity_profile_other_pregnancy), pregnanciesCount));
                 }

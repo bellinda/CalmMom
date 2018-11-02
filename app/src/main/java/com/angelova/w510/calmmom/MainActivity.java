@@ -47,6 +47,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.text.ParseException;
@@ -660,6 +661,11 @@ public class MainActivity extends AppCompatActivity {
             mEditor.remove("shouldUpdateLanguage").commit();
             finish();
             startActivity(getIntent());
+        } else if (!mPrefs.getString("user", "").isEmpty()) {
+            Gson gson = new Gson();
+            String userJson = mPrefs.getString("user", "");
+            mUser = gson.fromJson(userJson, User.class);
+            mEditor.remove("user").commit();
         }
     }
 

@@ -1,7 +1,9 @@
 package com.angelova.w510.calmmom;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +23,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.Map;
@@ -34,6 +37,9 @@ public class KicksAndContractionsActivity extends AppCompatActivity {
 
     private FirebaseFirestore mDb;
 
+    SharedPreferences mPrefs;
+    SharedPreferences.Editor mEditor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +50,9 @@ public class KicksAndContractionsActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.parseColor("#324A5F"));
         }
+
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mPrefs.edit();
 
         mUser = (User) getIntent().getSerializableExtra("user");
         mUserEmail = getIntent().getStringExtra("email");
@@ -109,6 +118,10 @@ public class KicksAndContractionsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         System.out.println("DocumentSnapshot successfully updated!");
+                        Gson gson = new Gson();
+                        String userJson = gson.toJson(mUser);
+                        mEditor.putString("user", userJson);
+                        mEditor.apply();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -130,6 +143,10 @@ public class KicksAndContractionsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         System.out.println("DocumentSnapshot successfully updated!");
+                        Gson gson = new Gson();
+                        String userJson = gson.toJson(mUser);
+                        mEditor.putString("user", userJson);
+                        mEditor.apply();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

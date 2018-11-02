@@ -16,8 +16,11 @@ import com.angelova.w510.calmmom.ExaminationsActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationStatus;
+import com.angelova.w510.calmmom.models.Measurement;
+import com.angelova.w510.calmmom.models.Test;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -119,6 +122,8 @@ public class AddExaminationDialog extends Dialog {
                     examination.setTitle(mTitleTextView.getText().toString());
                 }
                 examination.setStatus(ExaminationStatus.FUTURE);
+                examination.setActivities(new ArrayList<Measurement>());
+                examination.setTests(new ArrayList<Test>());
                 listener.onSave(examination);
                 dismiss();
             }

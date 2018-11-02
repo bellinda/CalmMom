@@ -14,35 +14,46 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LoginActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".InfoActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".InfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ExaminationsActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ExaminationDetailsActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".HealthStateActivity" />
-        <activity android:name=".TipsActivity" />
-        <activity android:name=".KicksAndContractionsActivity" />
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HealthStateActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TipsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".KicksAndContractionsActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="627b66396e9d89fdbcaa048c8384959371ca7f85" />
 
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ProfileActivity"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".services.StopwatchService" />
 
-        <activity android:name=".ForumActivity"></activity>
+        <activity android:name=".ForumActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

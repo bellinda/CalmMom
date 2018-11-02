@@ -53,7 +53,7 @@
     <string name="custom_tip_underfeeding">Недохранването може да навреди на Вас и на развиващото се все още бебе както в краткосрочен, така и в дългосрочен план, затова е препоръчително да се посъветвате с Вашия лекар.</string>
     <string name="custom_tip_allergy">Споделете с Вашия лекар, че имате алергии, за да намалите рисковете за Вас и Вашето бебе.</string>
     <string name="custom_tip_blood_groups">В случай на несъответствие на Вашата кръвна група и тази на партньора Ви, трябва да се посъветвате с Вашия лекар относно допълнителните изследвания, които е необходимо да Ви бъдат направени.</string>
-    <string name="custom_tip_family_history">Консултирайте се с Вашия лекар по отношение на рисквоете, които крие Вашата фамилна обремененост.</string>
+    <string name="custom_tip_family_history">Консултирайте се с Вашия лекар по отношение на рисковете, които крие Вашата фамилна обремененост.</string>
     <string name="custom_tip_pregnancies_history">Посъветвахте ли се с Вашия лекар за допълнителните изследвания, които е необходимо да се направят поради историята на Вашите бременности?</string>
     <string name="custom_tip_not_enough_activities">Теглото Ви се повишава, а няма информация за активности тази седмица. Движете се повече, за да сте здрава.</string>
 
@@ -105,7 +105,7 @@
     <string name="first_examination_test7">Микробиологично изследване на влагалищен секрет</string>
     <string name="first_examination_test8">Ранен биохимичен скрининг</string>
 
-    <string name="first_examination_act1">Анамнеза на рискови фактори (възраст, придружаващи заболяваия, усложнения на предишни бременности, вредни навици, професионални, други)</string>
+    <string name="first_examination_act1">Анамнеза на рискови фактори (възраст, придружаващи заболявания, усложнения на предишни бременности, вредни навици, професионални, други)</string>
     <string name="first_examination_act2">Определяне на вероятен термин на раждане (ВТР)</string>
     <string name="first_examination_act3">Измерване на артериално кръвно налягане</string>
     <string name="first_examination_act4">Измерване на ръст</string>
@@ -118,7 +118,7 @@
 
     <string name="second_examination_act1">Измерване на артериално кръвно налягане</string>
     <string name="second_examination_act2">Измерване на ръст</string>
-    <string name="second_examination_act3">Измерване на теелсна маса</string>
+    <string name="second_examination_act3">Измерване на телесна маса</string>
     <string name="second_examination_act4">Гинекологичен статус</string>
     <string name="second_examination_act5">Гинекологична ехография</string>
     <string name="second_examination_act6">Обсъждане на резултати</string>
@@ -189,7 +189,7 @@
     <string name="seventh_examination_act8">Обсъждане на резултати</string>
 
     <!-- 36th week -->
-    <string name="seventh_1_examination_title">3та седмица</string>
+    <string name="seventh_1_examination_title">36та седмица</string>
     <string name="seventh_1_examination_test1">Урокултура</string>
 
     <!-- 38th week -->
@@ -351,7 +351,7 @@
     <string name="dialog_medicine_save_btn">Запази</string>
 
     <string name="dialog_is_allowed_med_title">Внимание</string>
-    <string name="dialog_is_allowed_med_msg">Не забравяйте да се косултирате с Вашия лекар за този медикамент!</string>
+    <string name="dialog_is_allowed_med_msg">Не забравяйте да се консултирате с Вашия лекар за този медикамент!</string>
     <string name="dialog_is_allowed_med_add_to_allowed">В разрешени</string>
     <string name="dialog_is_allowed_med_cancel">Отказ</string>
 
@@ -434,6 +434,7 @@
     <string name="activity_profile_add_image">Добави\nснимка</string>
     <string name="activity_profile_first_pregnancy">1ва бременност</string>
     <string name="activity_profile_second_pregnancy">2ра бременност</string>
+    <string name="activity_profile_third_pregnancy">3та бременност</string>
     <string name="activity_profile_other_pregnancy" formatted="false">%dта бременност</string>
     <string name="activity_profile_edd">Очакван термин</string>
     <string name="activity_profile_language_label">Език на приложението</string>
@@ -458,7 +459,7 @@
     <string name="dialog_add_theme_cancel_btn">Отказ</string>
     <string name="dialog_add_theme_title">Заглавие</string>
     <string name="dialog_add_theme_content">Съдържание</string>
-    <string name="dialog_add_theme_not_all_data">Моля въведете заглавие и съдърание на темата, която искате да публикувате</string>
+    <string name="dialog_add_theme_not_all_data">Моля въведете заглавие и съдържание на темата, която искате да публикувате</string>
     <string name="dialog_add_theme_not_all_data_title">Внимание</string>
 
     <string name="dialog_add_answer_title">Вашият отговор</string>
@@ -482,7 +483,7 @@
     <string name="size_plum">Размер на слива</string>
     <string name="size_lemon">Размер на лимон</string>
     <string name="size_peach">Размер на праскова</string>
-    <string name="size_orange">Размр на портокал</string>
+    <string name="size_orange">Размер на портокал</string>
     <string name="size_avocado">Размер на авокадо</string>
     <string name="size_onion">Размер на глава лук</string>
     <string name="size_pomegranate">Размер на нар</string>
@@ -546,13 +547,13 @@
     <string name="dialog_start_pregnancy_weight_metrix">кг</string>
     <string name="dialog_start_pregnancy_last_menstruation">Първи ден на последната\nменструация</string>
     <string name="dialog_start_pregnancy_regular_menstruation">Редовна менструация?</string>
-    <string name="dialog_start_pregnancy_menstruation_length">Периодичност на меструацията</string>
-    <string name="dialog_start_pregnancy_menstruation_duration">Продължителност на менструцията</string>
+    <string name="dialog_start_pregnancy_menstruation_length">Периодичност на менструацията</string>
+    <string name="dialog_start_pregnancy_menstruation_duration">Продължителност на менструацията</string>
     <string name="dialog_start_pregnancy_days_label">дни</string>
     <string name="dialog_start_pregnancy_unwanted">Нежелана бременност</string>
     <string name="dialog_start_pregnancy_blood_incompatibility">Кръвногрупова несъвместимост между родителите</string>
     <string name="dialog_start_pregnancy_risk_factor_title">Рискови фактори</string>
-    <string name="dialog_start_pregnancy_risk_factor_smoke">Тютюнопушене</string>
+    <string name="dialog_start_pregnancy_risk_factor_smoke">Пушене</string>
     <string name="dialog_start_pregnancy_risk_factor_alcohol">Злоупотреба с алкохол</string>
     <string name="dialog_start_pregnancy_risk_factor_overweight">Наднормено тегло</string>
     <string name="dialog_start_pregnancy_risk_factor_age">Възраст</string>

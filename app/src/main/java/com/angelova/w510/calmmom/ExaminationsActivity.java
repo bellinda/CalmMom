@@ -1,8 +1,10 @@
 package com.angelova.w510.calmmom;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -31,6 +33,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.Map;
@@ -47,6 +50,9 @@ public class ExaminationsActivity extends AppCompatActivity {
 
     private int pregnancyIndex;
 
+    SharedPreferences mPrefs;
+    SharedPreferences.Editor mEditor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +63,9 @@ public class ExaminationsActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.parseColor("#324A5F"));
         }
+
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mPrefs.edit();
 
         mUser = new User();
         mDb = FirebaseFirestore.getInstance();
@@ -153,6 +162,10 @@ public class ExaminationsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         System.out.println("DocumentSnapshot successfully updated!");
+                        Gson gson = new Gson();
+                        String userJson = gson.toJson(mUser);
+                        mEditor.putString("user", userJson);
+                        mEditor.apply();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
