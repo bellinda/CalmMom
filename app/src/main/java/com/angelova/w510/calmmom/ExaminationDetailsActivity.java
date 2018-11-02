@@ -173,7 +173,8 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
         } else {
             Resources bgResources = getLocalizedResources(ExaminationDetailsActivity.this, new Locale("bg"));
             Resources enResources = getLocalizedResources(ExaminationDetailsActivity.this, new Locale("en"));
-            mTestsAdapter = new TestsAdapter(this, Arrays.asList(new Test(bgResources.getString(R.string.examination_no_tests), enResources.getString(R.string.examination_no_tests))), mExamination.getStatus() == ExaminationStatus.COMPLETED);
+            mTests = Arrays.asList(new Test(bgResources.getString(R.string.examination_no_tests), enResources.getString(R.string.examination_no_tests)));
+            mTestsAdapter = new TestsAdapter(this, mTests, mExamination.getStatus() == ExaminationStatus.COMPLETED);
         }
         mUser = (User) getIntent().getSerializableExtra("user");
         mUserEmail = getIntent().getStringExtra("email");
@@ -242,13 +243,18 @@ public class ExaminationDetailsActivity extends AppCompatActivity {
                         if (mTests == null) {
                             mTests = new ArrayList<>();
                         }
+                        Resources bgResources = getLocalizedResources(ExaminationDetailsActivity.this, new Locale("bg"));
+                        if (mTests.size() == 1 && mTests.get(0).getTitle().equalsIgnoreCase(bgResources.getString(R.string.examination_no_tests))) {
+                            mTests = new ArrayList<>();
+                        }
                         if (Locale.getDefault().getLanguage().equalsIgnoreCase("en")) {
                             mTests.add(new Test("", mNewItemInput.getText().toString()));
                         } else {
                             mTests.add(new Test(mNewItemInput.getText().toString(), ""));
                         }
                         mExamination.setTests(mTests);
-                        mTestsAdapter.notifyDataSetChanged();
+                        mTestsAdapter = new TestsAdapter(ExaminationDetailsActivity.this, mTests, mExamination.getStatus() == ExaminationStatus.COMPLETED);
+                        mListTests.setAdapter(mTestsAdapter);
                     } else {
                         if (mMeasurements == null) {
                             mMeasurements = new ArrayList<Measurement>();
