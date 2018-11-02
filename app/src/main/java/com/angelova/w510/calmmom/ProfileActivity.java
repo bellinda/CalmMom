@@ -476,12 +476,14 @@ public class ProfileActivity extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
             Bitmap d = BitmapFactory.decodeFile(picturePath);
-            int nh = (int) ( d.getHeight() * (512.0 / d.getWidth()) );
-            Bitmap scaledImage = Bitmap.createScaledBitmap(d, 512, nh, true);
-            mImageView.setImageBitmap(scaledImage);
-            mAddImageText.setVisibility(View.GONE);
+            if (d != null) {
+                int nh = (int) (d.getHeight() * (512.0 / d.getWidth()));
+                Bitmap scaledImage = Bitmap.createScaledBitmap(d, 512, nh, true);
+                mImageView.setImageBitmap(scaledImage);
+                mAddImageText.setVisibility(View.GONE);
 
-            uploadUserPhoto();
+                uploadUserPhoto();
+            }
         }
     }
 
