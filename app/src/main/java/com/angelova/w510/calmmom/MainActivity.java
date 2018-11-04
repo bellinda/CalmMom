@@ -280,10 +280,19 @@ public class MainActivity extends AppCompatActivity {
                     ObjectMapper mapper = new ObjectMapper();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Map<String, Object> sizes = document.getData();
-                        mCurrentBabySize = mapper.convertValue(sizes.get(Integer.toString(mCurrentPregnancyWeek)), BabySize.class);
+                        if (mCurrentPregnancyWeek >= 40) {
+                            mCurrentBabySize = mapper.convertValue(sizes.get("40"), BabySize.class);
+                        } else if (mCurrentPregnancyWeek <= 0) {
+                            mCurrentBabySize = mapper.convertValue(sizes.get("1"), BabySize.class);
+                        } else {
+                            mCurrentBabySize = mapper.convertValue(sizes.get(Integer.toString(mCurrentPregnancyWeek)), BabySize.class);
+                        }
                     }
-                    mBabySizeView.setText(String.format(getString(R.string.main_activity_size_text), Float.toString(mCurrentBabySize.getWeight()), Float.toString(mCurrentBabySize.getLength())));
-
+                    if (mCurrentBabySize != null) {
+                        mBabySizeView.setText(String.format(getString(R.string.main_activity_size_text), Float.toString(mCurrentBabySize.getWeight()), Float.toString(mCurrentBabySize.getLength())));
+                    } else {
+                        mBabySizeView.setText("");
+                    }
                     if (mLoadingDialog != null) {
                         mLoadingDialog.dismiss();
                     }
