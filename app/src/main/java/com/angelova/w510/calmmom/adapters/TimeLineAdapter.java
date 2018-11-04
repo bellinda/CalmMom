@@ -1,6 +1,5 @@
 package com.angelova.w510.calmmom.adapters;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -16,9 +15,7 @@ import android.widget.TimePicker;
 import com.angelova.w510.calmmom.ExaminationsActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.TimeLineViewHolder;
-import com.angelova.w510.calmmom.dialogs.WarnDialog;
 import com.angelova.w510.calmmom.dialogs.YesNoDialog;
-import com.angelova.w510.calmmom.fragments.ExaminationsFragment;
 import com.angelova.w510.calmmom.models.Examination;
 import com.angelova.w510.calmmom.models.ExaminationStatus;
 import com.angelova.w510.calmmom.utils.DateTimeUtils;
@@ -85,6 +82,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
                             updateAllOlderExaminationsToBePast(timeLineModel);
                             notifyDataSetChanged();
                             ((ExaminationsActivity) mContext).updateExaminationsInDb(mFeedList);
+                            ((ExaminationsActivity) mContext).scheduleNotificationForNextExamination(mFeedList);
                         }
 
                         @Override
@@ -105,10 +103,14 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
         else
             holder.mDate.setText(mContext.getString(R.string.time_line_adapter_no_date));
 
-        if (Locale.getDefault().getLanguage().equalsIgnoreCase("en")) {
-            holder.mMessage.setText(timeLineModel.getTitle());
+        if (timeLineModel.getTitle() != null && timeLineModel.getTitleBg() != null) {
+            if (Locale.getDefault().getLanguage().equalsIgnoreCase("en")) {
+                holder.mMessage.setText(timeLineModel.getTitle());
+            } else {
+                holder.mMessage.setText(timeLineModel.getTitleBg());
+            }
         } else {
-            holder.mMessage.setText(timeLineModel.getTitleBg());
+            holder.mMessage.setText(timeLineModel.getTitle() != null ? timeLineModel.getTitle() : timeLineModel.getTitleBg());
         }
 
         holder.mMessage.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +132,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
                                 timeLineModel.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date.getTime()));
                                 notifyItemChanged(position);
                                 ((ExaminationsActivity) mContext).updateExaminationsInDb(mFeedList);
+                                ((ExaminationsActivity) mContext).scheduleNotificationForNextExamination(mFeedList);
                             }
                         },currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE), false).show();
 
@@ -158,6 +161,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
                                 timeLineModel.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date.getTime()));
                                 notifyItemChanged(position);
                                 ((ExaminationsActivity) mContext).updateExaminationsInDb(mFeedList);
+                                ((ExaminationsActivity) mContext).scheduleNotificationForNextExamination(mFeedList);
                             }
                         },currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE), false).show();
 

@@ -54,6 +54,10 @@
 
         <activity android:name=".ForumActivity"
             android:screenOrientation="portrait"></activity>
+
+        <receiver
+            android:name=".receivers.NextExaminationReceiver"
+            android:exported="false" />
     </application>
 
 </manifest>

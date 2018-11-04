@@ -256,6 +256,8 @@
     <string name="examination_cancel_btn">Cancel</string>
     <string name="examination_save_btn">Save</string>
     <string name="examination_uploading">Uploading&#8230;</string>
+    <string name="examination_next_title">Calm Mom Reminder</string>
+    <string name="examination_next_date" formatted="false">Your next examination is on %s at %sh.</string>
 
     <string name="questions_add_answer">Add answer</string>
     <string name="delete_question_title">Warning</string>

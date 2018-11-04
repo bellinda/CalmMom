@@ -256,6 +256,8 @@
     <string name="examination_cancel_btn">Отказ</string>
     <string name="examination_save_btn">Запази</string>
     <string name="examination_uploading">Записване&#8230;</string>
+    <string name="examination_next_title">Напомняне от Calm Mom</string>
+    <string name="examination_next_date" formatted="false">Вашият следващ прглед е на %s от %s часа.</string>
 
     <string name="questions_add_answer">Добави отговор</string>
     <string name="delete_question_title">Внимание</string>

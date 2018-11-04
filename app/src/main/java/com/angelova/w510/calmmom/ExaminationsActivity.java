@@ -1,5 +1,8 @@
 package com.angelova.w510.calmmom;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -21,8 +24,11 @@ import com.angelova.w510.calmmom.dialogs.YesNoDialog;
 import com.angelova.w510.calmmom.fragments.ExaminationsFragment;
 import com.angelova.w510.calmmom.fragments.QuestionsFragment;
 import com.angelova.w510.calmmom.models.Examination;
+import com.angelova.w510.calmmom.models.ExaminationStatus;
 import com.angelova.w510.calmmom.models.Question;
 import com.angelova.w510.calmmom.models.User;
+import com.angelova.w510.calmmom.receivers.NextExaminationReceiver;
+import com.angelova.w510.calmmom.utils.DateTimeUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,7 +41,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class ExaminationsActivity extends AppCompatActivity {
@@ -222,6 +233,43 @@ public class ExaminationsActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    public void scheduleNotificationForNextExamination(List<Examination> examinations) {
+        String nextExaminationDate = getNextExaminationDate(examinations);
+        if (nextExaminationDate != null) {
+            String date = DateTimeUtils.parseDateTime(nextExaminationDate, "yyyy-MM-dd HH:mm", "dd MMM yyyy");
+            String time = DateTimeUtils.parseDateTime(nextExaminationDate, "yyyy-MM-dd HH:mm", "HH:mm");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+            try {
+                Date exDate = sdf.parse(nextExaminationDate);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(exDate);
+                calendar.set(Calendar.HOUR, 10);
+                calendar.set(Calendar.HOUR_OF_DAY, 10);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
+
+                long when = calendar.getTime().getTime() - (24 * 60 * 60 * 1000); //System.currentTimeMillis() + 60000L;
+
+                AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                Intent intent = new Intent(this, NextExaminationReceiver.class);
+                intent.putExtra("nextExamination", String.format(getString(R.string.examination_next_date), date, time));
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+                am.set(AlarmManager.RTC_WAKEUP, when, pendingIntent);
+            } catch (ParseException pe) {
+                pe.printStackTrace();
+            }
+        }
+    }
+
+    private String getNextExaminationDate(List<Examination> examinations) {
+        for (Examination examination : examinations) {
+            if (examination.getStatus() == ExaminationStatus.CURRENT) {
+                return examination.getDate();
+            }
+        }
+        return null;
     }
 
     public void showYesNoDialogNow(String title, String positiveBtnTitle, String negativeBtnTitle, YesNoDialog.ButtonClickListener listener) {
