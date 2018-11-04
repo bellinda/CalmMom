@@ -215,13 +215,13 @@
                 android:textColorHint="@color/colorContrast"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 android:focusable="false"
-                android:focusableInTouchMode="true">
+                android:focusableInTouchMode="true"
+                android:hint="@string/name_label">
 
                 <EditText
                     android:id="@+id/input_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/name_label"
                     android:textColor="@color/colorContrast"
                     android:focusableInTouchMode="true"
                     android:theme="@style/MyContrastEditTextTheme"
@@ -235,13 +235,13 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorContrast"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                android:hint="@string/age_label"
                 android:layout_marginTop="15dp">
 
                 <EditText
                     android:id="@+id/input_age"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/age_label"
                     android:textColor="@color/colorContrast"
                     android:theme="@style/MyContrastEditTextTheme"
                     android:inputType="number"/>
@@ -254,13 +254,13 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorContrast"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                android:hint="@string/height_label"
                 android:layout_marginTop="15dp">
 
                 <EditText
                     android:id="@+id/input_height"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/height_label"
                     android:textColor="@color/colorContrast"
                     android:theme="@style/MyContrastEditTextTheme"
                     android:inputType="numberDecimal"/>
@@ -273,13 +273,13 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorContrast"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                android:hint="@string/weight_label"
                 android:layout_marginTop="15dp">
 
                 <EditText
                     android:id="@+id/input_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/weight_label"
                     android:textColor="@color/colorContrast"
                     android:theme="@style/MyContrastEditTextTheme"
                     android:inputType="numberDecimal"/>
@@ -1010,13 +1010,13 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorContrast"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                android:hint="@string/menstruation_length_label"
                 android:layout_marginTop="15dp">
 
                 <EditText
                     android:id="@+id/input_menstruation_length"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/menstruation_length_label"
                     android:textColor="@color/colorContrast"
                     android:theme="@style/MyContrastEditTextTheme"
                     android:inputType="number"/>
@@ -1029,13 +1029,13 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorContrast"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                android:hint="@string/menstruation_duration_label"
                 android:layout_marginTop="15dp">
 
                 <EditText
                     android:id="@+id/input_menstruation_duration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/menstruation_duration_label"
                     android:textColor="@color/colorContrast"
                     android:theme="@style/MyContrastEditTextTheme"
                     android:inputType="number"/>

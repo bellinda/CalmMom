@@ -99,6 +99,7 @@
         app:layout_constraintLeft_toRightOf="@id/left_username_guideline"
         app:layout_constraintRight_toLeftOf="@id/right_username_guideline"
         android:textColorHint="@color/colorAccent"
+        android:hint="@string/username_label"
         android:focusable="false"
         android:focusableInTouchMode="true">
 
@@ -106,7 +107,6 @@
             android:id="@+id/input_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/username_label"
             android:textColor="@color/colorAccent"
             android:theme="@style/MyEditTextTheme"
             android:focusableInTouchMode="true"
@@ -124,14 +124,14 @@
         android:layout_marginTop="15dp"
         app:passwordToggleEnabled="true"
         android:textColorHint="@color/colorAccent"
-        app:passwordToggleTint="@color/colorAccent">
+        app:passwordToggleTint="@color/colorAccent"
+        android:hint="@string/password_label">
 
         <EditText
             android:id="@+id/input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="@string/password_label"
             android:textColor="@color/colorAccent"
             android:theme="@style/MyEditTextTheme"/>
 
