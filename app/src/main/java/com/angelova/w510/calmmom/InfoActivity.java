@@ -576,10 +576,12 @@ public class InfoActivity extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
             Bitmap d = BitmapFactory.decodeFile(picturePath);
-            int nh = (int) ( d.getHeight() * (512.0 / d.getWidth()) );
-            Bitmap scaledImage = Bitmap.createScaledBitmap(d, 512, nh, true);
-            mProfileImage.setImageBitmap(scaledImage);
-            mProfileText.setVisibility(View.GONE);
+            if (d != null) {
+                int nh = (int) (d.getHeight() * (512.0 / d.getWidth()));
+                Bitmap scaledImage = Bitmap.createScaledBitmap(d, 512, nh, true);
+                mProfileImage.setImageBitmap(scaledImage);
+                mProfileText.setVisibility(View.GONE);
+            }
         }
     }
 
