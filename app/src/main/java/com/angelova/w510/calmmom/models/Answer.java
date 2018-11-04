@@ -40,7 +40,7 @@ public class Answer implements Serializable, Comparable<Answer> {
 
     @Override
     public int compareTo(@NonNull Answer answer) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.getDefault());
 
         try {
             Date currentItemDate = sdf.parse(this.getSubmittedOn());

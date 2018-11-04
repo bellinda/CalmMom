@@ -98,7 +98,7 @@ public class Theme implements Serializable, Comparable<Theme> {
 
     @Override
     public int compareTo(@NonNull Theme theme) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.getDefault());
 
         try {
             Date currentItemDate = sdf.parse(this.getLastAnsweredOn());

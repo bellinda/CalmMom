@@ -62,7 +62,7 @@ public class AddThemeDialog extends Dialog {
                     Theme theme = new Theme();
                     theme.setTitle(mTitleView.getText().toString());
                     theme.setContent(mContentView.getText().toString());
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault());
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.getDefault());
                     Calendar calendar = Calendar.getInstance();
                     theme.setSubmittedOn(sdf.format(calendar.getTime()));
                     theme.setLastAnsweredOn(sdf.format(calendar.getTime()));

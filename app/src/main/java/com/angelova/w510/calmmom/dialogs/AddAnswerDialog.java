@@ -74,7 +74,7 @@ public class AddAnswerDialog extends Dialog {
                 } else {
                     Answer answer = new Answer();
                     answer.setContent(mAnswerView.getText().toString());
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault());
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.getDefault());
                     Calendar calendar = Calendar.getInstance();
                     answer.setSubmittedOn(sdf.format(calendar.getTime()));
                     listener.onPost(answer);
