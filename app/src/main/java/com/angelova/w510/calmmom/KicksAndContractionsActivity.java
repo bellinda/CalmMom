@@ -77,30 +77,35 @@ public class KicksAndContractionsActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            if (fragmentManager == null) {
+                fragmentManager = getSupportFragmentManager();
+            }
+            if (fragmentManager != null) {
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-            switch (item.getItemId()) {
-                case R.id.navigation_contractions:
-                    Bundle bundleC = new Bundle();
-                    bundleC.putSerializable("user", mUser);
-                    ContractionsFragment questionsFragment = new ContractionsFragment();
-                    questionsFragment.setArguments(bundleC);
-                    transaction.replace(R.id.content, questionsFragment).commit();
-                    if(getSupportActionBar() != null) {
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                    }
-                    return true;
-                case R.id.navigation_kicks:
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("user", mUser);
-                    // set Fragmentclass Arguments
-                    KicksFragment examinationsFragment = new KicksFragment();
-                    examinationsFragment.setArguments(bundle);
-                    transaction.replace(R.id.content, examinationsFragment).commit();
-                    if(getSupportActionBar() != null) {
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                    }
-                    return true;
+                switch (item.getItemId()) {
+                    case R.id.navigation_contractions:
+                        Bundle bundleC = new Bundle();
+                        bundleC.putSerializable("user", mUser);
+                        ContractionsFragment questionsFragment = new ContractionsFragment();
+                        questionsFragment.setArguments(bundleC);
+                        transaction.replace(R.id.content, questionsFragment).commit();
+                        if (getSupportActionBar() != null) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        }
+                        return true;
+                    case R.id.navigation_kicks:
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", mUser);
+                        // set Fragmentclass Arguments
+                        KicksFragment examinationsFragment = new KicksFragment();
+                        examinationsFragment.setArguments(bundle);
+                        transaction.replace(R.id.content, examinationsFragment).commit();
+                        if (getSupportActionBar() != null) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        }
+                        return true;
+                }
             }
             return false;
         }

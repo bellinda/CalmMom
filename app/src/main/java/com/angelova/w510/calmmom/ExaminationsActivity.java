@@ -123,39 +123,35 @@ public class ExaminationsActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            if (fragmentManager == null) {
+                fragmentManager = getSupportFragmentManager();
+            }
+            if (fragmentManager != null) {
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-            switch (item.getItemId()) {
-                case R.id.navigation_examinations:
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("user", mUser);
-                    bundle.putString("email", mUserEmail);
-                    // set Fragmentclass Arguments
-                    ExaminationsFragment examinationsFragment = new ExaminationsFragment();
-                    examinationsFragment.setArguments(bundle);
-                    transaction.replace(R.id.content, examinationsFragment).commit();
-                    if(getSupportActionBar() != null) {
-                        //getSupportActionBar().setTitle(R.string.title_upload);
-//                        toolbarTitle.setText(R.string.title_upload);
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                    }
-                    return true;
-                case R.id.navigation_questions:
-                    Bundle bundleQ = new Bundle();
-                    bundleQ.putSerializable("user", mUser);
-                    QuestionsFragment questionsFragment = new QuestionsFragment();
-                    questionsFragment.setArguments(bundleQ);
-                    transaction.replace(R.id.content, questionsFragment).commit();
-                    if(getSupportActionBar() != null) {
-                        //getSupportActionBar().setTitle(R.string.title_documents);
-//                        toolbar.setVisibility(View.VISIBLE);
-//                        toolbarTitle.setText(R.string.title_waiting);
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                        //change items in toolbar
-                        //WAITING_DOCUMENT_MENU_ITEM_STATE = 0;
-                        //invalidateOptionsMenu();
-                    }
-                    return true;
+                switch (item.getItemId()) {
+                    case R.id.navigation_examinations:
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", mUser);
+                        bundle.putString("email", mUserEmail);
+                        ExaminationsFragment examinationsFragment = new ExaminationsFragment();
+                        examinationsFragment.setArguments(bundle);
+                        transaction.replace(R.id.content, examinationsFragment).commit();
+                        if (getSupportActionBar() != null) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        }
+                        return true;
+                    case R.id.navigation_questions:
+                        Bundle bundleQ = new Bundle();
+                        bundleQ.putSerializable("user", mUser);
+                        QuestionsFragment questionsFragment = new QuestionsFragment();
+                        questionsFragment.setArguments(bundleQ);
+                        transaction.replace(R.id.content, questionsFragment).commit();
+                        if (getSupportActionBar() != null) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        }
+                        return true;
+                }
             }
             return false;
         }

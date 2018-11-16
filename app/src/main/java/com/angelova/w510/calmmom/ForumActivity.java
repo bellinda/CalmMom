@@ -77,6 +77,9 @@ public class ForumActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            if (fragmentManager == null) {
+                fragmentManager = getSupportFragmentManager();
+            }
             if (fragmentManager != null) {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
 
