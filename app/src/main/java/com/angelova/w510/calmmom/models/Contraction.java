@@ -2,9 +2,15 @@ package com.angelova.w510.calmmom.models;
 
 import android.support.annotation.NonNull;
 
-import java.io.Serializable;
+import org.apache.commons.lang3.LocaleUtils;
 
-public class Contraction implements Serializable {
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+public class Contraction implements Serializable, Comparable<Contraction> {
 
     private String date;
     private String startTime;
@@ -70,5 +76,42 @@ public class Contraction implements Serializable {
 
     public void setPainGrade(int painGrade) {
         this.painGrade = painGrade;
+    }
+
+    @Override
+    public int compareTo(@NonNull Contraction contraction) {
+        SimpleDateFormat sdfEn = new SimpleDateFormat("dd MMM yyyy, HH:mm:ss", Locale.US);
+        SimpleDateFormat sdf2En = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss", Locale.US);
+        SimpleDateFormat sdfBg = new SimpleDateFormat("dd MMM yyyy, HH:mm:ss", LocaleUtils.toLocale("bg"));
+        SimpleDateFormat sdf2Bg = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss", LocaleUtils.toLocale("bg"));
+
+        try {
+            Date currentItemDate;
+            Date otherItemDate;
+            if (isDateInEn(this.getDate())) {
+                currentItemDate = sdf2En.parse(sdf2En.format(sdfEn.parse(this.getDate() + ", " + this.getStartTime())));
+            } else {
+                currentItemDate = sdf2Bg.parse(sdf2Bg.format(sdfBg.parse(this.getDate() + ", " + this.getStartTime())));
+            }
+            if (isDateInEn(contraction.getDate())) {
+                otherItemDate = sdf2En.parse(sdf2En.format(sdfEn.parse(contraction.getDate() + ", " + contraction.getStartTime())));
+            } else {
+                otherItemDate = sdf2Bg.parse(sdf2Bg.format(sdfBg.parse(contraction.getDate() + ", " + contraction.getStartTime())));
+            }
+
+            if (currentItemDate.after(otherItemDate)) {
+                return -1;
+            } else if (currentItemDate.before(otherItemDate)) {
+                return 1;
+            }
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+        return 0;
+    }
+
+    private boolean isDateInEn(String date) {
+        return date.contains("Jan") || date.contains("Feb") || date.contains("Mar") || date.contains("Apr") || date.contains("May") || date.contains("Jun")
+                || date.contains("Jul") || date.contains("Aug") || date.contains("Sep") || date.contains("Oct") || date.contains("Nov") || date.contains("Dec");
     }
 }

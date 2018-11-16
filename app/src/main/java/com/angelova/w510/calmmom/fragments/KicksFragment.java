@@ -29,6 +29,7 @@ import com.angelova.w510.calmmom.models.User;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
@@ -83,6 +84,7 @@ public class KicksFragment extends Fragment {
         if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getKicks() != null) {
             mDataList.addAll(mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getKicks());
         }
+        Collections.sort(mDataList);
         mAdapter = new KicksAdapter(mDataList, getActivity());
         mRecyclerView.setAdapter(mAdapter);
 
@@ -178,6 +180,7 @@ public class KicksFragment extends Fragment {
         System.out.println("TIME = " + timeInMinutes);
         Kick kick = new Kick(currentDate, timeInMinutes, counter);
         mDataList.add(0, kick);
+        Collections.sort(mDataList);
         mAdapter.notifyDataSetChanged();
 
         ((KicksAndContractionsActivity)getActivity()).updateKicksInDb(mDataList);

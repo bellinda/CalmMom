@@ -69,6 +69,7 @@ public class ContractionsFragment extends Fragment {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
     private SimpleDateFormat simpleDateFormatWithDate = new SimpleDateFormat("dd MMM yyyy, HH:mm:ss", Locale.getDefault());
     private SimpleDateFormat simpleDateFormatDate = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+    private SimpleDateFormat simpleDateFormatNoLangDate = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -181,7 +182,7 @@ public class ContractionsFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         if (mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getContractions() != null) {
             List<Contraction> contractions = mUser.getPregnancies().get(mUser.getPregnancyConsecutiveId()).getContractions();
-            Collections.reverse(contractions);
+            Collections.sort(contractions);
             mDataList.addAll(contractions);
         }
         mAdapter = new ContractionsAdapter(mDataList, getActivity());
@@ -241,16 +242,22 @@ public class ContractionsFragment extends Fragment {
     private int getCountOfContractionsInLast10Minutes() {
         int count = 0;
         Date currentTime = Calendar.getInstance().getTime();
-        for (Contraction contraction : mDataList) {
-            String[] startTimeParts = contraction.getStartTime().split(":");
-            Calendar contractionCal = Calendar.getInstance();
-            contractionCal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(startTimeParts[0]));
-            contractionCal.set(Calendar.MINUTE, Integer.parseInt(startTimeParts[1]));
-            contractionCal.set(Calendar.SECOND, Integer.parseInt(startTimeParts[2]));
-            Date contractionDate = contractionCal.getTime();
-            if (currentTime.getTime() - contractionDate.getTime() <= 10*60*1000) {
-                count++;
+        try {
+            for (Contraction contraction : mDataList) {
+                if (simpleDateFormatNoLangDate.format(simpleDateFormatDate.parse(contraction.getDate())).equals(simpleDateFormatNoLangDate.format(Calendar.getInstance().getTime()))) {
+                    String[] startTimeParts = contraction.getStartTime().split(":");
+                    Calendar contractionCal = Calendar.getInstance();
+                    contractionCal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(startTimeParts[0]));
+                    contractionCal.set(Calendar.MINUTE, Integer.parseInt(startTimeParts[1]));
+                    contractionCal.set(Calendar.SECOND, Integer.parseInt(startTimeParts[2]));
+                    Date contractionDate = contractionCal.getTime();
+                    if (currentTime.getTime() - contractionDate.getTime() <= 10 * 60 * 1000) {
+                        count++;
+                    }
+                }
             }
+        } catch (ParseException pe) {
+            pe.printStackTrace();
         }
         return count;
     }
