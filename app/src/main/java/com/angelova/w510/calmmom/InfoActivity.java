@@ -334,26 +334,29 @@ public class InfoActivity extends AppCompatActivity {
                     HashMap<String, List<UserActivity>> activities = PregnancyUtils.getInitialUserActivities();
                     mPregnancy.setActivities(activities);
 
+                    Resources bgResources = getLocalizedResources(InfoActivity.this, new Locale("bg"));
+                    Resources enResources = getLocalizedResources(InfoActivity.this, new Locale("en"));
+
                     List<RiskFactor> riskFactors = new ArrayList<RiskFactor>();
                     if (mSmokeChkBox.isChecked()) {
                         riskFactors.add(RiskFactor.Smoking);
-                        customTips.add(new Tip(null, getString(R.string.custom_tip_smoking), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_smoking), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_smoking), bgResources.getString(R.string.custom_tip_smoking), true, false));
                     }
                     if (mAlcoholChkBox.isChecked()) {
                         riskFactors.add(RiskFactor.Alcohol);
-                        customTips.add(new Tip(null, getString(R.string.custom_tip_alcohol), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_alcohol), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_alcohol), bgResources.getString(R.string.custom_tip_alcohol), true, false));
                     }
                     if (mOverweightChkBox.isChecked()) {
                         riskFactors.add(RiskFactor.Overweight);
-                        customTips.add(new Tip(null, getString(R.string.custom_tip_overweight), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_overweight), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_overweight), bgResources.getString(R.string.custom_tip_overweight), true, false));
                     }
                     if (mAgeChkBox.isChecked()) {
                         riskFactors.add(RiskFactor.Age);
-                        customTips.add(new Tip(null, getString(R.string.custom_tip_age), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_age), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_age), bgResources.getString(R.string.custom_tip_age), true, false));
                     }
                     if (mUnderfeedingChkBox.isChecked()) {
                         riskFactors.add(RiskFactor.UnderFeeding);
-                        customTips.add(new Tip(null, getString(R.string.custom_tip_underfeeding), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_underfeeding), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_underfeeding), bgResources.getString(R.string.custom_tip_underfeeding), true, false));
                     }
                     if (mFoodAllChkBox.isChecked()) {
                         riskFactors.add(RiskFactor.FoodAllergy);
@@ -362,7 +365,7 @@ public class InfoActivity extends AppCompatActivity {
                         riskFactors.add(RiskFactor.MedicinesAllergy);
                     }
                     if (mFoodAllChkBox.isChecked() || mMedAllChkBox.isChecked()) {
-                        customTips.add(new Tip(null, getString(R.string.custom_tip_allergy), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_allergy), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_allergy), bgResources.getString(R.string.custom_tip_allergy), true, false));
                     }
                     mUser.setRiskFactors(riskFactors);
 
@@ -406,7 +409,7 @@ public class InfoActivity extends AppCompatActivity {
                     }
 
                     if (mAbortionSwitch.isChecked() || (!mPregnancy.isFirstPregnancy() && mUser.getStillbornKids() > 0) || mUser.getComplicationsOtherPregnancies() != null) {
-                        customTips.add(new Tip(null, getString(R.string.custom_tip_pregnancies_history), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_pregnancies_history), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_pregnancies_history), bgResources.getString(R.string.custom_tip_pregnancies_history), true, false));
                     }
 
                     if (mInfectiousDiseases.getText() != null && !mInfectiousDiseases.getText().toString().isEmpty()) {
@@ -423,7 +426,7 @@ public class InfoActivity extends AppCompatActivity {
 
                     if (mFamilyHistory.getText() != null && !mFamilyHistory.getText().toString().isEmpty()) {
                         mUser.setFamilyHistories(mFamilyHistory.getText().toString());
-                        customTips.add(new Tip(null, getString(R.string.custom_tip_family_history), getLocalizedResources(InfoActivity.this, new Locale("bg")).getString(R.string.custom_tip_family_history), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_family_history), bgResources.getString(R.string.custom_tip_family_history), true, false));
                     }
 
                     if (mFeaturesAndComplications.getText() != null && !mFeaturesAndComplications.getText().toString().isEmpty()) {

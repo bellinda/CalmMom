@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 List<UserActivity> currentWeekActivities = currentPregnancy.getActivities().get(Integer.toString(mCurrentPregnancyWeek));
                 if ((currentWeekActivities == null || currentWeekActivities.size() == 0) && currentWeekWeight.getValue() - previousWeekWeight.getValue() > 0) {
                     if (!isNotEnoughActivitiesTipPresent()) {
-                        mUser.getCustomTips().add(new Tip(null, getString(R.string.custom_tip_not_enough_activities), getLocalizedResources(MainActivity.this, new Locale("bg")).getString(R.string.custom_tip_not_enough_activities), true, false));
+                        mUser.getCustomTips().add(new Tip(null, getLocalizedResources(MainActivity.this, new Locale("en")).getString(R.string.custom_tip_not_enough_activities), getLocalizedResources(MainActivity.this, new Locale("bg")).getString(R.string.custom_tip_not_enough_activities), true, false));
                         updateUser();
                     }
                 } else {
@@ -443,7 +443,7 @@ public class MainActivity extends AppCompatActivity {
         if (mUser.getCustomTips() != null) {
             for (int i = 0; i < mUser.getCustomTips().size(); i++) {
                 Tip tip = mUser.getCustomTips().get(i);
-                if (tip.getContent().equals(getString(R.string.custom_tip_not_enough_activities))) {
+                if (tip.getContent().equals(getString(R.string.custom_tip_not_enough_activities)) || tip.getBgContent().equals(getString(R.string.custom_tip_not_enough_activities))) {
                     mUser.getCustomTips().remove(i);
                     updateUser();
                     break;
@@ -456,7 +456,7 @@ public class MainActivity extends AppCompatActivity {
         if (mUser.getCustomTips() != null) {
             for (int i = 0; i < mUser.getCustomTips().size(); i++) {
                 Tip tip = mUser.getCustomTips().get(i);
-                if (tip.getContent().equals(getString(R.string.custom_tip_not_enough_activities))) {
+                if (tip.getContent().equals(getString(R.string.custom_tip_not_enough_activities)) || tip.getBgContent().equals(getString(R.string.custom_tip_not_enough_activities))) {
                     return true;
                 }
             }

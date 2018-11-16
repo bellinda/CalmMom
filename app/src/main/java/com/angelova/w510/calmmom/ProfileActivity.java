@@ -361,10 +361,10 @@ public class ProfileActivity extends AppCompatActivity {
                         mUser.setPregnancyCount(mUser.getPregnancyCount() + 1);
                         mUser.setPregnancyConsecutiveId(mUser.getPregnancyConsecutiveId() + 1);
                         if (mUser.getStillbornKids() > 0 || mUser.getDesiredAbortions() > 0 || mUser.getAbortionsOnMedEvidence() > 0 || mUser.getMiscarriages() > 0 || mUser.getComplicationsOtherPregnancies() != null) {
-                            customTips.add(new Tip(null, getString(R.string.custom_tip_pregnancies_history), getLocalizedResources(ProfileActivity.this, new Locale("bg")).getString(R.string.custom_tip_pregnancies_history), true, false));
+                            customTips.add(new Tip(null, getLocalizedResources(ProfileActivity.this, new Locale("en")).getString(R.string.custom_tip_pregnancies_history), getLocalizedResources(ProfileActivity.this, new Locale("bg")).getString(R.string.custom_tip_pregnancies_history), true, false));
                         }
                         if (mUser.getFamilyHistories() != null) {
-                            customTips.add(new Tip(null, getString(R.string.custom_tip_family_history), getLocalizedResources(ProfileActivity.this, new Locale("bg")).getString(R.string.custom_tip_family_history), true, false));
+                            customTips.add(new Tip(null, getLocalizedResources(ProfileActivity.this, new Locale("en")).getString(R.string.custom_tip_family_history), getLocalizedResources(ProfileActivity.this, new Locale("bg")).getString(R.string.custom_tip_family_history), true, false));
                         }
                         mUser.setCustomTips(customTips);
 

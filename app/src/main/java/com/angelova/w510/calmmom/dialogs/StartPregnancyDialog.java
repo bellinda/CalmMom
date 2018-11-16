@@ -178,27 +178,31 @@ public class StartPregnancyDialog extends Dialog {
 
                     pregnancy.setUnwantedPregnancy(mUnwantedPregnancySwitch.isChecked());
                     pregnancy.setBloodGroupIncompatibility(mBloodIncompatibilitySwitch.isChecked());
+
+                    Resources bgResources = getLocalizedResources(activity, new Locale("bg"));
+                    Resources enResources = getLocalizedResources(activity, new Locale("en"));
+
                     List<Tip> customTips = new ArrayList<>();
                     List<RiskFactor> riskFactors = new ArrayList<>();
                     if (mSmokeRisk.isChecked()) {
                         riskFactors.add(RiskFactor.Smoking);
-                        customTips.add(new Tip(null, activity.getString(R.string.custom_tip_smoking), getLocalizedResources(activity, new Locale("bg")).getString(R.string.custom_tip_smoking), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_smoking), bgResources.getString(R.string.custom_tip_smoking), true, false));
                     }
                     if (mAlcoholRisk.isChecked()) {
                         riskFactors.add(RiskFactor.Alcohol);
-                        customTips.add(new Tip(null, activity.getString(R.string.custom_tip_alcohol), getLocalizedResources(activity, new Locale("bg")).getString(R.string.custom_tip_alcohol), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_alcohol), bgResources.getString(R.string.custom_tip_alcohol), true, false));
                     }
                     if (mOverweightRisk.isChecked()) {
                         riskFactors.add(RiskFactor.Overweight);
-                        customTips.add(new Tip(null, activity.getString(R.string.custom_tip_overweight), getLocalizedResources(activity, new Locale("bg")).getString(R.string.custom_tip_overweight), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_overweight), bgResources.getString(R.string.custom_tip_overweight), true, false));
                     }
                     if (mAgeRisk.isChecked()) {
                         riskFactors.add(RiskFactor.Age);
-                        customTips.add(new Tip(null, activity.getString(R.string.custom_tip_age), getLocalizedResources(activity, new Locale("bg")).getString(R.string.custom_tip_age), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_age), bgResources.getString(R.string.custom_tip_age), true, false));
                     }
                     if (mUnderfeedingRisk.isChecked()) {
                         riskFactors.add(RiskFactor.UnderFeeding);
-                        customTips.add(new Tip(null, activity.getString(R.string.custom_tip_underfeeding), getLocalizedResources(activity, new Locale("bg")).getString(R.string.custom_tip_underfeeding), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_underfeeding), bgResources.getString(R.string.custom_tip_underfeeding), true, false));
                     }
                     if (mFoodAllergyRisk.isChecked()) {
                         riskFactors.add(RiskFactor.FoodAllergy);
@@ -207,11 +211,11 @@ public class StartPregnancyDialog extends Dialog {
                         riskFactors.add(RiskFactor.MedicinesAllergy);
                     }
                     if (mFoodAllergyRisk.isChecked() || mMedAllergyRisk.isChecked()) {
-                        customTips.add(new Tip(null, activity.getString(R.string.custom_tip_allergy), getLocalizedResources(activity, new Locale("bg")).getString(R.string.custom_tip_allergy), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_allergy), bgResources.getString(R.string.custom_tip_allergy), true, false));
                     }
 
                     if (mBloodIncompatibilitySwitch.isChecked()) {
-                        customTips.add(new Tip(null, activity.getString(R.string.custom_tip_blood_groups), getLocalizedResources(activity, new Locale("bg")).getString(R.string.custom_tip_blood_groups), true, false));
+                        customTips.add(new Tip(null, enResources.getString(R.string.custom_tip_blood_groups), bgResources.getString(R.string.custom_tip_blood_groups), true, false));
                     }
 
                     listener.onSave(pregnancy, currentWeight, mRegularSwitch.isChecked(), Integer.parseInt(mCycleLengthView.getText().toString()), Integer.parseInt(mDurationView.getText().toString()), riskFactors, customTips);
