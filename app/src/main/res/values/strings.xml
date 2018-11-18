@@ -240,6 +240,8 @@
     <string name="examination_title_text">Set title</string>
     <string name="examination_no_title">No title</string>
     <string name="examination_no_tests">No tests were planned</string>
+    <string name="examination_tests">Tests</string>
+    <string name="examination_measurements">Measurements</string>
     <string name="examination_documents_title">Results and Documents</string>
     <string name="examination_images_title">Images</string>
     <string name="examination_no_documents">0 documents added</string>

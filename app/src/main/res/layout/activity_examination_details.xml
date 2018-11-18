@@ -112,7 +112,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Tests"
+            android:text="@string/examination_tests"
             android:checked="true"
             />
 
@@ -122,7 +122,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Measurements"/>
+            android:text="@string/examination_measurements"/>
     </info.hoang8f.android.segmented.SegmentedGroup>
 
     <android.support.constraint.Guideline
