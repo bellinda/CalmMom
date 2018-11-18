@@ -66,7 +66,7 @@ public class KicksAndContractionsActivity extends AppCompatActivity {
         // set Fragmentclass Arguments
         ContractionsFragment contractionsFragment = new ContractionsFragment();
         contractionsFragment.setArguments(bundle);
-        transaction.replace(R.id.content, contractionsFragment).commit();
+        transaction.replace(R.id.content, contractionsFragment).commitAllowingStateLoss();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -89,7 +89,7 @@ public class KicksAndContractionsActivity extends AppCompatActivity {
                         bundleC.putSerializable("user", mUser);
                         ContractionsFragment questionsFragment = new ContractionsFragment();
                         questionsFragment.setArguments(bundleC);
-                        transaction.replace(R.id.content, questionsFragment).commit();
+                        transaction.replace(R.id.content, questionsFragment).commitAllowingStateLoss();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }
@@ -100,7 +100,7 @@ public class KicksAndContractionsActivity extends AppCompatActivity {
                         // set Fragmentclass Arguments
                         KicksFragment examinationsFragment = new KicksFragment();
                         examinationsFragment.setArguments(bundle);
-                        transaction.replace(R.id.content, examinationsFragment).commit();
+                        transaction.replace(R.id.content, examinationsFragment).commitAllowingStateLoss();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }

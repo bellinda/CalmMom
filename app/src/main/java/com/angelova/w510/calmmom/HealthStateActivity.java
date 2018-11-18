@@ -94,7 +94,7 @@ public class HealthStateActivity extends AppCompatActivity {
                         // set Fragmentclass Arguments
                         WeightFragment weightFragment = new WeightFragment();
                         weightFragment.setArguments(bundle);
-                        transaction.replace(R.id.content, weightFragment).commit();
+                        transaction.replace(R.id.content, weightFragment).commitAllowingStateLoss();
                     } else {
                         //The user doesn't exist...
                         //createUser(email);
@@ -127,7 +127,7 @@ public class HealthStateActivity extends AppCompatActivity {
                         // set Fragmentclass Arguments
                         WeightFragment weightFragment = new WeightFragment();
                         weightFragment.setArguments(bundle);
-                        transaction.replace(R.id.content, weightFragment).commit();
+                        transaction.replace(R.id.content, weightFragment).commitAllowingStateLoss();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }
@@ -137,7 +137,7 @@ public class HealthStateActivity extends AppCompatActivity {
                         bundleA.putSerializable("user", mUser);
                         ActivitiesFragment activitiesFragment = new ActivitiesFragment();
                         activitiesFragment.setArguments(bundleA);
-                        transaction.replace(R.id.content, activitiesFragment).commit();
+                        transaction.replace(R.id.content, activitiesFragment).commitAllowingStateLoss();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }
@@ -147,7 +147,7 @@ public class HealthStateActivity extends AppCompatActivity {
                         bundleM.putSerializable("user", mUser);
                         MedicinesFragment medicinesFragment = new MedicinesFragment();
                         medicinesFragment.setArguments(bundleM);
-                        transaction.replace(R.id.content, medicinesFragment).commit();
+                        transaction.replace(R.id.content, medicinesFragment).commitAllowingStateLoss();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }
@@ -157,7 +157,7 @@ public class HealthStateActivity extends AppCompatActivity {
                         bundleMl.putSerializable("user", mUser);
                         MealsFragment mealsFragment = new MealsFragment();
                         mealsFragment.setArguments(bundleMl);
-                        transaction.replace(R.id.content, mealsFragment).commit();
+                        transaction.replace(R.id.content, mealsFragment).commitAllowingStateLoss();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }
@@ -167,7 +167,7 @@ public class HealthStateActivity extends AppCompatActivity {
                         bundleW.putSerializable("user", mUser);
                         WaterFragment waterFragment = new WaterFragment();
                         waterFragment.setArguments(bundleW);
-                        transaction.replace(R.id.content, waterFragment).commit();
+                        transaction.replace(R.id.content, waterFragment).commitAllowingStateLoss();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }

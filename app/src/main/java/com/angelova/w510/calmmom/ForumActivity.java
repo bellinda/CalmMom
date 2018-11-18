@@ -65,7 +65,7 @@ public class ForumActivity extends AppCompatActivity {
         bundle.putString("email", mUserEmail);
         ThemesFragment themesFragment = new ThemesFragment();
         themesFragment.setArguments(bundle);
-        transaction.replace(R.id.content, themesFragment).commit();
+        transaction.replace(R.id.content, themesFragment).commitAllowingStateLoss();
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -91,7 +91,7 @@ public class ForumActivity extends AppCompatActivity {
                         // set Fragmentclass Arguments
                         ThemesFragment themesFragment = new ThemesFragment();
                         themesFragment.setArguments(bundle);
-                        transaction.replace(R.id.content, themesFragment).commit();
+                        transaction.replace(R.id.content, themesFragment).commitAllowingStateLoss();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }
@@ -102,7 +102,7 @@ public class ForumActivity extends AppCompatActivity {
                         bundleA.putString("email", mUserEmail);
                         AnsweredByMeFragment answeredByMeFragment = new AnsweredByMeFragment();
                         answeredByMeFragment.setArguments(bundleA);
-                        transaction.replace(R.id.content, answeredByMeFragment).commit();
+                        transaction.replace(R.id.content, answeredByMeFragment).commitAllowingStateLoss();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }
@@ -113,7 +113,7 @@ public class ForumActivity extends AppCompatActivity {
                         bundleM.putString("email", mUserEmail);
                         MyThemesFragment myThemesFragment = new MyThemesFragment();
                         myThemesFragment.setArguments(bundleM);
-                        transaction.replace(R.id.content, myThemesFragment).commit();
+                        transaction.replace(R.id.content, myThemesFragment).commitAllowingStateLoss();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }

@@ -104,7 +104,7 @@ public class ExaminationsActivity extends AppCompatActivity {
                         // set Fragmentclass Arguments
                         ExaminationsFragment examinationsFragment = new ExaminationsFragment();
                         examinationsFragment.setArguments(bundle);
-                        transaction.replace(R.id.content, examinationsFragment).commit();
+                        transaction.replace(R.id.content, examinationsFragment).commitAllowingStateLoss();
                     } else {
                         //The user doesn't exist...
                         //createUser(email);
@@ -136,7 +136,7 @@ public class ExaminationsActivity extends AppCompatActivity {
                         bundle.putString("email", mUserEmail);
                         ExaminationsFragment examinationsFragment = new ExaminationsFragment();
                         examinationsFragment.setArguments(bundle);
-                        transaction.replace(R.id.content, examinationsFragment).commit();
+                        transaction.replace(R.id.content, examinationsFragment).commitAllowingStateLoss();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }
@@ -146,7 +146,7 @@ public class ExaminationsActivity extends AppCompatActivity {
                         bundleQ.putSerializable("user", mUser);
                         QuestionsFragment questionsFragment = new QuestionsFragment();
                         questionsFragment.setArguments(bundleQ);
-                        transaction.replace(R.id.content, questionsFragment).commit();
+                        transaction.replace(R.id.content, questionsFragment).commitAllowingStateLoss();
                         if (getSupportActionBar() != null) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         }
