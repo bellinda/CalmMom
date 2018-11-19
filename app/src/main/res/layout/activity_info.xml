@@ -244,7 +244,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorContrast"
                     android:theme="@style/MyContrastEditTextTheme"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:maxLength="3"/>
 
             </android.support.design.widget.TextInputLayout>
 
