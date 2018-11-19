@@ -243,7 +243,7 @@ public class AddEditMealDialog extends Dialog {
                         meal.setQuantity(quantity);
                     }
                     meal.setTime(time);
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.US);
                     meal.setDate(sdf.format(selectedDate));
 
                     if (mealToEdit != null) {

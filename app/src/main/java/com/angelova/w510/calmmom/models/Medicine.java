@@ -65,10 +65,10 @@ public class Medicine implements Serializable, Comparable<Medicine> {
 
     @Override
     public int compareTo(@NonNull Medicine m) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy kk:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("kk:mm", Locale.getDefault());
         try {
-            Date currentItemDate = sdf.parse(String.format("%s %s", this.getTakenOn(), this.getTime()));
-            Date otherItemDate = sdf.parse(String.format("%s %s", m.getTakenOn(), m.getTime()));
+            Date currentItemDate = sdf.parse(this.getTime());
+            Date otherItemDate = sdf.parse(m.getTime());
 
             if (currentItemDate.after(otherItemDate)) {
                 return -1;

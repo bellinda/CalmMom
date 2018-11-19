@@ -17,14 +17,13 @@ import com.angelova.w510.calmmom.HealthStateActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.models.User;
 
+import org.apache.commons.lang3.LocaleUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -64,7 +63,7 @@ public class WaterFragment extends Fragment {
         mUser = (User) getArguments().getSerializable("user");
         pregnancyIndex = mUser.getPregnancyConsecutiveId();
 
-        sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+        sdf = new SimpleDateFormat("dd MMM yyyy", Locale.US);
 
         int currentPregnancyWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation()) / 7 + 1);
         int daysOfCurrentWeek = (int) (getDaysSinceDate(mUser.getPregnancies().get(pregnancyIndex).getFirstDayOfLastMenstruation()) % 7 + 1);
@@ -194,11 +193,19 @@ public class WaterFragment extends Fragment {
 
     private int getWaterIntakeForCurrentDay() {
         if (mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes() != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.US);
+            SimpleDateFormat sdfBg = new SimpleDateFormat("dd MMM yyyy", LocaleUtils.toLocale("bg"));
             //the selected date on opening the fragment is always the current date
             String date = sdf.format(Calendar.getInstance().getTime());
+            String dateBg = sdfBg.format(Calendar.getInstance().getTime());
             if (mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(date) != null) {
-                return mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(date);
+                if (mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(dateBg) != null) {
+                    return mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(date) + mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(dateBg);
+                } else {
+                    return mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(date);
+                }
+            } else if (mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(dateBg) != null) {
+                return mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(dateBg);
             }
         }
         return 0;
@@ -206,10 +213,18 @@ public class WaterFragment extends Fragment {
 
     private int getWaterIntakeForDate(Calendar date) {
         if (mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes() != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.US);
+            SimpleDateFormat sdfBg = new SimpleDateFormat("dd MMM yyyy", LocaleUtils.toLocale("bg"));
             String formattedDate = sdf.format(date.getTime());
+            String formattedDateBg = sdfBg.format(date.getTime());
             if (mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(formattedDate) != null) {
-                return mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(formattedDate);
+                if (mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(formattedDateBg) != null) {
+                    return mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(formattedDate) + mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(formattedDateBg);
+                } else {
+                    return mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(formattedDate);
+                }
+            } else if (mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(formattedDateBg) != null) {
+                return mUser.getPregnancies().get(pregnancyIndex).getWaterIntakes().get(formattedDateBg);
             }
         }
         return 0;

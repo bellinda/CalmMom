@@ -43,4 +43,9 @@ public class DateTimeUtils {
             return "";
         }
     }
+
+    public static boolean isDateInEn(String date) {
+        return date.contains("Jan") || date.contains("Feb") || date.contains("Mar") || date.contains("Apr") || date.contains("May") || date.contains("Jun")
+                || date.contains("Jul") || date.contains("Aug") || date.contains("Sep") || date.contains("Oct") || date.contains("Nov") || date.contains("Dec");
+    }
 }

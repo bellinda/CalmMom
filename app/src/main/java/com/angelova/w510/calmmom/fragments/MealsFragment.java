@@ -23,6 +23,8 @@ import com.angelova.w510.calmmom.models.User;
 import com.github.lzyzsd.circleprogress.ArcProgress;
 import com.melnykov.fab.FloatingActionButton;
 
+import org.apache.commons.lang3.LocaleUtils;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -302,12 +304,20 @@ public class MealsFragment extends Fragment {
     private void getMealsForCurrentDate() {
         meals = new ArrayList<>();
         if (mUser.getPregnancies().get(pregnancyIndex).getMeals() != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.US);
+            SimpleDateFormat sdfBg = new SimpleDateFormat("dd MMM yyyy", LocaleUtils.toLocale("bg"));
             //the selected date on opening the fragment is always the current date
             String date = sdf.format(Calendar.getInstance().getTime());
+            String dateBg = sdfBg.format(Calendar.getInstance().getTime());
             List<Meal> mealsForCurrentDate = mUser.getPregnancies().get(pregnancyIndex).getMeals().get(date);
+            List<Meal> mealsForCurrentDateBg = mUser.getPregnancies().get(pregnancyIndex).getMeals().get(dateBg);
             if (mealsForCurrentDate != null) {
                 meals = mealsForCurrentDate;
+                if (mealsForCurrentDateBg != null) {
+                    meals.addAll(mealsForCurrentDateBg);
+                }
+            } else if (mealsForCurrentDateBg != null) {
+                meals = mealsForCurrentDateBg;
             }
         }
     }
@@ -315,11 +325,19 @@ public class MealsFragment extends Fragment {
     private void getMealsForDate(Date date) {
         meals = new ArrayList<>();
         if (mUser.getPregnancies().get(pregnancyIndex).getMeals() != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.US);
+            SimpleDateFormat sdfBg = new SimpleDateFormat("dd MMM yyyy", LocaleUtils.toLocale("bg"));
             String dateAsString = sdf.format(date);
+            String dateAsStringBg = sdfBg.format(date);
             List<Meal> mealsForCurrentDate = mUser.getPregnancies().get(pregnancyIndex).getMeals().get(dateAsString);
+            List<Meal> mealsForCurrentDateBg = mUser.getPregnancies().get(pregnancyIndex).getMeals().get(dateAsStringBg);
             if (mealsForCurrentDate != null) {
                 meals = mealsForCurrentDate;
+                if (mealsForCurrentDateBg != null) {
+                    meals.addAll(mealsForCurrentDateBg);
+                }
+            } else if (mealsForCurrentDateBg != null) {
+                meals = mealsForCurrentDateBg;
             }
         }
     }
@@ -333,11 +351,13 @@ public class MealsFragment extends Fragment {
 
     private List<String> getAllDatesFromSelectedWeek(Calendar currentDate, int dayOfCurrentWeek) {
         List<String> datesInWeek = new ArrayList<>();
-        DateFormat format = new SimpleDateFormat("dd MMM yyyy");
+        DateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.US);
+        DateFormat formatBg = new SimpleDateFormat("dd MMM yyyy", LocaleUtils.toLocale("bg"));
         currentDate.add(Calendar.DAY_OF_MONTH, 1 - dayOfCurrentWeek);
 
         for (int i = 0; i < 7; i++) {
             datesInWeek.add(format.format(currentDate.getTime()));
+            datesInWeek.add(formatBg.format(currentDate.getTime()));
             currentDate.add(Calendar.DAY_OF_MONTH, 1);
         }
         return datesInWeek;

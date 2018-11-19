@@ -21,9 +21,12 @@ import com.angelova.w510.calmmom.dialogs.IsAllowedMedDialog;
 import com.angelova.w510.calmmom.dialogs.TakenMedicineDialog;
 import com.angelova.w510.calmmom.models.Medicine;
 import com.angelova.w510.calmmom.models.User;
+import com.angelova.w510.calmmom.utils.DateTimeUtils;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.melnykov.fab.FloatingActionButton;
+
+import org.apache.commons.lang3.LocaleUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -192,13 +195,19 @@ public class MedicinesFragment extends Fragment {
 
     private void loadAllEventsOnTheCalendar() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy kk:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy kk:mm", Locale.US);
+        SimpleDateFormat sdfBg = new SimpleDateFormat("dd MMM yyyy kk:mm", LocaleUtils.toLocale("bg"));
 
         if (mUser.getPregnancies().get(pregnancyIndex).getTakenMedicines() != null) {
 
             for (Medicine medicine : mUser.getPregnancies().get(pregnancyIndex).getTakenMedicines()) {
                 try {
-                    Date date = sdf.parse(String.format("%s %s", medicine.getTakenOn(), medicine.getTime()));
+                    Date date;
+                    if (DateTimeUtils.isDateInEn(medicine.getTakenOn())) {
+                        date = sdf.parse(String.format("%s %s", medicine.getTakenOn(), medicine.getTime()));
+                    } else {
+                        date = sdfBg.parse(String.format("%s %s", medicine.getTakenOn(), medicine.getTime()));
+                    }
                     calendar.setTime(date);
 
                     Event ev1 = new Event(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryTransparent, null), calendar.getTimeInMillis(), medicine);

@@ -81,7 +81,7 @@ public class TakenMedicineDialog extends Dialog {
                 } else {
                     Medicine medicine = new Medicine();
                     medicine.setTitle(titleView.getText().toString());
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.US);
                     medicine.setTakenOn(sdf.format(selectedDate));
                     medicine.setTime(timeView.getText().toString());
                     if (commentView.getText() != null && !commentView.getText().toString().isEmpty()) {

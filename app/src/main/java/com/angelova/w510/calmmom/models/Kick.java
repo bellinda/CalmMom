@@ -2,6 +2,8 @@ package com.angelova.w510.calmmom.models;
 
 import android.support.annotation.NonNull;
 
+import com.angelova.w510.calmmom.utils.DateTimeUtils;
+
 import org.apache.commons.lang3.LocaleUtils;
 
 import java.io.Serializable;
@@ -61,12 +63,12 @@ public class Kick implements Serializable, Comparable<Kick> {
         try {
             Date currentItemDate;
             Date otherItemDate;
-            if (isDateInEn(this.getDate())) {
+            if (DateTimeUtils.isDateInEn(this.getDate())) {
                 currentItemDate = sdf2En.parse(sdf2En.format(sdfEn.parse(this.getDate())));
             } else {
                 currentItemDate = sdf2Bg.parse(sdf2Bg.format(sdfBg.parse(this.getDate())));
             }
-            if (isDateInEn(kick.getDate())) {
+            if (DateTimeUtils.isDateInEn(kick.getDate())) {
                 otherItemDate = sdf2En.parse(sdf2En.format(sdfEn.parse(kick.getDate())));
             } else {
                 otherItemDate = sdf2Bg.parse(sdf2Bg.format(sdfBg.parse(kick.getDate())));
@@ -81,10 +83,5 @@ public class Kick implements Serializable, Comparable<Kick> {
             pe.printStackTrace();
         }
         return 0;
-    }
-
-    private boolean isDateInEn(String date) {
-        return date.contains("Jan") || date.contains("Feb") || date.contains("Mar") || date.contains("Apr") || date.contains("May") || date.contains("Jun")
-                || date.contains("Jul") || date.contains("Aug") || date.contains("Sep") || date.contains("Oct") || date.contains("Nov") || date.contains("Dec");
     }
 }

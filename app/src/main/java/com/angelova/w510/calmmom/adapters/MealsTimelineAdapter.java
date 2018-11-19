@@ -15,7 +15,10 @@ import com.angelova.w510.calmmom.HealthStateActivity;
 import com.angelova.w510.calmmom.R;
 import com.angelova.w510.calmmom.dialogs.AddEditMealDialog;
 import com.angelova.w510.calmmom.models.Meal;
+import com.angelova.w510.calmmom.utils.DateTimeUtils;
 import com.github.vipulasri.timelineview.TimelineView;
+
+import org.apache.commons.lang3.LocaleUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -115,9 +118,15 @@ public class MealsTimelineAdapter extends RecyclerView.Adapter<MealsTimelineAdap
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+                SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.US);
+                SimpleDateFormat sdfBg = new SimpleDateFormat("dd MMM yyyy", LocaleUtils.toLocale("bg"));
                 try {
-                    Date mealDate = sdf.parse(meal.getDate());
+                    Date mealDate;
+                    if (DateTimeUtils.isDateInEn(meal.getDate())) {
+                        mealDate = sdf.parse(meal.getDate());
+                    } else {
+                        mealDate = sdfBg.parse(meal.getDate());
+                    }
                     AddEditMealDialog dialog = new AddEditMealDialog(mContext, mealDate, meal, new AddEditMealDialog.DialogClickListener() {
                         @Override
                         public void onSave(Meal meal) {
@@ -136,7 +145,6 @@ public class MealsTimelineAdapter extends RecyclerView.Adapter<MealsTimelineAdap
             }
         };
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
