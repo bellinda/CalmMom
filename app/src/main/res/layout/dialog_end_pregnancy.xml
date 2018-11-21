@@ -213,7 +213,7 @@
         android:layout_height="250dp"
         android:id="@+id/live_birth_data"
         android:layout_marginTop="10dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -337,26 +337,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:paddingBottom="10dp"
                 android:weightSum="10">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/dialog_end_pregnancy_baby_sex"
                     android:layout_weight="5"
                     android:gravity="center_vertical"
                     android:textSize="18sp"
                     android:textColor="@color/colorContrast"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="10dp"
+                    android:paddingBottom="10dp"/>
 
                 <RadioGroup
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
                     android:weightSum="2"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
 
                     <android.support.v7.widget.AppCompatRadioButton
                         android:layout_width="0dp"

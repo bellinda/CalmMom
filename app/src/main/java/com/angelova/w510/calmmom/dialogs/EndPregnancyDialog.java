@@ -236,7 +236,7 @@ public class EndPregnancyDialog extends Dialog {
                             outcome.setBabyLength(Integer.parseInt(mBabyLengthInput.getText().toString()));
                             outcome.setBabyWeight(mBabyWeightInput.getText().toString());
                             if (mHoursInput.getText() != null && !mHoursInput.getText().toString().isEmpty()) {
-                                outcome.setHoursOfLabour(Integer.parseInt(mHoursInput.getText().toString()));
+                                outcome.setHoursOfLabour(Double.parseDouble(mHoursInput.getText().toString()));
                             }
                             if (mComplicationsInput.getText() != null && !mComplicationsInput.getText().toString().isEmpty()) {
                                 outcome.setComplications(mComplicationsInput.getText().toString());
@@ -244,7 +244,7 @@ public class EndPregnancyDialog extends Dialog {
                             outcome.setDate(mBirthDateView.getText().toString());
                             outcome.setTime(mBirthTimeView.getText().toString());
 
-                            listener.onSave(outcome);
+                            //listener.onSave(outcome);
                             dismiss();
                         }
                     }

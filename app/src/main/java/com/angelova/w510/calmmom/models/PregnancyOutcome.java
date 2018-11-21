@@ -12,7 +12,7 @@ public class PregnancyOutcome implements Serializable {
     private String babyWeight;
     private int babyLength;
     private String complications;
-    private int hoursOfLabour;
+    private double hoursOfLabour;
     private String comments;
     private AbortionPurpose abortionPurpose;
 
@@ -82,11 +82,11 @@ public class PregnancyOutcome implements Serializable {
         this.complications = complications;
     }
 
-    public int getHoursOfLabour() {
+    public double getHoursOfLabour() {
         return hoursOfLabour;
     }
 
-    public void setHoursOfLabour(int hoursOfLabour) {
+    public void setHoursOfLabour(double hoursOfLabour) {
         this.hoursOfLabour = hoursOfLabour;
     }
 
