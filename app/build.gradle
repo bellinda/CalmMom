@@ -22,8 +22,8 @@ android {
         applicationId "com.angelova.w510.calmmom"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 16
-        versionName "1.14"
+        versionCode 17
+        versionName "1.15"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

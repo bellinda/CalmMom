@@ -244,7 +244,7 @@ public class EndPregnancyDialog extends Dialog {
                             outcome.setDate(mBirthDateView.getText().toString());
                             outcome.setTime(mBirthTimeView.getText().toString());
 
-                            //listener.onSave(outcome);
+                            listener.onSave(outcome);
                             dismiss();
                         }
                     }
