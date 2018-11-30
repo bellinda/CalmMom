@@ -8,10 +8,10 @@
     <string name="forgotten_pass">Forgotten Password?</string>
     <string name="register_btn">Register</string>
 
-    <string name="name_label">Name</string>
-    <string name="age_label">Age</string>
-    <string name="height_label">Current height</string>
-    <string name="weight_label">Current weight</string>
+    <string name="name_label">Име</string>
+    <string name="age_label">Възраст</string>
+    <string name="height_label">Текуща височина</string>
+    <string name="weight_label">Тегло в началото на бременността</string>
     <string name="other_illnesses_label">Други заболявания</string>
     <string name="family_history_label">Фамилна обремененост, заболявания</string>
     <string name="surgeries_label">Прекарани операции, диагноза</string>

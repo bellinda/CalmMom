@@ -11,7 +11,7 @@
     <string name="name_label">Name</string>
     <string name="age_label">Age</string>
     <string name="height_label">Current height</string>
-    <string name="weight_label">Current weight</string>
+    <string name="weight_label">Weight at pregnancy start</string>
     <string name="other_illnesses_label">Other illnesses</string>
     <string name="family_history_label">Family history, diseases</string>
     <string name="surgeries_label">Spent surgeries, diagnosis</string>
