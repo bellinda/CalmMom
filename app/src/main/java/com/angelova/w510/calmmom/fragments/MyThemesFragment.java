@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.constraint.Guideline;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -267,13 +268,28 @@ public class MyThemesFragment extends Fragment implements SwipeRefreshLayout.OnR
         mAuthorView.setText(theme.getAuthor());
         mDateView.setText(theme.getSubmittedOn());
 
+        float topAnswersPercent = 0.4f;
+        if ((theme.getContent() != null && theme.getContent().length() > 600) || (theme.getContentEn() != null && theme.getContentEn().length() > 600)) {
+            topAnswersPercent = 0.85f;
+        } else if ((theme.getContent() != null && theme.getContent().length() > 450) || (theme.getContentEn() != null && theme.getContentEn().length() > 450)) {
+            topAnswersPercent = 0.75f;
+        } else if ((theme.getContent() != null && theme.getContent().length() > 300) || (theme.getContentEn() != null && theme.getContentEn().length() > 300)) {
+            topAnswersPercent = 0.65f;
+        } else if ((theme.getContent() != null && theme.getContent().length() > 150) || (theme.getContentEn() != null && theme.getContentEn().length() > 150)) {
+            topAnswersPercent = 0.5f;
+        }
+        Guideline bottomTimeGdl = (Guideline) mItemLayout.findViewById(R.id.top_guideline);
+        ConstraintLayout.LayoutParams bottomTimeGdlParams = (ConstraintLayout.LayoutParams) bottomTimeGdl.getLayoutParams();
+        bottomTimeGdlParams.guidePercent = topAnswersPercent;
+        bottomTimeGdl.setLayoutParams(bottomTimeGdlParams);
+
         showAnswers(theme);
 
         mItemLayout.setVisibility(View.VISIBLE);
     }
 
     private void showAnswers(Theme theme) {
-        if (theme.getAnswers() != null) {
+        if (theme.getAnswers() != null && theme.getAnswers().size() > 0) {
             List<Answer> answers = theme.getAnswers();
             Collections.sort(answers);
 
