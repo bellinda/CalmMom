@@ -176,6 +176,13 @@ public class LoginActivity extends AppCompatActivity {
                 saveLanguageInSharedPreferences("en");
             }
         });
+
+        if (Locale.getDefault().getLanguage().equals("bg")) {
+            mBgLangView.setBackgroundResource(R.drawable.lang_selected);
+            mBgLangView.setTextColor(ContextCompat.getColor(LoginActivity.this, R.color.colorPrimary));
+            mEnLangView.setBackgroundResource(R.drawable.lang_not_selected);
+            mEnLangView.setTextColor(ContextCompat.getColor(LoginActivity.this, R.color.colorAccent));
+        }
     }
 
     private void loginUser(final String email, String password) {
