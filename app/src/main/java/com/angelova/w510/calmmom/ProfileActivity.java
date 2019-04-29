@@ -83,8 +83,6 @@ public class ProfileActivity extends AppCompatActivity {
     private LinearLayout mDDLayout;
     private LinearLayout mEstimatedDDLayout;
     private TextView mDeliveryDate;
-    private RadioButton mEnLanguage;
-    private RadioButton mBgLanguage;
     private Button mLogoutBtn;
     private Button mEndPregnancyBtn;
     private Button mStartPregnancyBtn;
@@ -138,8 +136,6 @@ public class ProfileActivity extends AppCompatActivity {
         mDDLayout = (LinearLayout) findViewById(R.id.dd_view);
         mDeliveryDate = (TextView) findViewById(R.id.delivery_date);
         mEstimatedDDLayout = (LinearLayout) findViewById(R.id.delivery_date_layout);
-        mEnLanguage = (RadioButton) findViewById(R.id.lang_en);
-        mBgLanguage = (RadioButton) findViewById(R.id.lang_bg);
         mLogoutBtn = (Button) findViewById(R.id.log_out_btn);
         mEndPregnancyBtn = (Button) findViewById(R.id.end_pregnancy_btn);
         mStartPregnancyBtn = (Button) findViewById(R.id.start_pregnancy_btn);
@@ -262,18 +258,6 @@ public class ProfileActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-
-        if (Locale.getDefault().getLanguage().equals("en")) {
-            mEnLanguage.setOnCheckedChangeListener(null);
-            mEnLanguage.setChecked(true);
-            mEnLanguage.setOnCheckedChangeListener(mEnCheckListener);
-            mBgLanguage.setOnCheckedChangeListener(mBgCheckListener);
-        } else {
-            mBgLanguage.setOnCheckedChangeListener(null);
-            mBgLanguage.setChecked(true);
-            mBgLanguage.setOnCheckedChangeListener(mBgCheckListener);
-            mEnLanguage.setOnCheckedChangeListener(mEnCheckListener);
-        }
 
         mLogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override

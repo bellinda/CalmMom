@@ -1,13 +1,21 @@
 <resources>
     <string name="app_name">Calm Mom</string>
 
-    <string name="username_label">Email</string>
-    <string name="password_label">Password</string>
-    <string name="password_repeat_label">Repeat Password</string>
-    <string name="login_btn">Login</string>
-    <string name="forgotten_pass">Forgotten Password?</string>
-    <string name="privacy_policy">Privacy Policy</string>
-    <string name="register_btn">Register</string>
+    <string name="username_label">Имейл</string>
+    <string name="password_label">Парола</string>
+    <string name="password_repeat_label">Повторете паролата</string>
+    <string name="login_btn">Вписване</string>
+    <string name="forgotten_pass">Забравена парола?</string>
+    <string name="privacy_policy">Политика за поверителността</string>
+    <string name="register_btn">Регистрация</string>
+
+    <string name="activity_login_bg_lang">BG</string>
+    <string name="activity_login_en_lang">EN</string>
+    <string name="activity_login_dialogs_title">Внимание</string>
+    <string name="activity_login_no_password">Моля въведете Вашата парола</string>
+    <string name="activity_login_no_email">Моля въведете Вашия имейл</string>
+    <string name="activity_login_pass_reset_email">Имейлът Ви беше изпратен</string>
+    <string name="activity_login_pass_reset_title">Обновяване на паролата</string>
 
     <string name="name_label">Име</string>
     <string name="age_label">Възраст</string>
@@ -16,8 +24,8 @@
     <string name="other_illnesses_label">Други заболявания</string>
     <string name="family_history_label">Фамилна обремененост, заболявания</string>
     <string name="surgeries_label">Прекарани операции, диагноза</string>
-    <string name="menstruation_label">First day of last menstruation</string>
-    <string name="regular_menstruation_label">Regular menstruation?</string>
+    <string name="menstruation_label">Първи ден на последната менструация</string>
+    <string name="regular_menstruation_label">Редовна менструация?</string>
     <string name="menstruation_length_label">Menstruation cycle length</string>
     <string name="menstruation_duration_label">Duration of the menstruation</string>
     <string name="risk_factor_title">Рискови фактори</string>

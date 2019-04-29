@@ -13,15 +13,74 @@
     <android.support.constraint.Guideline
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95"
+        android:id="@+id/right_lang_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.72"
+        android:id="@+id/left_lang_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.08"
+        app:layout_constraintGuide_percent="0.03"
+        android:id="@+id/top_lang_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.07"
+        android:id="@+id/bottom_lang_guideline"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toRightOf="@id/left_lang_guideline"
+        app:layout_constraintRight_toLeftOf="@id/right_lang_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_lang_guideline"
+        app:layout_constraintBottom_toTopOf="@id/bottom_lang_guideline"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/lang_not_selected"
+            android:textColor="@color/colorAccent"
+            android:text="@string/activity_login_bg_lang"
+            android:gravity="center"
+            android:id="@+id/bg_lang"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/lang_selected"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/activity_login_en_lang"
+            android:gravity="center"
+            android:id="@+id/en_lang"/>
+    </LinearLayout>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.13"
         android:id="@+id/top_logo_guideline" />
 
     <android.support.constraint.Guideline
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25"
+        app:layout_constraintGuide_percent="0.3"
         android:id="@+id/bottom_logo_guideline" />
 
     <android.support.constraint.Guideline
@@ -49,7 +108,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15"
+        app:layout_constraintGuide_percent="0.2"
         android:id="@+id/top_title_guideline" />
 
     <ImageView

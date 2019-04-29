@@ -9,6 +9,14 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="register_btn">Register</string>
 
+    <string name="activity_login_bg_lang">BG</string>
+    <string name="activity_login_en_lang">EN</string>
+    <string name="activity_login_dialogs_title">Warning</string>
+    <string name="activity_login_no_password">Please input your password</string>
+    <string name="activity_login_no_email">Please input your email</string>
+    <string name="activity_login_pass_reset_email">An email was sent</string>
+    <string name="activity_login_pass_reset_title">Password reset</string>
+
     <string name="name_label">Name</string>
     <string name="age_label">Age</string>
     <string name="height_label">Current height</string>

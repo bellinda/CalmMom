@@ -2,12 +2,15 @@ package com.angelova.w510.calmmom;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,8 +24,6 @@ import com.angelova.w510.calmmom.dialogs.WebviewDialog;
 import com.angelova.w510.calmmom.models.User;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,9 +34,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.melnykov.fab.FloatingActionButton;
 
 import io.fabric.sdk.android.Fabric;
-import java.util.HashMap;
+
 import java.util.Locale;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -45,12 +45,19 @@ public class LoginActivity extends AppCompatActivity {
 
     private FloatingActionButton mFloatingBtn;
 
+    private TextInputLayout mEmailInputLayout;
     private EditText mEmail;
+    private TextInputLayout mPasswordInputLayout;
     private EditText mPassword;
     private Button mLoginBtn;
     private ProgressBar mLoader;
     private TextView mForgotPass;
     private TextView mPrivacyPolicy;
+
+    private TextView mBgLangView;
+    private TextView mEnLangView;
+
+    public static final String SHARED_PREFS_LANGUAGE = "language";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +95,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        mEmailInputLayout = (TextInputLayout) findViewById(R.id.input_layout_username);
         mEmail = (EditText) findViewById(R.id.input_username);
+        mPasswordInputLayout = (TextInputLayout) findViewById(R.id.input_layout_password);
         mPassword = (EditText) findViewById(R.id.input_password);
         mLoginBtn = (Button) findViewById(R.id.login_btn);
 
@@ -102,10 +111,10 @@ public class LoginActivity extends AppCompatActivity {
                     if (mPassword.getText() != null && !mPassword.getText().toString().isEmpty()) {
                         loginUser(mEmail.getText().toString(), mPassword.getText().toString());
                     } else {
-                        showAlertDialogNow("Please input your password", "Login");
+                        showAlertDialogNow(getString(R.string.activity_login_no_password), getString(R.string.activity_login_dialogs_title));
                     }
                 } else {
-                    showAlertDialogNow("Please input your email", "Login");
+                    showAlertDialogNow(getString(R.string.activity_login_no_email), getString(R.string.activity_login_dialogs_title));
                 }
             }
         });
@@ -137,6 +146,36 @@ public class LoginActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+
+        mBgLangView = (TextView) findViewById(R.id.bg_lang);
+        mBgLangView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBgLangView.setBackgroundResource(R.drawable.lang_selected);
+                mBgLangView.setTextColor(ContextCompat.getColor(LoginActivity.this, R.color.colorPrimary));
+                mEnLangView.setBackgroundResource(R.drawable.lang_not_selected);
+                mEnLangView.setTextColor(ContextCompat.getColor(LoginActivity.this, R.color.colorAccent));
+
+                updateResources(LoginActivity.this, "bg");
+                updateStrings();
+                saveLanguageInSharedPreferences("bg");
+            }
+        });
+
+        mEnLangView = (TextView) findViewById(R.id.en_lang);
+        mEnLangView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mEnLangView.setBackgroundResource(R.drawable.lang_selected);
+                mEnLangView.setTextColor(ContextCompat.getColor(LoginActivity.this, R.color.colorPrimary));
+                mBgLangView.setBackgroundResource(R.drawable.lang_not_selected);
+                mBgLangView.setTextColor(ContextCompat.getColor(LoginActivity.this, R.color.colorAccent));
+
+                updateResources(LoginActivity.this, "en");
+                updateStrings();
+                saveLanguageInSharedPreferences("en");
+            }
+        });
     }
 
     private void loginUser(final String email, String password) {
@@ -154,7 +193,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Failed",
                                     Toast.LENGTH_SHORT).show();
 
-                            showAlertDialogNow(task.getException().getMessage(), "Login");
+                            showAlertDialogNow(task.getException().getLocalizedMessage(), getString(R.string.activity_login_dialogs_title));
                         } else {
                             getUserData(email);
                         }
@@ -177,12 +216,6 @@ public class LoginActivity extends AppCompatActivity {
                         //The user exists...
                         if (document.contains("name")) {
                             User user = document.toObject(User.class);
-                            String applicationLanguage = user.getApplicationLanguage();
-                            if (applicationLanguage == null || applicationLanguage.equals("en")) {
-                                updateResources(LoginActivity.this, "en");
-                            } else {
-                                updateResources(LoginActivity.this, "bg");
-                            }
                             //open main menu
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("email", mEmail.getText().toString());
@@ -212,7 +245,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            showAlertDialogNow("An email was sent", "Password reset");
+                            showAlertDialogNow(getString(R.string.activity_login_pass_reset_email), getString(R.string.activity_login_pass_reset_title));
                         }
                     }
                 });
@@ -239,6 +272,19 @@ public class LoginActivity extends AppCompatActivity {
         configuration.locale = locale;
 
         resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+    }
+
+    private void updateStrings() {
+        mEmailInputLayout.setHint(getString(R.string.username_label));
+        mPasswordInputLayout.setHint(getString(R.string.password_label));
+        mLoginBtn.setText(getString(R.string.login_btn));
+        mForgotPass.setText(getString(R.string.forgotten_pass));
+        mPrivacyPolicy.setText(getString(R.string.privacy_policy));
+    }
+
+    private void saveLanguageInSharedPreferences(String language) {
+        final SharedPreferences appPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        appPreferences.edit().putString(SHARED_PREFS_LANGUAGE, language).apply();
     }
 
     @Override

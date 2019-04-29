@@ -1,7 +1,10 @@
 package com.angelova.w510.calmmom;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
@@ -15,6 +18,8 @@ import android.view.View;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.ProgressBar;
 
+import java.util.Locale;
+
 public class SplashActivity extends AppCompatActivity {
 
     private ProgressBar mProgress;
@@ -25,6 +30,9 @@ public class SplashActivity extends AppCompatActivity {
     private static int OPEN_LOGIN_TIME_OUT = 2000;
     private ConstraintSet constraintSet = new ConstraintSet();
 
+    private static final String SHARED_PREFS_LANGUAGE = "language";
+    private static final String LANGUAGE_EN = "en";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
         mProgress = (ProgressBar) findViewById(R.id.progress);
 
         SharedPreferences appPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        //TODO: check if language is saved, else -> EN
+        final String currentLanguage = appPreferences.getString(SHARED_PREFS_LANGUAGE, LANGUAGE_EN);
 
         final Handler handler = new Handler();
         Runnable runnable = new Runnable() {
@@ -50,6 +58,8 @@ public class SplashActivity extends AppCompatActivity {
                                 mProgress.setVisibility(View.GONE);
                             }
                         });
+
+                        updateResources(SplashActivity.this, currentLanguage);
 
                         Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                         startActivity(intent);
@@ -98,5 +108,17 @@ public class SplashActivity extends AppCompatActivity {
 
         TransitionManager.beginDelayedTransition(mMainLayout, transition);
         constraintSet.applyTo(mMainLayout);
+    }
+
+    private void updateResources(Context context, String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+
+        Resources resources = context.getResources();
+
+        Configuration configuration = resources.getConfiguration();
+        configuration.locale = locale;
+
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
     }
 }
