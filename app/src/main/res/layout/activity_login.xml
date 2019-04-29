@@ -224,4 +224,21 @@
         android:id="@+id/forgotten_pass_label"
         android:textColor="@color/colorContrast"/>
 
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95"
+        android:id="@+id/top_privacy_policy_guideline" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/top_privacy_policy_guideline"
+        app:layout_constraintLeft_toRightOf="@id/left_username_guideline"
+        android:text="@string/privacy_policy"
+        android:id="@+id/privacy_policy_label"
+        android:textColor="@color/colorContrastLiteTransparent"
+        android:textSize="12sp"/>
+
 </android.support.constraint.ConstraintLayout>

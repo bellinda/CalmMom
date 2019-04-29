@@ -6,6 +6,7 @@
     <string name="password_repeat_label">Repeat Password</string>
     <string name="login_btn">Login</string>
     <string name="forgotten_pass">Forgotten Password?</string>
+    <string name="privacy_policy">Privacy Policy</string>
     <string name="register_btn">Register</string>
 
     <string name="name_label">Име</string>
@@ -444,6 +445,7 @@
     <string name="activity_profile_language_label">Език на приложението</string>
     <string name="activity_profile_language_en">Английски</string>
     <string name="activity_profile_language_bg">Български</string>
+    <string name="activity_profile_privacy_policy"><u>Декларация за поверителност</u></string>
     <string name="activity_profile_end_pregnancy_btn">Край на бременността</string>
     <string name="activity_profile_start_pregnancy_btn">Нова бременност</string>
     <string name="activity_profile_log_out_btn">Изход</string>
@@ -498,7 +500,7 @@
     <string name="size_papaya">Размер на папая</string>
     <string name="size_grapefruit">Размер на грейпфрут</string>
     <string name="size_swede">Размер на ряпа</string>
-    <string name="size_broccoli_head">Размер а глава броколи</string>
+    <string name="size_broccoli_head">Размер на глава броколи</string>
     <string name="size_canteloupe_melon">Размер на пъпеш</string>
     <string name="size_cauliflower">Размер на карфиол</string>
     <string name="size_iceberg_lettuce">Размер на салата айсберг</string>

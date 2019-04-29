@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        app:layout_constraintGuide_percent="0.92"
+        android:orientation="horizontal"
+        android:id="@+id/button_layout_top_guideline"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="OK"
+        android:gravity="center|end"
+        android:textColor="@color/colorContrast"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:id="@+id/ok_button"/>
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ok_button"
+        android:id="@+id/web_view"/>
+</RelativeLayout>

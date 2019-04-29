@@ -6,6 +6,7 @@
     <string name="password_repeat_label">Repeat Password</string>
     <string name="login_btn">Login</string>
     <string name="forgotten_pass">Forgotten Password?</string>
+    <string name="privacy_policy">Privacy Policy</string>
     <string name="register_btn">Register</string>
 
     <string name="name_label">Name</string>
@@ -444,6 +445,7 @@
     <string name="activity_profile_language_label">Application language</string>
     <string name="activity_profile_language_en">English</string>
     <string name="activity_profile_language_bg">Bulgarian</string>
+    <string name="activity_profile_privacy_policy"><u>Privacy Policy</u></string>
     <string name="activity_profile_end_pregnancy_btn">End pregnancy</string>
     <string name="activity_profile_start_pregnancy_btn">Start pregnancy</string>
     <string name="activity_profile_log_out_btn">Log out</string>

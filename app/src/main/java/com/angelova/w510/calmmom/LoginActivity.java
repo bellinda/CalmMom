@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.angelova.w510.calmmom.dialogs.DialogResetPassword;
 import com.angelova.w510.calmmom.dialogs.WarnDialog;
+import com.angelova.w510.calmmom.dialogs.WebviewDialog;
 import com.angelova.w510.calmmom.models.User;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button mLoginBtn;
     private ProgressBar mLoader;
     private TextView mForgotPass;
+    private TextView mPrivacyPolicy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +118,20 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSend(String email) {
                         sendResetPasswordEmail(email);
+                    }
+                });
+                dialog.show();
+            }
+        });
+
+        mPrivacyPolicy = (TextView) findViewById(R.id.privacy_policy_label);
+        mPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WebviewDialog dialog = new WebviewDialog(LoginActivity.this, "https://gabriellaa17.wordpress.com/2017/01/08/privacy-policy-for-google-play-apps/", new WebviewDialog.DialogClickListener() {
+                    @Override
+                    public void onClick() {
+
                     }
                 });
                 dialog.show();
